@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.clases.Imprentas;
@@ -26,9 +29,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Configuration_Activity extends AppCompatActivity {
+    private ProgressDialog progressDialog;
+    private ArrayList<Imprentas> listImprentas = new ArrayList<>();
 
-    private ArrayList<Imprentas> listImprentas;
-    private RecyclerView recyclerView;
     private AdapterImprentas adapterImprentas = new AdapterImprentas();
 
     @Override
@@ -36,9 +39,7 @@ public class Configuration_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        recyclerView = findViewById(R.id.config_recycler);
-
-
+        RecyclerView recyclerView = findViewById(R.id.config_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterImprentas);
 
@@ -46,6 +47,8 @@ public class Configuration_Activity extends AppCompatActivity {
     }
 
    void Request(){
+
+       setProgressDialog();
 
        OkHttpClient client = new OkHttpClient.Builder()
                .connectTimeout(10, TimeUnit.SECONDS)
@@ -62,8 +65,8 @@ public class Configuration_Activity extends AppCompatActivity {
            @Override
            public void onFailure(Call call, IOException e) {
                call.cancel();
-               Log.e("error",e.toString());
-
+               actualizarReciclerView(false);
+               progressDialog.dismiss();
            }
 
            @Override
@@ -76,22 +79,18 @@ public class Configuration_Activity extends AppCompatActivity {
 
                        JSONArray jsonArray = new JSONArray(myResponse);
                        JSONObject jsonObject = new JSONObject();
+                       listImprentas.clear();
 
                        for(int i=0; i<jsonArray.length(); i++){
-
                            jsonObject = (JSONObject) jsonArray.get(i);
-
-                           Log.e("MOSTRANDO",jsonObject.toString());
-
                            Gson gson = new Gson();
-
                            Imprentas imprenta = gson.fromJson(jsonObject.toString(), Imprentas.class);
-
                            listImprentas.add(imprenta);
 
                        }
+                       progressDialog.dismiss();
+                       actualizarReciclerView(true);
 
-                       Log.e("MOSTRANDO",jsonObject.toString());
 
 /*
                        JSONArray names = json.names();
@@ -128,4 +127,28 @@ public class Configuration_Activity extends AppCompatActivity {
        });
    }
 
-   }
+    public void setProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading..."); // Setting Message
+        progressDialog.setTitle("ProgressDialog"); // Setting Title
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.show(); // Display Progress Dialog
+        progressDialog.setCancelable(false);
+
+    }
+
+    public void actualizarReciclerView(boolean a) {
+        runOnUiThread(() -> {
+            if (a){
+                adapterImprentas.setNotes(listImprentas);
+                adapterImprentas.notifyDataSetChanged();
+                Toast.makeText(Configuration_Activity.this,"Actualizo",Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(Configuration_Activity.this,"Error Api",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+    }
+
+}

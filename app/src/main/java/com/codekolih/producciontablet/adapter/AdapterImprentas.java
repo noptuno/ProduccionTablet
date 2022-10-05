@@ -61,8 +61,6 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
     }
 
 
-
-
     public void setOnNoteSelectedListener(OnNoteSelectedListener onNoteSelectedListener) {
         this.onNoteSelectedListener = onNoteSelectedListener;
     }
