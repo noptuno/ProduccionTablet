@@ -7,14 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.codekolih.producciontablet.adapter.AdapterImprentas;
+import com.codekolih.producciontablet.clases.Imprentas;
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -25,20 +27,20 @@ import okhttp3.Response;
 
 public class Configuration_Activity extends AppCompatActivity {
 
-
-    private RecyclerView.Adapter adapter;
+    private ArrayList<Imprentas> listImprentas;
     private RecyclerView recyclerView;
+    private AdapterImprentas adapterImprentas = new AdapterImprentas();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        recyclerView = findViewById(R.id.config_rec_imprenta);
+        recyclerView = findViewById(R.id.config_recycler);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapterImprentas);
 
         Request();
     }
@@ -71,11 +73,52 @@ public class Configuration_Activity extends AppCompatActivity {
 
                if (response.isSuccessful()) {
                    try {
-                       JSONArray jsonArray = new JSONArray(myResponse);
 
-                       JSONObject jsonObject = new JSONObject(jsonArray.getString(0));
+                       JSONArray jsonArray = new JSONArray(myResponse);
+                       JSONObject jsonObject = new JSONObject();
+
+                       for(int i=0; i<jsonArray.length(); i++){
+
+                           jsonObject = (JSONObject) jsonArray.get(i);
+
+                           Log.e("MOSTRANDO",jsonObject.toString());
+
+                           Gson gson = new Gson();
+
+                           Imprentas imprenta = gson.fromJson(jsonObject.toString(), Imprentas.class);
+
+                           listImprentas.add(imprenta);
+
+                       }
 
                        Log.e("MOSTRANDO",jsonObject.toString());
+
+/*
+                       JSONArray names = json.names();
+                       JSONArray values = json.toJSONArray(names);
+                       for(int i=0; i<values.length(); i++){
+                           if (names.getString(i).equals("description")){
+                               setDescription(values.getString(i));
+                           }
+                           else if (names.getString(i).equals("expiryDate")){
+                               String dateString = values.getString(i);
+                               setExpiryDate(stringToDateHelper(dateString));
+                           }
+                           else if (names.getString(i).equals("id")){
+                               setId(values.getLong(i));
+                           }
+                           else if (names.getString(i).equals("offerCode")){
+                               setOfferCode(values.getString(i));
+                           }
+                           else if (names.getString(i).equals("startDate")){
+                               String dateString = values.getString(i);
+                               setStartDate(stringToDateHelper(dateString));
+                           }
+                           else if (names.getString(i).equals("title")){
+                               setTitle(values.getString(i));
+                           }
+                       }
+                       */
 
                    } catch (JSONException e) {
                        e.printStackTrace();
