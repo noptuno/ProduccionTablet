@@ -37,7 +37,7 @@ public class Login_Activity extends AppCompatActivity {
 
         //cargar
 
-        String NombreMaquina = getIntent().getStringExtra("NombreImprenta");
+        String NombreMaquina = getIntent().getStringExtra("NombreMaquina");
         txt_nombreImprenta.setText(NombreMaquina);
 
 

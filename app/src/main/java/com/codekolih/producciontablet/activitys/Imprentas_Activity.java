@@ -9,7 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.GsonUtils;
+import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.clases.Imprentas;
 import com.google.gson.Gson;
@@ -20,6 +27,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -38,6 +46,10 @@ public class Imprentas_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imprentas);
 
+        //declaraciones
+        requestQueue = Volley.newRequestQueue(this);
+
+
         RecyclerView recyclerView = findViewById(R.id.config_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterImprentas);
@@ -47,7 +59,8 @@ public class Imprentas_Activity extends AppCompatActivity {
             public void onClick(Imprentas note) {
 
                 Intent intent = new Intent(Imprentas_Activity.this, Login_Activity.class);
-                intent.putExtra("NombreImprenta", note.getNombreMaquina());
+                intent.putExtra("NombreMaquina", note.getNombreMaquina());
+                intent.putExtra("TipoMaquina", note.getMaquinaTipoId());
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -57,13 +70,56 @@ public class Imprentas_Activity extends AppCompatActivity {
 
         cargarConfiguracion();
 
+        cargarDatos();
+       // Request();
 
-        Request();
+
     }
+    private RequestQueue requestQueue;
+
+void cargarDatos(){
+
+
+        final ProgressDialog dialog = ProgressDialog.show(this, "Cargando...", "Espere por favor", true);
+
+        String url = Urls.Imprentas;
+
+        StringRequest request = new StringRequest(
+                com.android.volley.Request.Method.GET,
+                url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //updateLista(response);
+
+                            List<Imprentas> lista = GsonUtils.parseList(response, Imprentas[].class);
+                             List<Imprentas> aux = new ArrayList<>();
+
+                                for (Imprentas lg : lista) {
+                                    if (lg.getHabilitada()){
+                                        aux.add(lg);
+                                    }
+                                }
+
+                            adapterImprentas.setNotes(aux);
+                            adapterImprentas.notifyDataSetChanged();
+                            dialog.dismiss();
+
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Imprentas_Activity.this, "Siempre tengo hambre =)", Toast.LENGTH_LONG).show();
+                         dialog.dismiss();
+                    }
+                });
+        requestQueue.add(request);
+
+}
+
 
     private void cargarConfiguracion() {
-
-
 
 
     }
@@ -175,3 +231,36 @@ public class Imprentas_Activity extends AppCompatActivity {
     }
 
 }
+
+/*
+private void Registrar(Login login) {
+    final ProgressDialog dialog = ProgressDialog.show(this, "Cargando...", "Espere por favor", true);
+
+    String url = URLs.REGISTER;
+    JSONObject jsonObject = GsonUtils.toJSON(login);
+    JsonObjectRequest request = new JsonObjectRequest(
+            com.android.volley.Request.Method.POST,
+            url,
+            jsonObject,
+            new com.android.volley.Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    dialog.dismiss();
+                    Toast.makeText(RegistroUsuario.this, "Registro exitoso", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            },
+            new com.android.volley.Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    error.printStackTrace();
+                    dialog.dismiss();
+                    Toast.makeText(RegistroUsuario.this, "Reintentelo de conexion", Toast.LENGTH_LONG).show();
+                }
+            });
+
+    requestQueue.add(request);
+}
+*/
