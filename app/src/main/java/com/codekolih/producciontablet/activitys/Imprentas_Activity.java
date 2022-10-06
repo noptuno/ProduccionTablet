@@ -1,15 +1,15 @@
-package com.codekolih.producciontablet;
+package com.codekolih.producciontablet.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
+import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.clases.Imprentas;
 import com.google.gson.Gson;
@@ -28,25 +28,47 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Configuration_Activity extends AppCompatActivity {
+public class Imprentas_Activity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private ArrayList<Imprentas> listImprentas = new ArrayList<>();
-
     private AdapterImprentas adapterImprentas = new AdapterImprentas();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_configuration);
+        setContentView(R.layout.activity_imprentas);
 
         RecyclerView recyclerView = findViewById(R.id.config_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterImprentas);
 
+        adapterImprentas.setOnNoteSelectedListener(new AdapterImprentas.OnNoteSelectedListener(){
+            @Override
+            public void onClick(Imprentas note) {
+
+                Intent intent = new Intent(Imprentas_Activity.this, Login_Activity.class);
+                intent.putExtra("NombreImprenta", note.getNombreMaquina());
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+
+        });
+
+        cargarConfiguracion();
+
+
         Request();
     }
 
-   void Request(){
+    private void cargarConfiguracion() {
+
+
+
+
+    }
+
+    void Request(){
 
        setProgressDialog();
 
@@ -88,6 +110,7 @@ public class Configuration_Activity extends AppCompatActivity {
                            listImprentas.add(imprenta);
 
                        }
+
                        progressDialog.dismiss();
                        actualizarReciclerView(true);
 
@@ -142,9 +165,9 @@ public class Configuration_Activity extends AppCompatActivity {
             if (a){
                 adapterImprentas.setNotes(listImprentas);
                 adapterImprentas.notifyDataSetChanged();
-                Toast.makeText(Configuration_Activity.this,"Actualizo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Imprentas_Activity.this,"Actualizo",Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(Configuration_Activity.this,"Error Api",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Imprentas_Activity.this,"Error Api",Toast.LENGTH_SHORT).show();
             }
 
         });

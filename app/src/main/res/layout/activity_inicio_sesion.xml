@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InicioSesion">
+    tools:context=".activitys.Login_Activity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta"
         app:srcCompat="@android:drawable/ic_dialog_dialer" />
 
     <Button
-        android:id="@+id/login_btn_login"
+        android:id="@+id/login_btn_IniciarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -51,4 +51,24 @@
         app:layout_constraintEnd_toEndOf="@+id/login_edt_user"
         app:layout_constraintStart_toStartOf="@+id/login_edt_user"
         app:layout_constraintTop_toBottomOf="@+id/login_edt_user" />
+
+    <TextView
+        android:id="@+id/login_txt_nombreimprenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/login_btn_cargarImprenta"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        app:icon="@android:drawable/ic_menu_revert"
+        app:layout_constraintBottom_toBottomOf="@+id/login_txt_nombreimprenta"
+        app:layout_constraintStart_toEndOf="@+id/login_txt_nombreimprenta"
+        app:layout_constraintTop_toTopOf="@+id/login_txt_nombreimprenta" />
 </androidx.constraintlayout.widget.ConstraintLayout>

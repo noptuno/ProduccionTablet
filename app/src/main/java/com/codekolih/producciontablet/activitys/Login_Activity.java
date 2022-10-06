@@ -1,4 +1,4 @@
-package com.codekolih.producciontablet;
+package com.codekolih.producciontablet.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,26 +8,54 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.Metodos;
+import com.codekolih.producciontablet.clases.Imprentas;
 
-public class InicioSesion extends AppCompatActivity {
+public class Login_Activity extends AppCompatActivity {
 
-    private Button btn_login;
+    private Button btn_inicioSesion, btn_cargarImprenta;
     private ProgressDialog progressDialog;
+    private TextView txt_nombreImprenta;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
 
         //Referencias
-        btn_login = findViewById(R.id.login_btn_login);
+
+        btn_inicioSesion = findViewById(R.id.login_btn_IniciarSesion);
+        txt_nombreImprenta = findViewById(R.id.login_txt_nombreimprenta);
+        btn_cargarImprenta = findViewById(R.id.login_btn_cargarImprenta);
+
 
         //Inicializar
         Metodos metodos = new Metodos(getApplicationContext());
 
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        //cargar
+
+        String NombreMaquina = getIntent().getStringExtra("NombreImprenta");
+        txt_nombreImprenta.setText(NombreMaquina);
+
+
+        btn_cargarImprenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+
+            }
+        });
+
+
+
+        btn_inicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -36,7 +64,7 @@ public class InicioSesion extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable(){
                     @Override
                     public void run() {
-                        Intent intent = new Intent(InicioSesion.this, Configuration_Activity.class);
+                        Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         progressDialog.dismiss();

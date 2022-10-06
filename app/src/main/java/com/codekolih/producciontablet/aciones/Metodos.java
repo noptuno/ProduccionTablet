@@ -30,4 +30,10 @@ public class Metodos {
     }
 
 
+    public void registrar_preferencias(){
+
+
+    }
+
+
 }
