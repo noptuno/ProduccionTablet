@@ -34,7 +34,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="produccion1@dmr.com.uy"
+        android:text="rubach"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -47,7 +47,7 @@
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:text="123456"
+        android:text="1234567"
         app:layout_constraintEnd_toEndOf="@+id/login_edt_user"
         app:layout_constraintStart_toStartOf="@+id/login_edt_user"
         app:layout_constraintTop_toBottomOf="@+id/login_edt_user" />

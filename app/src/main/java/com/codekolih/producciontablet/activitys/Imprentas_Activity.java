@@ -37,10 +37,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Imprentas_Activity extends AppCompatActivity {
+
     private ProgressDialog progressDialog;
     private ArrayList<Imprentas> listImprentas = new ArrayList<>();
     private AdapterImprentas adapterImprentas = new AdapterImprentas();
-
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ public class Imprentas_Activity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
+
             }
 
         });
@@ -71,17 +73,16 @@ public class Imprentas_Activity extends AppCompatActivity {
         cargarConfiguracion();
 
         cargarDatos();
+
        // Request();
 
-
     }
-    private RequestQueue requestQueue;
+
 
 void cargarDatos(){
 
 
-        final ProgressDialog dialog = ProgressDialog.show(this, "Cargando...", "Espere por favor", true);
-
+        setProgressDialog();
         String url = Urls.Imprentas;
 
         StringRequest request = new StringRequest(
@@ -90,12 +91,12 @@ void cargarDatos(){
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //updateLista(response);
 
                             List<Imprentas> lista = GsonUtils.parseList(response, Imprentas[].class);
                              List<Imprentas> aux = new ArrayList<>();
 
                                 for (Imprentas lg : lista) {
+
                                     if (lg.getHabilitada()){
                                         aux.add(lg);
                                     }
@@ -103,15 +104,24 @@ void cargarDatos(){
 
                             adapterImprentas.setNotes(aux);
                             adapterImprentas.notifyDataSetChanged();
-                            dialog.dismiss();
+                            progressDialog.dismiss();
 
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Imprentas_Activity.this, "Siempre tengo hambre =)", Toast.LENGTH_LONG).show();
-                         dialog.dismiss();
+                        Toast.makeText(Imprentas_Activity.this, "Fallo", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+
+                        Intent intent = new Intent(Imprentas_Activity.this, Login_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+
+
+                       // cargarDatos();
+
                     }
                 });
         requestQueue.add(request);
@@ -155,9 +165,10 @@ void cargarDatos(){
                if (response.isSuccessful()) {
                    try {
 
+                       listImprentas.clear();
+
                        JSONArray jsonArray = new JSONArray(myResponse);
                        JSONObject jsonObject = new JSONObject();
-                       listImprentas.clear();
 
                        for(int i=0; i<jsonArray.length(); i++){
                            jsonObject = (JSONObject) jsonArray.get(i);

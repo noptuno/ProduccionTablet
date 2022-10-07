@@ -5,24 +5,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.clases.Imprentas;
+import com.codekolih.producciontablet.clases.Tareas;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.NoteViewHolder> {
+public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHolder> {
 
-    private List<Imprentas> notes;
+    private List<Tareas> notes;
     private OnNoteSelectedListener onNoteSelectedListener;
     private OnNoteDetailListener onDetailListener;
     private Context context;
 
-    public AdapterImprentas() {
+    public AdapterTareas() {
         this.notes = new ArrayList<>();
     }
 
-    public AdapterImprentas(List<Imprentas> notes) {
+    public AdapterTareas(List<Tareas> notes) {
         this.notes = notes;
     }
 
@@ -47,15 +51,15 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
         return notes.size();
     }
 
-    public List<Imprentas> getNotes() {
+    public List<Tareas> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Imprentas> notes) {
+    public void setNotes(List<Tareas> notes) {
         this.notes = notes;
     }
 
-    public void setFilter(List<Imprentas> notes){
+    public void setFilter(List<Tareas> notes){
         this.notes.addAll(notes);
       //  notifyDataSetChanged();
     }
@@ -71,18 +75,18 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
 
 
     public interface OnNoteSelectedListener {
-        void onClick(Imprentas note);
+        void onClick(Tareas note);
     }
 
     public interface OnNoteDetailListener {
-        void onDetail(Imprentas note);
+        void onDetail(Tareas note);
     }
 
 
 
 
 
-    public Imprentas getposicionactual(int position) {
+    public Tareas getposicionactual(int position) {
         return notes.get(position);
     }
 
@@ -95,16 +99,16 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
 
         }
 
-        public void bind(final Imprentas imprenta) {
+        public void bind(final Tareas tarea) {
 
-            nombre.setText((imprenta.getNombreMaquina()));
+            nombre.setText((tarea.getNombreMaquina()));
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (onNoteSelectedListener != null) {
-                        onNoteSelectedListener.onClick(imprenta);
+                        onNoteSelectedListener.onClick(tarea);
                     }
                 }
             });
