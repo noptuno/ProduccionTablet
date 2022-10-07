@@ -101,7 +101,7 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
 
         public void bind(final Tareas tarea) {
 
-            nombre.setText((tarea.getNombreMaquina()));
+            nombre.setText((tarea.getDescripcion()));
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

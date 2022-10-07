@@ -31,7 +31,6 @@ public class Tareas {
     private float MetrosAImprimir;
     private float MetrosPorRollo;
     private float MetrosMatTroquelar;
-
     private String Estado;
     private boolean EsPedidoFinal;
 

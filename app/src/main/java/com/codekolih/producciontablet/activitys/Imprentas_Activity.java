@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
@@ -50,8 +49,7 @@ public class Imprentas_Activity extends AppCompatActivity {
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
 
-
-        RecyclerView recyclerView = findViewById(R.id.config_recycler);
+        RecyclerView recyclerView = findViewById(R.id.imprentas_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterImprentas);
 
@@ -61,7 +59,7 @@ public class Imprentas_Activity extends AppCompatActivity {
 
                 Intent intent = new Intent(Imprentas_Activity.this, Login_Activity.class);
                 intent.putExtra("NombreMaquina", note.getNombreMaquina());
-                intent.putExtra("TipoMaquina", note.getMaquinaTipoId());
+                intent.putExtra("MaquinaId", note.getMaquinaId());
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

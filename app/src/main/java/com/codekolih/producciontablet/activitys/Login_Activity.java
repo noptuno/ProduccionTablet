@@ -38,6 +38,10 @@ public class Login_Activity extends AppCompatActivity {
     private TextView txt_nombreImprenta;
     private EditText edt_usaurio, edt_pass;
     private RequestQueue requestQueue;
+
+
+    private String NombreMaquina;
+    private int MaquinaId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +64,10 @@ public class Login_Activity extends AppCompatActivity {
 
         //cargar
 
-        String NombreMaquina = getIntent().getStringExtra("NombreMaquina");
-        txt_nombreImprenta.setText(NombreMaquina);
+         NombreMaquina = getIntent().getStringExtra("NombreMaquina");
+         MaquinaId = getIntent().getIntExtra("MaquinaId",0);
+
+        txt_nombreImprenta.setText(NombreMaquina + " " + MaquinaId);
 
 
         btn_cargarImprenta.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +106,7 @@ public class Login_Activity extends AppCompatActivity {
                               //  Toast.makeText(Login_Activity.this, nombre, Toast.LENGTH_LONG).show();
 
                                 Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
+                                intent.putExtra("MaquinaId", MaquinaId);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 progressDialog.dismiss();

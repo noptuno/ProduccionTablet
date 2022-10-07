@@ -6,12 +6,13 @@
         <entry key="..\:/Users/David Garcia/AndroidStudioProjects/DMR/Produccion/app/src/main/res/layout/activity_inicio_sesion.xml" value="0.30344202898550726" />
         <entry key="..\:/Users/David Garcia/AndroidStudioProjects/DMR/Produccion/app/src/main/res/layout/activity_main.xml" value="0.30344202898550726" />
         <entry key="..\:/Users/David Garcia/AndroidStudioProjects/DMR/Produccion/app/src/main/res/layout/activity_seleccion_imprenta.xml" value="0.30344202898550726" />
+        <entry key="..\:/Users/David Garcia/AndroidStudioProjects/ProduccionTablet/app/src/main/res/layout/activity_imprentas.xml" value="0.1828125" />
+        <entry key="..\:/Users/David Garcia/AndroidStudioProjects/ProduccionTablet/app/src/main/res/layout/activity_tareas.xml" value="0.1828125" />
+        <entry key="..\:/Users/David Garcia/AndroidStudioProjects/ProduccionTablet/app/src/main/res/layout/item_note_tareas.xml" value="0.1828125" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_configuration.xml" value="0.18" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_imprentas.xml" value="0.22" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_imprentas.xml" value="0.3546195652173913" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_inicio_sesion.xml" value="0.3546195652173913" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_tareas.xml" value="0.15" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/item_note_imprentas.xml" value="0.33" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/item_note_tareas.xml" value="0.15" />
       </map>
     </option>
   </component>
