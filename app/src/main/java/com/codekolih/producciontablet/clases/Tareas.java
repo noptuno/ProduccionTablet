@@ -35,10 +35,26 @@ public class Tareas {
     private boolean EsPedidoFinal;
 
     ArrayList<Bobinas> Bobinas = new ArrayList<Bobinas>();
-    ArrayList<Object> EstadosOp = new ArrayList<Object>();
+    ArrayList<EstadosOp> EstadosOp = new ArrayList<EstadosOp>();
     ArrayList<Object> Produccion_Lista = new ArrayList<Object>();
 
 
+    public ArrayList<com.codekolih.producciontablet.clases.EstadosOp> getEstadosOp() {
+        return EstadosOp;
+    }
+
+    public void setEstadosOp(ArrayList<com.codekolih.producciontablet.clases.EstadosOp> estadosOp) {
+        EstadosOp = estadosOp;
+    }
+
+
+
+    public String toString(){
+
+        String a = "Tarea: " + getDescripcion();
+
+        return a;
+    }
     // Getter Methods
 
     public float getTroquelId() {
