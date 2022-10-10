@@ -12,16 +12,6 @@ public class EstadosOp {
     String NombreUsuario;
 
 
-    public EstadosOp(int logId, int tareaId, String estadoId, String nombreEstado, String fechaInicio, String fechaFin, int usuarioId, String nombreUsuario) {
-        LogId = logId;
-        TareaId = tareaId;
-        EstadoId = estadoId;
-        NombreEstado = nombreEstado;
-        FechaInicio = fechaInicio;
-        FechaFin = fechaFin;
-        UsuarioId = usuarioId;
-        NombreUsuario = nombreUsuario;
-    }
 
     public int getLogId() {
         return LogId;

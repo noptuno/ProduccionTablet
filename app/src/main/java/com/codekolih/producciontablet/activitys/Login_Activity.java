@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -22,14 +22,14 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.Metodos;
 import com.codekolih.producciontablet.aciones.Urls;
-import com.codekolih.producciontablet.clases.Cuenta;
-import com.codekolih.producciontablet.clases.Imprentas;
+import com.codekolih.producciontablet.clases.Tareas;
+import com.codekolih.producciontablet.clases.Usuario;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Login_Activity extends AppCompatActivity {
 
@@ -88,8 +88,12 @@ public class Login_Activity extends AppCompatActivity {
             public void onClick(View view) {
 
                 setProgressDialog();
-                String url = Urls.Usuario;
-                Cuenta login = new Cuenta(edt_usaurio.getText().toString(),edt_pass.getText().toString(),"");
+                String url = Urls.login;
+
+                Map<String, Object> login = new HashMap<>();
+                login.put("UserName", edt_usaurio.getText().toString());
+                login.put("Password", edt_pass.getText().toString());
+                login.put("MacAddress", "");
 
                 JSONObject jsonObject = GsonUtils.toJSON(login);
                 JsonObjectRequest request = new JsonObjectRequest(
@@ -100,20 +104,15 @@ public class Login_Activity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
 
-                              //  Cuenta a = GsonUtils.parse(response.toString(),Cuenta.class);
-                              //  String nombre = a.getUserName();
+                                Log.e("Login Response",response.toString());
 
-                              //  Toast.makeText(Login_Activity.this, nombre, Toast.LENGTH_LONG).show();
 
-                                Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-                                intent.putExtra("MaquinaId", MaquinaId);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                progressDialog.dismiss();
+                                ObtenerDatosDelUsuario();
+
+
 
                             }
                         },
-
                         new com.android.volley.Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
@@ -123,28 +122,55 @@ public class Login_Activity extends AppCompatActivity {
                         });
                 requestQueue.add(request);
 
-/*
-                setProgressDialog();
-                new Handler().postDelayed(new Runnable(){
-                    @Override
-                    public void run() {
-
-                        Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        progressDialog.dismiss();
-                    }
-
-                }, 2000);
-*/
-
 
             }
         });
     }
+    public void ObtenerDatosDelUsuario() {
 
+
+        setProgressDialog();
+
+        String url = Urls.getUsuario;
+        StringRequest request = new StringRequest(
+                com.android.volley.Request.Method.GET,
+                url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.e("Usuario Response",response);
+
+                        Usuario a = GsonUtils.parse(response,Usuario.class);
+                        Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
+                        intent.putExtra("MaquinaId", MaquinaId);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        progressDialog.dismiss();
+
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Login_Activity.this, "Fallo", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+
+
+                    }
+                });
+        requestQueue.add(request);
+
+
+
+
+
+
+
+    }
 
     public void setProgressDialog() {
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading..."); // Setting Message
         progressDialog.setTitle("ProgressDialog"); // Setting Title

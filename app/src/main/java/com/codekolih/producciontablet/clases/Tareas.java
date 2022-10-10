@@ -36,8 +36,23 @@ public class Tareas {
 
     ArrayList<Bobinas> Bobinas = new ArrayList<Bobinas>();
     ArrayList<EstadosOp> EstadosOp = new ArrayList<EstadosOp>();
-    ArrayList<Object> Produccion_Lista = new ArrayList<Object>();
+    ArrayList<Produccion_Lista> Produccion_Lista = new ArrayList<Produccion_Lista>();
 
+    public ArrayList<com.codekolih.producciontablet.clases.Produccion_Lista> getProduccion_Lista() {
+        return Produccion_Lista;
+    }
+
+    public void setProduccion_Lista(ArrayList<com.codekolih.producciontablet.clases.Produccion_Lista> produccion_Lista) {
+        Produccion_Lista = produccion_Lista;
+    }
+
+    public ArrayList<com.codekolih.producciontablet.clases.Bobinas> getBobinas() {
+        return Bobinas;
+    }
+
+    public void setBobinas(ArrayList<com.codekolih.producciontablet.clases.Bobinas> bobinas) {
+        Bobinas = bobinas;
+    }
 
     public ArrayList<com.codekolih.producciontablet.clases.EstadosOp> getEstadosOp() {
         return EstadosOp;

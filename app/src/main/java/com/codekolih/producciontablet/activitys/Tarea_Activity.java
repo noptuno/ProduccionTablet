@@ -49,6 +49,8 @@ public class Tarea_Activity extends AppCompatActivity {
         recyclerView.setAdapter(adapterTareas);
 
         cargarDatos();
+
+
     }
 
 
@@ -65,16 +67,17 @@ public class Tarea_Activity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.e("RESPONSE",response);
+                        Log.e("Tarea Response",response);
                         List<Tareas> lista = GsonUtils.parseList(response, Tareas[].class);
 
+/*
                         for (Tareas lg : lista) {
-                            List<EstadosOp> list2 = GsonUtils.parseList(lg.getEstadosOp().toString(), EstadosOp[].class);
-                            for (EstadosOp est : list2) {
-                                Log.e("Estado",est.getEstadoId());
-                            }
+                            List<EstadosOp> list = lg.getEstadosOp();
+                           for (EstadosOp est : list) {
+                              Log.e("Estados:",est.getNombreEstado());
+                           }
                         }
-
+*/
 
                         adapterTareas.setNotes(lista);
                         adapterTareas.notifyDataSetChanged();
