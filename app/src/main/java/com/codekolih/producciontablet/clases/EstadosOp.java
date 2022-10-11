@@ -1,6 +1,8 @@
 package com.codekolih.producciontablet.clases;
 
-public class EstadosOp {
+import java.io.Serializable;
+
+public class EstadosOp implements Serializable  {
 
     int LogId;
     int TareaId;

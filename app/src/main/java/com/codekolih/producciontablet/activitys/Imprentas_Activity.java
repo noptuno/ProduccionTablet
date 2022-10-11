@@ -49,7 +49,7 @@ public class Imprentas_Activity extends AppCompatActivity {
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
 
-        RecyclerView recyclerView = findViewById(R.id.imprentas_recycler);
+        RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterImprentas);
 

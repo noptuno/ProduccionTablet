@@ -9,23 +9,24 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHolder> {
+public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.NoteViewHolder> {
 
-    private List<Tareas> notes;
+    private List<Produccion_Lista> notes;
     private OnNoteSelectedListener onNoteSelectedListener;
     private OnNoteDetailListener onDetailListener;
     private Context context;
 
-    public AdapterTareas() {
+    public AdapterProduccion() {
         this.notes = new ArrayList<>();
     }
 
-    public AdapterTareas(List<Tareas> notes) {
+    public AdapterProduccion(List<Produccion_Lista> notes) {
         this.notes = notes;
     }
 
@@ -34,7 +35,7 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
     public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View elementoTitular = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_note_imprentas, parent, false);
+                .inflate(R.layout.item_note_produccion, parent, false);
 
         context = elementoTitular.getContext();
         return new NoteViewHolder(elementoTitular);
@@ -50,15 +51,15 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
         return notes.size();
     }
 
-    public List<Tareas> getNotes() {
+    public List<Produccion_Lista> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Tareas> notes) {
+    public void setNotes(List<Produccion_Lista> notes) {
         this.notes = notes;
     }
 
-    public void setFilter(List<Tareas> notes){
+    public void setFilter(List<Produccion_Lista> notes){
         this.notes.addAll(notes);
       //  notifyDataSetChanged();
     }
@@ -74,18 +75,16 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
 
 
     public interface OnNoteSelectedListener {
-        void onClick(Tareas note);
+        void onClick(Produccion_Lista note);
     }
 
     public interface OnNoteDetailListener {
-        void onDetail(Tareas note);
+        void onDetail(Produccion_Lista note);
     }
 
 
 
-
-
-    public Tareas getposicionactual(int position) {
+    public Produccion_Lista getposicionactual(int position) {
         return notes.get(position);
     }
 
@@ -98,16 +97,15 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
 
         }
 
-        public void bind(final Tareas tarea) {
+        public void bind(final Produccion_Lista produccion) {
 
-            nombre.setText((tarea.getDescripcion()));
-
+            nombre.setText((produccion.getUserNameId()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (onNoteSelectedListener != null) {
-                        onNoteSelectedListener.onClick(tarea);
+                        onNoteSelectedListener.onClick(produccion);
                     }
                 }
             });

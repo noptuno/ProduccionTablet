@@ -16,14 +16,17 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
-            android:name=".Produccion_Activity"
+            android:name=".activitys.Verificacion_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.Produccion_Activity"
             android:exported="false" />
         <activity
             android:name=".activitys.Tarea_Activity"
             android:exported="false" />
         <activity
             android:name=".activitys.Imprentas_Activity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activitys.Login_Activity"
             android:exported="true">

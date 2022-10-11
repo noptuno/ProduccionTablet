@@ -1,6 +1,8 @@
 package com.codekolih.producciontablet.clases;
 
-public class Bobinas {
+import java.io.Serializable;
+
+public class Bobinas implements Serializable {
 
         private float BobinaId;
         private float TareaId;

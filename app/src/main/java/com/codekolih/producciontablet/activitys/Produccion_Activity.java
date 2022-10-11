@@ -14,7 +14,7 @@ import com.codekolih.producciontablet.clases.Usuario;
 public class Produccion_Activity extends AppCompatActivity {
 
 
-    Tareas tarea_Seleccionada;
+
 
 
     @Override
@@ -22,13 +22,7 @@ public class Produccion_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produccion);
 
-        Bundle parametros = getIntent().getExtras();
 
-        if (parametros != null) {
-            tarea_Seleccionada =  (Tareas) parametros.getSerializable("tarea");
-        }else{
-            Toast.makeText(getApplicationContext(), "No hay datos a mostrar", Toast.LENGTH_LONG).show();
-        }
 
 
 

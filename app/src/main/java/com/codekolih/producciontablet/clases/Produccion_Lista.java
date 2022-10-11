@@ -1,6 +1,8 @@
 package com.codekolih.producciontablet.clases;
 
-public class Produccion_Lista {
+import java.io.Serializable;
+
+public class Produccion_Lista implements Serializable  {
     private String Fecha;
     private String UserNameId;
     private float ProduccionId;
@@ -23,8 +25,31 @@ public class Produccion_Lista {
     private float RollosEmpaquetados;
     private float UsuarioId;
 
+    public Produccion_Lista(String fecha, String userNameId, float produccionId, float pedidoId, float tareaId, float metrosImpresos, float anchoFinalRolloYGap, float cantidadPistasImpresas, float cantidadTintas, float anchoBobinaUsadoCm, float scrapAjusteInicial, String scrapAjusteInicial_Unidades, float scrapAjusteProduccion, String scrapAjusteProduccion_Unidades, String observacionesCierre, float rollosFabricdos, float anchoFinalRollo, float cantidadPistasCortadas, float pistasTroquelUsadas, float rollosEmpaquetados, float usuarioId) {
+        Fecha = fecha;
+        UserNameId = userNameId;
+        ProduccionId = produccionId;
+        PedidoId = pedidoId;
+        TareaId = tareaId;
+        MetrosImpresos = metrosImpresos;
+        AnchoFinalRolloYGap = anchoFinalRolloYGap;
+        CantidadPistasImpresas = cantidadPistasImpresas;
+        CantidadTintas = cantidadTintas;
+        AnchoBobinaUsadoCm = anchoBobinaUsadoCm;
+        ScrapAjusteInicial = scrapAjusteInicial;
+        ScrapAjusteInicial_Unidades = scrapAjusteInicial_Unidades;
+        ScrapAjusteProduccion = scrapAjusteProduccion;
+        ScrapAjusteProduccion_Unidades = scrapAjusteProduccion_Unidades;
+        ObservacionesCierre = observacionesCierre;
+        RollosFabricdos = rollosFabricdos;
+        AnchoFinalRollo = anchoFinalRollo;
+        CantidadPistasCortadas = cantidadPistasCortadas;
+        PistasTroquelUsadas = pistasTroquelUsadas;
+        RollosEmpaquetados = rollosEmpaquetados;
+        UsuarioId = usuarioId;
+    }
 
-    // Getter Methods
+// Getter Methods
 
     public String getFecha() {
         return Fecha;

@@ -87,6 +87,13 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+                Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
+                intent.putExtra("MaquinaId", MaquinaId);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+/*
                 setProgressDialog();
                 String url = Urls.login;
 
@@ -121,11 +128,14 @@ public class Login_Activity extends AppCompatActivity {
                             }
                         });
                 requestQueue.add(request);
-
+*/
 
             }
         });
-    }
+
+
+        }
+
     public void ObtenerDatosDelUsuario() {
 
 

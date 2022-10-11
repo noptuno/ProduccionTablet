@@ -91,7 +91,7 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
         public NoteViewHolder(View item) {
             super(item);
 
-            nombre = (TextView) item.findViewById(R.id.item_tarea_txt_nombre);
+            nombre = (TextView) item.findViewById(R.id.item_produccion_txt_nombre);
 
         }
 
