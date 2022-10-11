@@ -22,6 +22,7 @@ import com.codekolih.producciontablet.clases.EstadosOp;
 import com.codekolih.producciontablet.clases.Imprentas;
 import com.codekolih.producciontablet.clases.Tareas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,24 +39,37 @@ public class Tarea_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tareas);
 
+
+
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
 
 
         maquinaId = getIntent().getIntExtra("MaquinaId",0);
 
+
         RecyclerView recyclerView = findViewById(R.id.tarea_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterTareas);
 
-        cargarDatos();
 
+        adapterTareas.setOnNoteSelectedListener(new AdapterTareas.OnNoteSelectedListener() {
+            @Override
+            public void onClick(Tareas note) {
+
+                Intent intent = new Intent(Tarea_Activity.this, Produccion_Activity.class);
+                intent.putExtra("Tarea", note);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+            }
+        });
+
+        cargarDatos();
 
     }
 
-
     void cargarDatos(){
-
 
         setProgressDialog();
         String url = Urls.Tareas;
@@ -94,11 +108,13 @@ public class Tarea_Activity extends AppCompatActivity {
 
                     }
                 });
+
         requestQueue.add(request);
 
     }
 
     public void setProgressDialog() {
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading..."); // Setting Message
         progressDialog.setTitle("ProgressDialog"); // Setting Title

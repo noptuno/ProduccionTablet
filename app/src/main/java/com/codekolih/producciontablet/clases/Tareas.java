@@ -1,8 +1,11 @@
 package com.codekolih.producciontablet.clases;
 
+import androidx.navigation.NavType;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tareas {
+public class Tareas implements Serializable {
 
     private float TroquelId;
     private String Descripcion;
@@ -34,31 +37,31 @@ public class Tareas {
     private String Estado;
     private boolean EsPedidoFinal;
 
-    ArrayList<Bobinas> Bobinas = new ArrayList<Bobinas>();
-    ArrayList<EstadosOp> EstadosOp = new ArrayList<EstadosOp>();
-    ArrayList<Produccion_Lista> Produccion_Lista = new ArrayList<Produccion_Lista>();
+    private ArrayList<Bobinas> Bobinas = new ArrayList<Bobinas>();
+    private ArrayList<EstadosOp> EstadosOp = new ArrayList<EstadosOp>();
+    private ArrayList<Produccion_Lista> Produccion_Lista = new ArrayList<Produccion_Lista>();
 
-    public ArrayList<com.codekolih.producciontablet.clases.Produccion_Lista> getProduccion_Lista() {
+    public ArrayList<Produccion_Lista> getProduccion_Lista() {
         return Produccion_Lista;
     }
 
-    public void setProduccion_Lista(ArrayList<com.codekolih.producciontablet.clases.Produccion_Lista> produccion_Lista) {
+    public void setProduccion_Lista(ArrayList<Produccion_Lista> produccion_Lista) {
         Produccion_Lista = produccion_Lista;
     }
 
-    public ArrayList<com.codekolih.producciontablet.clases.Bobinas> getBobinas() {
+    public ArrayList<Bobinas> getBobinas() {
         return Bobinas;
     }
 
-    public void setBobinas(ArrayList<com.codekolih.producciontablet.clases.Bobinas> bobinas) {
+    public void setBobinas(ArrayList<Bobinas> bobinas) {
         Bobinas = bobinas;
     }
 
-    public ArrayList<com.codekolih.producciontablet.clases.EstadosOp> getEstadosOp() {
+    public ArrayList<EstadosOp> getEstadosOp() {
         return EstadosOp;
     }
 
-    public void setEstadosOp(ArrayList<com.codekolih.producciontablet.clases.EstadosOp> estadosOp) {
+    public void setEstadosOp(ArrayList<EstadosOp> estadosOp) {
         EstadosOp = estadosOp;
     }
 
