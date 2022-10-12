@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -112,16 +113,12 @@ void cargarDatos(){
                         Toast.makeText(Imprentas_Activity.this, "Fallo", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
 
-                        Intent intent = new Intent(Imprentas_Activity.this, Login_Activity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        finish();
-
 
                        // cargarDatos();
 
                     }
                 });
+        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
 }

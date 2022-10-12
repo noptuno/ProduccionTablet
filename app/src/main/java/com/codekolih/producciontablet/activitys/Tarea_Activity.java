@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -39,19 +40,14 @@ public class Tarea_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tareas);
 
-
-
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
 
-
         maquinaId = getIntent().getIntExtra("MaquinaId",0);
-
 
         RecyclerView recyclerView = findViewById(R.id.tarea_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterTareas);
-
 
         adapterTareas.setOnNoteSelectedListener(new AdapterTareas.OnNoteSelectedListener() {
             @Override
@@ -108,7 +104,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
                     }
                 });
-
+        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
     }

@@ -36,16 +36,12 @@ import java.util.Map;
 public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
-
     Button btn_guardar;
-
     private ProgressDialog progressDialog;
     private ArrayList<Produccion_Lista> listImprentas = new ArrayList<>();
-
     Produccion_Lista produccion_actual;
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private RequestQueue requestQueue;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +103,6 @@ public class Verificacion_Activity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
 
-
-
                                 Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
 
@@ -125,7 +119,6 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                 request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(request);
-
 
             }
         });
