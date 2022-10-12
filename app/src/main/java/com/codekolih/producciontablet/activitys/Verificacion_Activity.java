@@ -56,15 +56,10 @@ public class Verificacion_Activity extends AppCompatActivity {
         Bundle parametros = getIntent().getExtras();
 
         if (parametros != null) {
-
             tarea_Seleccionada =  (Tareas) parametros.getSerializable("tarea");
-
         }else{
-
             Toast.makeText(getApplicationContext(), "No hay datos a mostrar", Toast.LENGTH_LONG).show();
-
         }
-
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -74,7 +69,8 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
 
-            Log.e("Estados:",lg.getUserNameId());
+
+            produccion_actual = lg;
 
         }
 
@@ -96,30 +92,8 @@ public class Verificacion_Activity extends AppCompatActivity {
                 setProgressDialog();
                 String url = Urls.agregarProduccion;
 
-
-                produccion_actual = new Produccion_Lista(
-                        "11/10/2022",
-                        "rubach",
-                        1,
-                        tarea_Seleccionada.getPedidoId(),
-                        tarea_Seleccionada.getTareaId(),
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        "KG",
-                        1,
-                        "KG",
-                        "HOLA",
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        tarea_Seleccionada.getUsuarioId()
-                        );
+                produccion_actual.setFecha("12/10/2022");
+                produccion_actual.setObservacionesCierre("HOLA2");
 
                 JSONObject jsonObject = GsonUtils.toJSON(produccion_actual);
                 JsonObjectRequest request = new JsonObjectRequest(
