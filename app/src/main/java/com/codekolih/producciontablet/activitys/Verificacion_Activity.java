@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -63,6 +64,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
+
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterProduccion);
@@ -96,6 +98,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                 produccion_actual.setObservacionesCierre("HOLA2");
 
                 JSONObject jsonObject = GsonUtils.toJSON(produccion_actual);
+
                 JsonObjectRequest request = new JsonObjectRequest(
                         com.android.volley.Request.Method.POST,
                         url,
@@ -103,6 +106,8 @@ public class Verificacion_Activity extends AppCompatActivity {
                         new com.android.volley.Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+
+
 
                                 Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
@@ -112,10 +117,13 @@ public class Verificacion_Activity extends AppCompatActivity {
                         new com.android.volley.Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+
                                 Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
                             }
                         });
+
+                request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(request);
 
 
