@@ -16,15 +16,19 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
+            android:label="Verificar Tarea"
             android:name=".activitys.Verificacion_Activity"
             android:exported="false" />
         <activity
+            android:label="Produccion de Tarea"
             android:name=".activitys.Produccion_Activity"
             android:exported="false" />
         <activity
+            android:label="Tareas Disponibles"
             android:name=".activitys.Tarea_Activity"
             android:exported="false" />
         <activity
+            android:label="Seleccionar Imprentas"
             android:name=".activitys.Imprentas_Activity"
             android:exported="false" />
         <activity

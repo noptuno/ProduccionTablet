@@ -20,12 +20,13 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
 
     public AdapterImprentas() {
         this.notes = new ArrayList<>();
+
     }
 
     public AdapterImprentas(List<Imprentas> notes) {
         this.notes = notes;
-    }
 
+    }
 
     @Override
     public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -78,16 +79,14 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
         void onDetail(Imprentas note);
     }
 
-
-
-
-
     public Imprentas getposicionactual(int position) {
         return notes.get(position);
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
+
         private TextView nombre;
+
         public NoteViewHolder(View item) {
             super(item);
 

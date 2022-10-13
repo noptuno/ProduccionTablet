@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,23 +16,21 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
+import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
-import com.codekolih.producciontablet.clases.EstadosOp;
-import com.codekolih.producciontablet.clases.Imprentas;
 import com.codekolih.producciontablet.clases.Tareas;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tarea_Activity extends AppCompatActivity {
 
-    private ProgressDialog progressDialog;
     private RequestQueue requestQueue;
     private ArrayList<Tareas> listImprentas = new ArrayList<>();
     private AdapterTareas adapterTareas = new AdapterTareas();
     private int maquinaId;
+    private ProgressHUD dialogProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +64,8 @@ public class Tarea_Activity extends AppCompatActivity {
 
     void cargarDatos(){
 
-        setProgressDialog();
+        dialogProgress = ProgressHUD.show(Tarea_Activity.this);
+
         String url = Urls.Tareas;
 
         StringRequest request = new StringRequest(
@@ -91,7 +89,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
                         adapterTareas.setNotes(lista);
                         adapterTareas.notifyDataSetChanged();
-                        progressDialog.dismiss();
+                        dialogProgress.dismiss();
 
                     }
                 },
@@ -99,8 +97,7 @@ public class Tarea_Activity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(Tarea_Activity.this, "Fallo", Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
-
+                        dialogProgress.dismiss();
 
                     }
                 });
@@ -109,15 +106,6 @@ public class Tarea_Activity extends AppCompatActivity {
 
     }
 
-    public void setProgressDialog() {
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading..."); // Setting Message
-        progressDialog.setTitle("ProgressDialog"); // Setting Title
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-        progressDialog.show(); // Display Progress Dialog
-        progressDialog.setCancelable(false);
-
-    }
 
 }
