@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
@@ -44,6 +45,8 @@ public class Verificacion_Activity extends AppCompatActivity {
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
+
+    private TareaSingleton tareaSingleton;
 
     private EditText
             edt_AnchoFinalRolloYGap,
@@ -73,11 +76,20 @@ public class Verificacion_Activity extends AppCompatActivity {
         edt_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
         edt_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
 
+        //tarea_Seleccionada = TareaInstance.Get();
+
+
+
+//        Log.e("Mensaje",tarea_Seleccionada.getDescripcion());
+
 
         Bundle parametros = getIntent().getExtras();
 
         if (parametros != null) {
-            tarea_Seleccionada =  (Tareas) parametros.getSerializable("tarea");
+
+            tareaSingleton =  (TareaSingleton) parametros.getSerializable("tarea");
+            tarea_Seleccionada = tareaSingleton.getTareaInstanciada();
+
         }else{
             Toast.makeText(getApplicationContext(), "No hay datos a mostrar", Toast.LENGTH_LONG).show();
         }

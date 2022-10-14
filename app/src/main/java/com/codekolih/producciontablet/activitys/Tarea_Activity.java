@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
 import com.codekolih.producciontablet.clases.Tareas;
@@ -50,8 +51,12 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note) {
 
+              // TareaInstance.Set(note);
+
+                TareaSingleton singleton = TareaSingleton.SingletonInstance(note);
+
                 Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
-                intent.putExtra("tarea", note);
+                intent.putExtra("tarea", singleton);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
