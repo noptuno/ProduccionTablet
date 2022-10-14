@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TareaSingleton implements Serializable {
 
     private Tareas tareaInstanciada;
-    private static TareaSingleton singleton;
+    private static TareaSingleton tareaSingle;
 
     // El constructor es privado, no permite que se genere un constructor por defecto.
     public TareaSingleton(Tareas tarea) {
@@ -17,14 +17,14 @@ public class TareaSingleton implements Serializable {
     }
 
     public static TareaSingleton SingletonInstance(Tareas tareaInstanciada) {
-        if (singleton == null){
-            singleton = new TareaSingleton(tareaInstanciada);
+        if (tareaSingle == null){
+            tareaSingle = new TareaSingleton(tareaInstanciada);
         }
         else{
-            System.out.println("No se puede crear el objeto "+ tareaInstanciada.getDescripcion() + " porque ya existe un objeto de la clase SoyUnico");
+            System.out.println("No se puede crear el objeto "+ tareaInstanciada.getDescripcion() + " porque ya existe un objeto de la clase");
         }
 
-        return singleton;
+        return tareaSingle;
     }
 
 

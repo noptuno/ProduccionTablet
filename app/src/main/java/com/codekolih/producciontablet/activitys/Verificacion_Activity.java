@@ -78,8 +78,6 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         //tarea_Seleccionada = TareaInstance.Get();
 
-
-
 //        Log.e("Mensaje",tarea_Seleccionada.getDescripcion());
 
 
@@ -95,7 +93,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         }
 
 
-        requestQueue = Volley.newRequestQueue(this);
+       requestQueue = Volley.newRequestQueue(this);
 
 
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);

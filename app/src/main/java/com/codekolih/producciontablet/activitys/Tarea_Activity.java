@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
+import com.codekolih.producciontablet.aciones.RequestVolleySingleton;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
@@ -40,6 +41,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
+
 
         maquinaId = getIntent().getIntExtra("MaquinaId",0);
 
@@ -65,14 +67,21 @@ public class Tarea_Activity extends AppCompatActivity {
 
         cargarDatos();
 
+
+
+
+
+
+
     }
 
     void cargarDatos(){
 
+       // RequestVolleySingleton.getInstance(this).request(Urls.Tareas,0);
+
+
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
-
         String url = Urls.Tareas;
-
         StringRequest request = new StringRequest(
                 com.android.volley.Request.Method.GET,
                 url,
@@ -107,6 +116,7 @@ public class Tarea_Activity extends AppCompatActivity {
                     }
                 });
         request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         requestQueue.add(request);
 
     }
