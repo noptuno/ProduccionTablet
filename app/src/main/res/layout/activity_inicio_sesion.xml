@@ -8,13 +8,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta"
-        app:srcCompat="@android:drawable/ic_dialog_dialer" />
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:srcCompat="@drawable/ic_baseline_supervised_user_circle_24" />
 
     <Button
         android:id="@+id/login_btn_IniciarSesion"
@@ -28,7 +28,7 @@
 
     <EditText
         android:id="@+id/login_edt_user"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -41,7 +41,7 @@
 
     <EditText
         android:id="@+id/login_edt_password"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -62,13 +62,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/login_btn_cargarImprenta"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:icon="@android:drawable/ic_menu_revert"
         app:layout_constraintBottom_toBottomOf="@+id/login_txt_nombreimprenta"
         app:layout_constraintStart_toEndOf="@+id/login_txt_nombreimprenta"
-        app:layout_constraintTop_toTopOf="@+id/login_txt_nombreimprenta" />
+        app:layout_constraintTop_toTopOf="@+id/login_txt_nombreimprenta"
+        app:srcCompat="@drawable/ic_find" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta" />
 </androidx.constraintlayout.widget.ConstraintLayout>

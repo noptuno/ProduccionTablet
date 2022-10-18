@@ -1,14 +1,21 @@
 package com.codekolih.producciontablet.activitys;
 
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +40,19 @@ import java.util.Map;
 
 public class Login_Activity extends AppCompatActivity {
 
-    private Button btn_inicioSesion, btn_cargarImprenta;
+    private Button btn_inicioSesion;
+    private ImageButton btn_cargarImprenta;
     private ProgressDialog progressDialog;
     private TextView txt_nombreImprenta;
     private EditText edt_usaurio, edt_pass;
     private RequestQueue requestQueue;
 
 
-    private String NombreMaquina;
-    private int MaquinaId;
+    private String nombreMaquina;
+    private String maquinaId;
+    private SharedPreferences pref;
+    Metodos metodos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,21 +64,19 @@ public class Login_Activity extends AppCompatActivity {
         txt_nombreImprenta = findViewById(R.id.login_txt_nombreimprenta);
         btn_cargarImprenta = findViewById(R.id.login_btn_cargarImprenta);
 
-
         edt_usaurio= findViewById(R.id.login_edt_user);
         edt_pass= findViewById(R.id.login_edt_password);;
 
 
         //Inicializar
-        Metodos metodos = new Metodos(getApplicationContext());
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+        metodos= new Metodos(getApplicationContext());
         requestQueue = Volley.newRequestQueue(this);
 
         //cargar
 
-         NombreMaquina = getIntent().getStringExtra("NombreMaquina");
-         MaquinaId = getIntent().getIntExtra("MaquinaId",0);
+        cargarMaquinas();
 
-        txt_nombreImprenta.setText(NombreMaquina + " " + MaquinaId);
 
 
         btn_cargarImprenta.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +98,7 @@ public class Login_Activity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-                intent.putExtra("MaquinaId", MaquinaId);
+                intent.putExtra("MaquinaId", maquinaId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
@@ -136,6 +145,14 @@ public class Login_Activity extends AppCompatActivity {
 
         }
 
+    private void cargarMaquinas() {
+
+        nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
+        maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
+        txt_nombreImprenta.setText("Maquina: " + nombreMaquina);
+
+    }
+
     public void ObtenerDatosDelUsuario() {
 
 
@@ -153,7 +170,7 @@ public class Login_Activity extends AppCompatActivity {
 
                         Usuario a = GsonUtils.parse(response,Usuario.class);
                         Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-                        intent.putExtra("MaquinaId", MaquinaId);
+                        intent.putExtra("MaquinaId", maquinaId);
                         startActivity(intent);
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         progressDialog.dismiss();

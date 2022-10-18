@@ -1,18 +1,23 @@
 package com.codekolih.producciontablet.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.ColorDiagram;
 import com.codekolih.producciontablet.clases.Tareas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHolder> {
 
@@ -34,7 +39,7 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
     public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View elementoTitular = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_note_imprentas, parent, false);
+                .inflate(R.layout.item_note_tareas, parent, false);
 
         context = elementoTitular.getContext();
         return new NoteViewHolder(elementoTitular);
@@ -90,18 +95,40 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
-        private TextView nombre;
+        private TextView serieynumero,concepto,totalcantidad,restante,observaciones;
+        private LinearLayout layoutTareas;
         public NoteViewHolder(View item) {
             super(item);
 
-            nombre = (TextView) item.findViewById(R.id.item_produccion_txt_nombre);
+            serieynumero = (TextView) item.findViewById(R.id.item_tarea_txt_syn);
+            concepto = (TextView) item.findViewById(R.id.item_tarea_txt_concepto);
+            totalcantidad = (TextView) item.findViewById(R.id.item_tarea_txt_totalcantidad);
+            restante = (TextView) item.findViewById(R.id.item_tarea_txt_restante);
+            observaciones = (TextView) item.findViewById(R.id.item_tarea_txt_obseraciones);
+            layoutTareas= (LinearLayout) item.findViewById(R.id.layoutTareas);
+
 
         }
 
         public void bind(final Tareas tarea) {
 
-            nombre.setText((tarea.getDescripcion()));
+            Log.e("TAREA",tarea.toString());
 
+          //  Random random = new Random();
+
+
+            ColorDiagram a = new ColorDiagram();
+
+           // int color = Color.argb(255,random.nextInt(256),(random.nextInt(256)),(random.nextInt(256)));
+            layoutTareas.setBackgroundColor(a.getColor());
+
+
+
+            serieynumero.setText(""+tarea.getNroDeSobre());
+            concepto.setText(tarea.getDescripcion());
+            totalcantidad.setText(""+tarea.getMetrosAImprimir());
+            restante.setText(""+tarea.getMetrosPorRollo());
+            observaciones.setText(tarea.getObservaciones());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

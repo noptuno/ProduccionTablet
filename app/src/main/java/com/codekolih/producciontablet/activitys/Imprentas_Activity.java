@@ -1,11 +1,19 @@
 package com.codekolih.producciontablet.activitys;
 
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -29,6 +37,8 @@ public class Imprentas_Activity extends AppCompatActivity {
     private AdapterImprentas adapterImprentas = new AdapterImprentas();
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
+    private SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +47,8 @@ public class Imprentas_Activity extends AppCompatActivity {
 
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+
 
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -47,8 +59,15 @@ public class Imprentas_Activity extends AppCompatActivity {
             public void onClick(Imprentas note) {
 
                 Intent intent = new Intent(Imprentas_Activity.this, Login_Activity.class);
-                intent.putExtra("NombreMaquina", note.getNombreMaquina());
-                intent.putExtra("MaquinaId", note.getMaquinaId());
+              //  intent.putExtra("NombreMaquina", note.getNombreMaquina());
+              //  intent.putExtra("MaquinaId", note.getMaquinaId());
+
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString(PREF_PRODUCCION_NOMBREMAQUINA, note.getNombreMaquina());
+                editor.putString(PREF_PRODUCCION_MAQUINAID, ""+note.getMaquinaId());
+                editor.apply();
+
+
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -66,7 +85,7 @@ public class Imprentas_Activity extends AppCompatActivity {
     }
 
 
-void cargarDatos(){
+private void cargarDatos(){
 
 
         dialogProgress = ProgressHUD.show(Imprentas_Activity.this);
@@ -113,11 +132,10 @@ void cargarDatos(){
 }
 
 
-    private void cargarConfiguracion() {
+private void cargarConfiguracion() {
 
 
     }
-
 
     public void actualizarReciclerView(boolean a) {
         runOnUiThread(() -> {
@@ -133,7 +151,31 @@ void cargarDatos(){
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menureload, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.cargar:
+
+                cargarDatos();
+
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+
+
 
 /*
 private void Registrar(Login login) {

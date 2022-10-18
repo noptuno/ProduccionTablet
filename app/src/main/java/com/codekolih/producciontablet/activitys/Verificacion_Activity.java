@@ -111,7 +111,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         adapterProduccion.notifyDataSetChanged();
 
 
-
         adapterProduccion.setOnNoteSelectedListener(new AdapterProduccion.OnNoteSelectedListener() {
             @Override
             public void onClick(Produccion_Lista note) {

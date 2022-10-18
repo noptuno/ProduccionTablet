@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
-import com.codekolih.producciontablet.clases.Tareas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +92,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
         public NoteViewHolder(View item) {
             super(item);
 
-            nombre = (TextView) item.findViewById(R.id.item_produccion_txt_nombre);
+            nombre = (TextView) item.findViewById(R.id.item_produccion_txt_tarea);
 
         }
 

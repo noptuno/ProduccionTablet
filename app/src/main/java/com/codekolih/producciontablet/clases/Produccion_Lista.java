@@ -3,6 +3,7 @@ package com.codekolih.producciontablet.clases;
 import java.io.Serializable;
 
 public class Produccion_Lista implements Serializable  {
+
     private String Fecha;
     private String UserNameId;
     private float ProduccionId;
