@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -58,6 +59,22 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_CantidadPistasCortadas,edt_PistasTroquelUsadas;
 
 
+    private TextView
+            txt_verificacion_txt_NroDeSobre,
+            txt_verificacion_txt_Descripcion,
+            txt_verificacion_txt_MetrosAImprimir,
+            txt_verificacion_txt_MetrosPorRollo,
+            txt_verificacion_txt_MetrosMatTroquelar,
+            txt_verificacion_txt_Observaciones;
+
+    private TextView
+            txt_verificacion_txt_Z_AltoMasGap,
+            txt_verificacion_txt_Cilindro,
+            txt_verificacion_txt_Pistas,
+            txt_verificacion_txt_EtiquetasEnBanda,
+            txt_verificacion_txt_EtiquetasPorRollo;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +93,21 @@ public class Verificacion_Activity extends AppCompatActivity {
         edt_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
         edt_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
 
+
+        txt_verificacion_txt_NroDeSobre = findViewById(R.id.verificacion_txt_NroDeSobre);
+        txt_verificacion_txt_Descripcion = findViewById(R.id.verificacion_txt_Descripcion);
+        txt_verificacion_txt_MetrosAImprimir = findViewById(R.id.verificacion_txt_MetrosAImprimir);
+        txt_verificacion_txt_MetrosPorRollo = findViewById(R.id.verificacion_txt_MetrosPorRollo);
+        txt_verificacion_txt_MetrosMatTroquelar = findViewById(R.id.verificacion_txt_MetrosMatTroquelar);
+        txt_verificacion_txt_Observaciones = findViewById(R.id.verificacion_txt_Observaciones);
+
+        txt_verificacion_txt_Z_AltoMasGap= findViewById(R.id.verificacion_txt_Z_AltoMasGap);
+        txt_verificacion_txt_Cilindro= findViewById(R.id.verificacion_txt_Cilindro);
+        txt_verificacion_txt_Pistas= findViewById(R.id.verificacion_txt_Pistas);
+        txt_verificacion_txt_EtiquetasEnBanda= findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
+        txt_verificacion_txt_EtiquetasPorRollo= findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
+
+
         //tarea_Seleccionada = TareaInstance.Get();
 
 //        Log.e("Mensaje",tarea_Seleccionada.getDescripcion());
@@ -88,8 +120,24 @@ public class Verificacion_Activity extends AppCompatActivity {
             tareaSingleton =  (TareaSingleton) parametros.getSerializable("tarea");
             tarea_Seleccionada = tareaSingleton.getTareaInstanciada();
 
+
+            txt_verificacion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
+            txt_verificacion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
+            txt_verificacion_txt_MetrosAImprimir.setText(""+tarea_Seleccionada.getMetrosAImprimir());
+            txt_verificacion_txt_MetrosPorRollo.setText(""+tarea_Seleccionada.getMetrosPorRollo());
+            txt_verificacion_txt_MetrosMatTroquelar.setText(""+tarea_Seleccionada.getMetrosMatTroquelar());
+            txt_verificacion_txt_Observaciones.setText(""+tarea_Seleccionada.getObservaciones());
+
+            txt_verificacion_txt_Z_AltoMasGap.setText(""+tarea_Seleccionada.getZ_AltoMasGap());
+            txt_verificacion_txt_Cilindro.setText(""+tarea_Seleccionada.getCilindro());
+            txt_verificacion_txt_Pistas.setText(""+tarea_Seleccionada.getPistas());
+            txt_verificacion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
+            txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
+
         }else{
+
             Toast.makeText(getApplicationContext(), "No hay datos a mostrar", Toast.LENGTH_LONG).show();
+
         }
 
 
