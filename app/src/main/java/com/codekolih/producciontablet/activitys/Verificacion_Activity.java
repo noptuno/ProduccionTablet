@@ -185,7 +185,6 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                 String url = Urls.agregarProduccion;
 
-
                 produccion_actual.setFecha("13/10/2022");
                 produccion_actual.setObservacionesCierre("HOLA2");
                 produccion_actual.setAnchoFinalRollo(Float.parseFloat(edt_AnchoFinalRolloYGap.getText().toString()));
@@ -197,7 +196,12 @@ public class Verificacion_Activity extends AppCompatActivity {
                 produccion_actual.setCantidadPistasCortadas(Float.parseFloat(edt_CantidadPistasCortadas.getText().toString()));
                 produccion_actual.setPistasTroquelUsadas(Float.parseFloat(edt_PistasTroquelUsadas.getText().toString()));
 
+                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                intent.putExtra("tareaSingleton", tareaSingleton);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
+                /*
                 JSONObject jsonObject = GsonUtils.toJSON(produccion_actual);
 
                 JsonObjectRequest request = new JsonObjectRequest(
@@ -221,12 +225,15 @@ public class Verificacion_Activity extends AppCompatActivity {
                                 dialogProgress.dismiss();
                             }
                         });
-
                 request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(request);
+                */
+
 
             }
         });
+
+
     }
 
 

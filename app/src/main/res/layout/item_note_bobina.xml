@@ -49,17 +49,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Usuario"
+                    android:text="ProveedorId"
                     android:textColor="#141717"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/item_produccion_txt_UsuarioId"
+                    android:id="@+id/item_bobina_txt_ProveedorId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="ProveedorId"
                     android:textColor="#F8F5F5"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -76,10 +76,10 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MetrosImpresos" />
+                    android:text="ProveedorNombre" />
 
                 <TextView
-                    android:id="@+id/item_produccion_txt_MetrosImpresos"
+                    android:id="@+id/item_bobina_txt_ProveedorNombre"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -94,10 +94,10 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ScrapAjusteProduccion" />
+                    android:text="Lote" />
 
                 <TextView
-                    android:id="@+id/item_produccion_txt_ScrapAjusteProduccion"
+                    android:id="@+id/item_bobina_txt_Lote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -111,10 +111,10 @@
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="ScrapAjusteProduccion_Unidades" />
+                    android:text="Ancho" />
 
                 <TextView
-                    android:id="@+id/item_produccion_txt_ScrapAjusteProduccion_Unidades"
+                    android:id="@+id/item_bobina_txt_Ancho"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -128,10 +128,10 @@
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="RollosFabricdos" />
+                    android:text="TipoMaterialId" />
 
                 <TextView
-                    android:id="@+id/item_produccion_txt_RollosFabricdos"
+                    android:id="@+id/item_bobina_txt_TipoMaterialId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -145,14 +145,30 @@
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="RollosEmpaquetados" />
+                    android:text="DefectuosaKg" />
 
                 <TextView
-                    android:id="@+id/item_produccion_txt_RollosEmpaquetados"
+                    android:id="@+id/item_bobina_txt_DefectuosaKg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="EsAbiertaoCerrada" />
+
+                <TextView
+                    android:id="@+id/item_bobina_txt_EsAbiertaoCerrada"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -82,23 +82,31 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
     }
 
 
-
     public Produccion_Lista getposicionactual(int position) {
         return notes.get(position);
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
-        private TextView nombre;
+        private TextView UsuarioId, MetrosImpresos, ScrapAjusteProduccion,ScrapAjusteProduccion_Unidades,RollosFabricdos,RollosEmpaquetados;
         public NoteViewHolder(View item) {
             super(item);
 
-            nombre = (TextView) item.findViewById(R.id.item_produccion_txt_tarea);
-
+            UsuarioId = (TextView) item.findViewById(R.id.item_produccion_txt_UsuarioId);
+            MetrosImpresos = (TextView) item.findViewById(R.id.item_produccion_txt_MetrosImpresos);
+            ScrapAjusteProduccion = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion);
+            ScrapAjusteProduccion_Unidades = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion_Unidades);
+            RollosFabricdos = (TextView) item.findViewById(R.id.item_produccion_txt_RollosFabricdos);
+            RollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txt_RollosEmpaquetados);
         }
 
         public void bind(final Produccion_Lista produccion) {
 
-            nombre.setText((produccion.getUserNameId()));
+            UsuarioId.setText((produccion.getUserNameId()));
+            MetrosImpresos.setText((""+produccion.getMetrosImpresos()));
+            ScrapAjusteProduccion.setText((""+produccion.getScrapAjusteProduccion()));
+            ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));
+            RollosFabricdos.setText((""+produccion.getRollosFabricdos()));
+            RollosEmpaquetados.setText((""+produccion.getRollosEmpaquetados()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
