@@ -42,7 +42,6 @@ public class Tarea_Activity extends AppCompatActivity {
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
 
-
         maquinaId = getIntent().getIntExtra("MaquinaId",0);
 
         RecyclerView recyclerView = findViewById(R.id.tarea_recycler);
@@ -53,11 +52,9 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note) {
 
-              // TareaInstance.Set(note);
-
                 TareaSingleton singleton = TareaSingleton.SingletonInstance(note);
-
                 Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
+
                 intent.putExtra("tarea", singleton);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -65,19 +62,14 @@ public class Tarea_Activity extends AppCompatActivity {
             }
         });
 
+      //  RequestVolleySingleton.getInstance(this).request(Urls.Tareas,0);
+      //  List<Tareas> lista = GsonUtils.parseList(RequestVolleySingleton.getInstance(this).getRequestQueue(), Tareas[].class);
+
         cargarDatos();
-
-
-
-
-
-
 
     }
 
     void cargarDatos(){
-
-       // RequestVolleySingleton.getInstance(this).request(Urls.Tareas,0);
 
 
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
@@ -116,7 +108,6 @@ public class Tarea_Activity extends AppCompatActivity {
                     }
                 });
         request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         requestQueue.add(request);
 
     }

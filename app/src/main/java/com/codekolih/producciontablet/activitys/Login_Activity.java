@@ -19,24 +19,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
-import com.codekolih.producciontablet.aciones.Metodos;
 import com.codekolih.producciontablet.aciones.Urls;
-import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.clases.Usuario;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Login_Activity extends AppCompatActivity {
 
@@ -51,7 +41,7 @@ public class Login_Activity extends AppCompatActivity {
     private String nombreMaquina;
     private String maquinaId;
     private SharedPreferences pref;
-    Metodos metodos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +60,6 @@ public class Login_Activity extends AppCompatActivity {
 
         //Inicializar
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        metodos= new Metodos(getApplicationContext());
         requestQueue = Volley.newRequestQueue(this);
 
         //cargar

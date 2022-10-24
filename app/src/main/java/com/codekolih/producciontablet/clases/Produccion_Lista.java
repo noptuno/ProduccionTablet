@@ -26,6 +26,12 @@ public class Produccion_Lista implements Serializable  {
     private float RollosEmpaquetados;
     private float UsuarioId;
 
+
+    public Produccion_Lista() {
+
+
+    }
+
     public Produccion_Lista(String fecha, String userNameId, float produccionId, float pedidoId, float tareaId, float metrosImpresos, float anchoFinalRolloYGap, float cantidadPistasImpresas, float cantidadTintas, float anchoBobinaUsadoCm, float scrapAjusteInicial, String scrapAjusteInicial_Unidades, float scrapAjusteProduccion, String scrapAjusteProduccion_Unidades, String observacionesCierre, float rollosFabricdos, float anchoFinalRollo, float cantidadPistasCortadas, float pistasTroquelUsadas, float rollosEmpaquetados, float usuarioId) {
         Fecha = fecha;
         UserNameId = userNameId;

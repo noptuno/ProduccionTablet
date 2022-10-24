@@ -21,10 +21,11 @@ public class RequestVolleySingleton {
         private static RequestVolleySingleton instance;
         private RequestQueue requestQueue;
         private ImageLoader imageLoader;
-        private static Context ctx;
+        private static Context context;
+
 
         private RequestVolleySingleton(Context context) {
-            ctx = context;
+           this.context = context;
             requestQueue = getRequestQueue();
 
 /*
@@ -56,9 +57,7 @@ public class RequestVolleySingleton {
 
         public RequestQueue getRequestQueue() {
             if (requestQueue == null) {
-                // getApplicationContext() is key, it keeps you from leaking the
-                // Activity or BroadcastReceiver if someone passes one in.
-                requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
+                requestQueue = Volley.newRequestQueue(context.getApplicationContext());
             }
             return requestQueue;
         }
@@ -87,7 +86,7 @@ public class RequestVolleySingleton {
 
         public void request(String url,int tipo) {
 
-            dialogProgress = ProgressHUD.show(ctx);
+            dialogProgress = ProgressHUD.show(context);
 
             StringRequest request = new StringRequest(
                     tipo,
@@ -108,17 +107,14 @@ public class RequestVolleySingleton {
                     new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(ctx, "Fallo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Fallo", Toast.LENGTH_LONG).show();
 
                           //  dialogProgress.dismiss();
 
                         }
                     });
             request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
             instance.addToRequestQueue(request);
-
-
         }
 
     }

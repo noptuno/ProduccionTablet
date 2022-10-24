@@ -16,21 +16,30 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
-            android:label="Verificar Tarea"
+            android:name=".activitys.BobinasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.ScrapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.CantidadActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.Verificacion_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Verificar Tarea" />
         <activity
-            android:label="Produccion de Tarea"
             android:name=".activitys.Produccion_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Produccion de Tarea" />
         <activity
-            android:label="Tareas Disponibles"
             android:name=".activitys.Tarea_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Tareas Disponibles" />
         <activity
-            android:label="Seleccionar Imprentas"
             android:name=".activitys.Imprentas_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Seleccionar Imprentas" />
         <activity
             android:name=".activitys.Login_Activity"
             android:exported="true">
