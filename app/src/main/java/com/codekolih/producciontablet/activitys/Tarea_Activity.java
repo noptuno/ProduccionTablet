@@ -71,7 +71,6 @@ public class Tarea_Activity extends AppCompatActivity {
 
     void cargarDatos(){
 
-
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
         String url = Urls.Tareas;
         StringRequest request = new StringRequest(
@@ -112,7 +111,4 @@ public class Tarea_Activity extends AppCompatActivity {
         requestQueue.add(request);
 
     }
-
-
-
 }

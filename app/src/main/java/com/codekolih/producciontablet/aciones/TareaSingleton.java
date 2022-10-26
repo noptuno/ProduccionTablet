@@ -27,14 +27,14 @@ public class TareaSingleton {
 
     }
 
-    public synchronized Tareas setTarea(Tareas tarea) {
+    public Tareas setTarea(Tareas tarea) {
         if (this.tareaInstanciada == null) {
             this.tareaInstanciada = tarea;
         }
         return this.tareaInstanciada;
     }
 
-    public Tareas loadTarea(){
+    public Tareas getTarea(){
 
         if (tareaInstanciada==null){
             tareaInstanciada = null;

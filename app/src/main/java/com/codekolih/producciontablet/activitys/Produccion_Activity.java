@@ -55,7 +55,7 @@ public class Produccion_Activity extends AppCompatActivity {
         btn_bobina = findViewById(R.id.produccion_btn_bobina);
         btn_scrap = findViewById(R.id.produccion_btn_scrap);
 
-        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().loadTarea())==null){
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
         }
 

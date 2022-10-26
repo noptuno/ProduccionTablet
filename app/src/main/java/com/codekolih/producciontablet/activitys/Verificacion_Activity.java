@@ -110,7 +110,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
 //        Log.e("Mensaje",tarea_Seleccionada.getDescripcion());
 
-        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().loadTarea())==null){
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
         }
 

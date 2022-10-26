@@ -16,6 +16,9 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
+            android:name=".pdf.PdfActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.BobinasActivity"
             android:exported="false" />
         <activity
@@ -35,8 +38,8 @@
         <activity
             android:name=".activitys.Tarea_Activity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:label="Tareas Disponibles" />
+            android:label="Tareas Disponibles"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activitys.Imprentas_Activity"
             android:exported="false"
