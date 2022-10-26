@@ -1,38 +1,48 @@
 package com.codekolih.producciontablet.aciones;
 
 
+import android.content.Context;
+import android.text.TextUtils;
+
 import com.codekolih.producciontablet.clases.Tareas;
 
 import java.io.Serializable;
 
-public class TareaSingleton implements Serializable {
+public class TareaSingleton {
 
-    private Tareas tareaInstanciada;
     private static TareaSingleton tareaSingle;
+    private Tareas tareaInstanciada;
 
-    // El constructor es privado, no permite que se genere un constructor por defecto.
-    public TareaSingleton(Tareas tarea) {
-        this.tareaInstanciada = tarea;
-        System.out.println("Mi nombre es: " + this.tareaInstanciada);
+    private TareaSingleton() {
     }
 
-    public static TareaSingleton SingletonInstance(Tareas tareaInstanciada) {
+    public static TareaSingleton SingletonInstance() {
         if (tareaSingle == null){
-            tareaSingle = new TareaSingleton(tareaInstanciada);
+            tareaSingle = new TareaSingleton();
         }
         else{
-            System.out.println("No se puede crear el objeto "+ tareaInstanciada.getDescripcion() + " porque ya existe un objeto de la clase");
+            System.out.println("No se puede crear el objeto ");
+        }
+        return tareaSingle;
+
+    }
+
+    public synchronized Tareas setTarea(Tareas tarea) {
+        if (this.tareaInstanciada == null) {
+            this.tareaInstanciada = tarea;
+        }
+        return this.tareaInstanciada;
+    }
+
+    public Tareas loadTarea(){
+
+        if (tareaInstanciada==null){
+            tareaInstanciada = null;
         }
 
-        return tareaSingle;
+        return this.tareaInstanciada;
     }
 
 
-    public Tareas getTareaInstanciada() {
-        return tareaInstanciada;
-    }
 
-    public void setTareaInstanciada(Tareas tareaInstanciada) {
-        this.tareaInstanciada = tareaInstanciada;
-    }
 }

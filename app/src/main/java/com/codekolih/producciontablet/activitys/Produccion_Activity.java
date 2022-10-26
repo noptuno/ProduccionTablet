@@ -48,22 +48,18 @@ public class Produccion_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produccion);
 
-        requestQueue = Volley.newRequestQueue(this);
+       // requestQueue = Volley.newRequestQueue(this);
 
 
         btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
         btn_bobina = findViewById(R.id.produccion_btn_bobina);
         btn_scrap = findViewById(R.id.produccion_btn_scrap);
 
-
-        Bundle parametros = getIntent().getExtras();
-
-        if (parametros != null) {
-
-            tareaSingleton = (TareaSingleton) parametros.getSerializable("tareaSingleton");
-            tarea_Seleccionada = tareaSingleton.getTareaInstanciada();
-
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().loadTarea())==null){
+            Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
         }
+
+
         btn_cantidad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,13 +178,6 @@ public class Produccion_Activity extends AppCompatActivity {
         adapterBobina.notifyDataSetChanged();
 
     }
-
-
-void actualziarRecicler (){
-
-
-}
-
 
 
 }

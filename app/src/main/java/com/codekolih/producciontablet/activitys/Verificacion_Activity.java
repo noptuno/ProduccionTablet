@@ -47,8 +47,6 @@ public class Verificacion_Activity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
 
-    private TareaSingleton tareaSingleton;
-
     private EditText
             edt_AnchoFinalRolloYGap,
             edt_CantidadPistasImpresas,
@@ -112,36 +110,25 @@ public class Verificacion_Activity extends AppCompatActivity {
 
 //        Log.e("Mensaje",tarea_Seleccionada.getDescripcion());
 
-
-        Bundle parametros = getIntent().getExtras();
-
-        if (parametros != null) {
-
-            tareaSingleton =  (TareaSingleton) parametros.getSerializable("tarea");
-            tarea_Seleccionada = tareaSingleton.getTareaInstanciada();
-
-
-            txt_verificacion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
-            txt_verificacion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
-            txt_verificacion_txt_MetrosAImprimir.setText(""+tarea_Seleccionada.getMetrosAImprimir());
-            txt_verificacion_txt_MetrosPorRollo.setText(""+tarea_Seleccionada.getMetrosPorRollo());
-            txt_verificacion_txt_MetrosMatTroquelar.setText(""+tarea_Seleccionada.getMetrosMatTroquelar());
-            txt_verificacion_txt_Observaciones.setText(""+tarea_Seleccionada.getObservaciones());
-
-            txt_verificacion_txt_Z_AltoMasGap.setText(""+tarea_Seleccionada.getZ_AltoMasGap());
-            txt_verificacion_txt_Cilindro.setText(""+tarea_Seleccionada.getCilindro());
-            txt_verificacion_txt_Pistas.setText(""+tarea_Seleccionada.getPistas());
-            txt_verificacion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
-            txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
-
-        }else{
-
-            Toast.makeText(getApplicationContext(), "No hay datos a mostrar", Toast.LENGTH_LONG).show();
-
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().loadTarea())==null){
+            Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
         }
 
+        txt_verificacion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
+        txt_verificacion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
+        txt_verificacion_txt_MetrosAImprimir.setText(""+tarea_Seleccionada.getMetrosAImprimir());
+        txt_verificacion_txt_MetrosPorRollo.setText(""+tarea_Seleccionada.getMetrosPorRollo());
+        txt_verificacion_txt_MetrosMatTroquelar.setText(""+tarea_Seleccionada.getMetrosMatTroquelar());
+        txt_verificacion_txt_Observaciones.setText(""+tarea_Seleccionada.getObservaciones());
 
-       requestQueue = Volley.newRequestQueue(this);
+        txt_verificacion_txt_Z_AltoMasGap.setText(""+tarea_Seleccionada.getZ_AltoMasGap());
+        txt_verificacion_txt_Cilindro.setText(""+tarea_Seleccionada.getCilindro());
+        txt_verificacion_txt_Pistas.setText(""+tarea_Seleccionada.getPistas());
+        txt_verificacion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
+        txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
+
+
+     //  requestQueue = Volley.newRequestQueue(this);
 
 
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
@@ -181,7 +168,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+               //ProgressHUD.show(Verificacion_Activity.this);
 
                 String url = Urls.agregarProduccion;
 
@@ -197,9 +184,11 @@ public class Verificacion_Activity extends AppCompatActivity {
                 produccion_actual.setPistasTroquelUsadas(Float.parseFloat(edt_PistasTroquelUsadas.getText().toString()));
 
                 Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                intent.putExtra("tareaSingleton", tareaSingleton);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+
+               // ProgressHUD.show(Verificacion_Activity.this).dismiss();
 
                 /*
                 JSONObject jsonObject = GsonUtils.toJSON(produccion_actual);
