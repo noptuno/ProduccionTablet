@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,23 +30,27 @@ import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Imprentas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
+import com.codekolih.producciontablet.pdf.PdfActivity;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Map;
 
 public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
-    Button btn_guardar;
+
     private ArrayList<Produccion_Lista> listImprentas = new ArrayList<>();
     Produccion_Lista produccion_actual;
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
+
+    private Boolean pdfAbierto = false;
 
     private EditText
             edt_AnchoFinalRolloYGap,
@@ -55,6 +60,8 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_UnidadIdScrapInicial,
             edt_AnchoFinalRollo,
             edt_CantidadPistasCortadas,edt_PistasTroquelUsadas;
+
+    private Switch uno,dos,tres,cuatro,cinco,seis;
 
 
     private TextView
@@ -72,14 +79,22 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_EtiquetasEnBanda,
             txt_verificacion_txt_EtiquetasPorRollo;
 
-
+    Button btn_guardar, btn_verpdf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificacion);
 
-
+        btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
+
+        uno= findViewById(R.id.switch1);
+        dos= findViewById(R.id.switch2);
+        tres= findViewById(R.id.switch3);
+        cuatro= findViewById(R.id.switch4);
+        cinco= findViewById(R.id.switch5);
+        seis= findViewById(R.id.switch6);
+
 
 
         edt_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
@@ -128,7 +143,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
 
 
-     //  requestQueue = Volley.newRequestQueue(this);
+         requestQueue = Volley.newRequestQueue(this);
 
 
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
@@ -168,41 +183,69 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               //ProgressHUD.show(Verificacion_Activity.this);
-
-                String url = Urls.agregarProduccion;
-
-                produccion_actual.setFecha("13/10/2022");
-                produccion_actual.setObservacionesCierre("HOLA2");
-                produccion_actual.setAnchoFinalRollo(Float.parseFloat(edt_AnchoFinalRolloYGap.getText().toString()));
-                produccion_actual.setCantidadPistasImpresas(Float.parseFloat(edt_CantidadPistasImpresas.getText().toString()));
-                produccion_actual.setCantidadTintas(Float.parseFloat(edt_CantidadTintas.getText().toString()));
-                produccion_actual.setScrapAjusteInicial(Float.parseFloat(edt_ScrapAjusteInicial.getText().toString()));
-                produccion_actual.setScrapAjusteInicial_Unidades(edt_UnidadIdScrapInicial.getText().toString());
-                produccion_actual.setAnchoFinalRollo(Float.parseFloat(edt_AnchoFinalRollo.getText().toString()));
-                produccion_actual.setCantidadPistasCortadas(Float.parseFloat(edt_CantidadPistasCortadas.getText().toString()));
-                produccion_actual.setPistasTroquelUsadas(Float.parseFloat(edt_PistasTroquelUsadas.getText().toString()));
 
                 Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
+/*
+                if (pdfAbierto && uno.isChecked() && dos.isChecked() && tres.isChecked() && cuatro.isChecked() && cinco.isChecked() && seis.isChecked()){
 
-               // ProgressHUD.show(Verificacion_Activity.this).dismiss();
 
-                /*
-                JSONObject jsonObject = GsonUtils.toJSON(produccion_actual);
+                   Produccion_Lista produccion =  cargarProduccion();
+
+                    if (produccion!=null){
+
+                        cargarVolley(produccion);
+                    }
+
+
+
+                }else{
+
+                    toastPersonalziado("Verificar Especificacion");
+
+                }
+*/
+
+            }
+        });
+
+        btn_verpdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                pdfAbierto = true;
+
+            }
+        });
+    }
+
+    private void cargarVolley(Produccion_Lista produccion) {
+
+        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+
+
+                JSONObject jsonObject = GsonUtils.toJSON(produccion);
 
                 JsonObjectRequest request = new JsonObjectRequest(
                         com.android.volley.Request.Method.POST,
-                        url,
+                        Urls.agregarProduccion,
                         jsonObject,
                         new com.android.volley.Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
 
                                 Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
+
                                 dialogProgress.dismiss();
+                                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                             }
                         },
@@ -212,18 +255,54 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
                                 dialogProgress.dismiss();
+
+                                //cargarVolley(produccion);
                             }
                         });
                 request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(request);
-                */
-
-
-            }
-        });
 
 
     }
 
+    private Produccion_Lista cargarProduccion() {
 
+
+        //todo hay que crearlo sin fecha y sin usuario ID
+        Produccion_Lista produccion = new Produccion_Lista();
+
+        produccion.setProduccionId(0);
+        produccion.setPedidoId(tarea_Seleccionada.getPedidoId());
+        produccion.setTareaId(tarea_Seleccionada.getTareaId());
+        produccion.setMetrosImpresos(0);
+        produccion.setAnchoFinalRolloYGap(Float.parseFloat(edt_AnchoFinalRolloYGap.getText().toString()));
+        produccion.setCantidadPistasImpresas(Float.parseFloat(edt_CantidadPistasImpresas.getText().toString()));
+        produccion.setCantidadTintas(Float.parseFloat(edt_CantidadTintas.getText().toString()));
+        produccion.setAnchoBobinaUsadoCm(0);
+        produccion.setScrapAjusteInicial(Float.parseFloat(edt_ScrapAjusteInicial.getText().toString()));
+        produccion.setScrapAjusteInicial_Unidades(edt_UnidadIdScrapInicial.getText().toString());
+        produccion.setScrapAjusteProduccion(0);
+        produccion.setScrapAjusteProduccion_Unidades("KG");
+        produccion.setObservacionesCierre("SIN OBSERVACIONES");
+        produccion.setRollosFabricdos(0);
+        produccion.setAnchoFinalRollo(Float.parseFloat(edt_AnchoFinalRollo.getText().toString()));
+        produccion.setCantidadPistasCortadas(Float.parseFloat(edt_CantidadPistasCortadas.getText().toString()));
+        produccion.setPistasTroquelUsadas(Float.parseFloat(edt_PistasTroquelUsadas.getText().toString()));
+        produccion.setRollosEmpaquetados(0);
+        produccion.setUsuarioId(tarea_Seleccionada.getUsuarioId());
+
+        return produccion;
+    }
+
+    private void verificarSwicht() {
+
+
+
+    }
+
+    private void toastPersonalziado(String msg){
+
+    Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+
+}
 }

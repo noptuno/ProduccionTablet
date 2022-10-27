@@ -41,6 +41,8 @@ public class Produccion_Activity extends AppCompatActivity {
     private ProgressHUD dialogProgress;
     private TareaSingleton tareaSingleton;
 
+    private float produccionId;
+
     private Button btn_cantidad, btn_bobina,btn_scrap;
 
     @Override
@@ -48,7 +50,7 @@ public class Produccion_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produccion);
 
-       // requestQueue = Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(this);
 
 
         btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
@@ -81,50 +83,10 @@ public class Produccion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Bobinas bobinacargar = new Bobinas();
 
-             float BobinaId;
-             float TareaId;
-             float ProduccionId;
-             float ProveedorId;
-             String ProveedorNombre;
-             String Lote;
-             float Ancho;
-             float TipoMaterialId;
-             String EsAbiertaoCerrada;
-             float DefectuosaKg;
-             String NombreTipoMaterial;
+                cargarBobina();
 
-                Intent intent = new Intent(Produccion_Activity.this, BobinasActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-/*
-                JSONObject jsonObject = GsonUtils.toJSON(bobinacargar);
-                JsonObjectRequest request = new JsonObjectRequest(
-                        com.android.volley.Request.Method.POST,
-                        Urls.agregarbobinas,
-                        jsonObject,
-                        new com.android.volley.Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-
-                                Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
-                               // dialogProgress.dismiss();
-
-                            }
-                        },
-                        new com.android.volley.Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
-                               // dialogProgress.dismiss();
-                            }
-                        });
-                request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                requestQueue.add(request);
-                */
 
 
 
@@ -159,6 +121,13 @@ public class Produccion_Activity extends AppCompatActivity {
 
         }
 
+        adapterProduccion.setOnNoteSelectedListener(new AdapterProduccion.OnNoteSelectedListener() {
+            @Override
+            public void onClick(Produccion_Lista note) {
+                produccionId = note.getProduccionId();
+            }
+        });
+
         adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
         adapterProduccion.notifyDataSetChanged();
 
@@ -176,6 +145,56 @@ public class Produccion_Activity extends AppCompatActivity {
 
         adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
         adapterBobina.notifyDataSetChanged();
+
+    }
+
+    private void cargarBobina() {
+
+        Bobinas bobinacargar = new Bobinas();
+
+        bobinacargar.setBobinaId(0);
+        bobinacargar.setTareaId(tarea_Seleccionada.getTareaId());
+        bobinacargar.setProduccionId(produccionId);
+        bobinacargar.setProveedorId(2);
+        bobinacargar.setProveedorNombre("dos");
+        bobinacargar.setLote("lote123");
+        bobinacargar.setAncho(5);
+        bobinacargar.setTipoMaterialId(1);
+        bobinacargar.setEsAbiertaoCerrada("true");
+        bobinacargar.setDefectuosaKg(5);
+        bobinacargar.setNombreTipoMaterial("nombretipo");
+
+/*
+        Intent intent = new Intent(Produccion_Activity.this, BobinasActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+*/
+
+        JSONObject jsonObject = GsonUtils.toJSON(bobinacargar);
+        JsonObjectRequest request = new JsonObjectRequest(
+                com.android.volley.Request.Method.POST,
+                Urls.agregarbobinas,
+                jsonObject,
+                new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
+                        // dialogProgress.dismiss();
+
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
+                       // cargarBobina();
+                    }
+                });
+        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+
 
     }
 

@@ -101,7 +101,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
         public void bind(final Produccion_Lista produccion) {
 
-            UsuarioId.setText((produccion.getUserNameId()));
+            UsuarioId.setText((""+produccion.getUsuarioId()));
             MetrosImpresos.setText((""+produccion.getMetrosImpresos()));
             ScrapAjusteProduccion.setText((""+produccion.getScrapAjusteProduccion()));
             ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));
