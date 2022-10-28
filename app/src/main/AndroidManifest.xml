@@ -16,16 +16,10 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
-            android:name=".pdf.PdfActivity"
+            android:name=".dialogs.PdfActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.BobinasActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activitys.ScrapActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activitys.CantidadActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.Verificacion_Activity"

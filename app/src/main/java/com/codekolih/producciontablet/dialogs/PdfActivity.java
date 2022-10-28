@@ -1,4 +1,4 @@
-package com.codekolih.producciontablet.pdf;
+package com.codekolih.producciontablet.dialogs;
 
 import androidx.appcompat.app.AppCompatActivity;
 

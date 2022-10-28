@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,12 +24,12 @@ import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
+import com.codekolih.producciontablet.dialogs.CuadrodeDialogo;
+import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-public class Produccion_Activity extends AppCompatActivity implements CuadrodeDialogo.finalizarCuadro {
+public class Produccion_Activity extends AppCompatActivity implements CuadrodeDialogo.finalizarCuadro, ScrapDialogo.finalizarScrapDialog {
 
     Tareas tarea_Seleccionada;
     Produccion_Lista produccion_actual;
@@ -72,10 +71,15 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
                 float RollosFabricdos=11;
                 float MetrosImpresos = 12;
 
+
+
+                new CuadrodeDialogo(Produccion_Activity.this,Produccion_Activity.this);
+               // productoGlobal = producto;
+/*
                 Intent intent = new Intent(Produccion_Activity.this, CantidadActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
+*/
             }
         });
 
@@ -87,8 +91,7 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
                 cargarBobina();
 
 /*
-                new CuadrodeDialogo(context,ListaProductos.this);
-                productoGlobal = producto;
+
 */
 
             }
@@ -100,12 +103,11 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
 
                 Produccion_Lista produccion = new Produccion_Lista();
 
+                new ScrapDialogo(Produccion_Activity.this,Produccion_Activity.this);
+
                 float ScrapAjusteProduccion = 100;
                 String ScrapAjusteProduccion_Unidades = "KG";
 
-                Intent intent = new Intent(Produccion_Activity.this, ScrapActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
             }
         });
@@ -150,9 +152,19 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
     }
 
     @Override
-    public void ResultadoCuadroDialogo(int numero) {
+    public void ResultadoCuadroDialogo(float valorFloat) {
+
+        Toast.makeText(getApplicationContext(),"Valor: " + valorFloat,Toast.LENGTH_LONG).show();
+
      //   cantidadimprimir = numero;
        // ProcesoImprimir(productoGlobal,cantidadimprimir);
+    }
+
+    @Override
+    public void ResultadoScrapDialogo(float cantidad) {
+
+        Toast.makeText(getApplicationContext(),"Valor: " + cantidad,Toast.LENGTH_LONG).show();
+
     }
 
     private void cargarBobina() {
@@ -204,6 +216,7 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
 
 
     }
+
 
 
 }

@@ -7,12 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,21 +28,15 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
-import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
-import com.codekolih.producciontablet.clases.Imprentas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
-import com.codekolih.producciontablet.pdf.PdfActivity;
+import com.codekolih.producciontablet.dialogs.PdfActivity;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
-import java.util.List;
-import java.util.Map;
 
 public class Verificacion_Activity extends AppCompatActivity {
 

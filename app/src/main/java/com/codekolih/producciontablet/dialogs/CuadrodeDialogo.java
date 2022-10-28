@@ -1,4 +1,4 @@
-package com.codekolih.producciontablet.activitys;
+package com.codekolih.producciontablet.dialogs;
 
 
 import android.app.Dialog;
@@ -20,9 +20,9 @@ public class CuadrodeDialogo {
 
     public interface finalizarCuadro{
 
-        void ResultadoCuadroDialogo(int numero);
-    }
+        void ResultadoCuadroDialogo(float cantidad);
 
+    }
 
 
     public CuadrodeDialogo(Context contexcto , finalizarCuadro actividad){
@@ -34,7 +34,7 @@ public class CuadrodeDialogo {
         dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogo.setCancelable(false);
         dialogo.setCanceledOnTouchOutside(false);
-        dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_num);
 
         Button aceptar = dialogo.findViewById(R.id.btnAceptar);
@@ -49,10 +49,10 @@ public class CuadrodeDialogo {
             public void onClick(View view) {
 
                 try{
-                    interfaz.ResultadoCuadroDialogo(Integer.parseInt(numero.getText().toString()));
+                    interfaz.ResultadoCuadroDialogo(Float.parseFloat(numero.getText().toString()));
                     dialogo.dismiss();
                 }catch (Exception e){
-                    interfaz.ResultadoCuadroDialogo(1);
+                    interfaz.ResultadoCuadroDialogo(0);
                     dialogo.dismiss();
                 }
 
