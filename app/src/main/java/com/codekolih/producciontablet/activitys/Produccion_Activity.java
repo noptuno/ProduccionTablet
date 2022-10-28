@@ -30,7 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Produccion_Activity extends AppCompatActivity {
+public class Produccion_Activity extends AppCompatActivity implements CuadrodeDialogo.finalizarCuadro {
 
     Tareas tarea_Seleccionada;
     Produccion_Lista produccion_actual;
@@ -86,9 +86,10 @@ public class Produccion_Activity extends AppCompatActivity {
 
                 cargarBobina();
 
-
-
-
+/*
+                new CuadrodeDialogo(context,ListaProductos.this);
+                productoGlobal = producto;
+*/
 
             }
         });
@@ -146,6 +147,12 @@ public class Produccion_Activity extends AppCompatActivity {
         adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
         adapterBobina.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void ResultadoCuadroDialogo(int numero) {
+     //   cantidadimprimir = numero;
+       // ProcesoImprimir(productoGlobal,cantidadimprimir);
     }
 
     private void cargarBobina() {

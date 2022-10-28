@@ -16,9 +16,6 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
-            android:name=".PdfActivity"
-            android:exported="false" />
-        <activity
             android:name=".pdf.PdfActivity"
             android:exported="false" />
         <activity
