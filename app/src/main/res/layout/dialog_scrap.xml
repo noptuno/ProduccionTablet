@@ -75,13 +75,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_numero" />
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="111dp"
+            android:layout_height="88dp"
+            android:layout_marginEnd="60dp"
+            android:entries="@android:array/organizationTypes"
+            app:layout_constraintBottom_toBottomOf="@+id/et_numero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cantidad_edt_nombreCantidad"
+            app:layout_constraintVertical_bias="0.0" />
+
         <EditText
             android:id="@+id/et_numero"
             android:layout_width="111dp"
             android:layout_height="88dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="4dp"
             android:cursorVisible="true"
             android:ems="10"
             android:inputType="number"
@@ -92,7 +102,6 @@
             android:textColor="@color/white"
             android:textSize="60sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cantidad_edt_nombreCantidad" />
 

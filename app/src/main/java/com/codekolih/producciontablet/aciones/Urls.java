@@ -1,5 +1,10 @@
 package com.codekolih.producciontablet.aciones;
 
+import android.app.Activity;
+import android.content.Context;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
 public class Urls {
 
     public static final String KEY = "F03601A1-FD60-47E1-B30F-6B2C3BACDE3B";
@@ -18,6 +23,8 @@ public class Urls {
     public static final String consultartareados="https://apidmr.azurewebsites.net/api/v1/produccion/listaxtarea/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/tareaid/2";
 
     public static final String agregarbobinas = "https://apidmr.azurewebsites.net/api/v1/produccion/altabobina/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/rubach";
+
+
 
 
 }

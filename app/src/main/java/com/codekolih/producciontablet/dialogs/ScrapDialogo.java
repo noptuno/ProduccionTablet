@@ -35,7 +35,7 @@ public class ScrapDialogo {
         dialogo.setCancelable(false);
         dialogo.setCanceledOnTouchOutside(false);
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
-        dialogo.setContentView(R.layout.dialog_num);
+        dialogo.setContentView(R.layout.dialog_scrap);
 
         Button aceptar = dialogo.findViewById(R.id.btnAceptar);
         Button cancelar = dialogo.findViewById(R.id.btnCancelar);
