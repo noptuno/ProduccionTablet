@@ -1,6 +1,5 @@
 package com.codekolih.producciontablet.dialogs;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -12,22 +11,20 @@ import android.widget.EditText;
 
 import com.codekolih.producciontablet.R;
 
+public class BobinaDialog {
 
-public class CuadrodeDialogo {
-
-    private finalizarCuadro interfaz;
+    private finalizarBobina interfazBobina;
 
 
-    public interface finalizarCuadro{
+    public interface finalizarBobina{
 
-        void ResultadoCuadroDialogo(float cantidad);
+        void ResultadoBobinaDialogo(float cantidad);
 
     }
 
+    public BobinaDialog(Context contexcto , finalizarBobina actividad){
 
-    public CuadrodeDialogo(Context contexcto , finalizarCuadro actividad){
-
-        interfaz = actividad;
+        interfazBobina = actividad;
         int numeros= 0;
         final Dialog dialogo = new Dialog(contexcto);
 
@@ -35,24 +32,25 @@ public class CuadrodeDialogo {
         dialogo.setCancelable(false);
         dialogo.setCanceledOnTouchOutside(false);
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
-        dialogo.setContentView(R.layout.dialog_num);
+        dialogo.setContentView(R.layout.dialog_bobina);
 
-        Button aceptar = dialogo.findViewById(R.id.btnAceptar);
-        Button cancelar = dialogo.findViewById(R.id.btnCancelar);
-        EditText numero = dialogo.findViewById(R.id.et_numero);
-        numero.setText("1");
+        Button aceptar = dialogo.findViewById(R.id.bobina_btn_guardar);
+        Button cancelar = dialogo.findViewById(R.id.bobina_btn_cancelar);
 
-        numero.setSelectAllOnFocus(true);
+        EditText bobina_edt_Lote = dialogo.findViewById(R.id.bobina_edt_Lote);
+        bobina_edt_Lote.setText("1");
+
+        bobina_edt_Lote.setSelectAllOnFocus(true);
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 try{
-                    interfaz.ResultadoCuadroDialogo(Float.parseFloat(numero.getText().toString()));
+                    interfazBobina.ResultadoBobinaDialogo(Float.parseFloat(bobina_edt_Lote.getText().toString()));
                     dialogo.dismiss();
                 }catch (Exception e){
-                    interfaz.ResultadoCuadroDialogo(0);
+                    interfazBobina.ResultadoBobinaDialogo(0);
                     dialogo.dismiss();
                 }
 
@@ -71,5 +69,6 @@ public class CuadrodeDialogo {
 
         dialogo.show();
     }
+
 
 }

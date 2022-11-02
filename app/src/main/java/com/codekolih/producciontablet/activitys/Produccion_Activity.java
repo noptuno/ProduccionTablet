@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +25,13 @@ import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
-import com.codekolih.producciontablet.dialogs.CuadrodeDialogo;
+import com.codekolih.producciontablet.dialogs.BobinaDialog;
+import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
 import org.json.JSONObject;
 
-public class Produccion_Activity extends AppCompatActivity implements CuadrodeDialogo.finalizarCuadro, ScrapDialogo.finalizarScrapDialog {
+public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialog.finalizarBobina {
 
     Tareas tarea_Seleccionada;
     Produccion_Lista produccion_actual;
@@ -73,7 +75,7 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
 
 
 
-                new CuadrodeDialogo(Produccion_Activity.this,Produccion_Activity.this);
+                new CantidadDialog(Produccion_Activity.this,Produccion_Activity.this);
                // productoGlobal = producto;
 /*
                 Intent intent = new Intent(Produccion_Activity.this, CantidadActivity.class);
@@ -87,8 +89,8 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
             @Override
             public void onClick(View view) {
 
-
-                cargarBobina();
+                new BobinaDialog(Produccion_Activity.this,Produccion_Activity.this);
+                //cargarBobina();
 
 /*
 
@@ -169,6 +171,12 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
 
     private void cargarBobina() {
 
+
+
+
+
+        /*
+
         Bobinas bobinacargar = new Bobinas();
 
         bobinacargar.setBobinaId(0);
@@ -182,12 +190,6 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
         bobinacargar.setEsAbiertaoCerrada("true");
         bobinacargar.setDefectuosaKg(5);
         bobinacargar.setNombreTipoMaterial("nombretipo");
-
-/*
-        Intent intent = new Intent(Produccion_Activity.this, BobinasActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-*/
 
         JSONObject jsonObject = GsonUtils.toJSON(bobinacargar);
         JsonObjectRequest request = new JsonObjectRequest(
@@ -214,9 +216,12 @@ public class Produccion_Activity extends AppCompatActivity implements CuadrodeDi
         request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
-
+*/
     }
 
 
-
+    @Override
+    public void ResultadoBobinaDialogo(float cantidad) {
+        Toast.makeText(getApplicationContext(),"Valor: " + cantidad,Toast.LENGTH_LONG).show();
+    }
 }

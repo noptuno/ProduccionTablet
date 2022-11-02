@@ -13,21 +13,21 @@ import android.widget.EditText;
 import com.codekolih.producciontablet.R;
 
 
-public class ScrapDialogo {
+public class CantidadDialog {
 
-    private finalizarScrapDialog interfaz_scrap;
+    private finalizarCuadro interfaz;
 
 
-    public interface finalizarScrapDialog{
+    public interface finalizarCuadro{
 
-        void ResultadoScrapDialogo(float cantidad);
+        void ResultadoCuadroDialogo(float cantidad);
 
     }
 
 
-    public ScrapDialogo(Context contexcto , finalizarScrapDialog actividad){
+    public CantidadDialog(Context contexcto , finalizarCuadro actividad){
 
-        interfaz_scrap = actividad;
+        interfaz = actividad;
         int numeros= 0;
         final Dialog dialogo = new Dialog(contexcto);
 
@@ -35,10 +35,10 @@ public class ScrapDialogo {
         dialogo.setCancelable(false);
         dialogo.setCanceledOnTouchOutside(false);
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
-        dialogo.setContentView(R.layout.dialog_scrap);
+        dialogo.setContentView(R.layout.dialog_num);
 
-        Button aceptar = dialogo.findViewById(R.id.scrap_btn_confirmar);
-        Button cancelar = dialogo.findViewById(R.id.scrap_btn_cancelar);
+        Button aceptar = dialogo.findViewById(R.id.cantidad_btn_confirmar);
+        Button cancelar = dialogo.findViewById(R.id.cantidad_btn_cancelar);
         EditText numero = dialogo.findViewById(R.id.et_numero);
         numero.setText("1");
 
@@ -49,10 +49,10 @@ public class ScrapDialogo {
             public void onClick(View view) {
 
                 try{
-                    interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()));
+                    interfaz.ResultadoCuadroDialogo(Float.parseFloat(numero.getText().toString()));
                     dialogo.dismiss();
                 }catch (Exception e){
-                    interfaz_scrap.ResultadoScrapDialogo(0);
+                    interfaz.ResultadoCuadroDialogo(0);
                     dialogo.dismiss();
                 }
 

@@ -19,9 +19,6 @@
             android:name=".dialogs.PdfActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.BobinasActivity"
-            android:exported="false" />
-        <activity
             android:name=".activitys.Verificacion_Activity"
             android:exported="false"
             android:windowSoftInputMode="stateHidden"
