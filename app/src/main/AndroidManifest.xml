@@ -16,18 +16,21 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
+            android:name=".Observaciones_Activity"
+            android:exported="false" />
+        <activity
             android:name=".dialogs.PdfActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.Verificacion_Activity"
             android:exported="false"
-            android:windowSoftInputMode="stateHidden"
-            android:label="Verificar Tarea" />
+            android:label="Verificar Tarea"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activitys.Produccion_Activity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:label="Produccion de Tarea" />
+            android:label="Produccion de Tarea"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activitys.Tarea_Activity"
             android:exported="false"
@@ -38,8 +41,8 @@
             android:label="Seleccionar Imprentas" />
         <activity
             android:name=".activitys.Login_Activity"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

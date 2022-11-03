@@ -20,7 +20,7 @@ public class CantidadDialog {
 
     public interface finalizarCuadro{
 
-        void ResultadoCuadroDialogo(float cantidad);
+        void ResultadoCantidadDialogo(float cantidad);
 
     }
 
@@ -49,10 +49,10 @@ public class CantidadDialog {
             public void onClick(View view) {
 
                 try{
-                    interfaz.ResultadoCuadroDialogo(Float.parseFloat(numero.getText().toString()));
+                    interfaz.ResultadoCantidadDialogo(Float.parseFloat(numero.getText().toString()));
                     dialogo.dismiss();
                 }catch (Exception e){
-                    interfaz.ResultadoCuadroDialogo(0);
+                    interfaz.ResultadoCantidadDialogo(0);
                     dialogo.dismiss();
                 }
 

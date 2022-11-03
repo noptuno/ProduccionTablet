@@ -47,9 +47,7 @@ public class Verificacion_Activity extends AppCompatActivity {
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
-
     private Boolean pdfAbierto = false;
-
     private EditText
             edt_AnchoFinalRolloYGap,
             edt_CantidadPistasImpresas,
@@ -60,7 +58,6 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_CantidadPistasCortadas,edt_PistasTroquelUsadas;
 
     private Switch uno,dos,tres,cuatro,cinco,seis;
-
 
     private TextView
             txt_verificacion_txt_NroDeSobre,
@@ -77,7 +74,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_EtiquetasEnBanda,
             txt_verificacion_txt_EtiquetasPorRollo;
 
-    Button btn_guardar, btn_verpdf;
+    Button btn_guardar, btn_verpdf, btn_cancelar;
     private boolean permisosaceptados = false;
 
     @Override
@@ -87,6 +84,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
+        btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
 
         uno= findViewById(R.id.switch1);
         dos= findViewById(R.id.switch2);
@@ -94,8 +92,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         cuatro= findViewById(R.id.switch4);
         cinco= findViewById(R.id.switch5);
         seis= findViewById(R.id.switch6);
-
-
 
         edt_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
         edt_CantidadPistasImpresas= findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
@@ -105,7 +101,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         edt_AnchoFinalRollo= findViewById(R.id.verificacion_edt_AnchoFinalRollo);
         edt_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
         edt_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
-
 
         txt_verificacion_txt_NroDeSobre = findViewById(R.id.verificacion_txt_NroDeSobre);
         txt_verificacion_txt_Descripcion = findViewById(R.id.verificacion_txt_Descripcion);
@@ -178,6 +173,14 @@ public class Verificacion_Activity extends AppCompatActivity {
             }
         });
 
+
+        btn_cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override

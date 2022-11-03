@@ -44,7 +44,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private float produccionId;
 
-    private Button btn_cantidad, btn_bobina,btn_scrap;
+    private Button btn_cantidad, btn_bobina,btn_scrap, btn_finalizar, btn_cancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +53,34 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         requestQueue = Volley.newRequestQueue(this);
 
-
         btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
         btn_bobina = findViewById(R.id.produccion_btn_bobina);
         btn_scrap = findViewById(R.id.produccion_btn_scrap);
+        btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
+        btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
+
+        btn_finalizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                /*
+                Intent intent = new Intent(Produccion_Activity.this, Observaciones_Activity.class);
+                //intent.putExtra("tarea", note);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                */
+
+
+            }
+        });
+
+        btn_cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
@@ -154,9 +178,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     }
 
     @Override
-    public void ResultadoCuadroDialogo(float valorFloat) {
+    public void ResultadoCantidadDialogo(float valorFloat) {
 
-        Toast.makeText(getApplicationContext(),"Valor: " + valorFloat,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Cantidad: " + valorFloat,Toast.LENGTH_LONG).show();
 
      //   cantidadimprimir = numero;
        // ProcesoImprimir(productoGlobal,cantidadimprimir);
@@ -165,7 +189,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     @Override
     public void ResultadoScrapDialogo(float cantidad) {
 
-        Toast.makeText(getApplicationContext(),"Valor: " + cantidad,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Scrap: " + cantidad,Toast.LENGTH_LONG).show();
 
     }
 
@@ -222,6 +246,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     @Override
     public void ResultadoBobinaDialogo(float cantidad) {
-        Toast.makeText(getApplicationContext(),"Valor: " + cantidad,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Bobina: " + cantidad,Toast.LENGTH_LONG).show();
     }
 }
