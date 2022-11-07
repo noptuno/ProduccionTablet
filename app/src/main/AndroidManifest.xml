@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,7 +18,10 @@
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
         <activity
-            android:name=".Observaciones_Activity"
+            android:name=".activitys.BobinaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.Observaciones_Activity"
             android:exported="false" />
         <activity
             android:name=".dialogs.PdfActivity"
@@ -31,6 +36,7 @@
             android:exported="false"
             android:label="Produccion de Tarea"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".activitys.Tarea_Activity"
             android:exported="false"

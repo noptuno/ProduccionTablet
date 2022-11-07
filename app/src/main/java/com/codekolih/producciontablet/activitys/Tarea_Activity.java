@@ -17,7 +17,6 @@ import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
-import com.codekolih.producciontablet.aciones.RequestVolleySingleton;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
@@ -52,7 +51,8 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note) {
 
-              TareaSingleton.SingletonInstance().setTarea(note);
+               TareaSingleton.SingletonInstance().setTarea(note);
+
 
                 Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
                 intent.putExtra("tarea", note);
@@ -65,7 +65,7 @@ public class Tarea_Activity extends AppCompatActivity {
       //  RequestVolleySingleton.getInstance(this).request(Urls.Tareas,0);
       //  List<Tareas> lista = GsonUtils.parseList(RequestVolleySingleton.getInstance(this).getRequestQueue(), Tareas[].class);
 
-        cargarDatos();
+      cargarDatos();
 
     }
 
@@ -81,6 +81,7 @@ public class Tarea_Activity extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         Log.e("Tarea Response",response);
+
                         List<Tareas> lista = GsonUtils.parseList(response, Tareas[].class);
 
 /*

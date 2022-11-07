@@ -170,6 +170,8 @@ public class Verificacion_Activity extends AppCompatActivity {
                 edt_CantidadPistasCortadas.setText(""+ produccion_actual.getCantidadPistasCortadas());
                 edt_PistasTroquelUsadas.setText(""+ produccion_actual.getPistasTroquelUsadas());
 
+                TareaSingleton.SingletonInstance().setProduccionId(note.getProduccionId());
+
             }
         });
 

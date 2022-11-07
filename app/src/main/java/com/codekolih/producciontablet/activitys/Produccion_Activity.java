@@ -10,28 +10,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.R;
-import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
-import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterBobinas;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
-import com.codekolih.producciontablet.dialogs.BobinaDialog;
 import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
-import org.json.JSONObject;
-
-public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialog.finalizarBobina {
+public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog {
 
     Tareas tarea_Seleccionada;
     Produccion_Lista produccion_actual;
@@ -113,8 +105,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                new BobinaDialog(Produccion_Activity.this,Produccion_Activity.this);
-                //cargarBobina();
+
+                cargarBobina();
 
 /*
 
@@ -196,6 +188,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private void cargarBobina() {
 
 
+        Intent intent = new Intent(Produccion_Activity.this, BobinaActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
 
 
@@ -243,9 +238,4 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 */
     }
 
-
-    @Override
-    public void ResultadoBobinaDialogo(float cantidad) {
-        Toast.makeText(getApplicationContext(),"Bobina: " + cantidad,Toast.LENGTH_LONG).show();
-    }
 }

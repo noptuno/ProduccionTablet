@@ -12,6 +12,7 @@ public class TareaSingleton {
 
     private static TareaSingleton tareaSingle;
     private Tareas tareaInstanciada;
+    private float produccionId;
 
     private TareaSingleton() {
     }
@@ -26,6 +27,16 @@ public class TareaSingleton {
         return tareaSingle;
 
     }
+
+    public float getProduccionId() {
+        return produccionId;
+    }
+
+    public void setProduccionId(float produccionId) {
+        this.produccionId = produccionId;
+    }
+
+
 
     public Tareas setTarea(Tareas tarea) {
         if (this.tareaInstanciada == null) {
