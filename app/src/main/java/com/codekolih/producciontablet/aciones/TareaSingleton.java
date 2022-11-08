@@ -11,7 +11,9 @@ import java.io.Serializable;
 public class TareaSingleton {
 
     private static TareaSingleton tareaSingle;
+
     private Tareas tareaInstanciada;
+
     private float produccionId;
 
     private TareaSingleton() {
@@ -39,9 +41,9 @@ public class TareaSingleton {
 
 
     public Tareas setTarea(Tareas tarea) {
-        if (this.tareaInstanciada == null) {
-            this.tareaInstanciada = tarea;
-        }
+        //if (this.tareaInstanciada == null) {
+        this.tareaInstanciada = tarea;
+        //}
         return this.tareaInstanciada;
     }
 

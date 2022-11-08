@@ -12,8 +12,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
+import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Bobinas;
@@ -21,18 +23,23 @@ import com.codekolih.producciontablet.clases.Tareas;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class BobinaActivity extends AppCompatActivity {
 
 
     private RequestQueue requestQueue;
     Tareas tarea_Seleccionada;
-
+    private HttpLayer httpLayer;
     Button btn_guardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bobina);
+
+        httpLayer = new HttpLayer(this);
+
 
         requestQueue = Volley.newRequestQueue(this);
         btn_guardar = findViewById(R.id.bobina_btn_guardar);
@@ -70,30 +77,20 @@ public class BobinaActivity extends AppCompatActivity {
         bobinacargar.setDefectuosaKg(5);
         bobinacargar.setNombreTipoMaterial("A");
 
-        JSONObject jsonObject = GsonUtils.toJSON(bobinacargar);
-        JsonObjectRequest request = new JsonObjectRequest(
-                com.android.volley.Request.Method.POST,
-                Urls.agregarbobinas,
-                jsonObject,
-                new com.android.volley.Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
 
-                        Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
-                     finish();
+        httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
 
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
-                       // cargarBobina();
-                    }
-                });
-        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+
+            }
+        });
 
     }
 }
