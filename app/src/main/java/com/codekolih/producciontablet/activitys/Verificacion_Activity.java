@@ -37,6 +37,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 
 public class Verificacion_Activity extends AppCompatActivity {
 
@@ -114,6 +115,9 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_verificacion_txt_Pistas= findViewById(R.id.verificacion_txt_Pistas);
         txt_verificacion_txt_EtiquetasEnBanda= findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
         txt_verificacion_txt_EtiquetasPorRollo= findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
+
+
+
 
 
         //tarea_Seleccionada = TareaInstance.Get();

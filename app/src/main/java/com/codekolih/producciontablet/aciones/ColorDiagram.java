@@ -8,7 +8,7 @@ public class ColorDiagram {
     // Member variables (properties about the object)
     public String[] mColors = {
             "#39add1", // light blue
-            "#3079ab", // dark blue
+            "#3079ab",  // dark blue
             "#c25975", // mauve
             "#e15258", // red
             "#f9845b", // orange

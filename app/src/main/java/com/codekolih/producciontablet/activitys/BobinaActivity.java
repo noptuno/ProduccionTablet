@@ -83,11 +83,29 @@ public class BobinaActivity extends AppCompatActivity {
             public void onSuccess(JSONObject response) {
 
 
+                Toast.makeText(getApplicationContext(), "Cargo Bobina",Toast.LENGTH_SHORT).show();
+
+
+                String params = "/" + tarea_Seleccionada.getPedidoId() + "/" + tarea_Seleccionada.getTareaId();
+                httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {
+                    @Override
+                    public void onSuccess(Tareas response) {
+
+                        Toast.makeText(getApplicationContext(), "Actualizo Tarea",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Toast.makeText(getApplicationContext(), "No Cargo Tarea",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
             public void onError(Exception e) {
 
+                Toast.makeText(getApplicationContext(), "No Cargo Bobina",Toast.LENGTH_SHORT).show();
 
             }
         });

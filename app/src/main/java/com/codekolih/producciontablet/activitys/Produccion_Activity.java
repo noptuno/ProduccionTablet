@@ -89,9 +89,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 float RollosFabricdos=11;
                 float MetrosImpresos = 12;
 
-
-
                 new CantidadDialog(Produccion_Activity.this,Produccion_Activity.this);
+
+
                // productoGlobal = producto;
 /*
                 Intent intent = new Intent(Produccion_Activity.this, CantidadActivity.class);
