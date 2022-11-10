@@ -116,10 +116,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_verificacion_txt_EtiquetasEnBanda= findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
         txt_verificacion_txt_EtiquetasPorRollo= findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
 
-
-
-
-
         //tarea_Seleccionada = TareaInstance.Get();
 
 //        Log.e("Mensaje",tarea_Seleccionada.getDescripcion());
@@ -141,19 +137,14 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_verificacion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
         txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
 
-
-         requestQueue = Volley.newRequestQueue(this);
-
+        requestQueue = Volley.newRequestQueue(this);
 
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterProduccion);
 
-
         for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-
             produccion_actual = lg;
-
         }
 
         adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
@@ -319,8 +310,8 @@ public class Verificacion_Activity extends AppCompatActivity {
         Produccion_Lista produccion = new Produccion_Lista();
 
         produccion.setProduccionId(0);
-        produccion.setPedidoId(tarea_Seleccionada.getPedidoId());
-        produccion.setTareaId(tarea_Seleccionada.getTareaId());
+        produccion.setPedidoId((int) tarea_Seleccionada.getPedidoId());
+        produccion.setTareaId((int) tarea_Seleccionada.getTareaId());
         produccion.setMetrosImpresos(0);
         produccion.setAnchoFinalRolloYGap(Float.parseFloat(edt_AnchoFinalRolloYGap.getText().toString()));
         produccion.setCantidadPistasImpresas(Float.parseFloat(edt_CantidadPistasImpresas.getText().toString()));
@@ -336,7 +327,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         produccion.setCantidadPistasCortadas(Float.parseFloat(edt_CantidadPistasCortadas.getText().toString()));
         produccion.setPistasTroquelUsadas(Float.parseFloat(edt_PistasTroquelUsadas.getText().toString()));
         produccion.setRollosEmpaquetados(0);
-        produccion.setUsuarioId(tarea_Seleccionada.getUsuarioId());
+        produccion.setUsuarioId((int) tarea_Seleccionada.getUsuarioId());
 
         return produccion;
     }

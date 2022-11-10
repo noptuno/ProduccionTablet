@@ -2,8 +2,10 @@ package com.codekolih.producciontablet;
 
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
+import static com.android.volley.Request.Method.PUT;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -16,6 +18,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Bobinas;
+import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +35,7 @@ public class HttpLayer {
     public HttpLayer(Context context) {
         requestQueue = Volley.newRequestQueue(context);
     }
+
 
     public void getTareas(HttpLayerResponses<List<Tareas>> listener) {
 
@@ -52,9 +56,10 @@ public class HttpLayer {
     }
 
 
+
     public void getTareaEspecifica(String params, HttpLayerResponses<Tareas> listener) {
 
-        String url = Urls.obtenertarea + "/2/2";
+        String url = Urls.obtenertarea + params;
 
         Type objectType = new TypeToken<Tareas>() {}.getType();
 
@@ -63,7 +68,6 @@ public class HttpLayer {
                 url,
                 response -> {
                     Tareas t = mapObject(response, objectType);
-                    TareaSingleton.SingletonInstance().setTarea(t);
                     listener.onSuccess(t);
                 },
                 listener::onError
@@ -90,6 +94,22 @@ public class HttpLayer {
 
     }
 
+    public void actualizarProduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                PUT,
+                Urls.UpdateProduccion,
+                jsonObject,
+                listener::onSuccess,
+                listener::onError
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+
+    }
+
+
     private <T> T mapObject(String response, Type clazz) {
         return new Gson().fromJson(response, clazz);
     }
@@ -98,5 +118,9 @@ public class HttpLayer {
         void onSuccess(T response);
         void onError(Exception e);
     }
+
+
+
+
 
 }

@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Bobinas implements Serializable {
 
-        private float BobinaId;
-        private float TareaId;
-        private float ProduccionId;
-        private float ProveedorId;
+        private int BobinaId;
+        private int TareaId;
+        private int ProduccionId;
+        private int ProveedorId;
         private String ProveedorNombre;
         private String Lote;
         private float Ancho;
@@ -65,19 +65,19 @@ public class Bobinas implements Serializable {
 
         // Setter Methods
 
-        public void setBobinaId( float BobinaId ) {
+        public void setBobinaId( int BobinaId ) {
             this.BobinaId = BobinaId;
         }
 
-        public void setTareaId( float TareaId ) {
+        public void setTareaId( int TareaId ) {
             this.TareaId = TareaId;
         }
 
-        public void setProduccionId( float ProduccionId ) {
+        public void setProduccionId( int ProduccionId ) {
             this.ProduccionId = ProduccionId;
         }
 
-        public void setProveedorId( float ProveedorId ) {
+        public void setProveedorId( int ProveedorId ) {
             this.ProveedorId = ProveedorId;
         }
 

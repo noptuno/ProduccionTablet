@@ -5,11 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="9dp"
-    android:layout_marginBottom="681dp"
+    android:layout_margin="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="5dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:textAlignment="center"
     app:cardCornerRadius="8dp"
@@ -29,7 +28,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
-        android:background="#4CAF50"
+        android:background="#52B8EA"
         android:orientation="vertical">
 
         <LinearLayout
@@ -50,8 +49,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="ProveedorId"
-                    android:textColor="#141717"
-                    android:textSize="14sp"
+
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -60,7 +59,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -77,7 +76,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="ProveedorNombre" />
+                    android:text="ProveedorNombre"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_bobina_txt_ProveedorNombre"
@@ -85,7 +87,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -99,7 +103,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Lote" />
+                    android:text="Lote"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_bobina_txt_Lote"
@@ -107,8 +114,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -120,7 +130,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Ancho" />
+                    android:text="Ancho"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_bobina_txt_Ancho"
@@ -128,8 +141,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -141,7 +157,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="TipoMaterialId" />
+                    android:text="TipoMaterialId"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_bobina_txt_TipoMaterialId"
@@ -149,8 +168,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -162,7 +184,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="DefectuosaKg" />
+                    android:text="DefectuosaKg"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_bobina_txt_DefectuosaKg"
@@ -170,8 +195,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -183,7 +211,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="EsAbiertaoCerrada" />
+                    android:text="EsAbiertaoCerrada"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_bobina_txt_EsAbiertaoCerrada"
@@ -191,7 +222,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

@@ -6,13 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.AccionClasses;
+import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterBobinas;
@@ -22,6 +26,11 @@ import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog {
 
@@ -33,17 +42,19 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
     private TareaSingleton tareaSingleton;
-
+    private HttpLayer httpLayer;
     private float produccionId;
-
     private Button btn_cantidad, btn_bobina,btn_scrap, btn_finalizar, btn_cancelar;
+
+    private Produccion_Lista produccion_Lista_seleccionada;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produccion);
 
-        requestQueue = Volley.newRequestQueue(this);
+        AccionClasses.PrintMesajeLog("ProduccionActivity","INICIO");
 
         btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
         btn_bobina = findViewById(R.id.produccion_btn_bobina);
@@ -51,10 +62,20 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
         btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
 
+
+        requestQueue = Volley.newRequestQueue(this);
+        httpLayer = new HttpLayer(this);
+
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
+
+            AccionClasses.PrintMesajeLog("ProduccionActivity","Error Instacia");
+
+        }
+
+
         btn_finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 /*
                 Intent intent = new Intent(Produccion_Activity.this, Observaciones_Activity.class);
@@ -62,7 +83,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 */
-
 
             }
         });
@@ -73,10 +93,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 finish();
             }
         });
-
-        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
-            Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
-        }
 
 
         btn_cantidad.setOnClickListener(new View.OnClickListener() {
@@ -91,13 +107,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                 new CantidadDialog(Produccion_Activity.this,Produccion_Activity.this);
 
-
-               // productoGlobal = producto;
-/*
-                Intent intent = new Intent(Produccion_Activity.this, CantidadActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-*/
             }
         });
 
@@ -105,13 +114,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-
                 cargarBobina();
-
-/*
-
-*/
-
             }
         });
 
@@ -134,56 +137,126 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         RecyclerView recyclerView = findViewById(R.id.produccion_cantidad_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterProduccion);
-
-
-        for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-
-            produccion_actual = lg;
-
-        }
-
-        adapterProduccion.setOnNoteSelectedListener(new AdapterProduccion.OnNoteSelectedListener() {
-            @Override
-            public void onClick(Produccion_Lista note) {
-                produccionId = note.getProduccionId();
-            }
-        });
-
-        adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
-        adapterProduccion.notifyDataSetChanged();
-
-
         RecyclerView recyclerBobinas = findViewById(R.id.produccion_bobina_recycler);
         recyclerBobinas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerBobinas.setAdapter(adapterBobina);
 
 
-        for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
+        CargarReciclerViews();
 
-            bobinas_actual = lg;
+    }
 
+
+    void CargarReciclerViews(){
+
+        AccionClasses.PrintMesajeLog(getApplicationContext().toString(),"CargarRecicler");
+
+        for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
+            produccion_actual = lg;
+            produccionId = lg.getProduccionId();
+            produccion_Lista_seleccionada = lg;
         }
 
+        AccionClasses.PrintMesajeLog("ProduccionActivity","ProduccionID cargado: " + produccion_Lista_seleccionada.getProduccionId());
+
+
+        for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
+            bobinas_actual = lg;
+        }
+
+        adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
+        adapterProduccion.notifyDataSetChanged();
         adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
         adapterBobina.notifyDataSetChanged();
-
     }
 
     @Override
     public void ResultadoCantidadDialogo(float valorFloat) {
 
-        Toast.makeText(getApplicationContext(),"Cantidad: " + valorFloat,Toast.LENGTH_LONG).show();
+        AccionClasses.PrintMesajeLog("ProduccionActivity","Cantidad: " + valorFloat);
 
-     //   cantidadimprimir = numero;
-       // ProcesoImprimir(productoGlobal,cantidadimprimir);
+        produccion_Lista_seleccionada.setRollosEmpaquetados(valorFloat);
+        produccion_Lista_seleccionada.setRollosFabricdos(valorFloat);
+        produccion_Lista_seleccionada.setMetrosImpresos(valorFloat);
+
+        Map<String, Object> produccion = new HashMap<>();
+        produccion.put("ProduccionId", produccion_Lista_seleccionada.getProduccionId());
+        produccion.put("PedidoId", produccion_Lista_seleccionada.getPedidoId());
+        produccion.put("TareaId", produccion_Lista_seleccionada.getTareaId());
+        produccion.put("MetrosImpresos", produccion_Lista_seleccionada.getMetrosImpresos());
+        produccion.put("AnchoFinalRolloYGap", produccion_Lista_seleccionada.getAnchoFinalRollo());
+        produccion.put("CantidadPistasImpresas", produccion_Lista_seleccionada.getCantidadPistasImpresas());
+        produccion.put("CantidadTintas", produccion_Lista_seleccionada.getCantidadTintas());
+        produccion.put("AnchoBobinaUsadoCm", produccion_Lista_seleccionada.getAnchoBobinaUsadoCm());
+        produccion.put("ScrapAjusteInicial", produccion_Lista_seleccionada.getScrapAjusteInicial());
+        produccion.put("ScrapAjusteInicial_Unidades", produccion_Lista_seleccionada.getScrapAjusteInicial_Unidades());
+        produccion.put("ScrapAjusteProduccion", produccion_Lista_seleccionada.getScrapAjusteProduccion());
+        produccion.put("ScrapAjusteProduccion_Unidades", produccion_Lista_seleccionada.getScrapAjusteProduccion_Unidades());
+        produccion.put("ObservacionesCierre", produccion_Lista_seleccionada.getObservacionesCierre());
+        produccion.put("RollosFabricdos", produccion_Lista_seleccionada.getRollosFabricdos());
+        produccion.put("AnchoFinalRollo", produccion_Lista_seleccionada.getAnchoFinalRollo());
+        produccion.put("CantidadPistasCortadas", produccion_Lista_seleccionada.getCantidadPistasCortadas());
+        produccion.put("PistasTroquelUsadas", produccion_Lista_seleccionada.getPistasTroquelUsadas());
+        produccion.put("RollosEmpaquetados", produccion_Lista_seleccionada.getRollosEmpaquetados());
+        produccion.put("UsuarioId", produccion_Lista_seleccionada.getUsuarioId());
+
+
+        httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                ActualizarTarea();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                Toast.makeText(getApplicationContext(), "No Cargo Bobina Reintentar",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+
+
+
+
     }
 
     @Override
     public void ResultadoScrapDialogo(float cantidad) {
 
-        Toast.makeText(getApplicationContext(),"Scrap: " + cantidad,Toast.LENGTH_LONG).show();
+        AccionClasses.PrintMesajeLog("ProduccionActivity","Scrap: " + cantidad);
 
     }
+
+
+
+    private void ActualizarTarea() {
+
+        String params = "/"+2+"/"+2;
+
+        httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {
+            @Override
+            public void onSuccess(Tareas response) {
+
+                AccionClasses.PrintMesajeLog("ProduccionActivity","actualzandoTarea");
+
+              TareaSingleton.SingletonInstance().setTarea(response);
+              CargarReciclerViews();
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                AccionClasses.PrintMesajeLog("ProduccionActivity","Error Actualziar Tarea");
+
+            }
+        });
+    }
+
 
     private void cargarBobina() {
 
@@ -191,7 +264,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         Intent intent = new Intent(Produccion_Activity.this, BobinaActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
 
 
         /*

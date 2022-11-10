@@ -9,15 +9,20 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.clases.Tareas;
+
+import org.json.JSONObject;
 
 
 public class CantidadDialog {
 
     private finalizarCuadro interfaz;
-
-
+    private HttpLayer httpLayer;
     public interface finalizarCuadro{
 
         void ResultadoCantidadDialogo(float cantidad);
@@ -27,6 +32,8 @@ public class CantidadDialog {
 
     public CantidadDialog(Context contexcto , finalizarCuadro actividad){
 
+
+        httpLayer = new HttpLayer(contexcto);
         interfaz = actividad;
         int numeros= 0;
         final Dialog dialogo = new Dialog(contexcto);
@@ -44,11 +51,13 @@ public class CantidadDialog {
 
         numero.setSelectAllOnFocus(true);
 
+
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 try{
+
                     interfaz.ResultadoCantidadDialogo(Float.parseFloat(numero.getText().toString()));
                     dialogo.dismiss();
                 }catch (Exception e){

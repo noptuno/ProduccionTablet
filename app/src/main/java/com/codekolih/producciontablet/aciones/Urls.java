@@ -21,15 +21,11 @@ public class Urls {
     public static final String getUsuario = "https://apidmr.azurewebsites.net/api/v1/Usuario/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/DatosUsuario/rubach";
     public static final String agregarProduccion = " httpS://apidmr.azurewebsites.net/api/v1/produccion/altaproduc/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/rubach";
     public static final String consultartareados="https://apidmr.azurewebsites.net/api/v1/produccion/listaxtarea/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/tareaid/2";
-    public static final String obtenertarea=" https://apidmr.azurewebsites.net/api/v1/tarea/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B";
+    public static final String obtenertarea="https://apidmr.azurewebsites.net/api/v1/tarea/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B";
 
-
-
-
+    public static final String UpdateProduccion="https://apidmr.azurewebsites.net/api/v1/produccion/updateproduc/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/rubach";
 
     public static final String agregarbobinas = "https://apidmr.azurewebsites.net/api/v1/produccion/altabobina/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/rubach";
-
-
 
 
 }

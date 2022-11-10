@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.AccionClasses;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
@@ -83,13 +84,17 @@ public class Tarea_Activity extends AppCompatActivity {
         httpLayer.getTareas(new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
+
                 adapterTareas.setNotes(response);
                 adapterTareas.notifyDataSetChanged();
+
                 dialogProgress.dismiss();
             }
             @Override
             public void onError(Exception e) {
                 dialogProgress.dismiss();
+
+                AccionClasses.PrintMesajeLog("TareaActivity","Error Response");
             }
         });
 

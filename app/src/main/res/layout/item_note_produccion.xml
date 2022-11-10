@@ -5,15 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="9dp"
-    android:layout_marginBottom="681dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:textAlignment="center"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +43,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Usuario"
-                    android:textColor="#141717"
-                    android:textSize="14sp"
+
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -60,7 +53,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="#F8F5F5"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -75,13 +68,21 @@
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="MetrosImpresos" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="MetrosImpresos"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_produccion_txt_MetrosImpresos"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -93,14 +94,23 @@
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ScrapAjusteProduccion" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="ScrapAjusteProduccion"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_produccion_txt_ScrapAjusteProduccion"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -111,13 +121,22 @@
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="ScrapAjusteProduccion_Unidades" />
+                    android:layout_weight="1"
+                    android:text="ScrapAjusteProduccion_Unidades"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_produccion_txt_ScrapAjusteProduccion_Unidades"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -128,13 +147,22 @@
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="RollosFabricdos" />
+                    android:layout_weight="1"
+                    android:text="RollosFabricdos"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_produccion_txt_RollosFabricdos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -145,12 +173,19 @@
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="RollosEmpaquetados" />
+                    android:layout_weight="1"
+                    android:text="RollosEmpaquetados"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/item_produccion_txt_RollosEmpaquetados"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 

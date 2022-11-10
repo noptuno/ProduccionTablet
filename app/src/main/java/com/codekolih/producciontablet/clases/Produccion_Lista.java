@@ -6,9 +6,9 @@ public class Produccion_Lista implements Serializable  {
 
     private String Fecha;
     private String UserNameId;
-    private float ProduccionId;
-    private float PedidoId;
-    private float TareaId;
+    private int ProduccionId;
+    private int PedidoId;
+    private int TareaId;
     private float MetrosImpresos;
     private float AnchoFinalRolloYGap;
     private float CantidadPistasImpresas;
@@ -24,7 +24,7 @@ public class Produccion_Lista implements Serializable  {
     private float CantidadPistasCortadas;
     private float PistasTroquelUsadas;
     private float RollosEmpaquetados;
-    private float UsuarioId;
+    private int UsuarioId;
 
 
     public Produccion_Lista() {
@@ -32,29 +32,7 @@ public class Produccion_Lista implements Serializable  {
 
     }
 
-    public Produccion_Lista(String fecha, String userNameId, float produccionId, float pedidoId, float tareaId, float metrosImpresos, float anchoFinalRolloYGap, float cantidadPistasImpresas, float cantidadTintas, float anchoBobinaUsadoCm, float scrapAjusteInicial, String scrapAjusteInicial_Unidades, float scrapAjusteProduccion, String scrapAjusteProduccion_Unidades, String observacionesCierre, float rollosFabricdos, float anchoFinalRollo, float cantidadPistasCortadas, float pistasTroquelUsadas, float rollosEmpaquetados, float usuarioId) {
-        Fecha = fecha;
-        UserNameId = userNameId;
-        ProduccionId = produccionId;
-        PedidoId = pedidoId;
-        TareaId = tareaId;
-        MetrosImpresos = metrosImpresos;
-        AnchoFinalRolloYGap = anchoFinalRolloYGap;
-        CantidadPistasImpresas = cantidadPistasImpresas;
-        CantidadTintas = cantidadTintas;
-        AnchoBobinaUsadoCm = anchoBobinaUsadoCm;
-        ScrapAjusteInicial = scrapAjusteInicial;
-        ScrapAjusteInicial_Unidades = scrapAjusteInicial_Unidades;
-        ScrapAjusteProduccion = scrapAjusteProduccion;
-        ScrapAjusteProduccion_Unidades = scrapAjusteProduccion_Unidades;
-        ObservacionesCierre = observacionesCierre;
-        RollosFabricdos = rollosFabricdos;
-        AnchoFinalRollo = anchoFinalRollo;
-        CantidadPistasCortadas = cantidadPistasCortadas;
-        PistasTroquelUsadas = pistasTroquelUsadas;
-        RollosEmpaquetados = rollosEmpaquetados;
-        UsuarioId = usuarioId;
-    }
+
 
 // Getter Methods
 
@@ -152,15 +130,15 @@ public class Produccion_Lista implements Serializable  {
         this.UserNameId = UserNameId;
     }
 
-    public void setProduccionId(float ProduccionId) {
+    public void setProduccionId(int ProduccionId) {
         this.ProduccionId = ProduccionId;
     }
 
-    public void setPedidoId(float PedidoId) {
+    public void setPedidoId(int PedidoId) {
         this.PedidoId = PedidoId;
     }
 
-    public void setTareaId(float TareaId) {
+    public void setTareaId(int TareaId) {
         this.TareaId = TareaId;
     }
 
@@ -224,7 +202,7 @@ public class Produccion_Lista implements Serializable  {
         this.RollosEmpaquetados = RollosEmpaquetados;
     }
 
-    public void setUsuarioId(float UsuarioId) {
+    public void setUsuarioId(int UsuarioId) {
         this.UsuarioId = UsuarioId;
     }
 }

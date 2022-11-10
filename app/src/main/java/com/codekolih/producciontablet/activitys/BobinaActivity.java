@@ -20,6 +20,7 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Tareas;
+import com.codekolih.producciontablet.dialogs.CantidadDialog;
 
 import org.json.JSONObject;
 
@@ -33,13 +34,14 @@ public class BobinaActivity extends AppCompatActivity {
     private HttpLayer httpLayer;
     Button btn_guardar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bobina);
 
-        httpLayer = new HttpLayer(this);
 
+        httpLayer = new HttpLayer(this);
 
         requestQueue = Volley.newRequestQueue(this);
         btn_guardar = findViewById(R.id.bobina_btn_guardar);
@@ -55,6 +57,9 @@ public class BobinaActivity extends AppCompatActivity {
             public void onClick(View view) {
                 registrarBobinas();
             }
+
+
+
         });
     }
 
@@ -62,11 +67,10 @@ public class BobinaActivity extends AppCompatActivity {
     void registrarBobinas(){
 
 
-
         Bobinas bobinacargar = new Bobinas();
 
         bobinacargar.setBobinaId(0);
-        bobinacargar.setTareaId(tarea_Seleccionada.getTareaId());
+        bobinacargar.setTareaId((int) tarea_Seleccionada.getTareaId());
         bobinacargar.setProduccionId(1);
         bobinacargar.setProveedorId(2);
         bobinacargar.setProveedorNombre("");
@@ -77,35 +81,21 @@ public class BobinaActivity extends AppCompatActivity {
         bobinacargar.setDefectuosaKg(5);
         bobinacargar.setNombreTipoMaterial("A");
 
-
         httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
 
                 Toast.makeText(getApplicationContext(), "Cargo Bobina",Toast.LENGTH_SHORT).show();
+                finish();
 
 
-                String params = "/" + tarea_Seleccionada.getPedidoId() + "/" + tarea_Seleccionada.getTareaId();
-                httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {
-                    @Override
-                    public void onSuccess(Tareas response) {
-
-                        Toast.makeText(getApplicationContext(), "Actualizo Tarea",Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        Toast.makeText(getApplicationContext(), "No Cargo Tarea",Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
 
             @Override
             public void onError(Exception e) {
 
-                Toast.makeText(getApplicationContext(), "No Cargo Bobina",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "No Cargo Bobina Reintentar",Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class Tareas implements Serializable {
 
-    private float TroquelId;
+    private int TroquelId;
     private String Descripcion;
     private float Z_AltoMasGap;
     private float Cilindro;
     private float NroDeSobre;
-    private float PedidoId;
-    private float TareaId;
+    private int PedidoId;
+    private int TareaId;
     private String ArchivoEspecificacion;
     private float TipoMaquinaId;
     private String NombreTipoMaquina;
@@ -204,7 +204,7 @@ public class Tareas implements Serializable {
 
     // Setter Methods
 
-    public void setTroquelId( float TroquelId ) {
+    public void setTroquelId( int TroquelId ) {
         this.TroquelId = TroquelId;
     }
 
@@ -224,11 +224,11 @@ public class Tareas implements Serializable {
         this.NroDeSobre = NroDeSobre;
     }
 
-    public void setPedidoId( float PedidoId ) {
+    public void setPedidoId( int PedidoId ) {
         this.PedidoId = PedidoId;
     }
 
-    public void setTareaId( float TareaId ) {
+    public void setTareaId( int TareaId ) {
         this.TareaId = TareaId;
     }
 
