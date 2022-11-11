@@ -50,14 +50,11 @@ public class Login_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio_sesion);
 
         //Referencias
-
         btn_inicioSesion = findViewById(R.id.login_btn_IniciarSesion);
         txt_nombreImprenta = findViewById(R.id.login_txt_nombreimprenta);
         btn_cargarImprenta = findViewById(R.id.login_btn_cargarImprenta);
-
         edt_usaurio= findViewById(R.id.login_edt_user);
         edt_pass= findViewById(R.id.login_edt_password);;
-
 
         //Inicializar
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);

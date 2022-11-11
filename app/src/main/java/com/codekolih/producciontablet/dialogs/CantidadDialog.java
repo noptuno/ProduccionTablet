@@ -60,9 +60,12 @@ public class CantidadDialog {
 
                     interfaz.ResultadoCantidadDialogo(Float.parseFloat(numero.getText().toString()));
                     dialogo.dismiss();
+
                 }catch (Exception e){
+
                     interfaz.ResultadoCantidadDialogo(0);
                     dialogo.dismiss();
+
                 }
 
 

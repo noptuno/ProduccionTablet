@@ -216,12 +216,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             }
         });
 
-
-
-
-
-
-
     }
 
     @Override
@@ -260,54 +254,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void cargarBobina() {
 
-
         Intent intent = new Intent(Produccion_Activity.this, BobinaActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-
-        /*
-
-        Bobinas bobinacargar = new Bobinas();
-
-        bobinacargar.setBobinaId(0);
-        bobinacargar.setTareaId(tarea_Seleccionada.getTareaId());
-        bobinacargar.setProduccionId(produccionId);
-        bobinacargar.setProveedorId(2);
-        bobinacargar.setProveedorNombre("dos");
-        bobinacargar.setLote("lote123");
-        bobinacargar.setAncho(5);
-        bobinacargar.setTipoMaterialId(1);
-        bobinacargar.setEsAbiertaoCerrada("true");
-        bobinacargar.setDefectuosaKg(5);
-        bobinacargar.setNombreTipoMaterial("nombretipo");
-
-        JSONObject jsonObject = GsonUtils.toJSON(bobinacargar);
-        JsonObjectRequest request = new JsonObjectRequest(
-                com.android.volley.Request.Method.POST,
-                Urls.agregarbobinas,
-                jsonObject,
-                new com.android.volley.Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
-                        // dialogProgress.dismiss();
-
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
-                       // cargarBobina();
-                    }
-                });
-        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-
-*/
     }
 
 }
