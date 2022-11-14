@@ -59,8 +59,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
 
                 TareaSingleton.SingletonInstance().setTarea(note);
-
-
+                TareaSingleton.SingletonInstance().setMaquina("1");
 
                 Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
                 intent.putExtra("tarea", note);
