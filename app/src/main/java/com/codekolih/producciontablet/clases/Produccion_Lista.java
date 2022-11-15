@@ -44,7 +44,7 @@ public class Produccion_Lista implements Serializable  {
         return UserNameId;
     }
 
-    public float getProduccionId() {
+    public int getProduccionId() {
         return ProduccionId;
     }
 

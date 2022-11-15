@@ -4,18 +4,30 @@ package com.codekolih.producciontablet.aciones;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TareaSingleton {
 
     private static TareaSingleton tareaSingle;
     private Tareas tareaInstanciada;
-    private float produccionId;
+    private int produccionId;
     private Map<String, String> maquina;
+    private ArrayList<Proveedor> proveedores;
+
+    public ArrayList<Proveedor> getProveedores() {
+        return proveedores;
+    }
+
+    public void setProveedores(ArrayList<Proveedor> proveedores) {
+        this.proveedores = proveedores;
+    }
 
     private TareaSingleton() {
     }
@@ -31,11 +43,11 @@ public class TareaSingleton {
 
     }
 
-    public float getProduccionId() {
+    public int getProduccionId() {
         return produccionId;
     }
 
-    public void setProduccionId(float produccionId) {
+    public void setProduccionId(int produccionId) {
         this.produccionId = produccionId;
     }
 

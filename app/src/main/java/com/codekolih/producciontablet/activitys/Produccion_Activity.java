@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,11 +44,11 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private ProgressHUD dialogProgress;
     private TareaSingleton tareaSingleton;
     private HttpLayer httpLayer;
-    private float produccionId;
+    private int produccionId;
     private Button btn_cantidad, btn_bobina,btn_scrap, btn_finalizar, btn_cancelar;
 
     private Produccion_Lista produccion_Lista_seleccionada;
-
+    private int LAUNCH_SECOND_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +100,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                Produccion_Lista produccion = new Produccion_Lista();
-
-                float RollosEmpaquetados = 10;
-                float RollosFabricdos=11;
-                float MetrosImpresos = 12;
-
                 new CantidadDialog(Produccion_Activity.this,Produccion_Activity.this);
 
             }
@@ -114,7 +109,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                cargarBobina();
+
+                Intent i = new Intent(Produccion_Activity.this, BobinaActivity.class);
+                startActivityForResult(i, LAUNCH_SECOND_ACTIVITY);
+
             }
         });
 
@@ -122,17 +120,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                Produccion_Lista produccion = new Produccion_Lista();
-
                 new ScrapDialogo(Produccion_Activity.this,Produccion_Activity.this);
-
-                float ScrapAjusteProduccion = 100;
-                String ScrapAjusteProduccion_Unidades = "KG";
-
 
             }
         });
-
 
         RecyclerView recyclerView = findViewById(R.id.produccion_cantidad_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -141,10 +132,28 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         recyclerBobinas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerBobinas.setAdapter(adapterBobina);
 
-
         CargarReciclerViews();
 
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == LAUNCH_SECOND_ACTIVITY) {
+            if(resultCode == Activity.RESULT_OK){
+
+                String result=data.getStringExtra("result");
+                ActualizarTarea();
+
+            }
+
+            if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
+    } //onAct
 
 
     void CargarReciclerViews(){
@@ -159,13 +168,14 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         AccionClasses.PrintMesajeLog("ProduccionActivity","ProduccionID cargado: " + produccion_Lista_seleccionada.getProduccionId());
 
-
         for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
             bobinas_actual = lg;
+
         }
 
         adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
         adapterProduccion.notifyDataSetChanged();
+
         adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
         adapterBobina.notifyDataSetChanged();
     }
@@ -211,7 +221,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onError(Exception e) {
 
-                Toast.makeText(getApplicationContext(), "No Cargo Bobina Reintentar",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "No Cargo Cantidad Reintentar",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -219,10 +229,51 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     }
 
     @Override
-    public void ResultadoScrapDialogo(float cantidad) {
+    public void ResultadoScrapDialogo(float cantidad, String unidad) {
 
         AccionClasses.PrintMesajeLog("ProduccionActivity","Scrap: " + cantidad);
 
+
+        produccion_Lista_seleccionada.setScrapAjusteProduccion(cantidad);
+        produccion_Lista_seleccionada.setScrapAjusteProduccion_Unidades(unidad);
+
+
+        Map<String, Object> produccion = new HashMap<>();
+        produccion.put("ProduccionId", produccion_Lista_seleccionada.getProduccionId());
+        produccion.put("PedidoId", produccion_Lista_seleccionada.getPedidoId());
+        produccion.put("TareaId", produccion_Lista_seleccionada.getTareaId());
+        produccion.put("MetrosImpresos", produccion_Lista_seleccionada.getMetrosImpresos());
+        produccion.put("AnchoFinalRolloYGap", produccion_Lista_seleccionada.getAnchoFinalRollo());
+        produccion.put("CantidadPistasImpresas", produccion_Lista_seleccionada.getCantidadPistasImpresas());
+        produccion.put("CantidadTintas", produccion_Lista_seleccionada.getCantidadTintas());
+        produccion.put("AnchoBobinaUsadoCm", produccion_Lista_seleccionada.getAnchoBobinaUsadoCm());
+        produccion.put("ScrapAjusteInicial", produccion_Lista_seleccionada.getScrapAjusteInicial());
+        produccion.put("ScrapAjusteInicial_Unidades", produccion_Lista_seleccionada.getScrapAjusteInicial_Unidades());
+        produccion.put("ScrapAjusteProduccion", produccion_Lista_seleccionada.getScrapAjusteProduccion());
+        produccion.put("ScrapAjusteProduccion_Unidades", produccion_Lista_seleccionada.getScrapAjusteProduccion_Unidades());
+        produccion.put("ObservacionesCierre", produccion_Lista_seleccionada.getObservacionesCierre());
+        produccion.put("RollosFabricdos", produccion_Lista_seleccionada.getRollosFabricdos());
+        produccion.put("AnchoFinalRollo", produccion_Lista_seleccionada.getAnchoFinalRollo());
+        produccion.put("CantidadPistasCortadas", produccion_Lista_seleccionada.getCantidadPistasCortadas());
+        produccion.put("PistasTroquelUsadas", produccion_Lista_seleccionada.getPistasTroquelUsadas());
+        produccion.put("RollosEmpaquetados", produccion_Lista_seleccionada.getRollosEmpaquetados());
+        produccion.put("UsuarioId", produccion_Lista_seleccionada.getUsuarioId());
+
+
+        httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                ActualizarTarea();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                Toast.makeText(getApplicationContext(), "No Cargo Scrap Reintentar",Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
 
@@ -230,6 +281,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private void ActualizarTarea() {
 
         String params = "/"+2+"/"+2;
+        AccionClasses.PrintMesajeLog("ProduccionActivity Valor",params);
 
         httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {
             @Override
@@ -252,12 +304,5 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     }
 
 
-    private void cargarBobina() {
-
-        Intent intent = new Intent(Produccion_Activity.this, BobinaActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-    }
 
 }

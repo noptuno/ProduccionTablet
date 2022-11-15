@@ -19,6 +19,7 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
+import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HttpLayer {
@@ -93,6 +95,25 @@ public class HttpLayer {
         requestQueue.add(request);
 
     }
+
+        public void listaProveedor(HttpLayerResponses<ArrayList<Proveedor>> listener) {
+
+            String url = Urls.proveedor;
+
+            Type listOfMyClassObject = new TypeToken<ArrayList<Proveedor>>() {}.getType();
+
+            StringRequest request = new StringRequest(
+                    GET,
+                    url,
+                    response -> listener.onSuccess(mapObject(response, listOfMyClassObject)),
+                    listener::onError
+            );
+
+            request.setRetryPolicy(new DefaultRetryPolicy(1000, 2,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            requestQueue.add(request);
+
+        }
+
 
     public void actualizarProduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
 

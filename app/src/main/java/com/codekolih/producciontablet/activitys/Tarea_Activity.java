@@ -22,6 +22,7 @@ import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
+import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Tarea_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tareas);
-
+        TareaSingleton.SingletonInstance();
         httpLayer = new HttpLayer(this);
 
         //declaraciones
@@ -72,8 +73,36 @@ public class Tarea_Activity extends AppCompatActivity {
       //  RequestVolleySingleton.getInstance(this).request(Urls.Tareas,0);
       //  List<Tareas> lista = GsonUtils.parseList(RequestVolleySingleton.getInstance(this).getRequestQueue(), Tareas[].class);
 
+
       cargarDatos();
 
+
+
+    }
+
+    private void cargarProveedor() {
+
+        dialogProgress = ProgressHUD.show(Tarea_Activity.this);
+
+            httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
+                @Override
+                public void onSuccess(ArrayList<Proveedor> response) {
+
+
+                    TareaSingleton.SingletonInstance().setProveedores(response);
+                    Toast.makeText(getApplicationContext(), "Cargo proveedores",Toast.LENGTH_SHORT).show();
+                    dialogProgress.dismiss();
+
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                    TareaSingleton.SingletonInstance().setProveedores(null);
+                    Toast.makeText(getApplicationContext(), "No Cargo proveedores Reintentar",Toast.LENGTH_SHORT).show();
+                    dialogProgress.dismiss();
+                }
+            });
 
     }
 
@@ -86,16 +115,18 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 adapterTareas.setNotes(response);
                 adapterTareas.notifyDataSetChanged();
-
                 dialogProgress.dismiss();
+                cargarProveedor();
             }
             @Override
             public void onError(Exception e) {
                 dialogProgress.dismiss();
-
-                AccionClasses.PrintMesajeLog("TareaActivity","Error Response");
+                AccionClasses.PrintMesajeLog("TareaActivity",e.toString());
             }
         });
+
+
+
 
 
 //        String url = Urls.Tareas;

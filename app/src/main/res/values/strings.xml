@@ -9,4 +9,23 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <string-array name="UNIDADES">
+        <item>KG</item>
+        <item>G</item>
+        <item>M</item>
+        <item>MM</item>
+    </string-array>
+
+    <string-array name="TIPOMATERIALID">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="ABIERTAOCERRADA">
+        <item>A</item>
+        <item>C</item>
+    </string-array>
+
 </resources>
