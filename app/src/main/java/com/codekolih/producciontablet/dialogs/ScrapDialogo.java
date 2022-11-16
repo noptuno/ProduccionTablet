@@ -34,8 +34,6 @@ public class ScrapDialogo {
         int numeros= 0;
         final Dialog dialogo = new Dialog(contexcto);
 
-
-
         dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogo.setCancelable(false);
         dialogo.setCanceledOnTouchOutside(false);

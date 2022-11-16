@@ -188,8 +188,6 @@ public class BobinaActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
 
-
-
             }
 
             @Override

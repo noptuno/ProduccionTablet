@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,27 +21,23 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
-import com.codekolih.producciontablet.aciones.AccionClasses;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
-import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
+import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
+import com.codekolih.producciontablet.dialogs.PdfDialog;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Verificacion_Activity extends AppCompatActivity {
@@ -50,9 +47,9 @@ public class Verificacion_Activity extends AppCompatActivity {
     private ArrayList<Produccion_Lista> listImprentas = new ArrayList<>();
     Produccion_Lista produccion_actual;
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
-    private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
     private Boolean pdfAbierto = false;
+    private HttpLayer httpLayer;
     private EditText
             edt_verificacion_AnchoFinalRolloYGap,
             edt_verificacion_CantidadPistasImpresas,
@@ -70,9 +67,6 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_Descripcion,
             txt_verificacion_txt_MetrosAImprimir,
             txt_verificacion_txt_MetrosPorRollo;
-
-
-
     private TextView
             txt_verificacion_txt_Z_AltoMasGap,
             txt_verificacion_txt_Cilindro,
@@ -81,6 +75,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_EtiquetasPorRollo;
 
     Button btn_guardar, btn_verpdf, btn_cancelar;
+
     private boolean permisosaceptados = false;
 
     @Override
@@ -88,47 +83,13 @@ public class Verificacion_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificacion);
 
-        btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
-        btn_guardar = findViewById(R.id.verificacion_btn_guardar);
-        btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
+        variablesFindRid();
 
-        uno= findViewById(R.id.switch1);
-        dos= findViewById(R.id.switch2);
-        tres= findViewById(R.id.switch3);
-        cuatro= findViewById(R.id.switch4);
-        cinco= findViewById(R.id.switch5);
-        seis= findViewById(R.id.switch6);
+       if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
+            Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
+       }
 
-
-
-
-        edt_verificacion_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
-        edt_verificacion_CantidadPistasImpresas= findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
-        edt_verificacion_CantidadTintas= findViewById(R.id.verificacion_edt_CantidadTintas);
-        edt_verificacion_ScrapAjusteInicial= findViewById(R.id.verificacion_edt_ScrapAjusteInicial);
-        edt_verificacion_UnidadIdScrapInicial= findViewById(R.id.verificacion_edt_UnidadIdScrapInicial);
-        edt_verificacion_AnchoFinalRollo= findViewById(R.id.verificacion_edt_AnchoFinalRollo);
-        edt_verificacion_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
-        edt_verificacion_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
-
-        txt_verificacion_txt_NroDeSobre = findViewById(R.id.verificacion_txt_NroDeSobre);
-        txt_verificacion_txt_Descripcion = findViewById(R.id.verificacion_txt_Descripcion);
-        txt_verificacion_txt_MetrosAImprimir = findViewById(R.id.verificacion_txt_MetrosAImprimir);
-        txt_verificacion_txt_MetrosPorRollo = findViewById(R.id.verificacion_txt_MetrosPorRollo);
-
-        txt_verificacion_txt_Z_AltoMasGap= findViewById(R.id.verificacion_txt_Z_AltoMasGap);
-        txt_verificacion_txt_Cilindro= findViewById(R.id.verificacion_txt_Cilindro);
-        txt_verificacion_txt_Pistas= findViewById(R.id.verificacion_txt_Pistas);
-        txt_verificacion_txt_EtiquetasEnBanda= findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
-        txt_verificacion_txt_EtiquetasPorRollo= findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
-
-        //tarea_Seleccionada = TareaInstance.Get();
-
-//        Log.e("Mensaje",tarea_Seleccionada.getDescripcion());
-
-        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
-            Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
-        }
+        httpLayer = new HttpLayer(this);
 
         txt_verificacion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
         txt_verificacion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
@@ -141,7 +102,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_verificacion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
         txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
 
-        requestQueue = Volley.newRequestQueue(this);
 
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -150,29 +110,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
             produccion_actual = lg;
         }
-
-        adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
-        adapterProduccion.notifyDataSetChanged();
-
-
-        adapterProduccion.setOnNoteSelectedListener(new AdapterProduccion.OnNoteSelectedListener() {
-            @Override
-            public void onClick(Produccion_Lista note) {
-                produccion_actual = note;
-
-                edt_verificacion_AnchoFinalRolloYGap.setText(""+ produccion_actual.getAnchoFinalRolloYGap());
-                edt_verificacion_CantidadPistasImpresas.setText(""+ produccion_actual.getCantidadPistasImpresas());
-                edt_verificacion_CantidadTintas.setText(""+ produccion_actual.getCantidadTintas());
-                edt_verificacion_ScrapAjusteInicial.setText(""+ produccion_actual.getScrapAjusteInicial());
-                edt_verificacion_UnidadIdScrapInicial.setText(""+ produccion_actual.getScrapAjusteInicial_Unidades());
-                edt_verificacion_AnchoFinalRollo.setText(""+ produccion_actual.getAnchoFinalRollo());
-                edt_verificacion_CantidadPistasCortadas.setText(""+ produccion_actual.getCantidadPistasCortadas());
-                edt_verificacion_PistasTroquelUsadas.setText(""+ produccion_actual.getPistasTroquelUsadas());
-
-                TareaSingleton.SingletonInstance().setProduccionId(note.getProduccionId());
-
-            }
-        });
 
 
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
@@ -227,7 +164,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                         pedir_permiso_escritura();
 
                     } else {
-
+/*
                         Intent I = new Intent(Verificacion_Activity.this, PdfActivity.class);
                         Bundle b = new Bundle();
                         I.setAction("ENVIANDO_INTENT");
@@ -235,6 +172,10 @@ public class Verificacion_Activity extends AppCompatActivity {
                         I.putExtras(b);
                         startActivity(I);
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+*/
+
+                        new PdfDialog(Verificacion_Activity.this);
+
 
                     }
 
@@ -243,10 +184,79 @@ public class Verificacion_Activity extends AppCompatActivity {
             }
         });
 
+
+        adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
+        adapterProduccion.notifyDataSetChanged();
+
+
         OcultarVariables();
+        cambioEstado();
 
 
     }
+
+    private void variablesFindRid() {
+
+        btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
+        btn_guardar = findViewById(R.id.verificacion_btn_guardar);
+        btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
+
+        uno= findViewById(R.id.switch1);
+        dos= findViewById(R.id.switch2);
+        tres= findViewById(R.id.switch3);
+        cuatro= findViewById(R.id.switch4);
+        cinco= findViewById(R.id.switch5);
+        seis= findViewById(R.id.switch6);
+
+        edt_verificacion_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
+        edt_verificacion_CantidadPistasImpresas= findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
+        edt_verificacion_CantidadTintas= findViewById(R.id.verificacion_edt_CantidadTintas);
+        edt_verificacion_ScrapAjusteInicial= findViewById(R.id.verificacion_edt_ScrapAjusteInicial);
+        edt_verificacion_UnidadIdScrapInicial= findViewById(R.id.verificacion_edt_UnidadIdScrapInicial);
+        edt_verificacion_AnchoFinalRollo= findViewById(R.id.verificacion_edt_AnchoFinalRollo);
+        edt_verificacion_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
+        edt_verificacion_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
+
+        txt_verificacion_txt_NroDeSobre = findViewById(R.id.verificacion_txt_NroDeSobre);
+        txt_verificacion_txt_Descripcion = findViewById(R.id.verificacion_txt_Descripcion);
+        txt_verificacion_txt_MetrosAImprimir = findViewById(R.id.verificacion_txt_MetrosAImprimir);
+        txt_verificacion_txt_MetrosPorRollo = findViewById(R.id.verificacion_txt_MetrosPorRollo);
+
+        txt_verificacion_txt_Z_AltoMasGap= findViewById(R.id.verificacion_txt_Z_AltoMasGap);
+        txt_verificacion_txt_Cilindro= findViewById(R.id.verificacion_txt_Cilindro);
+        txt_verificacion_txt_Pistas= findViewById(R.id.verificacion_txt_Pistas);
+        txt_verificacion_txt_EtiquetasEnBanda= findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
+        txt_verificacion_txt_EtiquetasPorRollo= findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
+
+    }
+
+    private void cambioEstado() {
+
+            Map<String, Object> estado = new HashMap<>();
+            estado.put("TareaId", tarea_Seleccionada.getTareaId());
+            estado.put("EstadoId", "A1");
+            estado.put("TipoEstadoId","I" );
+
+
+        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+
+            httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                @Override
+                public void onSuccess(JSONObject response) {
+
+                    Log.e("Verificacion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
+                    dialogProgress.dismiss();
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Log.e("Verificacion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
+                    dialogProgress.dismiss();
+                }
+            });
+
+        }
+
 
     private void OcultarVariables() {
 
@@ -348,84 +358,10 @@ public class Verificacion_Activity extends AppCompatActivity {
     }
 
 
-    private void cargarVolley(Produccion_Lista produccion) {
-
-        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
-
-
-                JSONObject jsonObject = GsonUtils.toJSON(produccion);
-
-                JsonObjectRequest request = new JsonObjectRequest(
-                        com.android.volley.Request.Method.POST,
-                        Urls.agregarProduccion,
-                        jsonObject,
-                        new com.android.volley.Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-
-                                Toast.makeText(getApplicationContext(), "Se cargo", Toast.LENGTH_LONG).show();
-
-                                dialogProgress.dismiss();
-                                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-                            }
-                        },
-                        new com.android.volley.Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
-                                dialogProgress.dismiss();
-
-                                //cargarVolley(produccion);
-                            }
-                        });
-                request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                requestQueue.add(request);
-
-
-    }
-
-    private Produccion_Lista cargarProduccion() {
-
-
-        //todo hay que crearlo sin fecha y sin usuario ID
-        Produccion_Lista produccion = new Produccion_Lista();
-
-        produccion.setProduccionId(0);
-        produccion.setPedidoId((int) tarea_Seleccionada.getPedidoId());
-        produccion.setTareaId((int) tarea_Seleccionada.getTareaId());
-        produccion.setMetrosImpresos(0);
-        produccion.setAnchoFinalRolloYGap(Float.parseFloat(edt_verificacion_AnchoFinalRolloYGap.getText().toString()));
-        produccion.setCantidadPistasImpresas(Float.parseFloat(edt_verificacion_CantidadPistasImpresas.getText().toString()));
-        produccion.setCantidadTintas(Float.parseFloat(edt_verificacion_CantidadTintas.getText().toString()));
-        produccion.setAnchoBobinaUsadoCm(0);
-        produccion.setScrapAjusteInicial(Float.parseFloat(edt_verificacion_ScrapAjusteInicial.getText().toString()));
-        produccion.setScrapAjusteInicial_Unidades(edt_verificacion_UnidadIdScrapInicial.getText().toString());
-        produccion.setScrapAjusteProduccion(0);
-        produccion.setScrapAjusteProduccion_Unidades("KG");
-        produccion.setObservacionesCierre("SIN OBSERVACIONES");
-        produccion.setRollosFabricdos(0);
-        produccion.setAnchoFinalRollo(Float.parseFloat(edt_verificacion_AnchoFinalRollo.getText().toString()));
-        produccion.setCantidadPistasCortadas(Float.parseFloat(edt_verificacion_CantidadPistasCortadas.getText().toString()));
-        produccion.setPistasTroquelUsadas(Float.parseFloat(edt_verificacion_PistasTroquelUsadas.getText().toString()));
-        produccion.setRollosEmpaquetados(0);
-        produccion.setUsuarioId((int) tarea_Seleccionada.getUsuarioId());
-
-        return produccion;
-    }
-
-    private void verificarSwicht() {
-
-
-
-    }
-
     private void toastPersonalziado(String msg){
 
     Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
 
 }
+
 }

@@ -29,5 +29,5 @@ public class Urls {
 
     public static final String proveedor = "https://apidmr.azurewebsites.net/api/v1/proveedor/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/lista";
 
-
+    public static final String estadoOperativo = "https://apidmr.azurewebsites.net/api/v1/tarea/altaestadoop/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/rubach";
 }

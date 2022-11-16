@@ -16,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
-import com.codekolih.producciontablet.aciones.AccionClasses;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
@@ -55,7 +54,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produccion);
 
-        AccionClasses.PrintMesajeLog("ProduccionActivity","INICIO");
+        Log.e("ProduccionActivity","INICIO");
 
         btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
         btn_bobina = findViewById(R.id.produccion_btn_bobina);
@@ -69,21 +68,40 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
 
-            AccionClasses.PrintMesajeLog("ProduccionActivity","Error Instacia");
+            Log.e("ProduccionActivity","Error Instacia");
 
         }
+        Log.e("codigosSeleccionados",tarea_Seleccionada.getTareaId() + " "+ tarea_Seleccionada.getPedidoId());
 
 
         btn_finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                /*
-                Intent intent = new Intent(Produccion_Activity.this, Observaciones_Activity.class);
-                //intent.putExtra("tarea", note);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                */
+                Map<String, Object> estado = new HashMap<>();
+                estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                estado.put("EstadoId", "C1");
+                estado.put("TipoEstadoId","F" );
+
+
+                dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+
+                httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+
+                        Log.e("Produccion_Cierre","Cargo Estado" + tarea_Seleccionada.getTareaId());
+                        dialogProgress.dismiss();
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e("Produccion_Cierre","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
+                        dialogProgress.dismiss();
+                    }
+                });
+
 
             }
         });
@@ -134,6 +152,36 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         CargarReciclerViews();
 
+        cambioEstado();
+
+    }
+
+    private void cambioEstado() {
+
+            Map<String, Object> estado = new HashMap<>();
+            estado.put("TareaId", tarea_Seleccionada.getTareaId());
+            estado.put("EstadoId", "P1");
+            estado.put("TipoEstadoId","I" );
+
+
+            dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+
+            httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                @Override
+                public void onSuccess(JSONObject response) {
+
+                    Log.e("Produccion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
+                    dialogProgress.dismiss();
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Log.e("Produccion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
+                    dialogProgress.dismiss();
+                }
+            });
+
+
     }
 
 
@@ -158,15 +206,15 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     void CargarReciclerViews(){
 
-        AccionClasses.PrintMesajeLog(getApplicationContext().toString(),"CargarRecicler");
+        Log.e(getApplicationContext().toString(),"CargarRecicler");
 
         for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
             produccion_actual = lg;
             produccionId = lg.getProduccionId();
             produccion_Lista_seleccionada = lg;
         }
-
-        AccionClasses.PrintMesajeLog("ProduccionActivity","ProduccionID cargado: " + produccion_Lista_seleccionada.getProduccionId());
+        Log.e("ProduccionActivity","ProduccionID: " + produccionId);
+        Log.e("ProduccionActivity","ProduccionID seleccionado: " + produccion_Lista_seleccionada.getProduccionId());
 
         for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
             bobinas_actual = lg;
@@ -174,16 +222,16 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         }
 
         adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
-        adapterProduccion.notifyDataSetChanged();
-
         adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
+
+        adapterProduccion.notifyDataSetChanged();
         adapterBobina.notifyDataSetChanged();
     }
 
     @Override
     public void ResultadoCantidadDialogo(float valorFloat) {
 
-        AccionClasses.PrintMesajeLog("ProduccionActivity","Cantidad: " + valorFloat);
+        Log.e("ProduccionActivity","Cantidad: " + valorFloat);
 
         produccion_Lista_seleccionada.setRollosEmpaquetados(valorFloat);
         produccion_Lista_seleccionada.setRollosFabricdos(valorFloat);
@@ -231,7 +279,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     @Override
     public void ResultadoScrapDialogo(float cantidad, String unidad) {
 
-        AccionClasses.PrintMesajeLog("ProduccionActivity","Scrap: " + cantidad);
+        Log.e("ProduccionActivity","Scrap: " + cantidad);
 
 
         produccion_Lista_seleccionada.setScrapAjusteProduccion(cantidad);
@@ -281,13 +329,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private void ActualizarTarea() {
 
         String params = "/"+2+"/"+2;
-        AccionClasses.PrintMesajeLog("ProduccionActivity Valor",params);
+        Log.e("ProduccionValor",params);
 
         httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {
             @Override
             public void onSuccess(Tareas response) {
 
-                AccionClasses.PrintMesajeLog("ProduccionActivity","actualzandoTarea");
+                Log.e("ProduccionActivity","actualzandoTarea");
 
               TareaSingleton.SingletonInstance().setTarea(response);
               CargarReciclerViews();
@@ -297,7 +345,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onError(Exception e) {
 
-                AccionClasses.PrintMesajeLog("ProduccionActivity","Error Actualziar Tarea");
+                Log.e("ProduccionActivity","Error Actualziar Tarea");
 
             }
         });
