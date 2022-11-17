@@ -3,15 +3,10 @@ package com.codekolih.producciontablet.activitys;
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,13 +24,10 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
-import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
-import com.codekolih.producciontablet.dialogs.PdfDialog;
 
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -157,41 +149,19 @@ public class Verificacion_Activity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                     File TEMPfILE = new File("");
+                Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                    if (!permisosaceptados) {
-                        toastPersonalziado("Debe aceptar los permisos para continuar");
-                        pedir_permiso_escritura();
-
-                    } else {
-/*
-                        Intent I = new Intent(Verificacion_Activity.this, PdfActivity.class);
-                        Bundle b = new Bundle();
-                        I.setAction("ENVIANDO_INTENT");
-                        b.putSerializable("MY_FILE", TEMPfILE);
-                        I.putExtras(b);
-                        startActivity(I);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-*/
-
-                        new PdfDialog(Verificacion_Activity.this);
-
-
-                    }
-
-                pdfAbierto = true;
 
             }
         });
 
-
         adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
         adapterProduccion.notifyDataSetChanged();
 
-
         OcultarVariables();
         cambioEstado();
-
 
     }
 
@@ -260,7 +230,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     private void OcultarVariables() {
 
-        for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getMaquina().entrySet()) {
+        for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
 
             System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
             if ("uno".equals(entry.getKey())){
@@ -335,27 +305,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         }
     }
 
-
-    private void pedir_permiso_escritura() {
-
-        int readExternalPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int writeExternalPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (writeExternalPermission != PackageManager.PERMISSION_GRANTED || readExternalPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_REQUEST_CODE);
-        } else {
-            permisosaceptados = true;
-        }
-
-        if (ContextCompat.checkSelfPermission(Verificacion_Activity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                ActivityCompat.requestPermissions(Verificacion_Activity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 2);
-
-                return;
-            }
-        }
-
-    }
 
 
     private void toastPersonalziado(String msg){

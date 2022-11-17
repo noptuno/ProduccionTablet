@@ -1,10 +1,17 @@
 package com.codekolih.producciontablet.activitys;
 
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -24,25 +31,31 @@ import java.util.List;
 
 public class Tarea_Activity extends AppCompatActivity {
 
+    private String MAQUINATIPOID = "";
+    private String MAQUINAID = "";
+
     private RequestQueue requestQueue;
     private ArrayList<Tareas> listImprentas = new ArrayList<>();
     private AdapterTareas adapterTareas = new AdapterTareas();
-    private int maquinaId;
     private ProgressHUD dialogProgress;
-
     private HttpLayer httpLayer;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tareas);
+
         TareaSingleton.SingletonInstance();
-        httpLayer = new HttpLayer(this);
 
         //declaraciones
         requestQueue = Volley.newRequestQueue(this);
+        httpLayer = new HttpLayer(this);
 
-        maquinaId = getIntent().getIntExtra("MaquinaId",0);
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+        MAQUINATIPOID= pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
+        MAQUINAID= pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
+        TareaSingleton.SingletonInstance().setTipoMaquina(MAQUINATIPOID);
 
         RecyclerView recyclerView = findViewById(R.id.tarea_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -52,9 +65,7 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note) {
 
-
                 TareaSingleton.SingletonInstance().setTarea(note);
-                TareaSingleton.SingletonInstance().setMaquina("1");
 
                 Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
                 intent.putExtra("tarea", note);
@@ -64,39 +75,11 @@ public class Tarea_Activity extends AppCompatActivity {
             }
         });
 
-      //  RequestVolleySingleton.getInstance(this).request(Urls.Tareas,0);
-      //  List<Tareas> lista = GsonUtils.parseList(RequestVolleySingleton.getInstance(this).getRequestQueue(), Tareas[].class);
-
-
       cargarDatos();
 
     }
 
-    private void cargarProveedor() {
 
-        dialogProgress = ProgressHUD.show(Tarea_Activity.this);
-
-            httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
-                @Override
-                public void onSuccess(ArrayList<Proveedor> response) {
-
-
-                    TareaSingleton.SingletonInstance().setProveedores(response);
-                    Toast.makeText(getApplicationContext(), "Cargo proveedores",Toast.LENGTH_SHORT).show();
-                    dialogProgress.dismiss();
-
-                }
-
-                @Override
-                public void onError(Exception e) {
-
-                    TareaSingleton.SingletonInstance().setProveedores(null);
-                    Toast.makeText(getApplicationContext(), "No Cargo proveedores Reintentar",Toast.LENGTH_SHORT).show();
-                    dialogProgress.dismiss();
-                }
-            });
-
-    }
 
     void cargarDatos(){
 
@@ -108,7 +91,7 @@ public class Tarea_Activity extends AppCompatActivity {
                 adapterTareas.setNotes(response);
                 adapterTareas.notifyDataSetChanged();
                 dialogProgress.dismiss();
-                cargarProveedor();
+
             }
             @Override
             public void onError(Exception e) {

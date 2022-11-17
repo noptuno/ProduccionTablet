@@ -48,11 +48,11 @@ public class Produccion_Lista implements Serializable  {
         return ProduccionId;
     }
 
-    public float getPedidoId() {
+    public int getPedidoId() {
         return PedidoId;
     }
 
-    public float getTareaId() {
+    public int getTareaId() {
         return TareaId;
     }
 

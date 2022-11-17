@@ -2,6 +2,7 @@ package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,12 +22,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.clases.Imprentas;
+import com.codekolih.producciontablet.clases.Proveedor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +42,15 @@ public class Imprentas_Activity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
     private SharedPreferences pref;
+    private HttpLayer httpLayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imprentas);
+
+        httpLayer = new HttpLayer(this);
+        requestQueue = Volley.newRequestQueue(this);
 
 
         //declaraciones
@@ -62,10 +70,15 @@ public class Imprentas_Activity extends AppCompatActivity {
               //  intent.putExtra("NombreMaquina", note.getNombreMaquina());
               //  intent.putExtra("MaquinaId", note.getMaquinaId());
 
+
+                SharedPreferences pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString(PREF_PRODUCCION_NOMBREMAQUINA, note.getNombreMaquina());
                 editor.putString(PREF_PRODUCCION_MAQUINAID, ""+note.getMaquinaId());
+                editor.putString(PREF_PRODUCCION_MAQUINATIPOID, ""+note.getMaquinaTipoId());
                 editor.apply();
+
+
 
 
                 startActivity(intent);
@@ -80,7 +93,6 @@ public class Imprentas_Activity extends AppCompatActivity {
 
         cargarDatos();
 
-       // Request();
 
     }
 
@@ -114,6 +126,8 @@ private void cargarDatos(){
 
                             dialogProgress.dismiss();
 
+                        cargarProveedor();
+
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {
@@ -129,7 +143,35 @@ private void cargarDatos(){
         request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
+
+
 }
+
+
+    private void cargarProveedor() {
+
+        dialogProgress = ProgressHUD.show(Imprentas_Activity.this);
+
+        httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
+            @Override
+            public void onSuccess(ArrayList<Proveedor> response) {
+
+                TareaSingleton.SingletonInstance().setProveedores(response);
+                Toast.makeText(getApplicationContext(), "Cargo proveedores",Toast.LENGTH_SHORT).show();
+                dialogProgress.dismiss();
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                TareaSingleton.SingletonInstance().setProveedores(null);
+                Toast.makeText(getApplicationContext(), "No Cargo proveedores Reintentar",Toast.LENGTH_SHORT).show();
+                dialogProgress.dismiss();
+            }
+        });
+
+    }
 
 
 private void cargarConfiguracion() {

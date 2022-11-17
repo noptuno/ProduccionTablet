@@ -106,11 +106,11 @@ public class Tareas implements Serializable {
         return NroDeSobre;
     }
 
-    public float getPedidoId() {
+    public int getPedidoId() {
         return PedidoId;
     }
 
-    public float getTareaId() {
+    public int getTareaId() {
         return TareaId;
     }
 

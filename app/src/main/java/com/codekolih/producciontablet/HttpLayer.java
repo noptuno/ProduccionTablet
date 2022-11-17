@@ -33,7 +33,6 @@ public class HttpLayer {
         requestQueue = Volley.newRequestQueue(context);
     }
 
-
     public void getTareas(HttpLayerResponses<List<Tareas>> listener) {
 
         String url = Urls.Tareas;
@@ -51,8 +50,6 @@ public class HttpLayer {
         requestQueue.add(request);
 
     }
-
-
 
     public void getTareaEspecifica(String params, HttpLayerResponses<Tareas> listener) {
 
@@ -108,8 +105,6 @@ public class HttpLayer {
             requestQueue.add(request);
 
         }
-
-
 
     public void actualizarProduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
 

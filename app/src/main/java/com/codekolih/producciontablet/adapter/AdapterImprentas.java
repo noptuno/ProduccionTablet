@@ -96,7 +96,7 @@ public class AdapterImprentas extends RecyclerView.Adapter<AdapterImprentas.Note
 
         public void bind(final Imprentas imprenta) {
 
-            nombre.setText((imprenta.getNombreMaquina()));
+            nombre.setText((imprenta.getMaquinaId() + " " +imprenta.getNombreMaquina()));
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
