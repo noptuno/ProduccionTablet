@@ -17,8 +17,11 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,14 +42,23 @@ import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Usuario;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Login_Activity extends AppCompatActivity {
+
+    public static final String PREFS_NAME = "PingBusPrefs";
+    public static final String PREFS_SEARCH_HISTORY = "SearchHistory";
+    private SharedPreferences settings;
+    private Set<String> history;
+
+
 
     private Button btn_inicioSesion;
     private ImageButton btn_cargarImprenta;
     private ProgressDialog progressDialog;
     private TextView txt_nombreImprenta;
-    private EditText edt_usaurio, edt_pass;
+    private EditText edt_pass;
     private RequestQueue requestQueue;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private String nombreMaquina;
@@ -55,8 +67,7 @@ public class Login_Activity extends AppCompatActivity {
     private boolean permisosEscritura;
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
-
-
+    private AutoCompleteTextView edt_usaurio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +80,14 @@ public class Login_Activity extends AppCompatActivity {
         btn_inicioSesion = findViewById(R.id.login_btn_IniciarSesion);
         txt_nombreImprenta = findViewById(R.id.login_txt_nombreimprenta);
         btn_cargarImprenta = findViewById(R.id.login_btn_cargarImprenta);
-        edt_usaurio= findViewById(R.id.login_edt_user);
-        edt_pass= findViewById(R.id.login_edt_password);;
+        //edt_usaurio= findViewById(R.id.login_edt_user);
+        edt_pass= findViewById(R.id.login_edt_password);
+        edt_usaurio = findViewById(R.id.login_edt_login);
+
+        settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        history = settings.getStringSet(PREFS_SEARCH_HISTORY, new HashSet<String>());
+        setAutoCompleteSource();
+
 
         //Inicializar
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
@@ -81,6 +98,19 @@ public class Login_Activity extends AppCompatActivity {
         cargarMaquinas();
 
 
+        edt_usaurio.setOnKeyListener(new View.OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+
+                    addSearchInput(edt_usaurio.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
 
         btn_cargarImprenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +134,7 @@ public class Login_Activity extends AppCompatActivity {
                 intent.putExtra("MaquinaId", maquinaId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
+                savePrefs();
 /*
                 setProgressDialog();
                 String url = Urls.login;
@@ -149,6 +179,43 @@ public class Login_Activity extends AppCompatActivity {
         }
 
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+
+
+    }
+
+
+    private void addSearchInput(String input)
+    {
+
+        Log.e("a",history.size()+"");
+        if (!history.contains(input))
+        {
+            history.add(input);
+            setAutoCompleteSource();
+        }
+    }
+
+    private void setAutoCompleteSource()
+    {
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_list_item_1, history.toArray(new String[history.size()]));
+        edt_usaurio.setAdapter(adapter);
+    }
+
+    private void savePrefs()
+    {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putStringSet(PREFS_SEARCH_HISTORY, history);
+
+        editor.commit();
+    }
+
     private void pedir_permiso_escritura() {
 
         int readExternalPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -165,7 +232,7 @@ public class Login_Activity extends AppCompatActivity {
 
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
         maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
-        txt_nombreImprenta.setText("Maquina: " + nombreMaquina);
+        txt_nombreImprenta.setText("Maquina Seleccionada: " + nombreMaquina);
 
     }
 

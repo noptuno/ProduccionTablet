@@ -116,7 +116,7 @@ public class Produccion_Lista implements Serializable  {
         return RollosEmpaquetados;
     }
 
-    public float getUsuarioId() {
+    public int getUsuarioId() {
         return UsuarioId;
     }
 

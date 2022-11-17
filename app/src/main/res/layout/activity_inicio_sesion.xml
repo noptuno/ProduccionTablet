@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,59 +18,63 @@
 
     <Button
         android:id="@+id/login_btn_IniciarSesion"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Iniciar"
+        android:text="Iniciar Sesion"
         app:layout_constraintEnd_toEndOf="@+id/login_edt_password"
         app:layout_constraintStart_toStartOf="@+id/login_edt_password"
         app:layout_constraintTop_toBottomOf="@+id/login_edt_password" />
 
-    <EditText
-        android:id="@+id/login_edt_user"
-        android:layout_width="300dp"
+    <AutoCompleteTextView
+        android:id="@+id/login_edt_login"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="rubach"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
+
         android:id="@+id/login_edt_password"
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:text="1234567"
-        app:layout_constraintEnd_toEndOf="@+id/login_edt_user"
-        app:layout_constraintStart_toStartOf="@+id/login_edt_user"
-        app:layout_constraintTop_toBottomOf="@+id/login_edt_user" />
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="@+id/login_edt_login"
+        app:layout_constraintStart_toStartOf="@+id/login_edt_login"
+        app:layout_constraintTop_toBottomOf="@+id/login_edt_login" />
 
     <TextView
         android:id="@+id/login_txt_nombreimprenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/login_btn_cargarImprenta"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:background="@color/purple_500"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:tint="#FAF8F8"
         app:layout_constraintBottom_toBottomOf="@+id/login_txt_nombreimprenta"
         app:layout_constraintStart_toEndOf="@+id/login_txt_nombreimprenta"
         app:layout_constraintTop_toTopOf="@+id/login_txt_nombreimprenta"
-        app:srcCompat="@drawable/ic_find" />
+        app:srcCompat="@drawable/ic_back" />
 
     <Space
         android:id="@+id/space"

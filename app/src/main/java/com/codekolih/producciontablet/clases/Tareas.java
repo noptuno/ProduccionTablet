@@ -86,7 +86,7 @@ public class Tareas implements Serializable {
     }
     // Getter Methods
 
-    public float getTroquelId() {
+    public int getTroquelId() {
         return TroquelId;
     }
 

@@ -96,6 +96,7 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onError(Exception e) {
                 Log.e("TareaActivity",e.toString());
+                dialogProgress.dismiss();
             }
         });
 

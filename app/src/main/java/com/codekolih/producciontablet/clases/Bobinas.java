@@ -19,19 +19,19 @@ public class Bobinas implements Serializable {
 
         // Getter Methods
 
-        public float getBobinaId() {
+        public int getBobinaId() {
             return BobinaId;
         }
 
-        public float getTareaId() {
+        public int getTareaId() {
             return TareaId;
         }
 
-        public float getProduccionId() {
+        public int getProduccionId() {
             return ProduccionId;
         }
 
-        public float getProveedorId() {
+        public int getProveedorId() {
             return ProveedorId;
         }
 

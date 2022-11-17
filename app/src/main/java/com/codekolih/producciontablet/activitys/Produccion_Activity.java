@@ -328,8 +328,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void ActualizarTarea() {
 
-        String params = "/"+2+"/"+2;
-        Log.e("ProduccionValor",params);
+        String params = "/"+produccion_Lista_seleccionada.getPedidoId()+"/"+produccion_Lista_seleccionada.getTareaId();
+        Log.e("Produccion_parametros",params);
 
         httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {
             @Override
