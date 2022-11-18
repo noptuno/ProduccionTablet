@@ -32,7 +32,12 @@ public class Produccion_Lista implements Serializable  {
 
     }
 
+public String toString(){
 
+        String a = "Produccion: Peido: " + getProduccionId() + " Tarea: " + getTareaId() + " Pedido: " + getPedidoId() + " User: " +getUserNameId();
+
+        return a;
+}
 
 // Getter Methods
 

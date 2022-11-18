@@ -38,7 +38,6 @@ public class Verificacion_Activity extends AppCompatActivity {
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private ArrayList<Produccion_Lista> listImprentas = new ArrayList<>();
     Produccion_Lista produccion_actual;
-    private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private ProgressHUD dialogProgress;
     private Boolean pdfAbierto = false;
     private HttpLayer httpLayer;
@@ -95,12 +94,10 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
 
 
-        RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(adapterProduccion);
 
         for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
             produccion_actual = lg;
+            Log.e("DATOS_PRODUCCION",produccion_actual.toString());
         }
 
 
@@ -156,9 +153,6 @@ public class Verificacion_Activity extends AppCompatActivity {
 
             }
         });
-
-        adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
-        adapterProduccion.notifyDataSetChanged();
 
         OcultarVariables();
         cambioEstado();

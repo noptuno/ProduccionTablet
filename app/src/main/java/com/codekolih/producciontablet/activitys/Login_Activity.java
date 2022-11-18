@@ -232,7 +232,7 @@ public class Login_Activity extends AppCompatActivity {
 
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
         maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
-        txt_nombreImprenta.setText("Maquina Seleccionada: " + nombreMaquina);
+        txt_nombreImprenta.setText("Imprenta Seleccionada: " + nombreMaquina);
 
     }
 

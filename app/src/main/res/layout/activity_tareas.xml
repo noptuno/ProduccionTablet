@@ -12,8 +12,11 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/fondo"
         android:text="Cerrar Sesion"
+        android:textColor="@color/white"
         android:textSize="10sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -156,6 +159,7 @@
         android:layout_marginTop="8dp"
         android:text="Lista de Tareas"
         android:textColor="#020000"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space2" />
 
@@ -163,8 +167,8 @@
         android:id="@+id/textView31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Selecciones un Tarea"
+        android:layout_marginTop="16dp"
+        android:text="Seleccione una Tarea"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

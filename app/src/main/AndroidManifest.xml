@@ -30,8 +30,8 @@
             android:exported="false" />
         <activity
             android:name=".activitys.Verificacion_Activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="false"
-            android:label="Verificar Tarea"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activitys.Produccion_Activity"
@@ -42,6 +42,7 @@
         <activity
             android:name=".activitys.Tarea_Activity"
             android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:label="Tareas Disponibles" />
         <activity
             android:name=".activitys.Imprentas_Activity"
