@@ -37,6 +37,7 @@
             android:name=".activitys.Produccion_Activity"
             android:exported="false"
             android:label="Produccion de Tarea"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
         <activity

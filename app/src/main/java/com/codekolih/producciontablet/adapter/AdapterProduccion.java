@@ -91,7 +91,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
         public NoteViewHolder(View item) {
             super(item);
 
-            UsuarioId = (TextView) item.findViewById(R.id.item_produccion_txt_UsuarioId);
+
             MetrosImpresos = (TextView) item.findViewById(R.id.item_produccion_txt_MetrosImpresos);
             ScrapAjusteProduccion = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion);
             ScrapAjusteProduccion_Unidades = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion_Unidades);
@@ -101,7 +101,6 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
         public void bind(final Produccion_Lista produccion) {
 
-            UsuarioId.setText((""+produccion.getUsuarioId()));
             MetrosImpresos.setText((""+produccion.getMetrosImpresos()));
             ScrapAjusteProduccion.setText((""+produccion.getScrapAjusteProduccion()));
             ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));

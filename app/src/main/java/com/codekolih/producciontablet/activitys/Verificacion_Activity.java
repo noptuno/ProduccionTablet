@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,10 +47,12 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_verificacion_CantidadPistasImpresas,
             edt_verificacion_CantidadTintas,
             edt_verificacion_ScrapAjusteInicial,
-            edt_verificacion_UnidadIdScrapInicial,
+
             edt_verificacion_AnchoFinalRollo,
             edt_verificacion_CantidadPistasCortadas,
             edt_verificacion_PistasTroquelUsadas;
+
+    private Spinner spi_verificacion_UnidadIdScrapInicial;
 
     private Switch uno,dos,tres,cuatro,cinco,seis;
 
@@ -176,7 +179,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         edt_verificacion_CantidadPistasImpresas= findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
         edt_verificacion_CantidadTintas= findViewById(R.id.verificacion_edt_CantidadTintas);
         edt_verificacion_ScrapAjusteInicial= findViewById(R.id.verificacion_edt_ScrapAjusteInicial);
-        edt_verificacion_UnidadIdScrapInicial= findViewById(R.id.verificacion_edt_UnidadIdScrapInicial);
+        spi_verificacion_UnidadIdScrapInicial= findViewById(R.id.verificacion_spi_UnidadIdScrapInicial);
         edt_verificacion_AnchoFinalRollo= findViewById(R.id.verificacion_edt_AnchoFinalRollo);
         edt_verificacion_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
         edt_verificacion_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
@@ -227,6 +230,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
 
             System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+
             if ("uno".equals(entry.getKey())){
                 uno.setVisibility(parseInt(entry.getValue()));
             }
@@ -258,7 +262,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                 edt_verificacion_ScrapAjusteInicial.setVisibility(parseInt(entry.getValue()));
             }
             if ("edt_verificacion_UnidadIdScrapInicial".equals(entry.getKey())){
-                edt_verificacion_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));
+                spi_verificacion_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));
             }
             if ("edt_verificacion_AnchoFinalRollo".equals(entry.getKey())){
                 edt_verificacion_AnchoFinalRollo.setVisibility(parseInt(entry.getValue()));

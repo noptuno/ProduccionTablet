@@ -129,12 +129,14 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+        if (!txt_nombreImprenta.getText().equals("NO")){
 
-                Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-                intent.putExtra("MaquinaId", maquinaId);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                savePrefs();
+            Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
+            intent.putExtra("MaquinaId", maquinaId);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        }
+
 /*
                 setProgressDialog();
                 String url = Urls.login;
@@ -207,14 +209,7 @@ public class Login_Activity extends AppCompatActivity {
         edt_usaurio.setAdapter(adapter);
     }
 
-    private void savePrefs()
-    {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putStringSet(PREFS_SEARCH_HISTORY, history);
 
-        editor.commit();
-    }
 
     private void pedir_permiso_escritura() {
 
@@ -232,7 +227,7 @@ public class Login_Activity extends AppCompatActivity {
 
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
         maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
-        txt_nombreImprenta.setText("Imprenta Seleccionada: " + nombreMaquina);
+        txt_nombreImprenta.setText(nombreMaquina);
 
     }
 
