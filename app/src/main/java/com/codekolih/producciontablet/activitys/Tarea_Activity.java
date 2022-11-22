@@ -84,7 +84,8 @@ public class Tarea_Activity extends AppCompatActivity {
     void cargarDatos(){
 
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
-        httpLayer.getTareas(new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+
+        httpLayer.getTareas("0/0",new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 

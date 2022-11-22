@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutDatos"
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="SERIE Y n"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_NroDeSobre"
@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="EtiquetasEnBanda"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_EtiquetasEnBanda"
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Cilindro"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Cilindro"
@@ -98,7 +98,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Z_AltoMasGap"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Z_AltoMasGap"
@@ -122,7 +122,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="EtiquetasPorRollo"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_EtiquetasPorRollo"
@@ -145,7 +145,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Pistas"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Pistas"
@@ -168,7 +168,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="MetrosAImprimir"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_MetrosAImprimir"
@@ -192,7 +192,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="MetrosPorRollo"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_MetrosPorRollo"
@@ -216,7 +216,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Descripcion"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Descripcion"
@@ -234,7 +234,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutVerificar"
-        android:layout_width="0dp"
+        android:layout_width="400dp"
         android:layout_height="267dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -340,7 +340,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayotCargarDatos"
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
@@ -351,16 +351,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView100"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_weight="2"
                 android:text="AnchoFinalRolloYGap"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_AnchoFinalRolloYGap"
@@ -372,22 +374,22 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView101"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="CantidadPistasImpresas"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_CantidadPistasImpresas"
@@ -399,22 +401,22 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView103"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="CantidadTintas"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_CantidadTintas"
@@ -426,13 +428,13 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -440,9 +442,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="ScrapAjusteInicial"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_ScrapAjusteInicial"
@@ -454,27 +456,27 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView105"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="UnidadIdScrapInicial"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <Spinner
                 android:id="@+id/verificacion_spi_UnidadIdScrapInicial"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:entries="@array/UNIDADES" />
         </LinearLayout>
@@ -482,15 +484,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView106"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="AnchoFinalRollo"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_AnchoFinalRollo"
@@ -502,22 +505,22 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView107"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="CantidadPistasCortadas"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_CantidadPistasCortadas"
@@ -529,22 +532,22 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView108"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="PistasTroquelUsadas"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_PistasTroquelUsadas"
@@ -556,8 +559,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
 

@@ -126,7 +126,6 @@ private void cargarDatos(){
 
                             dialogProgress.dismiss();
 
-                        cargarProveedor();
 
                     }
                 },
@@ -148,30 +147,7 @@ private void cargarDatos(){
 }
 
 
-    private void cargarProveedor() {
 
-        dialogProgress = ProgressHUD.show(Imprentas_Activity.this);
-
-        httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
-            @Override
-            public void onSuccess(ArrayList<Proveedor> response) {
-
-                TareaSingleton.SingletonInstance().setProveedores(response);
-                Toast.makeText(getApplicationContext(), "Cargo proveedores",Toast.LENGTH_SHORT).show();
-                dialogProgress.dismiss();
-
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-                TareaSingleton.SingletonInstance().setProveedores(null);
-                Toast.makeText(getApplicationContext(), "No Cargo proveedores Reintentar",Toast.LENGTH_SHORT).show();
-                dialogProgress.dismiss();
-            }
-        });
-
-    }
 
 
 private void cargarConfiguracion() {

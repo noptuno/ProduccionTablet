@@ -40,6 +40,7 @@ public class ScrapDialogo {
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_scrap);
         Spinner spinner = (Spinner) dialogo.findViewById(R.id.spinner);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

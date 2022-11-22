@@ -49,7 +49,7 @@ public class BobinaActivity extends AppCompatActivity {
     Button btn_guardar;
 
     ArrayList<String> listProveedores;
-    ArrayList<Proveedor> contacts;
+    ArrayList<Proveedor> proveedores = new ArrayList<>();
 
 
     String proveedorSeleccionado;
@@ -74,7 +74,11 @@ public class BobinaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bobina);
 
         listProveedores = new ArrayList<>();
-        contacts = TareaSingleton.SingletonInstance().getProveedores();
+
+
+       // proveedores = TareaSingleton.SingletonInstance().getProveedores();
+
+
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
         requestQueue = Volley.newRequestQueue(this);
 
@@ -113,7 +117,7 @@ public class BobinaActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
 
-                for (Proveedor proveeedores : contacts){
+                for (Proveedor proveeedores : proveedores){
                     if(proveeedores.getNombre().equals(adapterView.getItemAtPosition(i).toString())){
                         proveedorSeleccionado = proveeedores.getNombre();
                         idproveedorSeleccionado = proveeedores.getProveedorlId();
@@ -145,19 +149,39 @@ public class BobinaActivity extends AppCompatActivity {
 
     }
 
-    private void cargarProveedor() {
 
 
-        listProveedores.clear();
+    void cargarProveedor() {
 
-        for (Proveedor proveeedores : contacts){
+        httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
+            @Override
+            public void onSuccess(ArrayList<Proveedor> response) {
 
-            listProveedores.add(proveeedores.getNombre());
-        }
+                TareaSingleton.SingletonInstance().setProveedores(response);
+                Toast.makeText(getApplicationContext(), "Cargo proveedores",Toast.LENGTH_SHORT).show();
 
-        adapterProveedor = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listProveedores);
-        adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        spi_ProveedorNombre.setAdapter(adapterProveedor);
+                listProveedores.clear();
+
+                for (Proveedor proveeedores :  TareaSingleton.SingletonInstance().getProveedores()){
+
+                    listProveedores.add(proveeedores.getNombre());
+                }
+
+                adapterProveedor = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listProveedores);
+                adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+                spi_ProveedorNombre.setAdapter(adapterProveedor);
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                TareaSingleton.SingletonInstance().setProveedores(null);
+                Toast.makeText(getApplicationContext(), "No Cargo proveedores Reintentar",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
 

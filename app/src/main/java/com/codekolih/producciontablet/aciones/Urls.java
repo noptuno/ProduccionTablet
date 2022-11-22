@@ -17,7 +17,7 @@ public class Urls {
     public static final String login = API_BASE_USUARIO_URL + barr + Login_tad + barr + KEY;
     public static final String Imprentas = API_BASE_URL + barr + MAQUINAS + barr + KEY;
 
-    public static final String Tareas = "https://apidmr.azurewebsites.net/api/v1/tarea/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/listaxmaquinaid/0/0";
+    public static final String Tareas = "https://apidmr.azurewebsites.net/api/v1/tarea/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/listaxmaquinaid/";
     public static final String getUsuario = "https://apidmr.azurewebsites.net/api/v1/Usuario/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/DatosUsuario/rubach";
 
     public static final String obtenertarea="https://apidmr.azurewebsites.net/api/v1/tarea/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B";
@@ -29,4 +29,7 @@ public class Urls {
     public static final String proveedor = "https://apidmr.azurewebsites.net/api/v1/proveedor/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/lista";
 
     public static final String estadoOperativo = "https://apidmr.azurewebsites.net/api/v1/tarea/altaestadoop/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/rubach";
+
+    public static final String altaproduccion = " httpS://apidmr.azurewebsites.net/api/v1/produccion/altaproduc/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/rubach";
+
 }

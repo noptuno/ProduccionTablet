@@ -45,7 +45,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private HttpLayer httpLayer;
     private int produccionId;
     private Button btn_cantidad, btn_bobina,btn_scrap, btn_finalizar, btn_cancelar;
-
     private Produccion_Lista produccion_Lista_seleccionada;
     private int LAUNCH_SECOND_ACTIVITY = 1;
 
@@ -61,18 +60,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         btn_scrap = findViewById(R.id.produccion_btn_scrap);
         btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
         btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
-
-
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
-
-        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
-
-            Log.e("ProduccionActivity","Error Instacia");
-
-        }
-        Log.e("codigosSeleccionados",tarea_Seleccionada.getTareaId() + " "+ tarea_Seleccionada.getPedidoId());
-
 
         btn_finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +102,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             }
         });
 
-
         btn_cantidad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +140,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         CargarReciclerViews();
 
-        cambioEstado();
+      //  cambioEstado();
 
     }
 
@@ -206,22 +194,25 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     void CargarReciclerViews(){
 
-        Log.e(getApplicationContext().toString(),"CargarRecicler");
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
+            Log.e("ProduccionActivity","Error Instacia");
+        }
+        Log.e("codigosSeleccionados",tarea_Seleccionada.getTareaId() + " ");
 
         for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
             produccion_actual = lg;
             produccionId = lg.getProduccionId();
             produccion_Lista_seleccionada = lg;
         }
-        Log.e("ProduccionActivity","ProduccionID: " + produccionId);
-        Log.e("ProduccionActivity","ProduccionID seleccionado: " + produccion_Lista_seleccionada.getProduccionId());
+
+        TareaSingleton.SingletonInstance().setProduccionId(produccionId);
 
         for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
             bobinas_actual = lg;
-
         }
 
         adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
+
         adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
 
         adapterProduccion.notifyDataSetChanged();
@@ -328,7 +319,12 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void ActualizarTarea() {
 
-        String params = "/"+produccion_Lista_seleccionada.getPedidoId()+"/"+produccion_Lista_seleccionada.getTareaId();
+        //todo registrar id pedido y tarea id
+
+
+        String params = "/"+tarea_Seleccionada.getPedidoId()+"/"+tarea_Seleccionada.getTareaId();
+
+
         Log.e("Produccion_parametros",params);
 
         httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {

@@ -33,9 +33,9 @@ public class HttpLayer {
         requestQueue = Volley.newRequestQueue(context);
     }
 
-    public void getTareas(HttpLayerResponses<List<Tareas>> listener) {
+    public void getTareas(String params, HttpLayerResponses<List<Tareas>> listener) {
 
-        String url = Urls.Tareas;
+        String url = Urls.Tareas + params;
 
         Type listOfMyClassObject = new TypeToken<List<Tareas>>() {}.getType();
 
@@ -46,7 +46,7 @@ public class HttpLayer {
                 listener::onError
         );
 
-        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
     }
@@ -67,7 +67,7 @@ public class HttpLayer {
                 listener::onError
         );
 
-        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
     }
@@ -83,7 +83,7 @@ public class HttpLayer {
                 listener::onError
         );
 
-        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
     }
@@ -101,7 +101,7 @@ public class HttpLayer {
                     listener::onError
             );
 
-            request.setRetryPolicy(new DefaultRetryPolicy(1000, 2,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            request.setRetryPolicy(new DefaultRetryPolicy(6000, 3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             requestQueue.add(request);
 
         }
@@ -116,7 +116,7 @@ public class HttpLayer {
                 listener::onError
         );
 
-        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
     }
@@ -131,10 +131,27 @@ public class HttpLayer {
                 listener::onError
         );
 
-        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
 
     }
+
+
+    public void altaproduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                POST,
+                Urls.altaproduccion,
+                jsonObject,
+                listener::onSuccess,
+                listener::onError
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+
+    }
+
 
 
     private <T> T mapObject(String response, Type clazz) {

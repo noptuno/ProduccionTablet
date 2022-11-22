@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -70,6 +71,8 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     Button btn_guardar, btn_verpdf, btn_cancelar;
 
+    String UnidadIdScrapInicial= "KG";
+
     private boolean permisosaceptados = false;
 
     @Override
@@ -78,25 +81,35 @@ public class Verificacion_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_verificacion);
 
         variablesFindRid();
+        httpLayer = new HttpLayer(this);
 
        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
        }
 
-        httpLayer = new HttpLayer(this);
-
         txt_verificacion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
         txt_verificacion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
         txt_verificacion_txt_MetrosAImprimir.setText(""+tarea_Seleccionada.getMetrosAImprimir());
         txt_verificacion_txt_MetrosPorRollo.setText(""+tarea_Seleccionada.getMetrosPorRollo());
-
         txt_verificacion_txt_Z_AltoMasGap.setText(""+tarea_Seleccionada.getZ_AltoMasGap());
         txt_verificacion_txt_Cilindro.setText(""+tarea_Seleccionada.getCilindro());
         txt_verificacion_txt_Pistas.setText(""+tarea_Seleccionada.getPistas());
         txt_verificacion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
         txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
 
+        spi_verificacion_UnidadIdScrapInicial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                UnidadIdScrapInicial =  adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
             produccion_actual = lg;
@@ -117,29 +130,57 @@ public class Verificacion_Activity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-/*
-                if (pdfAbierto && uno.isChecked() && dos.isChecked() && tres.isChecked() && cuatro.isChecked() && cinco.isChecked() && seis.isChecked()){
+                String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
+                String CantidadPistasImpresas = edt_verificacion_CantidadPistasImpresas.getText().toString();
+                String CantidadTintas = edt_verificacion_CantidadTintas.getText().toString();
+                String ScrapAjusteInicial = edt_verificacion_ScrapAjusteInicial.getText().toString();
+                String AnchoFinalRollo = edt_verificacion_AnchoFinalRollo.getText().toString();
+                String CantidadPistasCortadas = edt_verificacion_CantidadPistasCortadas.getText().toString();
+                String PistasTroquelUsadas = edt_verificacion_PistasTroquelUsadas.getText().toString();
 
 
-                   Produccion_Lista produccion =  cargarProduccion();
+                Map<String, Object> newproduccion = new HashMap<>();
+                newproduccion.put("ProduccionId", 0);
+                newproduccion.put("PedidoId", tarea_Seleccionada.getPedidoId());
+                newproduccion.put("TareaId", tarea_Seleccionada.getTareaId());
+                newproduccion.put("MetrosImpresos", 0);
+                newproduccion.put("AnchoFinalRolloYGap", AnchoFinalRolloYGap);
+                newproduccion.put("CantidadPistasImpresas", CantidadPistasImpresas);
+                newproduccion.put("CantidadTintas",CantidadTintas );
+                newproduccion.put("AnchoBobinaUsadoCm", 0);
+                newproduccion.put("ScrapAjusteInicial",  ScrapAjusteInicial );
+                newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
+                newproduccion.put("ScrapAjusteProduccion", 0);
+                newproduccion.put("ScrapAjusteProduccion_Unidades", "KG");
+                newproduccion.put("ObservacionesCierre", "Sin cierre");
+                newproduccion.put("RollosFabricdos", 0);
+                newproduccion.put("AnchoFinalRollo", AnchoFinalRollo);
+                newproduccion.put("CantidadPistasCortadas", CantidadPistasCortadas);
+                newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
+                newproduccion.put("RollosEmpaquetados", 0);
+                newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
 
-                    if (produccion!=null){
 
-                        cargarVolley(produccion);
+                httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+
+                        Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                        Toast.makeText(getApplicationContext(), "Se dio de alta",Toast.LENGTH_SHORT).show();
+
                     }
 
+                    @Override
+                    public void onError(Exception e) {
 
+                        Toast.makeText(getApplicationContext(), "No Cargo Scrap Reintentar",Toast.LENGTH_SHORT).show();
 
-                }else{
-
-                    toastPersonalziado("Verificar Especificacion");
-
-                }
-*/
+                    }
+                });
 
             }
         });
@@ -158,7 +199,35 @@ public class Verificacion_Activity extends AppCompatActivity {
         });
 
         OcultarVariables();
-        cambioEstado();
+        //todo lo desactive por ahora
+       // cambioEstado();
+
+    }
+
+    private void cambioEstado() {
+
+        Map<String, Object> estado = new HashMap<>();
+        estado.put("TareaId", tarea_Seleccionada.getTareaId());
+        estado.put("EstadoId", "A1");
+        estado.put("TipoEstadoId","I" );
+
+
+        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+
+        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.e("Verificacion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
+                dialogProgress.dismiss();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("Verificacion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
+                dialogProgress.dismiss();
+            }
+        });
 
     }
 
@@ -196,35 +265,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_verificacion_txt_EtiquetasPorRollo= findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
 
     }
-
-    private void cambioEstado() {
-
-            Map<String, Object> estado = new HashMap<>();
-            estado.put("TareaId", tarea_Seleccionada.getTareaId());
-            estado.put("EstadoId", "A1");
-            estado.put("TipoEstadoId","I" );
-
-
-        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
-
-            httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
-                @Override
-                public void onSuccess(JSONObject response) {
-
-                    Log.e("Verificacion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
-                    dialogProgress.dismiss();
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    Log.e("Verificacion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
-                    dialogProgress.dismiss();
-                }
-            });
-
-        }
-
-
     private void OcultarVariables() {
 
         for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
