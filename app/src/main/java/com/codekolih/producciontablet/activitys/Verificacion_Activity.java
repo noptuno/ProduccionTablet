@@ -37,32 +37,29 @@ import java.util.Map;
 public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
-    public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
-    private ArrayList<Produccion_Lista> listImprentas = new ArrayList<>();
     Produccion_Lista produccion_actual;
     private ProgressHUD dialogProgress;
+
     private Boolean pdfAbierto = false;
     private HttpLayer httpLayer;
+
+    private TextView  txt_imprenta,txt_usuario,txt_fecha,txt_hora;
+
     private EditText
             edt_verificacion_AnchoFinalRolloYGap,
             edt_verificacion_CantidadPistasImpresas,
             edt_verificacion_CantidadTintas,
             edt_verificacion_ScrapAjusteInicial,
-
             edt_verificacion_AnchoFinalRollo,
             edt_verificacion_CantidadPistasCortadas,
             edt_verificacion_PistasTroquelUsadas;
-
     private Spinner spi_verificacion_UnidadIdScrapInicial;
-
     private Switch uno,dos,tres,cuatro,cinco,seis;
-
     private TextView
             txt_verificacion_txt_NroDeSobre,
             txt_verificacion_txt_Descripcion,
             txt_verificacion_txt_MetrosAImprimir,
-            txt_verificacion_txt_MetrosPorRollo;
-    private TextView
+            txt_verificacion_txt_MetrosPorRollo,
             txt_verificacion_txt_Z_AltoMasGap,
             txt_verificacion_txt_Cilindro,
             txt_verificacion_txt_Pistas,
@@ -70,7 +67,6 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_EtiquetasPorRollo;
 
     Button btn_guardar, btn_verpdf, btn_cancelar;
-
     String UnidadIdScrapInicial= "KG";
 
     private boolean permisosaceptados = false;
@@ -80,12 +76,11 @@ public class Verificacion_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificacion);
 
-        variablesFindRid();
+        variablesFind();
+
         httpLayer = new HttpLayer(this);
 
-       if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
-            Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
-       }
+        cargarTareaSeleccionada(); // tarea y produccion_actual
 
         txt_verificacion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
         txt_verificacion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
@@ -111,12 +106,6 @@ public class Verificacion_Activity extends AppCompatActivity {
             }
         });
 
-        for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-            produccion_actual = lg;
-            Log.e("DATOS_PRODUCCION",produccion_actual.toString());
-        }
-
-
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,7 +117,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 
                 String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
@@ -199,8 +187,26 @@ public class Verificacion_Activity extends AppCompatActivity {
         });
 
         OcultarVariables();
+
+
         //todo lo desactive por ahora
        // cambioEstado();
+
+    }
+
+    private void cargarTareaSeleccionada() {
+
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
+            Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
+        }
+
+        if (tarea_Seleccionada.getProduccion_Lista().size()>0){
+            for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
+                Log.e("Datos_Producción",produccion_actual.toString());
+                produccion_actual = lg;
+            }
+        }
+
 
     }
 
@@ -231,7 +237,13 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     }
 
-    private void variablesFindRid() {
+    private void variablesFind() {
+
+        txt_imprenta = findViewById(R.id.verificacion_txt_imprenta);
+        txt_usuario= findViewById(R.id.verificacion_txt_usuario);
+        txt_fecha= findViewById(R.id.verificacion_txt_fecha);
+        txt_hora= findViewById(R.id.txt_tarea_hora);
+
 
         btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);

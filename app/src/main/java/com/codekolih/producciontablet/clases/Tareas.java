@@ -69,13 +69,11 @@ public class Tareas implements Serializable {
 
     public String toString(){
 
-        String a = "TroquelId: " + getTroquelId() + "\n"+
-
+        String a = "CodigoTarea: " + getTareaId() + "\n"+
+                "Pedido: " + getPedidoId() + "\n"+
+                "Usuario: " + getUsuarioId() + "\n"+
+                "Sobre: " + getNroDeSobre() + "\n"+
                 "Descripcion: " + getDescripcion() + "\n"+
-                "Z_AltoMasGap: " + getZ_AltoMasGap() + "\n"+
-                "Cilindro: " + getCilindro() + "\n"+
-                "NroDeSobre: " + getNroDeSobre() + "\n"+
-                "PedidoId: " + getPedidoId() + "\n"+
                 "MaquinaId: " + getMaquinaId() + "\n"+
                 "EstadoAcceso: " + getEstadoAcceso() + "\n"+
                 "Observaciones: " + getObservaciones() + "\n"+

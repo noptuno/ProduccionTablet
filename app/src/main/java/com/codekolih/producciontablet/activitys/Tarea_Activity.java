@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -23,6 +24,7 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
+import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
@@ -31,42 +33,53 @@ import java.util.List;
 
 public class Tarea_Activity extends AppCompatActivity {
 
+    private TextView txt_imprenta, txt_usuario, txt_fecha,txt_hora;
     private String MAQUINATIPOID = "";
     private String MAQUINAID = "";
-
     private RequestQueue requestQueue;
     private ArrayList<Tareas> listImprentas = new ArrayList<>();
     private AdapterTareas adapterTareas = new AdapterTareas();
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
     private SharedPreferences pref;
+    private RecyclerView recyclerViewTareas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tareas);
 
-        TareaSingleton.SingletonInstance();
-
         //declaraciones
+
         requestQueue = Volley.newRequestQueue(this);
+
         httpLayer = new HttpLayer(this);
 
-        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        MAQUINATIPOID= pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
-        MAQUINAID= pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
-        TareaSingleton.SingletonInstance().setTipoMaquina(MAQUINATIPOID);
+        //recicler
 
-        RecyclerView recyclerView = findViewById(R.id.tarea_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(adapterTareas);
+        txt_imprenta = findViewById(R.id.tarea_txt_imprenta);
+        txt_usuario= findViewById(R.id.tarea_txt_usuario);
+        txt_fecha= findViewById(R.id.tarea_txt_fecha);
+        txt_hora= findViewById(R.id.txt_tarea_hora);
+
+        recyclerViewTareas = findViewById(R.id.tarea_recycler);
+        recyclerViewTareas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerViewTareas.setAdapter(adapterTareas);
+
+        //pref
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+        MAQUINATIPOID = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
+        MAQUINAID = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
+        txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
+
+
+        //TODO Validar maquinatipoid y aquinaid
 
         adapterTareas.setOnNoteSelectedListener(new AdapterTareas.OnNoteSelectedListener() {
             @Override
             public void onClick(Tareas note) {
 
                 TareaSingleton.SingletonInstance().setTarea(note);
-
                 Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
                 intent.putExtra("tarea", note);
                 startActivity(intent);
@@ -75,16 +88,14 @@ public class Tarea_Activity extends AppCompatActivity {
             }
         });
 
-      cargarDatos();
+        //todo valdiar internet
+        cargarTarea();
 
     }
 
-
-
-    void cargarDatos(){
+    void cargarTarea(){
 
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
-
         httpLayer.getTareas("0/0",new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
@@ -93,56 +104,19 @@ public class Tarea_Activity extends AppCompatActivity {
                 adapterTareas.notifyDataSetChanged();
                 dialogProgress.dismiss();
 
+                for (Tareas lg : response) {
+                    Log.e("Datos_tareas",lg.toString());
+                }
+
             }
             @Override
             public void onError(Exception e) {
+
                 Log.e("TareaActivity",e.toString());
                 dialogProgress.dismiss();
             }
         });
-
-
-
-
-
-//        String url = Urls.Tareas;
-//        StringRequest request = new StringRequest(
-//                com.android.volley.Request.Method.GET,
-//                url,
-//                new com.android.volley.Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//
-//                        Log.e("Tarea Response",response);
-//
-//                        List<Tareas> lista = GsonUtils.parseList(response, Tareas[].class);
-//
-///*
-//                        for (Tareas lg : lista) {
-//                            List<EstadosOp> list = lg.getEstadosOp();
-//                           for (EstadosOp est : list) {
-//                              Log.e("Estados:",est.getNombreEstado());
-//                           }
-//                        }
-//*/
-//
-//                        adapterTareas.setNotes(lista);
-//                        adapterTareas.notifyDataSetChanged();
-//                        dialogProgress.dismiss();
-//
-//                    }
-//                },
-//                new com.android.volley.Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(Tarea_Activity.this, "Fallo", Toast.LENGTH_LONG).show();
-//                        dialogProgress.dismiss();
-//                        cargarDatos();
-//
-//                    }
-//                });
-//        request.setRetryPolicy(new DefaultRetryPolicy(1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        requestQueue.add(request);
-
     }
+
+
 }

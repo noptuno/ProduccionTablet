@@ -75,9 +75,6 @@ public class TareaSingleton {
         if (tareaSingle == null){
             tareaSingle = new TareaSingleton();
         }
-        else{
-            System.out.println("No se puede crear el objeto ");
-        }
         return tareaSingle;
 
     }
@@ -89,8 +86,6 @@ public class TareaSingleton {
     public void setProduccionId(int produccionId) {
         this.produccionId = produccionId;
     }
-
-
 
     public Tareas setTarea(Tareas tarea) {
         this.tareaInstanciada = tarea;

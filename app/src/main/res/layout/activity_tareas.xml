@@ -106,9 +106,9 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView29"
+                    android:id="@+id/tarea_txt_fecha"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="22dp"
                     android:layout_weight="1"
                     android:text="25/10/2022" />
             </LinearLayout>
@@ -128,7 +128,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/txt_tarea_hora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

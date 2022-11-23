@@ -90,7 +90,7 @@ public class Login_Activity extends AppCompatActivity {
 
 
         //Inicializar
-        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+
         requestQueue = Volley.newRequestQueue(this);
 
         //cargar
@@ -224,7 +224,7 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     private void cargarMaquinas() {
-
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
         maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
         txt_nombreImprenta.setText(nombreMaquina);
