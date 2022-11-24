@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,7 @@ import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Bobinas;
+import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.CantidadDialog;
@@ -51,18 +53,16 @@ public class BobinaActivity extends AppCompatActivity {
     ArrayList<String> listProveedores;
     ArrayList<Proveedor> proveedores = new ArrayList<>();
 
-
     String proveedorSeleccionado;
-    int idproveedorSeleccionado;
+    int idproveedorSeleccionado = 1;
     String abiertaocerrada = "A";
-    int produccionId;
 
 
     Spinner  spi_ProveedorNombre,spi_EsAbiertaoCerrada;
     EditText edt_Lote;
     EditText edt_Ancho;
     EditText edt_DefectuosaKg;
-
+int produccionid;
 
     ArrayAdapter<String> adapterProveedor;
 
@@ -73,31 +73,22 @@ public class BobinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bobina);
 
-        listProveedores = new ArrayList<>();
-
-
-       // proveedores = TareaSingleton.SingletonInstance().getProveedores();
-
-
-        produccionId = TareaSingleton.SingletonInstance().getProduccionId();
         requestQueue = Volley.newRequestQueue(this);
-
         httpLayer = new HttpLayer(this);
+
         btn_guardar = findViewById(R.id.bobina_btn_guardar);
-
-
         spi_ProveedorNombre = (Spinner) findViewById(R.id.bobina_spi_ProveedorNombre);
         spi_EsAbiertaoCerrada = findViewById(R.id.bobina_spi_EsAbiertaoCerrada);
         edt_Lote= findViewById(R.id.bobina_edt_Lote);
         edt_Ancho= findViewById(R.id.bobina_edt_Ancho);
         edt_DefectuosaKg= findViewById(R.id.bobina_edt_DefectuosaKg);
 
+        listProveedores = new ArrayList<>();
+        adapterProveedor = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listProveedores);
+        adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
-        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
-            Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(getApplicationContext(),"IDPRODUCCON: " + TareaSingleton.SingletonInstance().getProduccionId(),Toast.LENGTH_LONG).show();
-        }
+        produccionid =  TareaSingleton.SingletonInstance().getProduccionId();
+
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,22 +99,11 @@ public class BobinaActivity extends AppCompatActivity {
 
         });
 
-
-        cargarProveedor();
-
-
         spi_ProveedorNombre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-
-                for (Proveedor proveeedores : proveedores){
-                    if(proveeedores.getNombre().equals(adapterView.getItemAtPosition(i).toString())){
-                        proveedorSeleccionado = proveeedores.getNombre();
-                        idproveedorSeleccionado = proveeedores.getProveedorlId();
-                        break;
-                    }
-                }
+                proveedorSeleccionado = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -146,9 +126,20 @@ public class BobinaActivity extends AppCompatActivity {
             }
         });
 
-
+        cargarDatos();
     }
 
+    private void cargarDatos() {
+
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
+            Toast.makeText(getApplicationContext(),"Error Instacia",Toast.LENGTH_LONG).show();
+        }
+
+
+        Log.e("Bobina_ac_produccionid",produccionid+"");
+        Log.e("Bobina_ac_tareaid",tarea_Seleccionada.getTareaId()+"");
+        cargarProveedor();
+    }
 
 
     void cargarProveedor() {
@@ -158,27 +149,19 @@ public class BobinaActivity extends AppCompatActivity {
             public void onSuccess(ArrayList<Proveedor> response) {
 
                 TareaSingleton.SingletonInstance().setProveedores(response);
-                Toast.makeText(getApplicationContext(), "Cargo proveedores",Toast.LENGTH_SHORT).show();
-
+                Log.e("Bobina_activit","cargo proveedores");
                 listProveedores.clear();
-
                 for (Proveedor proveeedores :  TareaSingleton.SingletonInstance().getProveedores()){
-
                     listProveedores.add(proveeedores.getNombre());
                 }
 
-                adapterProveedor = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listProveedores);
-                adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
                 spi_ProveedorNombre.setAdapter(adapterProveedor);
-
             }
 
             @Override
             public void onError(Exception e) {
 
-                TareaSingleton.SingletonInstance().setProveedores(null);
                 Toast.makeText(getApplicationContext(), "No Cargo proveedores Reintentar",Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -189,27 +172,42 @@ public class BobinaActivity extends AppCompatActivity {
     void registrarBobinas(){
 
 
+        int tareaId = tarea_Seleccionada.getTareaId();
+        int ProduccionId = produccionid;
+        int ProveedorId = idproveedorSeleccionado;
+        String ProveedorNombre = proveedorSeleccionado;
+        String Lote = edt_Lote.getText().toString();
+        Float Ancho = parseFloat(edt_Ancho.getText().toString());
+        int TipoMaterialId = 1;
+        String EsAbiertaoCerrada = abiertaocerrada;
+        Float DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
+        String  DeNombreTipoMaterial = "0";
+
         Bobinas bobinacargar = new Bobinas();
 
         bobinacargar.setBobinaId(0);
-        bobinacargar.setTareaId((int) tarea_Seleccionada.getTareaId());
-        bobinacargar.setProduccionId(produccionId);
-        bobinacargar.setProveedorId(idproveedorSeleccionado);
-        bobinacargar.setProveedorNombre(proveedorSeleccionado);
-        bobinacargar.setLote(edt_Lote.getText().toString());
-        bobinacargar.setAncho(parseFloat(edt_Ancho.getText().toString()));
-        bobinacargar.setTipoMaterialId(1);
-        bobinacargar.setEsAbiertaoCerrada(abiertaocerrada);
-        bobinacargar.setDefectuosaKg(parseFloat(edt_DefectuosaKg.getText().toString()));
-        bobinacargar.setNombreTipoMaterial("");
+        bobinacargar.setTareaId(tareaId);
+        bobinacargar.setProduccionId(ProduccionId);
+        bobinacargar.setProveedorId(ProveedorId);
+        bobinacargar.setProveedorNombre(ProveedorNombre);
+        bobinacargar.setLote(Lote);
+        bobinacargar.setAncho(Ancho);
+        bobinacargar.setTipoMaterialId(TipoMaterialId);
+        bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
+        bobinacargar.setDefectuosaKg(DefectuosaKg);
+        bobinacargar.setNombreTipoMaterial(DeNombreTipoMaterial);
 
         httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
+                Log.e("Bobina_activit",response.toString());
+
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result","true");
                 setResult(Activity.RESULT_OK,returnIntent);
+
+                Log.e("Bobina_activit","Registro bobina");
                 finish();
 
             }

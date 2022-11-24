@@ -17,6 +17,13 @@ public class Bobinas implements Serializable {
         private String NombreTipoMaterial;
 
 
+    public String toString(){
+
+        String a = "Bobina: " + getBobinaId() + "\n";
+
+        return a;
+    }
+
         // Getter Methods
 
         public int getBobinaId() {

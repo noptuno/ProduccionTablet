@@ -30,6 +30,7 @@ import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog {
@@ -37,16 +38,15 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     Tareas tarea_Seleccionada;
     Produccion_Lista produccion_actual;
     Bobinas bobinas_actual;
+
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private AdapterBobinas adapterBobina = new AdapterBobinas();
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
-    private TareaSingleton tareaSingleton;
     private HttpLayer httpLayer;
-    private int produccionId;
     private Button btn_cantidad, btn_bobina,btn_scrap, btn_finalizar, btn_cancelar;
-    private Produccion_Lista produccion_Lista_seleccionada;
-    private int LAUNCH_SECOND_ACTIVITY = 1;
+    private int BOBINA_ACTIVITY = 1;
+    RecyclerView recyclerViewCantidad,recyclerViewBobinas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +60,12 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         btn_scrap = findViewById(R.id.produccion_btn_scrap);
         btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
         btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
+
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
+        recyclerViewCantidad = findViewById(R.id.produccion_cantidad_recycler);
+        recyclerViewBobinas = findViewById(R.id.produccion_bobina_recycler);
+
 
         btn_finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +121,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 
                 Intent i = new Intent(Produccion_Activity.this, BobinaActivity.class);
-                startActivityForResult(i, LAUNCH_SECOND_ACTIVITY);
+                startActivityForResult(i, BOBINA_ACTIVITY);
 
             }
         });
@@ -131,14 +135,16 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.produccion_cantidad_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(adapterProduccion);
-        RecyclerView recyclerBobinas = findViewById(R.id.produccion_bobina_recycler);
-        recyclerBobinas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerBobinas.setAdapter(adapterBobina);
 
-        CargarReciclerViews();
+        recyclerViewCantidad.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerViewCantidad.setAdapter(adapterProduccion);
+
+        recyclerViewBobinas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerViewBobinas.setAdapter(adapterBobina);
+
+
+        cargarTareaSeleccionada(); // tarea y produccion_actual y bobina actual
+
 
       //  cambioEstado();
 
@@ -177,12 +183,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == LAUNCH_SECOND_ACTIVITY) {
+        if (requestCode == BOBINA_ACTIVITY) {
             if(resultCode == Activity.RESULT_OK){
 
-                String result=data.getStringExtra("result");
-                ActualizarTarea();
-
+                actualziarTarea2();
             }
 
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -192,31 +196,44 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     } //onAct
 
 
-    void CargarReciclerViews(){
+    void cargarTareaSeleccionada(){
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
-            Log.e("ProduccionActivity","Error Instacia");
-        }
-        Log.e("codigosSeleccionados",tarea_Seleccionada.getTareaId() + " ");
-
-        for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-            produccion_actual = lg;
-            produccionId = lg.getProduccionId();
-            produccion_Lista_seleccionada = lg;
+            Log.e("ERROR","NO TAREA");
         }
 
-        TareaSingleton.SingletonInstance().setProduccionId(produccionId);
+        if (tarea_Seleccionada.getProduccion_Lista().size()>0){
+            for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
+                Log.e("Producción_producion",lg.toString());
+                produccion_actual = lg;
+            }
 
-        for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
-            bobinas_actual = lg;
+
+            TareaSingleton.SingletonInstance().setProduccionId(produccion_actual.getProduccionId());
+            adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
+            adapterProduccion.notifyDataSetChanged();
+
+        }else{
+            Log.e("ERROR","NO PRODUCCION");
+
         }
 
-        adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
+        if (tarea_Seleccionada.getBobinas().size()>0){
+            for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
+                Log.e("Producción_Bobin",lg.toString());
+                bobinas_actual = lg;
+            }
 
-        adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
+            adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
+            adapterBobina.notifyDataSetChanged();
+        }
 
-        adapterProduccion.notifyDataSetChanged();
-        adapterBobina.notifyDataSetChanged();
+      //  TareaSingleton.SingletonInstance().setProduccionId(produccionId);
+
+
+
+
+
     }
 
     @Override
@@ -224,37 +241,37 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         Log.e("ProduccionActivity","Cantidad: " + valorFloat);
 
-        produccion_Lista_seleccionada.setRollosEmpaquetados(valorFloat);
-        produccion_Lista_seleccionada.setRollosFabricdos(valorFloat);
-        produccion_Lista_seleccionada.setMetrosImpresos(valorFloat);
+        produccion_actual.setRollosEmpaquetados(valorFloat);
+        produccion_actual.setRollosFabricdos(valorFloat);
+        produccion_actual.setMetrosImpresos(valorFloat);
 
         Map<String, Object> produccion = new HashMap<>();
-        produccion.put("ProduccionId", produccion_Lista_seleccionada.getProduccionId());
-        produccion.put("PedidoId", produccion_Lista_seleccionada.getPedidoId());
-        produccion.put("TareaId", produccion_Lista_seleccionada.getTareaId());
-        produccion.put("MetrosImpresos", produccion_Lista_seleccionada.getMetrosImpresos());
-        produccion.put("AnchoFinalRolloYGap", produccion_Lista_seleccionada.getAnchoFinalRollo());
-        produccion.put("CantidadPistasImpresas", produccion_Lista_seleccionada.getCantidadPistasImpresas());
-        produccion.put("CantidadTintas", produccion_Lista_seleccionada.getCantidadTintas());
-        produccion.put("AnchoBobinaUsadoCm", produccion_Lista_seleccionada.getAnchoBobinaUsadoCm());
-        produccion.put("ScrapAjusteInicial", produccion_Lista_seleccionada.getScrapAjusteInicial());
-        produccion.put("ScrapAjusteInicial_Unidades", produccion_Lista_seleccionada.getScrapAjusteInicial_Unidades());
-        produccion.put("ScrapAjusteProduccion", produccion_Lista_seleccionada.getScrapAjusteProduccion());
-        produccion.put("ScrapAjusteProduccion_Unidades", produccion_Lista_seleccionada.getScrapAjusteProduccion_Unidades());
-        produccion.put("ObservacionesCierre", produccion_Lista_seleccionada.getObservacionesCierre());
-        produccion.put("RollosFabricdos", produccion_Lista_seleccionada.getRollosFabricdos());
-        produccion.put("AnchoFinalRollo", produccion_Lista_seleccionada.getAnchoFinalRollo());
-        produccion.put("CantidadPistasCortadas", produccion_Lista_seleccionada.getCantidadPistasCortadas());
-        produccion.put("PistasTroquelUsadas", produccion_Lista_seleccionada.getPistasTroquelUsadas());
-        produccion.put("RollosEmpaquetados", produccion_Lista_seleccionada.getRollosEmpaquetados());
-        produccion.put("UsuarioId", produccion_Lista_seleccionada.getUsuarioId());
+        produccion.put("ProduccionId", produccion_actual.getProduccionId());
+        produccion.put("PedidoId", produccion_actual.getPedidoId());
+        produccion.put("TareaId", produccion_actual.getTareaId());
+        produccion.put("MetrosImpresos", produccion_actual.getMetrosImpresos());
+        produccion.put("AnchoFinalRolloYGap", produccion_actual.getAnchoFinalRollo());
+        produccion.put("CantidadPistasImpresas", produccion_actual.getCantidadPistasImpresas());
+        produccion.put("CantidadTintas", produccion_actual.getCantidadTintas());
+        produccion.put("AnchoBobinaUsadoCm", produccion_actual.getAnchoBobinaUsadoCm());
+        produccion.put("ScrapAjusteInicial", produccion_actual.getScrapAjusteInicial());
+        produccion.put("ScrapAjusteInicial_Unidades", produccion_actual.getScrapAjusteInicial_Unidades());
+        produccion.put("ScrapAjusteProduccion", produccion_actual.getScrapAjusteProduccion());
+        produccion.put("ScrapAjusteProduccion_Unidades", produccion_actual.getScrapAjusteProduccion_Unidades());
+        produccion.put("ObservacionesCierre", produccion_actual.getObservacionesCierre());
+        produccion.put("RollosFabricdos", produccion_actual.getRollosFabricdos());
+        produccion.put("AnchoFinalRollo", produccion_actual.getAnchoFinalRollo());
+        produccion.put("CantidadPistasCortadas", produccion_actual.getCantidadPistasCortadas());
+        produccion.put("PistasTroquelUsadas", produccion_actual.getPistasTroquelUsadas());
+        produccion.put("RollosEmpaquetados", produccion_actual.getRollosEmpaquetados());
+        produccion.put("UsuarioId", produccion_actual.getUsuarioId());
 
 
         httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
-                ActualizarTarea();
+                actualziarTarea2();
             }
 
             @Override
@@ -273,37 +290,37 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         Log.e("ProduccionActivity","Scrap: " + cantidad);
 
 
-        produccion_Lista_seleccionada.setScrapAjusteProduccion(cantidad);
-        produccion_Lista_seleccionada.setScrapAjusteProduccion_Unidades(unidad);
+        produccion_actual.setScrapAjusteProduccion(cantidad);
+        produccion_actual.setScrapAjusteProduccion_Unidades(unidad);
 
 
         Map<String, Object> produccion = new HashMap<>();
-        produccion.put("ProduccionId", produccion_Lista_seleccionada.getProduccionId());
-        produccion.put("PedidoId", produccion_Lista_seleccionada.getPedidoId());
-        produccion.put("TareaId", produccion_Lista_seleccionada.getTareaId());
-        produccion.put("MetrosImpresos", produccion_Lista_seleccionada.getMetrosImpresos());
-        produccion.put("AnchoFinalRolloYGap", produccion_Lista_seleccionada.getAnchoFinalRollo());
-        produccion.put("CantidadPistasImpresas", produccion_Lista_seleccionada.getCantidadPistasImpresas());
-        produccion.put("CantidadTintas", produccion_Lista_seleccionada.getCantidadTintas());
-        produccion.put("AnchoBobinaUsadoCm", produccion_Lista_seleccionada.getAnchoBobinaUsadoCm());
-        produccion.put("ScrapAjusteInicial", produccion_Lista_seleccionada.getScrapAjusteInicial());
-        produccion.put("ScrapAjusteInicial_Unidades", produccion_Lista_seleccionada.getScrapAjusteInicial_Unidades());
-        produccion.put("ScrapAjusteProduccion", produccion_Lista_seleccionada.getScrapAjusteProduccion());
-        produccion.put("ScrapAjusteProduccion_Unidades", produccion_Lista_seleccionada.getScrapAjusteProduccion_Unidades());
-        produccion.put("ObservacionesCierre", produccion_Lista_seleccionada.getObservacionesCierre());
-        produccion.put("RollosFabricdos", produccion_Lista_seleccionada.getRollosFabricdos());
-        produccion.put("AnchoFinalRollo", produccion_Lista_seleccionada.getAnchoFinalRollo());
-        produccion.put("CantidadPistasCortadas", produccion_Lista_seleccionada.getCantidadPistasCortadas());
-        produccion.put("PistasTroquelUsadas", produccion_Lista_seleccionada.getPistasTroquelUsadas());
-        produccion.put("RollosEmpaquetados", produccion_Lista_seleccionada.getRollosEmpaquetados());
-        produccion.put("UsuarioId", produccion_Lista_seleccionada.getUsuarioId());
+        produccion.put("ProduccionId", produccion_actual.getProduccionId());
+        produccion.put("PedidoId", produccion_actual.getPedidoId());
+        produccion.put("TareaId", produccion_actual.getTareaId());
+        produccion.put("MetrosImpresos", produccion_actual.getMetrosImpresos());
+        produccion.put("AnchoFinalRolloYGap", produccion_actual.getAnchoFinalRollo());
+        produccion.put("CantidadPistasImpresas", produccion_actual.getCantidadPistasImpresas());
+        produccion.put("CantidadTintas", produccion_actual.getCantidadTintas());
+        produccion.put("AnchoBobinaUsadoCm", produccion_actual.getAnchoBobinaUsadoCm());
+        produccion.put("ScrapAjusteInicial", produccion_actual.getScrapAjusteInicial());
+        produccion.put("ScrapAjusteInicial_Unidades", produccion_actual.getScrapAjusteInicial_Unidades());
+        produccion.put("ScrapAjusteProduccion", produccion_actual.getScrapAjusteProduccion());
+        produccion.put("ScrapAjusteProduccion_Unidades", produccion_actual.getScrapAjusteProduccion_Unidades());
+        produccion.put("ObservacionesCierre", produccion_actual.getObservacionesCierre());
+        produccion.put("RollosFabricdos", produccion_actual.getRollosFabricdos());
+        produccion.put("AnchoFinalRollo", produccion_actual.getAnchoFinalRollo());
+        produccion.put("CantidadPistasCortadas", produccion_actual.getCantidadPistasCortadas());
+        produccion.put("PistasTroquelUsadas", produccion_actual.getPistasTroquelUsadas());
+        produccion.put("RollosEmpaquetados", produccion_actual.getRollosEmpaquetados());
+        produccion.put("UsuarioId", produccion_actual.getUsuarioId());
 
 
         httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
-                ActualizarTarea();
+                actualziarTarea2();
             }
 
             @Override
@@ -315,26 +332,56 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         });
     }
 
+private void actualziarTarea5(){
+
+    dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+    httpLayer.getTareas("0/0",new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+        @Override
+        public void onSuccess(List<Tareas> response) {
 
 
-    private void ActualizarTarea() {
+            dialogProgress.dismiss();
+
+            for (Tareas lg : response) {
+
+                if (lg.getPedidoId() ==tarea_Seleccionada.getPedidoId() && lg.getTareaId() == tarea_Seleccionada.getTareaId() ){
+
+                    TareaSingleton.SingletonInstance().setTarea(lg);
+                    cargarTareaSeleccionada();
+                    break;
+                }
+
+                Log.e("Datos_tareas",lg.toString());
+            }
+
+        }
+        @Override
+        public void onError(Exception e) {
+
+            Log.e("TareaActivity",e.toString());
+            dialogProgress.dismiss();
+        }
+    });
+}
+
+    private void actualziarTarea2() {
 
         //todo registrar id pedido y tarea id
 
-
         String params = "/"+tarea_Seleccionada.getPedidoId()+"/"+tarea_Seleccionada.getTareaId();
-
 
         Log.e("Produccion_parametros",params);
 
+        dialogProgress = ProgressHUD.show(Produccion_Activity.this);
         httpLayer.getTareaEspecifica(params, new HttpLayer.HttpLayerResponses<Tareas>() {
             @Override
             public void onSuccess(Tareas response) {
 
                 Log.e("ProduccionActivity","actualzandoTarea");
 
-              TareaSingleton.SingletonInstance().setTarea(response);
-              CargarReciclerViews();
+                TareaSingleton.SingletonInstance().setTarea(response);
+                cargarTareaSeleccionada();
+                dialogProgress.dismiss();
 
             }
 
@@ -342,7 +389,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             public void onError(Exception e) {
 
                 Log.e("ProduccionActivity","Error Actualziar Tarea");
-
+                dialogProgress.dismiss();
             }
         });
     }

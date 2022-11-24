@@ -2,6 +2,7 @@ package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,7 +63,7 @@ public class Login_Activity extends AppCompatActivity {
     private RequestQueue requestQueue;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private String nombreMaquina;
-    private String maquinaId;
+    private String maquinaId,tipomaquinaid;
     private SharedPreferences pref;
     private boolean permisosEscritura;
     private ProgressHUD dialogProgress;
@@ -119,7 +120,6 @@ public class Login_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
 
             }
         });
@@ -132,7 +132,6 @@ public class Login_Activity extends AppCompatActivity {
         if (!txt_nombreImprenta.getText().equals("NO")){
 
             Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-            intent.putExtra("MaquinaId", maquinaId);
             startActivity(intent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
@@ -224,10 +223,21 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     private void cargarMaquinas() {
+
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
-        maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
+        maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
+        tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
         txt_nombreImprenta.setText(nombreMaquina);
+
+        if (!tipomaquinaid.equals("NO")){
+            TareaSingleton.SingletonInstance().setTipoMaquina(tipomaquinaid);
+        }else{
+            Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        }
+
 
     }
 

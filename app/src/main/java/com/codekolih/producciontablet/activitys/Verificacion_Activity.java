@@ -110,13 +110,20 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+            finish();
+            //cambio de estado
             }
         });
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+/*
+                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+*/
 
 
                 String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
@@ -171,6 +178,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                 });
 
             }
+
         });
 
         btn_verpdf.setOnClickListener(new View.OnClickListener() {
@@ -202,12 +210,10 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         if (tarea_Seleccionada.getProduccion_Lista().size()>0){
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-                Log.e("Datos_Producción",produccion_actual.toString());
+                Log.e("Verificacion_Producción",lg.toString());
                 produccion_actual = lg;
             }
         }
-
-
     }
 
     private void cambioEstado() {

@@ -236,13 +236,11 @@
         android:id="@+id/linearLayoutVerificar"
         android:layout_width="400dp"
         android:layout_height="267dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayotCargarDatos"
-        app:layout_constraintStart_toEndOf="@+id/linearLayoutDatos"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17">
 
         <LinearLayout
@@ -343,10 +341,10 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutVerificar"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutDatos"
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <LinearLayout
@@ -593,7 +591,7 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayotCargarDatos"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/linearLayotCargarDatos"
         app:layout_constraintTop_toTopOf="parent" />
@@ -610,7 +608,7 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayoutVerificar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/linearLayoutVerificar"
         app:layout_constraintTop_toTopOf="parent" />
 

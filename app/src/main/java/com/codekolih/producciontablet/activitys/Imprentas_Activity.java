@@ -78,9 +78,6 @@ public class Imprentas_Activity extends AppCompatActivity {
                 editor.putString(PREF_PRODUCCION_MAQUINATIPOID, ""+note.getMaquinaTipoId());
                 editor.apply();
 
-
-
-
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

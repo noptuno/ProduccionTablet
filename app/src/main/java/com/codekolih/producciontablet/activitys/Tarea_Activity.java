@@ -105,7 +105,9 @@ public class Tarea_Activity extends AppCompatActivity {
                 dialogProgress.dismiss();
 
                 for (Tareas lg : response) {
-                    Log.e("Datos_tareas",lg.toString());
+                   // Log.e("Datos_tareas",lg.toString());
+                    Log.e("Tareas",lg.getTareaId()+" Cantidad produccion"+ lg.getProduccion_Lista().size() + " cantidad bobinas "+ lg.getBobinas().size());
+
                 }
 
             }
