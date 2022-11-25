@@ -3,6 +3,7 @@ package com.codekolih.producciontablet.aciones;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
@@ -61,6 +62,7 @@ public class TareaSingleton {
     }
 
     public ArrayList<Proveedor> getProveedores() {
+        Log.e("Class","GetProveedores : " + proveedores.size());
         return proveedores;
     }
 
@@ -80,15 +82,20 @@ public class TareaSingleton {
     }
 
     public int getProduccionId() {
+        Log.e("Class","GetProduccionid : " + produccionId);
         return produccionId;
     }
 
     public void setProduccionId(int produccionId) {
         this.produccionId = produccionId;
+
+        Log.e("Class","SetProduccionid : " + produccionId);
     }
 
     public Tareas setTarea(Tareas tarea) {
         this.tareaInstanciada = tarea;
+        Log.e("Class","SetTarea : " + tarea.getTareaId());
+
         return this.tareaInstanciada;
     }
 
@@ -97,7 +104,7 @@ public class TareaSingleton {
         if (tareaInstanciada==null){
             tareaInstanciada = null;
         }
-
+        Log.e("Class","GetTarea : " + tareaInstanciada.getTareaId());
         return this.tareaInstanciada;
     }
 

@@ -112,7 +112,7 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
 
         public void bind(final Tareas tarea) {
 
-            Log.e("TAREA",tarea.toString());
+          //  Log.e("cargoRecicler",tarea.toString());
 
           //  Random random = new Random();
 

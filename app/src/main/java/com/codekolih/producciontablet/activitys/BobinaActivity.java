@@ -49,23 +49,18 @@ public class BobinaActivity extends AppCompatActivity {
     Tareas tarea_Seleccionada;
     private HttpLayer httpLayer;
     Button btn_guardar;
-
     ArrayList<String> listProveedores;
     ArrayList<Proveedor> proveedores = new ArrayList<>();
-
     String proveedorSeleccionado;
     int idproveedorSeleccionado = 1;
     String abiertaocerrada = "A";
-
-
     Spinner  spi_ProveedorNombre,spi_EsAbiertaoCerrada;
     EditText edt_Lote;
     EditText edt_Ancho;
     EditText edt_DefectuosaKg;
-int produccionid;
-
+    int produccionid;
     ArrayAdapter<String> adapterProveedor;
-
+    private ProgressHUD dialogProgress;
 
 
     @Override
@@ -83,12 +78,9 @@ int produccionid;
         edt_Ancho= findViewById(R.id.bobina_edt_Ancho);
         edt_DefectuosaKg= findViewById(R.id.bobina_edt_DefectuosaKg);
 
-        listProveedores = new ArrayList<>();
-        adapterProveedor = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listProveedores);
-        adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+
 
         produccionid =  TareaSingleton.SingletonInstance().getProduccionId();
-
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,24 +136,28 @@ int produccionid;
 
     void cargarProveedor() {
 
+        dialogProgress = ProgressHUD.show(BobinaActivity.this);
+
         httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
             @Override
             public void onSuccess(ArrayList<Proveedor> response) {
 
-                TareaSingleton.SingletonInstance().setProveedores(response);
-                Log.e("Bobina_activit","cargo proveedores");
-                listProveedores.clear();
-                for (Proveedor proveeedores :  TareaSingleton.SingletonInstance().getProveedores()){
+                listProveedores = new ArrayList<>();
+
+                for (Proveedor proveeedores :  response){
                     listProveedores.add(proveeedores.getNombre());
                 }
-
+                adapterProveedor = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listProveedores);
+                adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
                 spi_ProveedorNombre.setAdapter(adapterProveedor);
+                dialogProgress.dismiss();
             }
 
             @Override
             public void onError(Exception e) {
 
                 Toast.makeText(getApplicationContext(), "No Cargo proveedores Reintentar",Toast.LENGTH_SHORT).show();
+                dialogProgress.dismiss();
             }
         });
 
@@ -215,10 +211,6 @@ int produccionid;
             @Override
             public void onError(Exception e) {
 
-                Toast.makeText(getApplicationContext(), "No Cargo Bobina Reintentar",Toast.LENGTH_SHORT).show();
-                Intent returnIntent = new Intent();
-                setResult(Activity.RESULT_CANCELED, returnIntent);
-                finish();
             }
         });
 

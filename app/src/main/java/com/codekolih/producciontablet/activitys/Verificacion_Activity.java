@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,10 +30,12 @@ import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Verificacion_Activity extends AppCompatActivity {
@@ -39,12 +43,9 @@ public class Verificacion_Activity extends AppCompatActivity {
     Tareas tarea_Seleccionada;
     Produccion_Lista produccion_actual;
     private ProgressHUD dialogProgress;
-
     private Boolean pdfAbierto = false;
     private HttpLayer httpLayer;
-
     private TextView  txt_imprenta,txt_usuario,txt_fecha,txt_hora;
-
     private EditText
             edt_verificacion_AnchoFinalRolloYGap,
             edt_verificacion_CantidadPistasImpresas,
@@ -75,7 +76,7 @@ public class Verificacion_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificacion);
-
+        Log.e("VrerivicacionActivity","INICIO");
         variablesFind();
 
         httpLayer = new HttpLayer(this);
@@ -110,7 +111,34 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-            finish();
+                AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
+                build4.setMessage("¿Desea cancelar el trabajo? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        Map<String, Object> estado = new HashMap<>();
+                        estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                        estado.put("EstadoId", "A1");
+                        estado.put("TipoEstadoId","F" );
+
+
+                       // cambioEstado(estado);
+                        finish();
+
+
+                    }
+
+
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                AlertDialog alertDialog4 = build4.create();
+                alertDialog4.show();
+
             //cambio de estado
             }
         });
@@ -119,6 +147,27 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+                AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
+                build4.setMessage("¿Desea avanzar a produccion? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        cargarVerificacion();
+
+                    }
+
+
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                AlertDialog alertDialog4 = build4.create();
+                alertDialog4.show();
+
+
 /*
                 Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
                 startActivity(intent);
@@ -126,56 +175,6 @@ public class Verificacion_Activity extends AppCompatActivity {
 */
 
 
-                String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
-                String CantidadPistasImpresas = edt_verificacion_CantidadPistasImpresas.getText().toString();
-                String CantidadTintas = edt_verificacion_CantidadTintas.getText().toString();
-                String ScrapAjusteInicial = edt_verificacion_ScrapAjusteInicial.getText().toString();
-                String AnchoFinalRollo = edt_verificacion_AnchoFinalRollo.getText().toString();
-                String CantidadPistasCortadas = edt_verificacion_CantidadPistasCortadas.getText().toString();
-                String PistasTroquelUsadas = edt_verificacion_PistasTroquelUsadas.getText().toString();
-
-
-                Map<String, Object> newproduccion = new HashMap<>();
-                newproduccion.put("ProduccionId", 0);
-                newproduccion.put("PedidoId", tarea_Seleccionada.getPedidoId());
-                newproduccion.put("TareaId", tarea_Seleccionada.getTareaId());
-                newproduccion.put("MetrosImpresos", 0);
-                newproduccion.put("AnchoFinalRolloYGap", AnchoFinalRolloYGap);
-                newproduccion.put("CantidadPistasImpresas", CantidadPistasImpresas);
-                newproduccion.put("CantidadTintas",CantidadTintas );
-                newproduccion.put("AnchoBobinaUsadoCm", 0);
-                newproduccion.put("ScrapAjusteInicial",  ScrapAjusteInicial );
-                newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
-                newproduccion.put("ScrapAjusteProduccion", 0);
-                newproduccion.put("ScrapAjusteProduccion_Unidades", "KG");
-                newproduccion.put("ObservacionesCierre", "Sin cierre");
-                newproduccion.put("RollosFabricdos", 0);
-                newproduccion.put("AnchoFinalRollo", AnchoFinalRollo);
-                newproduccion.put("CantidadPistasCortadas", CantidadPistasCortadas);
-                newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
-                newproduccion.put("RollosEmpaquetados", 0);
-                newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
-
-
-                httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
-                    @Override
-                    public void onSuccess(JSONObject response) {
-
-                        Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-                        Toast.makeText(getApplicationContext(), "Se dio de alta",Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-
-                        Toast.makeText(getApplicationContext(), "No Cargo Scrap Reintentar",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
 
             }
 
@@ -202,6 +201,97 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     }
 
+    private void cargarVerificacion() {
+        String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
+        String CantidadPistasImpresas = edt_verificacion_CantidadPistasImpresas.getText().toString();
+        String CantidadTintas = edt_verificacion_CantidadTintas.getText().toString();
+        String ScrapAjusteInicial = edt_verificacion_ScrapAjusteInicial.getText().toString();
+        String AnchoFinalRollo = edt_verificacion_AnchoFinalRollo.getText().toString();
+        String CantidadPistasCortadas = edt_verificacion_CantidadPistasCortadas.getText().toString();
+        String PistasTroquelUsadas = edt_verificacion_PistasTroquelUsadas.getText().toString();
+
+
+        Map<String, Object> newproduccion = new HashMap<>();
+        newproduccion.put("ProduccionId", 0);
+        newproduccion.put("PedidoId", tarea_Seleccionada.getPedidoId());
+        newproduccion.put("TareaId", tarea_Seleccionada.getTareaId());
+        newproduccion.put("MetrosImpresos", 0);
+        newproduccion.put("AnchoFinalRolloYGap", AnchoFinalRolloYGap);
+        newproduccion.put("CantidadPistasImpresas", CantidadPistasImpresas);
+        newproduccion.put("CantidadTintas",CantidadTintas );
+        newproduccion.put("AnchoBobinaUsadoCm", 0);
+        newproduccion.put("ScrapAjusteInicial",  ScrapAjusteInicial );
+        newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
+        newproduccion.put("ScrapAjusteProduccion", 0);
+        newproduccion.put("ScrapAjusteProduccion_Unidades", "KG");
+        newproduccion.put("ObservacionesCierre", "Sin cierre");
+        newproduccion.put("RollosFabricdos", 0);
+        newproduccion.put("AnchoFinalRollo", AnchoFinalRollo);
+        newproduccion.put("CantidadPistasCortadas", CantidadPistasCortadas);
+        newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
+        newproduccion.put("RollosEmpaquetados", 0);
+        newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
+
+        httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.e("http",response.toString());
+                actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                Log.e("http_altaproduccion","Fallo");
+            }
+        });
+    }
+
+    private void actualziarTarea(int p, int t) {
+
+        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+        String params = "/"+p+"/"+ t;
+
+        httpLayer.getTareas("0/0",new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+            @Override
+            public void onSuccess(List<Tareas> response) {
+
+                for (Tareas tareatemp : response) {
+
+                    if (tareatemp.getPedidoId()==p && tareatemp.getTareaId()==t){
+
+
+                        TareaSingleton.SingletonInstance().setTarea(tareatemp);
+
+                        break;
+                    }
+
+                }
+
+                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                dialogProgress.dismiss();
+
+                Map<String, Object> estado = new HashMap<>();
+                estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                estado.put("EstadoId", "P1");
+                estado.put("TipoEstadoId","I" );
+
+                //cambioEstado(estado);
+                finish();
+
+            }
+            @Override
+            public void onError(Exception e) {
+
+                Log.e("error_verificarActvity",e.toString());
+                dialogProgress.dismiss();
+            }
+        });
+    }
+
     private void cargarTareaSeleccionada() {
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
@@ -210,34 +300,27 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         if (tarea_Seleccionada.getProduccion_Lista().size()>0){
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-                Log.e("Verificacion_Producción",lg.toString());
+                Log.e("Activity",lg.toString());
                 produccion_actual = lg;
             }
         }
     }
 
-    private void cambioEstado() {
+    private void cambioEstado( Map<String, Object> estado ) {
 
-        Map<String, Object> estado = new HashMap<>();
-        estado.put("TareaId", tarea_Seleccionada.getTareaId());
-        estado.put("EstadoId", "A1");
-        estado.put("TipoEstadoId","I" );
-
-
-        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
 
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
                 Log.e("Verificacion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
-                dialogProgress.dismiss();
+
             }
 
             @Override
             public void onError(Exception e) {
                 Log.e("Verificacion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
-                dialogProgress.dismiss();
+
             }
         });
 

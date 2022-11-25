@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".activitys.Produccion_Activity">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/list_datos_pedido"
+        android:layout_width="400dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/produccion_btn_cancelar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
@@ -122,42 +134,31 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="700dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/produccion_bobina_recycler"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"></LinearLayout>
-
     <Button
         android:id="@+id/produccion_btn_scrap"
         android:layout_width="150dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/fondo"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fondo2"
         android:text="Scrap"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:icon="@drawable/ic_agregar"
         app:iconTint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/produccion_cantidad_recycler"
+        app:layout_constraintStart_toEndOf="@+id/include" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/produccion_cantidad_recycler"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/produccion_btn_cantidad">
+        app:layout_constraintStart_toEndOf="@+id/produccion_btn_cantidad"
+        app:layout_constraintTop_toBottomOf="@+id/textView25">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -166,68 +167,126 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/produccion_btn_finalziar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/produccion_btn_bobina" />
+        app:layout_constraintStart_toEndOf="@+id/produccion_btn_bobina"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
     <Button
         android:id="@+id/produccion_btn_cantidad"
         android:layout_width="150dp"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/fondo"
-        android:text="Agregar cantidad"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/fondo2"
+        android:text="Cantidad"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:icon="@drawable/ic_agregar"
         app:iconTint="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/include"
+        app:layout_constraintTop_toTopOf="@+id/produccion_cantidad_recycler" />
 
     <Button
         android:id="@+id/produccion_btn_bobina"
         android:layout_width="150dp"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/fondo"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/fondo2"
         android:text="Agregar Bobina"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:icon="@drawable/ic_agregar"
         app:iconTint="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/produccion_cantidad_recycler" />
+        app:layout_constraintBottom_toBottomOf="@+id/produccion_bobina_recycler"
+        app:layout_constraintStart_toEndOf="@+id/include"
+        app:layout_constraintTop_toTopOf="@+id/produccion_bobina_recycler" />
 
     <Button
         android:id="@+id/produccion_btn_finalziar"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:text="FINALZIAR"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/produccion_btn_cancelar"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:text="CANCELAR"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Datos del Pedido"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Lista Produccion"
+        app:layout_constraintStart_toStartOf="@+id/produccion_cantidad_recycler"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Lista Bobinas"
+        app:layout_constraintStart_toStartOf="@+id/produccion_bobina_recycler"
+        app:layout_constraintTop_toBottomOf="@+id/produccion_cantidad_recycler" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Cantidad Total:"
+        app:layout_constraintBottom_toTopOf="@+id/produccion_cantidad_recycler"
+        app:layout_constraintEnd_toStartOf="@+id/textView33" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="0,0"
+        app:layout_constraintBottom_toBottomOf="@+id/textView27"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView27" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

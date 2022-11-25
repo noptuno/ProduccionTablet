@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,7 +50,7 @@ public class Tarea_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tareas);
-
+        Log.e("TareaActivity","INICIO");
         //declaraciones
 
         requestQueue = Volley.newRequestQueue(this);
@@ -79,11 +81,33 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note) {
 
-                TareaSingleton.SingletonInstance().setTarea(note);
-                Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
-                intent.putExtra("tarea", note);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
+                build4.setMessage("¿Desea Seleccionar la Tarea? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        TareaSingleton.SingletonInstance().setTarea(note);
+                        Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
+                        intent.putExtra("tarea", note);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+
+                    }
+
+
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                AlertDialog alertDialog4 = build4.create();
+                alertDialog4.show();
+
+
+
 
             }
         });
@@ -106,7 +130,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 for (Tareas lg : response) {
                    // Log.e("Datos_tareas",lg.toString());
-                    Log.e("Tareas",lg.getTareaId()+" Cantidad produccion"+ lg.getProduccion_Lista().size() + " cantidad bobinas "+ lg.getBobinas().size());
+                    Log.e("ListTareas","Cod: " + lg.getTareaId()+" Cant produccion: "+ lg.getProduccion_Lista().size() + " cantbobinas: "+ lg.getBobinas().size());
 
                 }
 

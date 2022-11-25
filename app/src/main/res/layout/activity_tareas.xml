@@ -8,14 +8,14 @@
 
     <Button
         android:id="@+id/tarea_btn_cerraSesion"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/fondo"
         android:text="Cerrar Sesion"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
