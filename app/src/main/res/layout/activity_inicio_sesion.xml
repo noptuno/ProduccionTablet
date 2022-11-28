@@ -6,82 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".activitys.Login_Activity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_txt_nombreimprenta"
-        app:srcCompat="@drawable/ic_baseline_supervised_user_circle_24" />
+        app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta">
 
-    <Button
-        android:id="@+id/login_btn_IniciarSesion"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/fondo"
-        android:text="Iniciar Sesion"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/login_edt_password"
-        app:layout_constraintStart_toStartOf="@+id/login_edt_password"
-        app:layout_constraintTop_toBottomOf="@+id/login_edt_password" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            app:srcCompat="@drawable/ic_baseline_supervised_user_circle_24" />
 
-    <AutoCompleteTextView
-        android:id="@+id/login_edt_login"
-        android:layout_width="400dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:text="RUBACH"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <AutoCompleteTextView
+            android:id="@+id/login_edt_login"
+            android:layout_width="400dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:autoText="true"
+            android:inputType="text|textCapWords"
+            android:selectAllOnFocus="true"
+            android:text="RUBACH" />
 
-    <EditText
+        <EditText
 
-        android:id="@+id/login_edt_password"
-        android:layout_width="400dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:text="1234567"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="@+id/login_edt_login"
-        app:layout_constraintStart_toStartOf="@+id/login_edt_login"
-        app:layout_constraintTop_toBottomOf="@+id/login_edt_login" />
+            android:id="@+id/login_edt_password"
+            android:layout_width="400dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:selectAllOnFocus="true"
+            android:text="1234567"
+            android:textSize="34sp" />
+
+        <Button
+            android:id="@+id/login_btn_IniciarSesion"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/fondo"
+            android:text="Iniciar Sesion"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/login_txt_nombreimprenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/teal_700"
         android:padding="5dp"
         android:text="NO"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/login_btn_cargarImprenta"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@color/teal_700"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:padding="5dp"
         android:tint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
 
     <Space
@@ -93,18 +99,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta" />
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#009688"
-        android:padding="5dp"
-        android:text="     Imprenta:      "
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

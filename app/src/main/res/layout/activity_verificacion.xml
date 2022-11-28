@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutDatos"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -18,6 +18,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16">
 
         <LinearLayout
+            android:id="@+id/ly_NroDeSobre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
@@ -27,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="SERIE Y n"
+                android:text="SERIE"
                 android:textSize="12sp" />
 
             <TextView
@@ -41,7 +42,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:orientation="horizontal">
 
@@ -55,12 +56,12 @@
             <TextView
                 android:id="@+id/verificacion_txt_EtiquetasEnBanda"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="textPersonName"
-                android:minHeight="48dp"
                 android:text="0"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -79,12 +80,12 @@
             <TextView
                 android:id="@+id/verificacion_txt_Cilindro"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
-                android:minHeight="48dp"
                 android:text="0"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -103,12 +104,12 @@
             <TextView
                 android:id="@+id/verificacion_txt_Z_AltoMasGap"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="textPersonName"
-                android:minHeight="48dp"
                 android:text="0"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -127,11 +128,12 @@
             <TextView
                 android:id="@+id/verificacion_txt_EtiquetasPorRollo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="textPersonName"
                 android:text="0"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -154,7 +156,8 @@
                 android:layout_weight="1"
                 android:inputType="textPersonName"
                 android:text="KG"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -176,9 +179,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="number"
-                android:minHeight="48dp"
                 android:text="0"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -200,9 +203,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="textPersonName"
-                android:minHeight="48dp"
                 android:text="0"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -224,9 +227,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="textPersonName"
-                android:minHeight="48dp"
                 android:text="datos"
-                android:textSize="18sp" />
+                android:textSize="14sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
 
@@ -256,7 +259,8 @@
                 android:layout_weight="1"
                 android:switchTextAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:text="VERIFICACION"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -271,7 +275,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="ESPECIFICACIONES OK?"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -286,7 +291,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="ESTADO DE LINER"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -301,7 +307,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TROQUELADO"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -316,7 +323,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="FORMA DE BOBINA"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -331,7 +339,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TIPO PAPEL Y BUJE"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
     </LinearLayout>
@@ -348,6 +357,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <LinearLayout
+            android:id="@+id/ly_AnchoFinalRolloYGap"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -368,7 +378,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textSize="20sp"
@@ -376,6 +386,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_CantidadPistasImpresas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -395,7 +406,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
@@ -403,10 +414,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_CantidadTintas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/textView103"
@@ -430,6 +443,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_ScrapAjusteInicial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -450,7 +464,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
@@ -458,6 +472,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_UnidadIdScrapInicial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -480,6 +495,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_AnchoFinalRollo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -499,7 +515,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
@@ -507,6 +523,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_CantidadPistasCortadas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -526,7 +543,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
@@ -534,6 +551,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_PistasTroquelUsadas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -553,7 +571,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"

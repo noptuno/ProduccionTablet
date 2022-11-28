@@ -1,5 +1,10 @@
 package com.codekolih.producciontablet.activitys;
 
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,14 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,6 +34,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
+import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
@@ -33,9 +42,12 @@ import com.codekolih.producciontablet.dialogs.PdfActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Verificacion_Activity extends AppCompatActivity {
@@ -55,6 +67,19 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_verificacion_CantidadPistasCortadas,
             edt_verificacion_PistasTroquelUsadas;
     private Spinner spi_verificacion_UnidadIdScrapInicial;
+
+    private LinearLayout
+            ly_AnchoFinalRolloYGap,
+            ly_CantidadPistasImpresas,
+            ly_CantidadTintas,
+            ly_ScrapAjusteInicial,
+            ly_AnchoFinalRollo,
+            ly_CantidadPistasCortadas,
+            ly_PistasTroquelUsadas,
+            ly_UnidadIdScrapInicial;
+
+
+
     private Switch uno,dos,tres,cuatro,cinco,seis;
     private TextView
             txt_verificacion_txt_NroDeSobre,
@@ -69,7 +94,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     Button btn_guardar, btn_verpdf, btn_cancelar;
     String UnidadIdScrapInicial= "KG";
-
+    private SharedPreferences pref;
     private boolean permisosaceptados = false;
 
     @Override
@@ -78,6 +103,10 @@ public class Verificacion_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_verificacion);
         Log.e("VrerivicacionActivity","INICIO");
         variablesFind();
+
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+        txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
+        txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
 
         httpLayer = new HttpLayer(this);
 
@@ -194,14 +223,36 @@ public class Verificacion_Activity extends AppCompatActivity {
         });
 
         OcultarVariables();
-
+        cargarfecha();
+       // CargarPedido();
 
         //todo lo desactive por ahora
        // cambioEstado();
 
     }
 
+    private void CargarPedido() {
+
+    String params = "/"+tarea_Seleccionada.getPedidoId();
+
+            httpLayer.getPedido(params, new HttpLayer.HttpLayerResponses<Pedido>() {
+                @Override
+                public void onSuccess(Pedido response) {
+                    Log.e("http",response.toString());
+
+
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Log.e("http",e.toString());
+                }
+            });
+
+    }
+
     private void cargarVerificacion() {
+
         String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
         String CantidadPistasImpresas = edt_verificacion_CantidadPistasImpresas.getText().toString();
         String CantidadTintas = edt_verificacion_CantidadTintas.getText().toString();
@@ -247,6 +298,21 @@ public class Verificacion_Activity extends AppCompatActivity {
             }
         });
     }
+
+    private void cargarfecha() {
+
+        SimpleDateFormat dateFormatcorta = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat horaFormatcorta = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        String fechaCortaLocal = dateFormatcorta.format(date);
+        String horaCortaLocal = horaFormatcorta.format(date);
+
+        txt_fecha.setText(fechaCortaLocal);
+        txt_hora.setText(horaCortaLocal);
+
+
+    }
+
 
     private void actualziarTarea(int p, int t) {
 
@@ -331,7 +397,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_imprenta = findViewById(R.id.verificacion_txt_imprenta);
         txt_usuario= findViewById(R.id.verificacion_txt_usuario);
         txt_fecha= findViewById(R.id.verificacion_txt_fecha);
-        txt_hora= findViewById(R.id.txt_tarea_hora);
+        txt_hora= findViewById(R.id.verificacion_txt_hora);
 
 
         btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
@@ -344,6 +410,18 @@ public class Verificacion_Activity extends AppCompatActivity {
         cuatro= findViewById(R.id.switch4);
         cinco= findViewById(R.id.switch5);
         seis= findViewById(R.id.switch6);
+
+
+        ly_AnchoFinalRolloYGap= findViewById(R.id.ly_AnchoFinalRolloYGap);
+        ly_CantidadPistasImpresas= findViewById(R.id.ly_CantidadPistasImpresas);
+        ly_CantidadTintas= findViewById(R.id.ly_CantidadTintas);
+        ly_ScrapAjusteInicial= findViewById(R.id.ly_ScrapAjusteInicial);
+        ly_AnchoFinalRollo= findViewById(R.id.ly_AnchoFinalRollo);
+        ly_CantidadPistasCortadas= findViewById(R.id.ly_CantidadPistasCortadas);
+        ly_PistasTroquelUsadas= findViewById(R.id.ly_PistasTroquelUsadas);
+        ly_UnidadIdScrapInicial= findViewById(R.id.ly_UnidadIdScrapInicial);
+
+
 
         edt_verificacion_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
         edt_verificacion_CantidadPistasImpresas= findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
@@ -388,58 +466,37 @@ public class Verificacion_Activity extends AppCompatActivity {
                 cinco.setVisibility(parseInt(entry.getValue()));
             }
             if ("seis".toString().equals(entry.getKey())){
+
+
                 seis.setVisibility(parseInt(entry.getValue()));
+
+
             }
-            if ("edt_verificacion_AnchoFinalRolloYGap".equals(entry.getKey())){
-                edt_verificacion_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
+
+
+            if ("AnchoFinalRolloYGap".equals(entry.getKey())){
+                ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
             }
-            if ("edt_verificacion_CantidadPistasImpresas".equals(entry.getKey())){
-                edt_verificacion_CantidadPistasImpresas.setVisibility(parseInt(entry.getValue()));
+            if ("CantidadPistasImpresas".equals(entry.getKey())){
+                ly_CantidadPistasImpresas.setVisibility(parseInt(entry.getValue()));
             }
-            if ("edt_verificacion_CantidadTintas".equals(entry.getKey())){
-                edt_verificacion_CantidadTintas.setVisibility(parseInt(entry.getValue()));
+            if ("CantidadTintas".equals(entry.getKey())){
+                ly_CantidadTintas.setVisibility(parseInt(entry.getValue()));
             }
-            if ("edt_verificacion_ScrapAjusteInicial".equals(entry.getKey())){
-                edt_verificacion_ScrapAjusteInicial.setVisibility(parseInt(entry.getValue()));
+            if ("ScrapAjusteInicial".equals(entry.getKey())){
+                ly_ScrapAjusteInicial.setVisibility(parseInt(entry.getValue()));
             }
-            if ("edt_verificacion_UnidadIdScrapInicial".equals(entry.getKey())){
-                spi_verificacion_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));
+            if ("UnidadIdScrapInicial".equals(entry.getKey())){
+                ly_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));
             }
-            if ("edt_verificacion_AnchoFinalRollo".equals(entry.getKey())){
-                edt_verificacion_AnchoFinalRollo.setVisibility(parseInt(entry.getValue()));
+            if ("AnchoFinalRollo".equals(entry.getKey())){
+                ly_AnchoFinalRollo.setVisibility(parseInt(entry.getValue()));
             }
-            if ("edt_verificacion_CantidadPistasCortadas".equals(entry.getKey())){
-                edt_verificacion_CantidadPistasCortadas.setVisibility(parseInt(entry.getValue()));
+            if ("CantidadPistasCortadas".equals(entry.getKey())){
+                ly_CantidadPistasCortadas.setVisibility(parseInt(entry.getValue()));
             }
-            if ("edt_verificacion_PistasTroquelUsadas".equals(entry.getKey())){
-                edt_verificacion_PistasTroquelUsadas.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_NroDeSobre".equals(entry.getKey())){
-                txt_verificacion_txt_NroDeSobre.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("verificacion_txt_Descripcion".equals(entry.getKey())){
-                txt_verificacion_txt_Descripcion.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_MetrosAImprimir".equals(entry.getKey())){
-                txt_verificacion_txt_MetrosAImprimir.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_MetrosPorRollo".equals(entry.getKey())){
-                txt_verificacion_txt_MetrosPorRollo.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_Z_AltoMasGap".equals(entry.getKey())){
-                txt_verificacion_txt_Z_AltoMasGap.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_Cilindro".equals(entry.getKey())){
-                txt_verificacion_txt_Cilindro.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_Pistas".equals(entry.getKey())){
-                txt_verificacion_txt_Pistas.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_EtiquetasEnBanda".equals(entry.getKey())){
-                txt_verificacion_txt_EtiquetasEnBanda.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("txt_verificacion_txt_EtiquetasPorRollo".equals(entry.getKey())){
-                txt_verificacion_txt_EtiquetasPorRollo.setVisibility(parseInt(entry.getValue()));
+            if ("PistasTroquelUsadas".equals(entry.getKey())){
+                ly_PistasTroquelUsadas.setVisibility(parseInt(entry.getValue()));
             }
         }
     }

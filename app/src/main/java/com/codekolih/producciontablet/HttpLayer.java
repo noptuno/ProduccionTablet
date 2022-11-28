@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Bobinas;
+import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.google.gson.Gson;
@@ -51,9 +52,9 @@ public class HttpLayer {
 
     }
 
-    public void getTareaEspecifica(String params, HttpLayerResponses<Tareas> listener) {
+    public void getPedido(String params, HttpLayerResponses<Pedido> listener) {
 
-        String url = Urls.obtenertarea + params;
+        String url = Urls.obtenerpedido + params;
 
         Type objectType = new TypeToken<Tareas>() {}.getType();
 
@@ -61,7 +62,7 @@ public class HttpLayer {
                 GET,
                 url,
                 response -> {
-                    Tareas t = mapObject(response, objectType);
+                    Pedido t = mapObject(response, objectType);
                     listener.onSuccess(t);
                 },
                 listener::onError
@@ -71,6 +72,7 @@ public class HttpLayer {
         requestQueue.add(request);
 
     }
+
 
     public void cargarBobinas(Bobinas bobinas, HttpLayerResponses<JSONObject> listener) {
 
@@ -151,7 +153,21 @@ public class HttpLayer {
         requestQueue.add(request);
 
     }
+    public void login(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
 
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                POST,
+                Urls.login,
+                jsonObject,
+                listener::onSuccess,
+                listener::onError
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+
+    }
 
 
     private <T> T mapObject(String response, Type clazz) {

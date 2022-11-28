@@ -71,7 +71,7 @@ public class Imprentas_Activity extends AppCompatActivity {
               //  intent.putExtra("MaquinaId", note.getMaquinaId());
 
 
-                SharedPreferences pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+                pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString(PREF_PRODUCCION_NOMBREMAQUINA, note.getNombreMaquina());
                 editor.putString(PREF_PRODUCCION_MAQUINAID, ""+note.getMaquinaId());

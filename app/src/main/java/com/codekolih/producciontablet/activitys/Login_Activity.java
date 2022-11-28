@@ -4,6 +4,8 @@ import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_C
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_SETSTRING;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -17,10 +19,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -42,15 +46,20 @@ import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Usuario;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Login_Activity extends AppCompatActivity {
 
     public static final String PREFS_NAME = "PingBusPrefs";
     public static final String PREFS_SEARCH_HISTORY = "SearchHistory";
-    private SharedPreferences settings;
     private Set<String> history;
 
 
@@ -69,6 +78,11 @@ public class Login_Activity extends AppCompatActivity {
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
     private AutoCompleteTextView edt_usaurio;
+
+    private static final String[] COUNTRIES = new String[] {
+            "RUBACH", "DAVID", "PETER", "ENRIQUE", "JOSE"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +90,7 @@ public class Login_Activity extends AppCompatActivity {
 
         httpLayer = new HttpLayer(this);
         requestQueue = Volley.newRequestQueue(this);
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
 
         //Referencias
         btn_inicioSesion = findViewById(R.id.login_btn_IniciarSesion);
@@ -83,11 +98,21 @@ public class Login_Activity extends AppCompatActivity {
         btn_cargarImprenta = findViewById(R.id.login_btn_cargarImprenta);
         //edt_usaurio= findViewById(R.id.login_edt_user);
         edt_pass= findViewById(R.id.login_edt_password);
-        edt_usaurio = findViewById(R.id.login_edt_login);
+        edt_pass.setTransformationMethod(new PasswordTransformationMethod());
 
-        settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        history = settings.getStringSet(PREFS_SEARCH_HISTORY, new HashSet<String>());
-        setAutoCompleteSource();
+        edt_usaurio = findViewById(R.id.login_edt_login);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+        edt_usaurio.setAdapter(adapter);
+
+
+        edt_usaurio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                edt_pass.requestFocus();
+            }
+        });
+
 
 
         //Inicializar
@@ -99,23 +124,12 @@ public class Login_Activity extends AppCompatActivity {
         cargarMaquinas();
 
 
-        edt_usaurio.setOnKeyListener(new View.OnKeyListener()
-        {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
-                    addSearchInput(edt_usaurio.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
 
         btn_cargarImprenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
                 startActivity(intent);
@@ -126,55 +140,71 @@ public class Login_Activity extends AppCompatActivity {
 
 
         btn_inicioSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        @Override
+        public void onClick(View view) {
 
-        if (!txt_nombreImprenta.getText().equals("NO")){
 
-            Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        }
+            String imprenta = txt_nombreImprenta.getText().toString();
+            String usuario = edt_usaurio.getText().toString();
+            String pass = edt_pass.getText().toString();
 
-/*
-                setProgressDialog();
-                String url = Urls.login;
+            if (!imprenta.equals("NO") && !usuario.equals("") && !pass.equals("")) {
 
                 Map<String, Object> login = new HashMap<>();
                 login.put("UserName", edt_usaurio.getText().toString());
                 login.put("Password", edt_pass.getText().toString());
                 login.put("MacAddress", "");
 
-                JSONObject jsonObject = GsonUtils.toJSON(login);
-                JsonObjectRequest request = new JsonObjectRequest(
-                        com.android.volley.Request.Method.POST,
-                        url,
-                        jsonObject,
-                        new com.android.volley.Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-
-                                Log.e("Login Response",response.toString());
+                dialogProgress = ProgressHUD.show(Login_Activity.this);
+                httpLayer.login(GsonUtils.toJSON(login), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
 
 
-                                ObtenerDatosDelUsuario();
+                        try {
+                            String estado = response.getString("Estado");
 
-
-
+                            if (estado.equals("200")){
+                                pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString(PREF_PRODUCCION_USUARIO, edt_usaurio.getText().toString());
+                                editor.apply();
+                                Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             }
-                        },
-                        new com.android.volley.Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
 
-                                progressDialog.dismiss();
-                            }
-                        });
-                requestQueue.add(request);
-*/
+                            Log.e("http_login", response.toString());
 
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
+                        dialogProgress.dismiss();
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                        Toast.makeText(getApplicationContext(),"No existe usuario",Toast.LENGTH_SHORT).show();
+                        Log.e("http_login", "Fallo");
+                        dialogProgress.dismiss();
+                    }
+                });
+
+
+            }else{
+                Toast.makeText(getApplicationContext(),"Faltan datos",Toast.LENGTH_SHORT).show();
             }
-        });
+        }
+    });
+
+
 
         pedir_permiso_escritura();
         }
@@ -186,26 +216,6 @@ public class Login_Activity extends AppCompatActivity {
         super.onStop();
 
 
-    }
-
-
-    private void addSearchInput(String input)
-    {
-
-        Log.e("a",history.size()+"");
-        if (!history.contains(input))
-        {
-            history.add(input);
-            setAutoCompleteSource();
-        }
-    }
-
-    private void setAutoCompleteSource()
-    {
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, history.toArray(new String[history.size()]));
-        edt_usaurio.setAdapter(adapter);
     }
 
 

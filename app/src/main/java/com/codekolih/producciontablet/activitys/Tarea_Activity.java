@@ -4,6 +4,7 @@ import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_C
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +33,11 @@ import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Tarea_Activity extends AppCompatActivity {
 
@@ -45,6 +51,7 @@ public class Tarea_Activity extends AppCompatActivity {
     private HttpLayer httpLayer;
     private SharedPreferences pref;
     private RecyclerView recyclerViewTareas;
+    private Button btn_cerrar_sesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,31 @@ public class Tarea_Activity extends AppCompatActivity {
         txt_usuario= findViewById(R.id.tarea_txt_usuario);
         txt_fecha= findViewById(R.id.tarea_txt_fecha);
         txt_hora= findViewById(R.id.txt_tarea_hora);
+        btn_cerrar_sesion = findViewById(R.id.tarea_btn_cerraSesion);
+
+        btn_cerrar_sesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
+                build4.setMessage("¿Desea Cerrar Sesion").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        finish();
+
+                    }
+
+
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                AlertDialog alertDialog4 = build4.create();
+                alertDialog4.show();
+            }
+        });
 
         recyclerViewTareas = findViewById(R.id.tarea_recycler);
         recyclerViewTareas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -73,7 +105,7 @@ public class Tarea_Activity extends AppCompatActivity {
         MAQUINATIPOID = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
         MAQUINAID = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
         txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
-
+        txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
 
         //TODO Validar maquinatipoid y aquinaid
 
@@ -83,7 +115,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
 
                 AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
-                build4.setMessage("¿Desea Seleccionar la Tarea? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                build4.setMessage("¿Desea Seleccionar la Tarea : " + note.getDescripcion()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -114,7 +146,20 @@ public class Tarea_Activity extends AppCompatActivity {
 
         //todo valdiar internet
         cargarTarea();
+        cargarfecha();
 
+    }
+
+    private void cargarfecha() {
+
+        SimpleDateFormat dateFormatcorta = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat horaFormatcorta = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        String fechaCortaLocal = dateFormatcorta.format(date);
+        String horaCortaLocal = horaFormatcorta.format(date);
+
+        txt_fecha.setText(fechaCortaLocal);
+        txt_hora.setText(horaCortaLocal);
     }
 
     void cargarTarea(){
