@@ -207,6 +207,8 @@ public class Login_Activity extends AppCompatActivity {
 
 
         pedir_permiso_escritura();
+
+
         }
 
 

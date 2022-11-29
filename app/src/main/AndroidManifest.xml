@@ -18,9 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProduccionTablet"
         tools:targetApi="31">
-        <activity
-            android:name=".activitys.BobinaActivity"
-            android:exported="false" />
+
         <activity
             android:name=".activitys.Observaciones_Activity"
             android:exported="false" />

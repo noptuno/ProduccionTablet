@@ -1,5 +1,7 @@
 package com.codekolih.producciontablet.activitys;
 
+import static java.lang.Float.parseFloat;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,11 +60,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         Log.e("ProduccionActivity","INICIO");
 
-
         findrid();
-
-
-
 
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
@@ -350,7 +348,43 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 
     @Override
-    public void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, double Ancho, String EsAbiertaoCerrada, double DefectuosaKg) {
+    public void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, float Ancho, String EsAbiertaoCerrada, float DefectuosaKg) {
+
+
+        int tareaId = tarea_Seleccionada.getTareaId();
+        int ProduccionId = produccion_actual.getProduccionId();
+        int TipoMaterialId = 1;
+        String  DeNombreTipoMaterial = "0";
+        Bobinas bobinacargar = new Bobinas();
+
+        bobinacargar.setBobinaId(0);
+        bobinacargar.setTareaId(tareaId);
+        bobinacargar.setProduccionId(ProduccionId);
+        bobinacargar.setProveedorId(ProveedorId);
+        bobinacargar.setProveedorNombre(ProveedorNombre);
+        bobinacargar.setLote(Lote);
+        bobinacargar.setAncho(Ancho);
+        bobinacargar.setTipoMaterialId(TipoMaterialId);
+        bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
+        bobinacargar.setDefectuosaKg(DefectuosaKg);
+        bobinacargar.setNombreTipoMaterial(DeNombreTipoMaterial);
+
+        httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.e("Bobina_activit",response.toString());
+
+                actualziarTarea();
+
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
 
     }
 

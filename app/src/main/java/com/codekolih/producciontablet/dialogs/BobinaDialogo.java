@@ -1,17 +1,27 @@
 package com.codekolih.producciontablet.dialogs;
 
 
+import static java.lang.Float.parseFloat;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.ProgressHUD;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.clases.Proveedor;
+
+import java.util.ArrayList;
 
 
 public class BobinaDialogo {
@@ -27,18 +37,20 @@ public class BobinaDialogo {
     Button btn_guardar;
     Button btn_cancelar;
 
+    int idproveedorSeleccionado = 1;
+    String proveedorSeleccionado;
+    String abiertaocerrada = "A";
 
     public interface finalizarBobinaDialog{
 
 
-        void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, double Ancho, String EsAbiertaoCerrada, double DefectuosaKg);
+        void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, float Ancho, String EsAbiertaoCerrada, float DefectuosaKg);
 
     }
 
     public BobinaDialogo(Context contexcto , finalizarBobinaDialog actividad){
 
         interfaz_scrap = actividad;
-
         int numeros= 0;
         final Dialog dialogo = new Dialog(contexcto);
 
@@ -56,14 +68,32 @@ public class BobinaDialogo {
         edt_Ancho = dialogo.findViewById(R.id.dialogbobina_edt_Ancho);
         edt_DefectuosaKg = dialogo.findViewById(R.id.dialogbobina_edt_DefectuosaKg);
 
-/*
-        Spinner spinner = (Spinner) dialogo.findViewById(R.id.spinner);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spi_ProveedorNombre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                unidad =  adapterView.getItemAtPosition(i).toString();
+                proveedorSeleccionado = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spi_EsAbiertaoCerrada.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                if (adapterView.getItemAtPosition(i).toString().equals("Abierta")){
+
+                    abiertaocerrada = "A";
+                }else{
+                    abiertaocerrada = "B";
+                }
+
 
             }
 
@@ -72,26 +102,21 @@ public class BobinaDialogo {
 
             }
         });
-*/
 
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int ProveedorId = 0;
-                String ProveedorNombre = "";
-                String Lote = "";
-                double Ancho = 0.0 ;
-                String EsAbiertaoCerrada = "";
-                double DefectuosaKg = 0.0;
 
 
+                int ProveedorId = idproveedorSeleccionado;
+                String ProveedorNombre = proveedorSeleccionado;
+                String Lote = edt_Lote.getText().toString();
+                Float Ancho = parseFloat(edt_Ancho.getText().toString());
+                String EsAbiertaoCerrada = abiertaocerrada;
+                Float DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
 
                 try{
-
-
-
-
                     interfaz_scrap.ResultadoBobinaDialogo(ProveedorId,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg);
                     dialogo.dismiss();
                 }catch (Exception e){
@@ -112,9 +137,23 @@ public class BobinaDialogo {
             }
         });
 
+        cargarProveedor(contexcto);
         dialogo.show();
     }
 
+    ArrayList<String> listProveedores;
+    ArrayAdapter<String> adapterProveedor;
 
+    private void cargarProveedor(Context c) {
+
+                listProveedores = new ArrayList<>();
+                for (Proveedor proveeedores : TareaSingleton.SingletonInstance().getProveedores()){
+                    listProveedores.add(proveeedores.getNombre());
+                }
+                adapterProveedor = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, listProveedores);
+                adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+                spi_ProveedorNombre.setAdapter(adapterProveedor);
+
+            }
 
 }

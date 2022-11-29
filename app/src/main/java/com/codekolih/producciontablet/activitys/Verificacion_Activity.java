@@ -151,11 +151,8 @@ public class Verificacion_Activity extends AppCompatActivity {
                         estado.put("EstadoId", "A1");
                         estado.put("TipoEstadoId","F" );
 
-
-                       // cambioEstado(estado);
+                        cambioEstado(estado);
                         finish();
-
-
                     }
 
 
@@ -168,7 +165,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                 AlertDialog alertDialog4 = build4.create();
                 alertDialog4.show();
 
-            //cambio de estado
+
             }
         });
 

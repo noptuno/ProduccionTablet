@@ -381,6 +381,7 @@
                 android:inputType="number"
                 android:selectAllOnFocus="true"
                 android:text="0"
+                android:textAllCaps="true"
                 android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
@@ -410,6 +411,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
+                android:textAllCaps="true"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -439,6 +441,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
+                android:textAllCaps="true"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -468,6 +471,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
+                android:textAllCaps="true"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -519,6 +523,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
+                android:textAllCaps="true"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -547,6 +552,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
+                android:textAllCaps="true"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -575,6 +581,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:text="0"
+                android:textAllCaps="true"
                 android:textSize="20sp" />
         </LinearLayout>
 

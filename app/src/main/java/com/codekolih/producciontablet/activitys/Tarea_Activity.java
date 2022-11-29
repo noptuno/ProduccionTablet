@@ -18,6 +18,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
@@ -33,11 +35,15 @@ import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Tarea_Activity extends AppCompatActivity {
 
@@ -119,12 +125,16 @@ public class Tarea_Activity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        TareaSingleton.SingletonInstance().setTarea(note);
-                        Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
-                        intent.putExtra("tarea", note);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        finish();
+
+
+                        Map<String, Object> estado = new HashMap<>();
+                        estado.put("TareaId", note.getTareaId());
+                        estado.put("EstadoId", "A1");
+                        estado.put("TipoEstadoId","I" );
+                        cambioEstado(estado,note);
+
+
+
 
                     }
 
@@ -147,6 +157,65 @@ public class Tarea_Activity extends AppCompatActivity {
         //todo valdiar internet
         cargarTarea();
         cargarfecha();
+
+
+    }
+
+    private void cambioEstado( Map<String, Object> estado,Tareas note ) {
+
+
+        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.e("Tarea_Activity","Cargo Estado");
+
+                TareaSingleton.SingletonInstance().setTarea(note);
+                Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
+                intent.putExtra("tarea", note);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("Tarea_Activity","Error al cargar Estado");
+
+            }
+        });
+
+    }
+
+
+    private void cargarProveedor() {
+
+
+            dialogProgress = ProgressHUD.show(Tarea_Activity.this);
+
+            httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
+                @Override
+                public void onSuccess(ArrayList<Proveedor> response) {
+
+                    TareaSingleton.SingletonInstance().setProveedores(response);
+
+                    dialogProgress.dismiss();
+
+                    Log.e("TareaActivity","cargoProveedores");
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                    ArrayList<Proveedor> listProveedores = new ArrayList<>();
+                    TareaSingleton.SingletonInstance().setProveedores(listProveedores);
+                    dialogProgress.dismiss();
+                }
+            });
+
+
+
 
     }
 
@@ -178,6 +247,8 @@ public class Tarea_Activity extends AppCompatActivity {
                     Log.e("ListTareas","Cod: " + lg.getTareaId()+" Cant produccion: "+ lg.getProduccion_Lista().size() + " cantbobinas: "+ lg.getBobinas().size());
 
                 }
+
+                cargarProveedor();
 
             }
             @Override
