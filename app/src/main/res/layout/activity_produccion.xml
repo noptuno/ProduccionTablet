@@ -6,6 +6,507 @@
     android:layout_height="match_parent"
     tools:context=".activitys.Produccion_Activity">
 
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="#009688"
+        android:padding="5dp"
+        android:text="Datos Cargados"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayotCargarDatos"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayotCargarDatos"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="28dp"
+        android:background="#009688"
+        android:padding="5dp"
+        android:text="Cargar datos Produccion"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/produccion_btn_scrap"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayotCargarDatos"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayotCargarDatos"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayotCargarDatos" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="#009688"
+        android:padding="5dp"
+        android:text="Datos Tarea"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutDatos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayotCargarDatos"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutDatos"
+        app:layout_constraintTop_toBottomOf="@+id/textView35">
+
+        <LinearLayout
+            android:id="@+id/lyp_AnchoFinalRolloYGap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView100"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="AnchoFinalRolloYGap"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_AnchoFinalRolloYGap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="0"
+                android:textSize="20sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_CantidadPistasImpresas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView101"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="CantidadPistasImpresas"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_CantidadPistasImpresas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_CantidadTintas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/textView103"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="CantidadTintas"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_CantidadTintas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_ScrapAjusteInicial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView104"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="ScrapAjusteInicial"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_ScrapAjusteInicial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_UnidadIdScrapInicial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView105"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="UnidadIdScrapInicial"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_UnidadIdScrapInicial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="KG"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_AnchoFinalRollo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView106"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="AnchoFinalRollo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_AnchoFinalRollo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_CantidadPistasCortadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView107"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="CantidadPistasCortadas"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_CantidadPistasCortadas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_PistasTroquelUsadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView108"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="PistasTroquelUsadas"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_PistasTroquelUsadas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:text="0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutDatos"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+        <LinearLayout
+            android:id="@+id/lyp_NroDeSobre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="SERIE"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_NroDeSobre"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyp_EtiquetasEnBanda"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="EtiquetasEnBanda"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_EtiquetasEnBanda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="0"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Cilindro"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_Cilindro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="0"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Z_AltoMasGap"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_Z_AltoMasGap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="0"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="EtiquetasPorRollo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_EtiquetasPorRollo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="0"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Pistas"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_Pistas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="0,0"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="MetrosAImprimir"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_MetrosAImprimir"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="0,0"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="MetrosPorRollo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_MetrosPorRollo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="0,0"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Descripcion"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produccion_txt_Descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="informacion"
+                android:textSize="10sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
@@ -124,28 +625,31 @@
 
     <Button
         android:id="@+id/produccion_btn_scrap"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/fondo2"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#4CAF50"
+        android:drawableTop="@drawable/ic_agregar"
         android:text="Scrap"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:icon="@drawable/ic_agregar"
         app:iconTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/produccion_cantidad_recycler"
-        tools:layout_editor_absoluteX="416dp" />
+        app:layout_constraintEnd_toStartOf="@+id/produccion_btn_bobina"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/produccion_btn_cantidad"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/produccion_cantidad_recycler"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="6dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/produccion_btn_cantidad"
-        app:layout_constraintTop_toBottomOf="@+id/textView25">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/linearLayotCargarDatos"
+        app:layout_constraintTop_toTopOf="@+id/textView35">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -153,44 +657,47 @@
         android:id="@+id/produccion_bobina_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/produccion_btn_finalziar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/produccion_btn_bobina"
+        app:layout_constraintStart_toEndOf="@+id/linearLayotCargarDatos"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
     <Button
         android:id="@+id/produccion_btn_cantidad"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/fondo2"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#4CAF50"
+        android:drawableTop="@drawable/ic_agregar"
         android:text="Cantidad"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        app:icon="@drawable/ic_agregar"
+        android:textSize="12sp"
         app:iconTint="@color/white"
-        app:layout_constraintTop_toTopOf="@+id/produccion_cantidad_recycler"
-        tools:layout_editor_absoluteX="416dp" />
+        app:layout_constraintEnd_toStartOf="@+id/produccion_btn_scrap"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textView37"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <Button
         android:id="@+id/produccion_btn_bobina"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/fondo2"
-        android:text="Agregar Bobina"
+        android:backgroundTint="#2196F3"
+        android:drawableTop="@drawable/ic_agregar"
+        android:text="Bobina"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:icon="@drawable/ic_agregar"
         app:iconTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/produccion_bobina_recycler"
-        app:layout_constraintTop_toTopOf="@+id/produccion_bobina_recycler"
-        tools:layout_editor_absoluteX="416dp" />
+        app:layout_constraintEnd_toEndOf="@+id/textView37"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/produccion_btn_scrap"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <Button
         android:id="@+id/produccion_btn_finalziar"
@@ -212,6 +719,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
+        android:backgroundTint="#F44336"
         android:text="CANCELAR"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -233,10 +741,10 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="6dp"
         android:text="Lista Produccion"
-        app:layout_constraintStart_toStartOf="@+id/produccion_cantidad_recycler"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintBottom_toTopOf="@+id/produccion_cantidad_recycler"
+        app:layout_constraintStart_toStartOf="@+id/produccion_cantidad_recycler" />
 
     <TextView
         android:id="@+id/textView29"
@@ -252,7 +760,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="6dp"
         android:text="Cantidad Total:"
         app:layout_constraintBottom_toTopOf="@+id/produccion_cantidad_recycler"
         app:layout_constraintEnd_toStartOf="@+id/textView33" />

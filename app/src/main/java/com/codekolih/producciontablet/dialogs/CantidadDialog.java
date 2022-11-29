@@ -22,6 +22,8 @@ import org.json.JSONObject;
 public class CantidadDialog {
 
     private finalizarCuadro interfaz;
+
+
     private HttpLayer httpLayer;
     public interface finalizarCuadro{
 

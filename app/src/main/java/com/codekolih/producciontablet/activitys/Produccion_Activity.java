@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -24,6 +26,7 @@ import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
+import com.codekolih.producciontablet.dialogs.BobinaDialogo;
 import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
@@ -33,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog {
+public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog {
 
     Tareas tarea_Seleccionada;
     Produccion_Lista produccion_actual;
@@ -55,11 +58,11 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         Log.e("ProduccionActivity","INICIO");
 
-        btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
-        btn_bobina = findViewById(R.id.produccion_btn_bobina);
-        btn_scrap = findViewById(R.id.produccion_btn_scrap);
-        btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
-        btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
+
+        findrid();
+
+
+
 
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
@@ -117,9 +120,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
+                new BobinaDialogo(Produccion_Activity.this, Produccion_Activity.this);
 
+                /*
                 Intent i = new Intent(Produccion_Activity.this, BobinaActivity.class);
                 startActivityForResult(i, BOBINA_ACTIVITY);
+                */
+
 
             }
         });
@@ -146,6 +153,45 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
       //  cambioEstado();
 
+    }
+
+    private void findrid() {
+
+        btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
+        btn_bobina = findViewById(R.id.produccion_btn_bobina);
+        btn_scrap = findViewById(R.id.produccion_btn_scrap);
+        btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
+        btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
+
+                txt_produccion_AnchoFinalRolloYGap = findViewById(R.id.produccion_txt_AnchoFinalRolloYGap);
+                txt_produccion_CantidadPistasImpresas = findViewById(R.id.produccion_txt_CantidadPistasImpresas);
+                txt_produccion_CantidadTintas = findViewById(R.id.produccion_txt_CantidadTintas);
+                txt_produccion_ScrapAjusteInicial = findViewById(R.id.produccion_txt_ScrapAjusteInicial);
+                txt_produccion_AnchoFinalRollo = findViewById(R.id.produccion_txt_AnchoFinalRollo);
+                txt_produccion_CantidadPistasCortadas = findViewById(R.id.produccion_txt_CantidadPistasCortadas);
+                txt_produccion_PistasTroquelUsadas = findViewById(R.id.produccion_txt_PistasTroquelUsadas);
+                txt_produccion_UnidadIdScrapInicial = findViewById(R.id.produccion_txt_UnidadIdScrapInicial);
+
+
+                lyp_AnchoFinalRolloYGap = findViewById(R.id.lyp_AnchoFinalRolloYGap);
+                lyp_CantidadPistasImpresas = findViewById(R.id.lyp_CantidadPistasImpresas);
+                lyp_CantidadTintas = findViewById(R.id.lyp_CantidadTintas);
+                lyp_ScrapAjusteInicial = findViewById(R.id.lyp_ScrapAjusteInicial);
+                lyp_AnchoFinalRollo = findViewById(R.id.lyp_AnchoFinalRollo);
+                lyp_CantidadPistasCortadas = findViewById(R.id.lyp_CantidadPistasCortadas);
+                lyp_PistasTroquelUsadas = findViewById(R.id.lyp_PistasTroquelUsadas);
+                lyp_UnidadIdScrapInicial = findViewById(R.id.lyp_UnidadIdScrapInicial);
+
+
+                txt_produccion_txt_NroDeSobre = findViewById(R.id.produccion_txt_NroDeSobre);
+                txt_produccion_txt_Descripcion = findViewById(R.id.produccion_txt_Descripcion);
+                txt_produccion_txt_MetrosAImprimir = findViewById(R.id.produccion_txt_MetrosAImprimir);
+                txt_produccion_txt_MetrosPorRollo = findViewById(R.id.produccion_txt_MetrosPorRollo);
+                txt_produccion_txt_Z_AltoMasGap = findViewById(R.id.produccion_txt_Z_AltoMasGap);
+                txt_produccion_txt_Cilindro = findViewById(R.id.produccion_txt_Cilindro);
+                txt_produccion_txt_Pistas = findViewById(R.id.produccion_txt_Pistas);
+                txt_produccion_txt_EtiquetasEnBanda = findViewById(R.id.produccion_txt_EtiquetasEnBanda);
+                txt_produccion_txt_EtiquetasPorRollo = findViewById(R.id.produccion_txt_EtiquetasPorRollo);
     }
 
     private void cambioEstado() {
@@ -226,6 +272,32 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             adapterBobina.notifyDataSetChanged();
         }
 
+        if (tarea_Seleccionada!=null){
+            //datos tarea
+            txt_produccion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
+            txt_produccion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
+            txt_produccion_txt_MetrosAImprimir.setText(""+tarea_Seleccionada.getMetrosAImprimir());
+            txt_produccion_txt_MetrosPorRollo.setText(""+tarea_Seleccionada.getMetrosPorRollo());
+            txt_produccion_txt_Z_AltoMasGap.setText(""+tarea_Seleccionada.getZ_AltoMasGap());
+            txt_produccion_txt_Cilindro.setText(""+tarea_Seleccionada.getCilindro());
+            txt_produccion_txt_Pistas.setText(""+tarea_Seleccionada.getPistas());
+            txt_produccion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
+            txt_produccion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
+        }
+
+        if (produccion_actual!=null){
+            //datos cargados
+            txt_produccion_AnchoFinalRolloYGap.setText(""+produccion_actual.getAnchoFinalRolloYGap());
+            txt_produccion_CantidadPistasImpresas.setText(""+produccion_actual.getCantidadPistasImpresas());
+            txt_produccion_CantidadTintas.setText(""+produccion_actual.getCantidadTintas());
+            txt_produccion_ScrapAjusteInicial.setText(""+produccion_actual.getScrapAjusteInicial());
+            txt_produccion_AnchoFinalRollo.setText(""+produccion_actual.getAnchoFinalRollo());
+            txt_produccion_CantidadPistasCortadas.setText(""+produccion_actual.getCantidadPistasCortadas());
+            txt_produccion_PistasTroquelUsadas.setText(""+produccion_actual.getPistasTroquelUsadas());
+            txt_produccion_UnidadIdScrapInicial.setText(""+produccion_actual.getScrapAjusteInicial_Unidades());
+
+        }
+
     }
 
     @Override
@@ -275,6 +347,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         });
 
     }
+
+
+    @Override
+    public void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, double Ancho, String EsAbiertaoCerrada, double DefectuosaKg) {
+
+    }
+
 
     @Override
     public void ResultadoScrapDialogo(float cantidad, String unidad) {
@@ -391,5 +470,39 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         });
     }
 */
+
+
+    private TextView
+            txt_produccion_AnchoFinalRolloYGap,
+            txt_produccion_CantidadPistasImpresas,
+            txt_produccion_CantidadTintas,
+            txt_produccion_ScrapAjusteInicial,
+            txt_produccion_AnchoFinalRollo,
+            txt_produccion_CantidadPistasCortadas,
+            txt_produccion_PistasTroquelUsadas,
+            txt_produccion_UnidadIdScrapInicial;
+
+    private LinearLayout
+            lyp_AnchoFinalRolloYGap,
+            lyp_CantidadPistasImpresas,
+            lyp_CantidadTintas,
+            lyp_ScrapAjusteInicial,
+            lyp_AnchoFinalRollo,
+            lyp_CantidadPistasCortadas,
+            lyp_PistasTroquelUsadas,
+            lyp_UnidadIdScrapInicial;
+
+    private TextView
+            txt_produccion_txt_NroDeSobre,
+            txt_produccion_txt_Descripcion,
+            txt_produccion_txt_MetrosAImprimir,
+            txt_produccion_txt_MetrosPorRollo,
+            txt_produccion_txt_Z_AltoMasGap,
+            txt_produccion_txt_Cilindro,
+            txt_produccion_txt_Pistas,
+            txt_produccion_txt_EtiquetasEnBanda,
+            txt_produccion_txt_EtiquetasPorRollo;
+
+
 
 }

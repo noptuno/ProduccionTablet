@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#0C808E"
+        android:background="#30ADBC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +53,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="32dp"
+            android:backgroundTint="#4CAF50"
             android:text="Confirmar"
             app:icon="@android:drawable/ic_menu_save"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +69,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
+            android:backgroundTint="#F44336"
             android:text="Cancelar"
+            android:textColor="@color/white"
             app:icon="@android:drawable/ic_menu_close_clear_cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/scrap_btn_confirmar"
@@ -77,12 +80,14 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="111dp"
+            android:layout_width="wrap_content"
             android:layout_height="88dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="32dp"
             android:entries="@array/UNIDADES"
-            app:layout_constraintBottom_toBottomOf="@+id/et_numero"
+            app:layout_constraintBottom_toTopOf="@+id/scrap_btn_confirmar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/et_numero"
             app:layout_constraintTop_toBottomOf="@+id/cantidad_edt_nombreCantidad"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -90,7 +95,7 @@
             android:id="@+id/et_numero"
             android:layout_width="111dp"
             android:layout_height="88dp"
-            android:layout_marginStart="56dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="4dp"
             android:cursorVisible="true"
             android:ems="10"
@@ -102,6 +107,9 @@
             android:textColor="@color/white"
             android:textSize="60sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrap_btn_cancelar"
+            app:layout_constraintEnd_toStartOf="@+id/spinner"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cantidad_edt_nombreCantidad" />
 

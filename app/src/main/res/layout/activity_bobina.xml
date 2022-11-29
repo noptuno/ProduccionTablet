@@ -6,44 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".activitys.BobinaActivity">
 
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:background="#009688"
+        android:padding="5dp"
+        android:text="Datos de la Tarea"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/bobina_btn_cancelar"
         android:layout_width="150dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#F44336"
         android:text="Cancelar"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bobina_btn_guardar"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bobina_btn_guardar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/bobina_btn_guardar"
         android:layout_width="150dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#4CAF50"
         android:text="Guardar"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/bobina_btn_cancelar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bobina_btn_cancelar"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="vertical"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView36">
 
         <LinearLayout
             android:id="@+id/linearLayout10"
@@ -59,7 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ProveedorNombre" />
+                android:text="ProveedorNombre"
+                android:textSize="16sp" />
 
             <Spinner
                 android:id="@+id/bobina_spi_ProveedorNombre"
@@ -83,7 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Lote" />
+                android:text="Lote"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/bobina_edt_Lote"
@@ -110,7 +129,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ancho" />
+                android:text="Ancho"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/bobina_edt_Ancho"
@@ -118,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text="15" />
         </LinearLayout>
 
@@ -136,7 +156,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="DefectuosaKg" />
+                android:text="DefectuosaKg"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/bobina_edt_DefectuosaKg"
@@ -144,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text="50" />
         </LinearLayout>
 
@@ -162,7 +183,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="EsAbiertaoCerrada" />
+                android:text="EsAbiertaoCerrada"
+                android:textSize="16sp" />
 
             <Spinner
                 android:id="@+id/bobina_spi_EsAbiertaoCerrada"
