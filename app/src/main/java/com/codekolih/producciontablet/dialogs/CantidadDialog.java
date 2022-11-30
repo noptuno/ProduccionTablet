@@ -9,21 +9,16 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
-import com.codekolih.producciontablet.aciones.TareaSingleton;
-import com.codekolih.producciontablet.clases.Tareas;
-
-import org.json.JSONObject;
 
 
 public class CantidadDialog {
 
     private finalizarCuadro interfaz;
-
-
+    private EditText edt_numero;
+    Button btn_cancelar, btn_aceptar;
     private HttpLayer httpLayer;
     public interface finalizarCuadro{
 
@@ -37,7 +32,6 @@ public class CantidadDialog {
 
         httpLayer = new HttpLayer(contexcto);
         interfaz = actividad;
-        int numeros= 0;
         final Dialog dialogo = new Dialog(contexcto);
 
         dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -46,22 +40,28 @@ public class CantidadDialog {
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_num);
 
-        Button aceptar = dialogo.findViewById(R.id.cantidad_btn_confirmar);
-        Button cancelar = dialogo.findViewById(R.id.cantidad_btn_cancelar);
-        EditText numero = dialogo.findViewById(R.id.et_numero);
-        numero.setText("1");
-
-        numero.setSelectAllOnFocus(true);
+        btn_aceptar = dialogo.findViewById(R.id.cantidad_btn_confirmar);
+        btn_cancelar= dialogo.findViewById(R.id.cantidad_btn_cancelar);
+        edt_numero = dialogo.findViewById(R.id.et_numero);
 
 
-        aceptar.setOnClickListener(new View.OnClickListener() {
+        btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 try{
 
-                    interfaz.ResultadoCantidadDialogo(Float.parseFloat(numero.getText().toString()));
-                    dialogo.dismiss();
+
+                    String num = edt_numero.getText().toString();
+
+                    if (num.length()>0){
+
+                        float numfloat = Float.parseFloat(num);
+                        interfaz.ResultadoCantidadDialogo(numfloat);
+                        dialogo.dismiss();
+
+                    }
+
 
                 }catch (Exception e){
 
@@ -74,7 +74,7 @@ public class CantidadDialog {
             }
         });
 
-        cancelar.setOnClickListener(new View.OnClickListener() {
+        btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

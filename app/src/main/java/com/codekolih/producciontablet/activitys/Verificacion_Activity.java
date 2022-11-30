@@ -36,6 +36,7 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
+import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
 
@@ -248,6 +249,8 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     }
 
+
+
     private void cargarVerificacion() {
 
         String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
@@ -280,16 +283,33 @@ public class Verificacion_Activity extends AppCompatActivity {
         newproduccion.put("RollosEmpaquetados", 0);
         newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
 
+
+        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+
         httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
                 Log.e("http",response.toString());
-                actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
+
+                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                dialogProgress.dismiss();
+
+                Map<String, Object> estado = new HashMap<>();
+                estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                estado.put("EstadoId", "P1");
+                estado.put("TipoEstadoId","I" );
+                cambioEstado(estado);
+
+
+             //   actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
             }
 
             @Override
             public void onError(Exception e) {
+                dialogProgress.dismiss();
 
                 Log.e("http_altaproduccion","Fallo");
             }
@@ -311,49 +331,6 @@ public class Verificacion_Activity extends AppCompatActivity {
     }
 
 
-    private void actualziarTarea(int p, int t) {
-
-        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
-        String params = "/"+p+"/"+ t;
-
-        httpLayer.getTareas("0/0",new HttpLayer.HttpLayerResponses<List<Tareas>>() {
-            @Override
-            public void onSuccess(List<Tareas> response) {
-
-                for (Tareas tareatemp : response) {
-
-                    if (tareatemp.getPedidoId()==p && tareatemp.getTareaId()==t){
-
-
-                        TareaSingleton.SingletonInstance().setTarea(tareatemp);
-
-                        break;
-                    }
-
-                }
-
-                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                dialogProgress.dismiss();
-
-                Map<String, Object> estado = new HashMap<>();
-                estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "P1");
-                estado.put("TipoEstadoId","I" );
-
-                //cambioEstado(estado);
-                finish();
-
-            }
-            @Override
-            public void onError(Exception e) {
-
-                Log.e("error_verificarActvity",e.toString());
-                dialogProgress.dismiss();
-            }
-        });
-    }
 
     private void cargarTareaSeleccionada() {
 
@@ -463,13 +440,8 @@ public class Verificacion_Activity extends AppCompatActivity {
                 cinco.setVisibility(parseInt(entry.getValue()));
             }
             if ("seis".toString().equals(entry.getKey())){
-
-
                 seis.setVisibility(parseInt(entry.getValue()));
-
-
             }
-
 
             if ("AnchoFinalRolloYGap".equals(entry.getKey())){
                 ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));

@@ -2,11 +2,13 @@ package com.codekolih.producciontablet.dialogs;
 
 
 import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -37,8 +39,8 @@ public class BobinaDialogo {
     Button btn_guardar;
     Button btn_cancelar;
 
-    int idproveedorSeleccionado = 1;
-    String proveedorSeleccionado;
+    String idproveedorSeleccionado = "0";
+    String proveedorSeleccionado= "NO";
     String abiertaocerrada = "A";
 
     public interface finalizarBobinaDialog{
@@ -68,16 +70,21 @@ public class BobinaDialogo {
         edt_Ancho = dialogo.findViewById(R.id.dialogbobina_edt_Ancho);
         edt_DefectuosaKg = dialogo.findViewById(R.id.dialogbobina_edt_DefectuosaKg);
 
-
         spi_ProveedorNombre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                proveedorSeleccionado = adapterView.getItemAtPosition(i).toString();
+               String nombreProveedor = adapterView.getItemAtPosition(i).toString();
+
+               String[] parts = nombreProveedor.split("-");
+               idproveedorSeleccionado = parts[0];
+               proveedorSeleccionado = parts[1];
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
 
             }
         });
@@ -86,7 +93,6 @@ public class BobinaDialogo {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-
                 if (adapterView.getItemAtPosition(i).toString().equals("Abierta")){
 
                     abiertaocerrada = "A";
@@ -94,11 +100,11 @@ public class BobinaDialogo {
                     abiertaocerrada = "B";
                 }
 
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
 
             }
         });
@@ -108,22 +114,25 @@ public class BobinaDialogo {
             @Override
             public void onClick(View view) {
 
+                if (idproveedorSeleccionado.length()>0 && proveedorSeleccionado.length()>0 && edt_Lote.getText().length()>0 && edt_Ancho.getText().length()>0&& edt_DefectuosaKg.getText().length()>0){
 
-                int ProveedorId = idproveedorSeleccionado;
-                String ProveedorNombre = proveedorSeleccionado;
-                String Lote = edt_Lote.getText().toString();
-                Float Ancho = parseFloat(edt_Ancho.getText().toString());
-                String EsAbiertaoCerrada = abiertaocerrada;
-                Float DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
+                    int idproveedor = parseInt(idproveedorSeleccionado);
+                    String ProveedorNombre = proveedorSeleccionado;
+                    String Lote = edt_Lote.getText().toString();
+                    Float Ancho = parseFloat(edt_Ancho.getText().toString());
+                    String EsAbiertaoCerrada = abiertaocerrada;
+                    Float DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
 
-                try{
-                    interfaz_scrap.ResultadoBobinaDialogo(ProveedorId,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg);
-                    dialogo.dismiss();
-                }catch (Exception e){
-                  //  interfaz_scrap.ResultadoScrapDialogo(0,"KG");
-                    dialogo.dismiss();
+                    try{
+                        interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg);
+                        dialogo.dismiss();
+                    }catch (Exception e){
+
+                        Log.e("ErrorBobina",e.toString());
+                        //  interfaz_scrap.ResultadoScrapDialogo(0,"KG");
+
+                    }
                 }
-
 
             }
         });
@@ -148,7 +157,7 @@ public class BobinaDialogo {
 
                 listProveedores = new ArrayList<>();
                 for (Proveedor proveeedores : TareaSingleton.SingletonInstance().getProveedores()){
-                    listProveedores.add(proveeedores.getNombre());
+                    listProveedores.add( proveeedores.getProveedorlId()+"-" +proveeedores.getNombre()  );
                 }
                 adapterProveedor = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, listProveedores);
                 adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);

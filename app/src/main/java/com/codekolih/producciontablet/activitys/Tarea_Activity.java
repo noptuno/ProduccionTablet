@@ -119,13 +119,18 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note) {
 
-
                 AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
                 build4.setMessage("¿Desea Seleccionar la Tarea : " + note.getDescripcion()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
 
+                        TareaSingleton.SingletonInstance().setTarea(note);
+
+                        Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
+                        intent.putExtra("tarea", note);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                         Map<String, Object> estado = new HashMap<>();
                         estado.put("TareaId", note.getTareaId());
@@ -133,11 +138,9 @@ public class Tarea_Activity extends AppCompatActivity {
                         estado.put("TipoEstadoId","I" );
                         cambioEstado(estado,note);
 
-
-
+                        finish();
 
                     }
-
 
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
@@ -159,6 +162,7 @@ public class Tarea_Activity extends AppCompatActivity {
         cargarfecha();
 
 
+
     }
 
     private void cambioEstado( Map<String, Object> estado,Tareas note ) {
@@ -170,12 +174,6 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 Log.e("Tarea_Activity","Cargo Estado");
 
-                TareaSingleton.SingletonInstance().setTarea(note);
-                Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
-                intent.putExtra("tarea", note);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
 
             }
 
@@ -188,35 +186,23 @@ public class Tarea_Activity extends AppCompatActivity {
 
     }
 
-
     private void cargarProveedor() {
-
-
-            dialogProgress = ProgressHUD.show(Tarea_Activity.this);
 
             httpLayer.listaProveedor(new HttpLayer.HttpLayerResponses<ArrayList<Proveedor>>() {
                 @Override
                 public void onSuccess(ArrayList<Proveedor> response) {
 
                     TareaSingleton.SingletonInstance().setProveedores(response);
-
-                    dialogProgress.dismiss();
-
                     Log.e("TareaActivity","cargoProveedores");
+
                 }
 
                 @Override
                 public void onError(Exception e) {
-
                     ArrayList<Proveedor> listProveedores = new ArrayList<>();
                     TareaSingleton.SingletonInstance().setProveedores(listProveedores);
-                    dialogProgress.dismiss();
                 }
             });
-
-
-
-
     }
 
     private void cargarfecha() {
@@ -240,20 +226,18 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 adapterTareas.setNotes(response);
                 adapterTareas.notifyDataSetChanged();
-                dialogProgress.dismiss();
+
 
                 for (Tareas lg : response) {
                    // Log.e("Datos_tareas",lg.toString());
                     Log.e("ListTareas","Cod: " + lg.getTareaId()+" Cant produccion: "+ lg.getProduccion_Lista().size() + " cantbobinas: "+ lg.getBobinas().size());
 
                 }
-
+                dialogProgress.dismiss();
                 cargarProveedor();
-
             }
             @Override
             public void onError(Exception e) {
-
                 Log.e("TareaActivity",e.toString());
                 dialogProgress.dismiss();
             }

@@ -101,7 +101,12 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Map<String, Object> estado = new HashMap<>();
+                estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                estado.put("EstadoId", "P1");
+                estado.put("TipoEstadoId","F" );
+                cambioEstado(estado);
+
             }
         });
 
@@ -146,8 +151,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         recyclerViewBobinas.setAdapter(adapterBobina);
 
 
-        cargarTareaSeleccionada(); // tarea y produccion_actual y bobina actual
-
+        cargarTareaHttp(); // tarea y produccion_actual y bobina actual
 
       //  cambioEstado();
 
@@ -192,12 +196,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 txt_produccion_txt_EtiquetasPorRollo = findViewById(R.id.produccion_txt_EtiquetasPorRollo);
     }
 
-    private void cambioEstado() {
-
-            Map<String, Object> estado = new HashMap<>();
-            estado.put("TareaId", tarea_Seleccionada.getTareaId());
-            estado.put("EstadoId", "P1");
-            estado.put("TipoEstadoId","I" );
+    private void cambioEstado( Map<String, Object> estado) {
 
 
             dialogProgress = ProgressHUD.show(Produccion_Activity.this);
@@ -208,6 +207,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                     Log.e("Produccion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
                     dialogProgress.dismiss();
+                    finish();
                 }
 
                 @Override
@@ -221,24 +221,40 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == BOBINA_ACTIVITY) {
-            if(resultCode == Activity.RESULT_OK){
+    void cargarTareaHttp(){
 
-                actualziarTarea();
+        int p = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
+        int t = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+
+        dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+
+        httpLayer.getTareas("0/0",new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+            @Override
+            public void onSuccess(List<Tareas> response) {
+
+                for (Tareas tareatemp : response) {
+
+                    if (tareatemp.getPedidoId()==p && tareatemp.getTareaId()==t){
+                        TareaSingleton.SingletonInstance().setTarea(tareatemp);
+                        break;
+                    }
+                }
+
+                dialogProgress.dismiss();
+                cargarTareaSeleccionada();
             }
+            @Override
+            public void onError(Exception e) {
 
-            if (resultCode == Activity.RESULT_CANCELED) {
-
+                Log.e("error_produccion",e.toString());
+                dialogProgress.dismiss();
             }
-        }
-    } //onAct
-
+        });
+    }
 
     void cargarTareaSeleccionada(){
+
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Log.e("ERROR","NO TAREA");
@@ -252,6 +268,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 //este hay que sacarlo de aca
             TareaSingleton.SingletonInstance().setProduccionId(produccion_actual.getProduccionId());
+
             adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
             adapterProduccion.notifyDataSetChanged();
 
@@ -333,7 +350,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onSuccess(JSONObject response) {
 
-                actualziarTarea();
+                cargarTareaHttp();
             }
 
             @Override
@@ -349,7 +366,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     @Override
     public void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, float Ancho, String EsAbiertaoCerrada, float DefectuosaKg) {
-
 
         int tareaId = tarea_Seleccionada.getTareaId();
         int ProduccionId = produccion_actual.getProduccionId();
@@ -375,7 +391,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                 Log.e("Bobina_activit",response.toString());
 
-                actualziarTarea();
+                cargarTareaHttp();
 
 
             }
@@ -424,7 +440,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onSuccess(JSONObject response) {
 
-                actualziarTarea();
+                cargarTareaHttp();
 
             }
 
@@ -438,40 +454,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     }
 
 
-    private void actualziarTarea() {
-
-        dialogProgress = ProgressHUD.show(Produccion_Activity.this);
-        int p = tarea_Seleccionada.getPedidoId();
-        int t = tarea_Seleccionada.getTareaId();
-
-        httpLayer.getTareas("0/0",new HttpLayer.HttpLayerResponses<List<Tareas>>() {
-            @Override
-            public void onSuccess(List<Tareas> response) {
-
-                for (Tareas tareatemp : response) {
-
-                    if (tareatemp.getPedidoId()==p && tareatemp.getTareaId()==t){
-
-
-                        TareaSingleton.SingletonInstance().setTarea(tareatemp);
-
-                        break;
-                    }
-
-                }
-                cargarTareaSeleccionada();
-
-                dialogProgress.dismiss();
-
-            }
-            @Override
-            public void onError(Exception e) {
-
-                Log.e("error_verificarActvity",e.toString());
-                dialogProgress.dismiss();
-            }
-        });
-    }
 
     /*
     private void actualziarTarea2() {
