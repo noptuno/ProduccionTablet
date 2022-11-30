@@ -174,7 +174,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 txt_produccion_PistasTroquelUsadas = findViewById(R.id.produccion_txt_PistasTroquelUsadas);
                 txt_produccion_UnidadIdScrapInicial = findViewById(R.id.produccion_txt_UnidadIdScrapInicial);
 
-
                 lyp_AnchoFinalRolloYGap = findViewById(R.id.lyp_AnchoFinalRolloYGap);
                 lyp_CantidadPistasImpresas = findViewById(R.id.lyp_CantidadPistasImpresas);
                 lyp_CantidadTintas = findViewById(R.id.lyp_CantidadTintas);
@@ -183,7 +182,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 lyp_CantidadPistasCortadas = findViewById(R.id.lyp_CantidadPistasCortadas);
                 lyp_PistasTroquelUsadas = findViewById(R.id.lyp_PistasTroquelUsadas);
                 lyp_UnidadIdScrapInicial = findViewById(R.id.lyp_UnidadIdScrapInicial);
-
 
                 txt_produccion_txt_NroDeSobre = findViewById(R.id.produccion_txt_NroDeSobre);
                 txt_produccion_txt_Descripcion = findViewById(R.id.produccion_txt_Descripcion);
@@ -217,9 +215,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 }
             });
 
-
     }
-
 
 
     void cargarTareaHttp(){
@@ -262,12 +258,12 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         if (tarea_Seleccionada.getProduccion_Lista().size()>0){
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-                Log.e("Producción_producion",lg.toString());
+                Log.e("BDproduccion",lg.toString());
                 produccion_actual = lg;
             }
-
+            Log.e("idproduccion_list",""+TareaSingleton.SingletonInstance().getProduccionId());
 //este hay que sacarlo de aca
-            TareaSingleton.SingletonInstance().setProduccionId(produccion_actual.getProduccionId());
+          //  TareaSingleton.SingletonInstance().setProduccionId(produccion_actual.getProduccionId());
 
             adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
             adapterProduccion.notifyDataSetChanged();

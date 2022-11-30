@@ -34,7 +34,17 @@ public class Produccion_Lista implements Serializable  {
 
 public String toString(){
 
-        String a = "produccionId: " + getProduccionId() + " Tarea: " + getTareaId() + " Pedido: " + getPedidoId() + " User: " +getUserNameId() + " "+ getAnchoFinalRolloYGap();
+        String a = " ProduccionId: " + getProduccionId() +
+                " PedidoId: " +getPedidoId() +
+                " TareaId: " +getTareaId() +
+                " AnchoFinalRolloYGap: " +getAnchoFinalRolloYGap() +
+                " CantidadPistasImpresas: " +getCantidadPistasImpresas() +
+                " CantidadTintas: " +getCantidadTintas() +
+                " ScrapAjusteInicial: " +getScrapAjusteInicial() +
+                " ScrapAjusteInicial_Unidades: " +getScrapAjusteInicial() +
+                " AnchoFinalRollo: " +getAnchoFinalRollo() +
+                " CantidadPistasCortadas: " +getCantidadPistasCortadas() +
+                " PistasTroquelUsadas: " +getPistasTroquelUsadas();
 
         return a;
 }

@@ -31,89 +31,221 @@ public class TareaSingleton {
 
         Map<String, String> variablesGenrales = new HashMap<>();
 
-        if (idtipomaquina.equals("2")){
+        if (idtipomaquina.equals("1")){
 
             Log.e("VariablesOcultar",idtipomaquina);
+
             variablesGenrales.put("uno", "0");
             variablesGenrales.put("dos", "0");
             variablesGenrales.put("tres", "0");
             variablesGenrales.put("cuatro", "0");
             variablesGenrales.put("cinco", "0");
-            variablesGenrales.put("seis", "0");
+            variablesGenrales.put("seis", "8");
+
+            //tarea
+            variablesGenrales.put("SumCantidad", "8");
+            variablesGenrales.put("EtiquetasPorRollo", "8");
+            variablesGenrales.put("EtiquetasEnBanda", "0");
+            variablesGenrales.put("Pistas", "0");
+            variablesGenrales.put("Observaciones", "0");
+            variablesGenrales.put("MetrosAImprimir", "0");
+            variablesGenrales.put("NroDeSobre", "0");
+            variablesGenrales.put("Descripcion", "0");
+            variablesGenrales.put("Cilindro", "0");
+            variablesGenrales.put("Z_AltoMasGap", "0");
+            variablesGenrales.put("MetrosPorRollo", "8");
+            variablesGenrales.put("MetrosMatTroquelar", "8");
+            variablesGenrales.put("TroquelId", "0");
+
+            //produccion
+            variablesGenrales.put("SumMetrosImpresos", "0");//IE,IR
+            variablesGenrales.put("AnchoFinalRolloYGap", "0");
+            variablesGenrales.put("CantidadPistasImpresas", "0");
+            variablesGenrales.put("CantidadTintas", "0");
+            variablesGenrales.put("ScrapAjusteInicial", "0");
+            variablesGenrales.put("UnidadIdScrapInicial", "0");
+            variablesGenrales.put("SumRollosFabricados", "8");//FE,FR
+            variablesGenrales.put("AnchoFinalRollo", "8");
+            variablesGenrales.put("CantidadPistasCortadas", "8");
+            variablesGenrales.put("PistasTroquelUsadas", "8");
+            variablesGenrales.put("SumRollosEmpaquedatos", "8");//e
+
+            //bobina
+            variablesGenrales.put("Ancho", "0");
+            variablesGenrales.put("EsAbiertaoCerrada", "8");
+            variablesGenrales.put("DefectuosaKg", "0");
+
+        }else if (idtipomaquina.equals("2")){
+
+            Log.e("VariablesOcultar",idtipomaquina);
+
+            variablesGenrales.put("uno", "0");
+            variablesGenrales.put("dos", "0");
+            variablesGenrales.put("tres", "0");
+            variablesGenrales.put("cuatro", "0");
+            variablesGenrales.put("cinco", "8");
+            variablesGenrales.put("seis", "8");
+
+            variablesGenrales.put("SumCantidad", "0");
+            variablesGenrales.put("EtiquetasPorRollo", "8");
+            variablesGenrales.put("EtiquetasEnBanda", "8");
+            variablesGenrales.put("Pistas", "0");
+            variablesGenrales.put("Observaciones", "0");
+            variablesGenrales.put("MetrosAImprimir", "0");
+            variablesGenrales.put("NroDeSobre", "8");
+            variablesGenrales.put("Descripcion", "8");
+            variablesGenrales.put("Cilindro", "8");
+            variablesGenrales.put("Z_AltoMasGap", "8");
+            variablesGenrales.put("MetrosPorRollo", "8");
+            variablesGenrales.put("MetrosMatTroquelar", "8");
+            variablesGenrales.put("TroquelId", "8");
+
+            //produccion
+            variablesGenrales.put("SumMetrosImpresos", "0");//IE,IR
+            variablesGenrales.put("AnchoFinalRolloYGap", "8");
+            variablesGenrales.put("CantidadPistasImpresas", "0");
+            variablesGenrales.put("CantidadTintas", "0");
+            variablesGenrales.put("ScrapAjusteInicial", "0");
+            variablesGenrales.put("UnidadIdScrapInicial", "0");
+            variablesGenrales.put("SumRollosFabricados", "8");//FE,FR
+            variablesGenrales.put("AnchoFinalRollo", "8");
+            variablesGenrales.put("CantidadPistasCortadas", "8");
+            variablesGenrales.put("PistasTroquelUsadas", "8");
+            variablesGenrales.put("SumRollosEmpaquedatos", "8");//e
+
+            //bobina
+            variablesGenrales.put("Ancho", "0");
+            variablesGenrales.put("EsAbiertaoCerrada", "8");
+            variablesGenrales.put("DefectuosaKg", "0");
 
 
+        }else if (idtipomaquina.equals("3")){
+
+            Log.e("VariablesOcultar",idtipomaquina);
+
+            variablesGenrales.put("uno", "0");
+            variablesGenrales.put("dos", "0");
+            variablesGenrales.put("tres", "0");
+            variablesGenrales.put("cuatro", "0");
+            variablesGenrales.put("cinco", "0");
+            variablesGenrales.put("seis", "8");
+
+            variablesGenrales.put("SumCantidad", "0");
+            variablesGenrales.put("EtiquetasPorRollo", "8");
+            variablesGenrales.put("EtiquetasEnBanda", "8");
+            variablesGenrales.put("Pistas", "0");
+            variablesGenrales.put("Observaciones", "0");
+            variablesGenrales.put("MetrosAImprimir", "8");
+            variablesGenrales.put("NroDeSobre", "8");
+            variablesGenrales.put("Descripcion", "8");
+            variablesGenrales.put("Cilindro", "8");
+            variablesGenrales.put("Z_AltoMasGap", "8");
+            variablesGenrales.put("MetrosPorRollo", "8");
+            variablesGenrales.put("MetrosMatTroquelar", "8");
+            variablesGenrales.put("TroquelId", "8");
+
+            //produccion
+            variablesGenrales.put("SumMetrosImpresos", "8");//IE,IR
             variablesGenrales.put("AnchoFinalRolloYGap", "8");
             variablesGenrales.put("CantidadPistasImpresas", "8");
             variablesGenrales.put("CantidadTintas", "8");
             variablesGenrales.put("ScrapAjusteInicial", "0");
             variablesGenrales.put("UnidadIdScrapInicial", "0");
-            variablesGenrales.put("AnchoFinalRollo", "8");
-            variablesGenrales.put("CantidadPistasCortadas", "8");
+            variablesGenrales.put("SumRollosFabricados", "0");//FE,FR
+            variablesGenrales.put("AnchoFinalRollo", "0");
+            variablesGenrales.put("CantidadPistasCortadas", ".0");
             variablesGenrales.put("PistasTroquelUsadas", "8");
+            variablesGenrales.put("SumRollosEmpaquedatos", "8");//e
 
-            variablesGenrales.put("NroDeSobre", "0");
-            variablesGenrales.put("Descripcion", "0");
-            variablesGenrales.put("MetrosAImprimir", "0");
-            variablesGenrales.put("MetrosPorRollo", "0");
-            variablesGenrales.put("MetrosMatTroquelar", "0");
-            variablesGenrales.put("Observaciones", "0");
-            variablesGenrales.put("Z_AltoMasGap", "0");
-            variablesGenrales.put("Cilindro", "0");
-            variablesGenrales.put("Pistas", "0");
-            variablesGenrales.put("EtiquetasEnBanda", "0");
-            variablesGenrales.put("EtiquetasPorRollo", "0");
+            //bobina
+            variablesGenrales.put("Ancho", "0");
+            variablesGenrales.put("EsAbiertaoCerrada", "0");
+            variablesGenrales.put("DefectuosaKg", "0");
         }else if (idtipomaquina.equals("4")){
+
+            Log.e("VariablesOcultar",idtipomaquina);
+
+            variablesGenrales.put("uno", "0");
+            variablesGenrales.put("dos", "0");
+            variablesGenrales.put("tres", "8");
+            variablesGenrales.put("cuatro", "8");
+            variablesGenrales.put("cinco", "8");
+            variablesGenrales.put("seis", "8");
+
+            variablesGenrales.put("SumCantidad", "0");
+            variablesGenrales.put("EtiquetasPorRollo", "0");
+            variablesGenrales.put("EtiquetasEnBanda", "0");
+            variablesGenrales.put("Pistas", "0");
+            variablesGenrales.put("Observaciones", "0");
+            variablesGenrales.put("MetrosAImprimir", "0");
+            variablesGenrales.put("NroDeSobre", "0");
+            variablesGenrales.put("Descripcion", "0");
+            variablesGenrales.put("Cilindro", "0");
+            variablesGenrales.put("Z_AltoMasGap", "0");
+            variablesGenrales.put("MetrosPorRollo", "0");
+            variablesGenrales.put("MetrosMatTroquelar", "0");
+            variablesGenrales.put("TroquelId", "0");
+
+            //produccion
+            variablesGenrales.put("SumMetrosImpresos", "8");//IE,IR
+            variablesGenrales.put("AnchoFinalRolloYGap", "0");
+            variablesGenrales.put("CantidadPistasImpresas", "8");
+            variablesGenrales.put("CantidadTintas", "8");
+            variablesGenrales.put("ScrapAjusteInicial", "0");
+            variablesGenrales.put("UnidadIdScrapInicial", "0");
+            variablesGenrales.put("SumRollosFabricados", "0");//FE,FR
+            variablesGenrales.put("AnchoFinalRollo", "8");
+            variablesGenrales.put("CantidadPistasCortadas", ("8"));
+            variablesGenrales.put("PistasTroquelUsadas", "0");
+            variablesGenrales.put("SumRollosEmpaquedatos", "0");//e
+
+            //bobina
+            variablesGenrales.put("Ancho", "0");
+            variablesGenrales.put("EsAbiertaoCerrada", "8");
+            variablesGenrales.put("DefectuosaKg", "0");
+        }else if (idtipomaquina.equals("5")){
+
+            Log.e("VariablesOcultar",idtipomaquina);
+
             variablesGenrales.put("uno", "0");
             variablesGenrales.put("dos", "0");
             variablesGenrales.put("tres", "0");
             variablesGenrales.put("cuatro", "0");
             variablesGenrales.put("cinco", "0");
-            variablesGenrales.put("seis", "0");
-            variablesGenrales.put("AnchoFinalRolloYGap", "0");
-            variablesGenrales.put("CantidadPistasImpresas", "0");
-            variablesGenrales.put("CantidadTintas", "0");
-            variablesGenrales.put("ScrapAjusteInicial", "0");
-            variablesGenrales.put("UnidadIdScrapInicial", "0");
-            variablesGenrales.put("AnchoFinalRollo", "0");
-            variablesGenrales.put("CantidadPistasCortadas", "0");
-            variablesGenrales.put("PistasTroquelUsadas", "0");
-            variablesGenrales.put("NroDeSobre", "0");
-            variablesGenrales.put("Descripcion", "0");
-            variablesGenrales.put("MetrosAImprimir", "0");
-            variablesGenrales.put("MetrosPorRollo", "0");
-            variablesGenrales.put("MetrosMatTroquelar", "0");
+            variablesGenrales.put("seis", "8");
+
+
+            variablesGenrales.put("SumCantidad", "0");
+            variablesGenrales.put("EtiquetasPorRollo", "8");
+            variablesGenrales.put("EtiquetasEnBanda", "8");
+            variablesGenrales.put("Pistas", "8");
             variablesGenrales.put("Observaciones", "0");
-            variablesGenrales.put("Z_AltoMasGap", "0");
-            variablesGenrales.put("Cilindro", "0");
-            variablesGenrales.put("Pistas", "0");
-            variablesGenrales.put("EtiquetasEnBanda", "0");
-            variablesGenrales.put("EtiquetasPorRollo", "0");
-        }else{
-            variablesGenrales.put("uno", "0");
-            variablesGenrales.put("dos", "0");
-            variablesGenrales.put("tres", "0");
-            variablesGenrales.put("cuatro", "0");
-            variablesGenrales.put("cinco", "0");
-            variablesGenrales.put("seis", "0");
-            variablesGenrales.put("AnchoFinalRolloYGap", "0");
-            variablesGenrales.put("CantidadPistasImpresas", "0");
-            variablesGenrales.put("CantidadTintas", "0");
-            variablesGenrales.put("ScrapAjusteInicial", "0");
-            variablesGenrales.put("UnidadIdScrapInicial", "0");
+            variablesGenrales.put("MetrosAImprimir", "8");
+            variablesGenrales.put("NroDeSobre", "8");
+            variablesGenrales.put("Descripcion", "8");
+            variablesGenrales.put("Cilindro", "8");
+            variablesGenrales.put("Z_AltoMasGap", "8");
+            variablesGenrales.put("MetrosPorRollo", "8");
+            variablesGenrales.put("MetrosMatTroquelar", "8");
+            variablesGenrales.put("TroquelId", "8");
+
+            //produccion
+            variablesGenrales.put("SumMetrosImpresos", "8");//IE,IR
+            variablesGenrales.put("AnchoFinalRolloYGap", "8");
+            variablesGenrales.put("CantidadPistasImpresas", "8");
+            variablesGenrales.put("CantidadTintas", "8");
+            variablesGenrales.put("ScrapAjusteInicial", "8");
+            variablesGenrales.put("UnidadIdScrapInicial", "8");
+            variablesGenrales.put("SumRollosFabricados", "8");//FE,FR
             variablesGenrales.put("AnchoFinalRollo", "0");
-            variablesGenrales.put("CantidadPistasCortadas", "0");
-            variablesGenrales.put("PistasTroquelUsadas", "0");
-            variablesGenrales.put("NroDeSobre", "0");
-            variablesGenrales.put("Descripcion", "0");
-            variablesGenrales.put("MetrosAImprimir", "0");
-            variablesGenrales.put("MetrosPorRollo", "0");
-            variablesGenrales.put("MetrosMatTroquelar", "0");
-            variablesGenrales.put("Observaciones", "0");
-            variablesGenrales.put("Z_AltoMasGap", "0");
-            variablesGenrales.put("Cilindro", "0");
-            variablesGenrales.put("Pistas", "0");
-            variablesGenrales.put("EtiquetasEnBanda", "0");
-            variablesGenrales.put("EtiquetasPorRollo", "0");
+            variablesGenrales.put("CantidadPistasCortadas", ".8");
+            variablesGenrales.put("PistasTroquelUsadas", "8");
+            variablesGenrales.put("SumRollosEmpaquedatos", "0");//e
+
+            //bobina
+            variablesGenrales.put("Ancho", "8");
+            variablesGenrales.put("EsAbiertaoCerrada", "8");
+            variablesGenrales.put("DefectuosaKg", "8");
         }
 
         this.tipoMaquina = variablesGenrales;

@@ -47,6 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -54,7 +55,7 @@ import java.util.Map;
 public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
-    Produccion_Lista produccion_actual;
+    //Produccion_Lista produccion_actual;
     private ProgressHUD dialogProgress;
     private Boolean pdfAbierto = false;
     private HttpLayer httpLayer;
@@ -292,16 +293,42 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                 Log.e("http",response.toString());
 
-                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                dialogProgress.dismiss();
+                try {
+                    String esthttp = response.getString("RespuestaMensaje");
 
-                Map<String, Object> estado = new HashMap<>();
-                estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "P1");
-                estado.put("TipoEstadoId","I" );
-                cambioEstado(estado);
+                    if (esthttp.equals("OK")){
+
+                        String RespuestaDato = response.getString("RespuestaDato");
+                        if (RespuestaDato.length()>0){
+
+                            String[] valirIdProduccion = RespuestaDato.split(":");
+                            String id = valirIdProduccion[1];
+                            TareaSingleton.SingletonInstance().setProduccionId(Integer.parseInt(id));
+                        }
+
+
+                        Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        dialogProgress.dismiss();
+
+                        Map<String, Object> estado = new HashMap<>();
+                        estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                        estado.put("EstadoId", "P1");
+                        estado.put("TipoEstadoId","I" );
+                        cambioEstado(estado);
+                        finish();
+                    }
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
 
 
              //   actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
@@ -337,13 +364,16 @@ public class Verificacion_Activity extends AppCompatActivity {
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
         }
-
+/*
         if (tarea_Seleccionada.getProduccion_Lista().size()>0){
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
                 Log.e("Activity",lg.toString());
                 produccion_actual = lg;
             }
         }
+        */
+
+
     }
 
     private void cambioEstado( Map<String, Object> estado ) {
