@@ -31,7 +31,7 @@ public class Tareas implements Serializable {
     private String UltimoEstadoIdAvance;
     private String PermiteCambioPrioridad;
     private String FechaAlta;
-    private float MetrosAImprimir;
+    private float MetrosAImprimir;//IE,IR
     private float MetrosPorRollo;
     private float MetrosMatTroquelar;
     private String Estado;

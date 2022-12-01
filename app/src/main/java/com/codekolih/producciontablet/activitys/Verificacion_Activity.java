@@ -55,6 +55,7 @@ import java.util.Map;
 public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
+    Pedido pedido_Cargado;
     //Produccion_Lista produccion_actual;
     private ProgressHUD dialogProgress;
     private Boolean pdfAbierto = false;
@@ -68,25 +69,22 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_verificacion_AnchoFinalRollo,
             edt_verificacion_CantidadPistasCortadas,
             edt_verificacion_PistasTroquelUsadas;
+
     private Spinner spi_verificacion_UnidadIdScrapInicial;
 
     private LinearLayout
-
-
-                   ly_EtiquetasPorRollo,
-    ly_EtiquetasEnBanda,
+            ly_EtiquetasPorRollo,
+            ly_EtiquetasEnBanda,
             ly_Pistas,
-    ly_Observaciones,
+            ly_Observaciones,
             ly_MetrosAImprimir,
-    ly_NroDeSobre,
+            ly_NroDeSobre,
             ly_Descripcion,
-    ly_Cilindro,
+            ly_Cilindro,
             ly_Z_AltoMasGap,
-    ly_MetrosPorRollo,
+            ly_MetrosPorRollo,
             ly_MetrosMatTroquelar,
-    ly_TroquelId,
-
-
+            ly_TroquelId,
             ly_AnchoFinalRolloYGap,
             ly_CantidadPistasImpresas,
             ly_CantidadTintas,
@@ -95,8 +93,6 @@ public class Verificacion_Activity extends AppCompatActivity {
             ly_CantidadPistasCortadas,
             ly_PistasTroquelUsadas,
             ly_UnidadIdScrapInicial;
-
-
 
     private Switch uno,dos,tres,cuatro,cinco,seis;
     private TextView
@@ -239,33 +235,43 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         OcultarVariables();
         cargarfecha();
+        CargarPedido();
+
 
        // CargarPedido();
-        //todo lo desactive por ahora
-       // cambioEstado();
+
 
     }
 
     private void CargarPedido() {
 
-    String params = "/"+tarea_Seleccionada.getPedidoId();
+        String params = ""+tarea_Seleccionada.getPedidoId();
 
-            httpLayer.getPedido(params, new HttpLayer.HttpLayerResponses<Pedido>() {
-                @Override
-                public void onSuccess(Pedido response) {
-                    Log.e("http",response.toString());
+        httpLayer.getPedido(params, new HttpLayer.HttpLayerResponses<Pedido>() {
+            @Override
+            public void onSuccess(Pedido response) {
+
+                TareaSingleton.SingletonInstance().setPedidoInstanciada(response);
+
+                cargarpedidotextview();
 
 
-                }
+                Log.e("http",response.toString());
 
-                @Override
-                public void onError(Exception e) {
-                    Log.e("http",e.toString());
-                }
-            });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("http",e.toString());
+            }
+        });
 
     }
 
+    private void cargarpedidotextview() {
+
+
+    }
 
 
     private void cargarVerificacion() {
@@ -277,7 +283,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         String AnchoFinalRollo = edt_verificacion_AnchoFinalRollo.getText().toString();
         String CantidadPistasCortadas = edt_verificacion_CantidadPistasCortadas.getText().toString();
         String PistasTroquelUsadas = edt_verificacion_PistasTroquelUsadas.getText().toString();
-
 
         Map<String, Object> newproduccion = new HashMap<>();
         newproduccion.put("ProduccionId", 0);
@@ -299,7 +304,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
         newproduccion.put("RollosEmpaquetados", 0);
         newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
-
 
         dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
 
@@ -336,16 +340,9 @@ public class Verificacion_Activity extends AppCompatActivity {
                         finish();
                     }
 
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-
-
 
              //   actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
             }
@@ -370,7 +367,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_fecha.setText(fechaCortaLocal);
         txt_hora.setText(horaCortaLocal);
 
-
     }
 
 
@@ -380,20 +376,19 @@ public class Verificacion_Activity extends AppCompatActivity {
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
         }
-/*
+
+    /*
         if (tarea_Seleccionada.getProduccion_Lista().size()>0){
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
                 Log.e("Activity",lg.toString());
                 produccion_actual = lg;
             }
         }
-        */
-
+    */
 
     }
 
     private void cambioEstado( Map<String, Object> estado ) {
-
 
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
@@ -405,6 +400,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
+
                 Log.e("Verificacion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
 
             }

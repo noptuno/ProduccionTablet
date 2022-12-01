@@ -1,6 +1,7 @@
 package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_ELEGIRTAREA;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
@@ -58,6 +59,7 @@ public class Tarea_Activity extends AppCompatActivity {
     private SharedPreferences pref;
     private RecyclerView recyclerViewTareas;
     private Button btn_cerrar_sesion;
+    private String elegirTarea="false";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,7 @@ public class Tarea_Activity extends AppCompatActivity {
         MAQUINAID = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
         txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
+        elegirTarea =  pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");
 
         //TODO Validar maquinatipoid y aquinaid
 

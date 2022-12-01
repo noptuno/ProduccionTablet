@@ -56,15 +56,10 @@ public class HttpLayer {
 
         String url = Urls.obtenerpedido + params;
 
-        Type objectType = new TypeToken<Tareas>() {}.getType();
-
         StringRequest request = new StringRequest(
                 GET,
                 url,
-                response -> {
-                    Pedido t = mapObject(response, objectType);
-                    listener.onSuccess(t);
-                },
+                response -> listener.onSuccess(mapObject(response, Pedido.class)),
                 listener::onError
         );
 

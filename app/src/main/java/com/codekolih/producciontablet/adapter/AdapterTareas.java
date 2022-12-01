@@ -86,10 +86,6 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
         void onDetail(Tareas note);
     }
 
-
-
-
-
     public Tareas getposicionactual(int position) {
         return notes.get(position);
     }
@@ -97,6 +93,8 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView serieynumero,concepto,totalcantidad,restante,observaciones;
         private LinearLayout layoutTareas;
+
+
         public NoteViewHolder(View item) {
             super(item);
 
@@ -106,10 +104,6 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
             restante = (TextView) item.findViewById(R.id.item_tarea_txt_restante);
             observaciones = (TextView) item.findViewById(R.id.item_tarea_txt_obseraciones);
             layoutTareas= (LinearLayout) item.findViewById(R.id.layoutTareas);
-
-
-
-
 
 
         }
@@ -126,8 +120,6 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
            // int color = Color.argb(255,random.nextInt(256),(random.nextInt(256)),(random.nextInt(256)));
             layoutTareas.setBackgroundColor(a.getColor());
 
-
-
             serieynumero.setText(""+tarea.getNroDeSobre());
             concepto.setText(tarea.getDescripcion());
             totalcantidad.setText(""+tarea.getMetrosAImprimir());
@@ -138,6 +130,9 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
                 @Override
                 public void onClick(View view) {
                     if (onNoteSelectedListener != null) {
+
+
+
                         onNoteSelectedListener.onClick(tarea);
                     }
                 }

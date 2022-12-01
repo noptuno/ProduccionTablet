@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
@@ -19,9 +20,19 @@ public class TareaSingleton {
 
     private static TareaSingleton tareaSingle;
     private Tareas tareaInstanciada;
+    private Pedido pedidoInstanciada;
     private int produccionId;
     private Map<String, String> tipoMaquina;
     private ArrayList<Proveedor> proveedores;
+
+
+    public Pedido getPedidoInstanciada() {
+        return pedidoInstanciada;
+    }
+
+    public void setPedidoInstanciada(Pedido pedidoInstanciada) {
+        this.pedidoInstanciada = pedidoInstanciada;
+    }
 
     public Map<String, String> getTipoMaquina() {
         return tipoMaquina;
@@ -35,6 +46,7 @@ public class TareaSingleton {
 
             Log.e("VariablesOcultar",idtipomaquina);
 
+            //pregutnas
             variablesGenrales.put("uno", "0");
             variablesGenrales.put("dos", "0");
             variablesGenrales.put("tres", "0");
@@ -42,13 +54,14 @@ public class TareaSingleton {
             variablesGenrales.put("cinco", "0");
             variablesGenrales.put("seis", "8");
 
-            //tarea
-            variablesGenrales.put("SumCantidad", "8");
+            //tarea unicavez
+            variablesGenrales.put("SumCantidad", "8"); //FR,FE,E
             variablesGenrales.put("EtiquetasPorRollo", "8");
             variablesGenrales.put("EtiquetasEnBanda", "0");
             variablesGenrales.put("Pistas", "0");
             variablesGenrales.put("Observaciones", "0");
-            variablesGenrales.put("MetrosAImprimir", "0");
+            variablesGenrales.put("MetrosAImprimir", "0");//IE,IR
+
             variablesGenrales.put("NroDeSobre", "0");
             variablesGenrales.put("Descripcion", "0");
             variablesGenrales.put("Cilindro", "0");
@@ -59,16 +72,16 @@ public class TareaSingleton {
 
             //produccion
             variablesGenrales.put("SumMetrosImpresos", "0");//IE,IR
-            variablesGenrales.put("AnchoFinalRolloYGap", "0");
-            variablesGenrales.put("CantidadPistasImpresas", "0");
-            variablesGenrales.put("CantidadTintas", "0");
-            variablesGenrales.put("ScrapAjusteInicial", "0");
-            variablesGenrales.put("UnidadIdScrapInicial", "0");
+            variablesGenrales.put("AnchoFinalRolloYGap", "0");//unica
+            variablesGenrales.put("CantidadPistasImpresas", "0");//unica
+            variablesGenrales.put("CantidadTintas", "0");//unica
+            variablesGenrales.put("ScrapAjusteInicial", "0");//unica
+            variablesGenrales.put("UnidadIdScrapInicial", "0");//unica
             variablesGenrales.put("SumRollosFabricados", "8");//FE,FR
             variablesGenrales.put("AnchoFinalRollo", "8");
             variablesGenrales.put("CantidadPistasCortadas", "8");
             variablesGenrales.put("PistasTroquelUsadas", "8");
-            variablesGenrales.put("SumRollosEmpaquedatos", "8");//e
+            variablesGenrales.put("SumRollosEmpaquedatos", "8");//E
 
             //bobina
             variablesGenrales.put("Ancho", "0");
@@ -203,6 +216,7 @@ public class TareaSingleton {
             variablesGenrales.put("Ancho", "0");
             variablesGenrales.put("EsAbiertaoCerrada", "8");
             variablesGenrales.put("DefectuosaKg", "0");
+
         }else if (idtipomaquina.equals("5")){
 
             Log.e("VariablesOcultar",idtipomaquina);

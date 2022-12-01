@@ -1,6 +1,7 @@
 package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_ELEGIRTAREA;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
@@ -76,6 +77,7 @@ public class Imprentas_Activity extends AppCompatActivity {
                 editor.putString(PREF_PRODUCCION_NOMBREMAQUINA, note.getNombreMaquina());
                 editor.putString(PREF_PRODUCCION_MAQUINAID, ""+note.getMaquinaId());
                 editor.putString(PREF_PRODUCCION_MAQUINATIPOID, ""+note.getMaquinaTipoId());
+                editor.putString(PREF_PRODUCCION_ELEGIRTAREA, ""+note.getPermiteCambioPrioridad());
                 editor.apply();
 
                 startActivity(intent);

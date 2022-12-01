@@ -3,6 +3,7 @@ package com.codekolih.producciontablet.clases;
 import java.util.ArrayList;
 
 public class Pedido {
+
     private float PedidoId;
     private String SerieYNro;
     private String ArticuloId;
@@ -10,7 +11,7 @@ public class Pedido {
     private float Cantidad;
     private String FechaIngreso;
     private String FechaFin;
-    ArrayList< Object > Tareas = new ArrayList < Object > ();
+    ArrayList < Object > Tareas = new ArrayList < Object > ();
     private boolean TareasCreadas;
 
 
