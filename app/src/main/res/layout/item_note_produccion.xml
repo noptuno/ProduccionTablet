@@ -58,6 +58,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_MetrosImpresos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -85,6 +86,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_ScrapAjusteProduccion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -112,6 +114,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_ScrapAjusteProduccion_Unidades"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -123,7 +126,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:text="ScrapAjusteProduccion_Unidades"
-
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -139,6 +141,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_RollosFabricdos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -166,6 +169,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_RollosEmpaquetados"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

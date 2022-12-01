@@ -71,6 +71,22 @@ public class Verificacion_Activity extends AppCompatActivity {
     private Spinner spi_verificacion_UnidadIdScrapInicial;
 
     private LinearLayout
+
+
+                   ly_EtiquetasPorRollo,
+    ly_EtiquetasEnBanda,
+            ly_Pistas,
+    ly_Observaciones,
+            ly_MetrosAImprimir,
+    ly_NroDeSobre,
+            ly_Descripcion,
+    ly_Cilindro,
+            ly_Z_AltoMasGap,
+    ly_MetrosPorRollo,
+            ly_MetrosMatTroquelar,
+    ly_TroquelId,
+
+
             ly_AnchoFinalRolloYGap,
             ly_CantidadPistasImpresas,
             ly_CantidadTintas,
@@ -223,8 +239,8 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         OcultarVariables();
         cargarfecha();
-       // CargarPedido();
 
+       // CargarPedido();
         //todo lo desactive por ahora
        // cambioEstado();
 
@@ -416,6 +432,21 @@ public class Verificacion_Activity extends AppCompatActivity {
         seis= findViewById(R.id.switch6);
 
 
+
+        ly_EtiquetasPorRollo= findViewById(R.id.ly_EtiquetasPorRollo);
+        ly_EtiquetasEnBanda= findViewById(R.id.ly_EtiquetasEnBanda);
+        ly_Pistas= findViewById(R.id.ly_Pistas);
+        ly_Observaciones= findViewById(R.id.ly_Observaciones);
+        ly_MetrosAImprimir= findViewById(R.id.ly_MetrosAImprimir);
+        ly_NroDeSobre= findViewById(R.id.ly_NroDeSobre);
+        ly_Descripcion= findViewById(R.id.ly_Descripcion);
+        ly_Cilindro= findViewById(R.id.ly_Cilindro);
+        ly_Z_AltoMasGap= findViewById(R.id.ly_Z_AltoMasGap);
+        ly_MetrosPorRollo= findViewById(R.id.ly_MetrosPorRollo);
+        ly_MetrosMatTroquelar= findViewById(R.id.ly_MetrosMatTroquelar);
+        ly_TroquelId= findViewById(R.id.ly_TroquelId);
+
+
         ly_AnchoFinalRolloYGap= findViewById(R.id.ly_AnchoFinalRolloYGap);
         ly_CantidadPistasImpresas= findViewById(R.id.ly_CantidadPistasImpresas);
         ly_CantidadTintas= findViewById(R.id.ly_CantidadTintas);
@@ -473,28 +504,55 @@ public class Verificacion_Activity extends AppCompatActivity {
                 seis.setVisibility(parseInt(entry.getValue()));
             }
 
+            if ("EtiquetasPorRollo".equals(entry.getKey())){
+                ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
+            }  else if ("EtiquetasEnBanda".equals(entry.getKey())){
+                ly_EtiquetasEnBanda.setVisibility(parseInt(entry.getValue()));
+            } else if ("Pistas".equals(entry.getKey())){
+                ly_Pistas.setVisibility(parseInt(entry.getValue()));
+            }else if ("Observaciones".equals(entry.getKey())){
+                ly_Observaciones.setVisibility(parseInt(entry.getValue()));
+            }else if ("MetrosAImprimir".equals(entry.getKey())){
+                ly_MetrosAImprimir.setVisibility(parseInt(entry.getValue()));
+            }else if ("NroDeSobre".equals(entry.getKey())){
+                ly_NroDeSobre.setVisibility(parseInt(entry.getValue()));
+            }else if ("Descripcion".equals(entry.getKey())){
+                ly_Descripcion.setVisibility(parseInt(entry.getValue()));
+            }else if ("Cilindro".equals(entry.getKey())){
+                ly_Cilindro.setVisibility(parseInt(entry.getValue()));
+            }else if ("Z_AltoMasGap".equals(entry.getKey())){
+                ly_Z_AltoMasGap.setVisibility(parseInt(entry.getValue()));
+            }else if ("MetrosPorRollo".equals(entry.getKey())){
+                ly_MetrosPorRollo.setVisibility(parseInt(entry.getValue()));
+            }else if ("MetrosMatTroquelar".equals(entry.getKey())){
+                ly_MetrosMatTroquelar.setVisibility(parseInt(entry.getValue()));
+            }else if ("TroquelId".equals(entry.getKey())){
+                ly_TroquelId.setVisibility(parseInt(entry.getValue()));
+            }
+
+
             if ("AnchoFinalRolloYGap".equals(entry.getKey())){
                 ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
             }
-            if ("CantidadPistasImpresas".equals(entry.getKey())){
+            else if ("CantidadPistasImpresas".equals(entry.getKey())){
                 ly_CantidadPistasImpresas.setVisibility(parseInt(entry.getValue()));
             }
-            if ("CantidadTintas".equals(entry.getKey())){
+            else if ("CantidadTintas".equals(entry.getKey())){
                 ly_CantidadTintas.setVisibility(parseInt(entry.getValue()));
             }
-            if ("ScrapAjusteInicial".equals(entry.getKey())){
+            else if ("ScrapAjusteInicial".equals(entry.getKey())){
                 ly_ScrapAjusteInicial.setVisibility(parseInt(entry.getValue()));
             }
-            if ("UnidadIdScrapInicial".equals(entry.getKey())){
+            else if ("UnidadIdScrapInicial".equals(entry.getKey())){
                 ly_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));
             }
-            if ("AnchoFinalRollo".equals(entry.getKey())){
+            else if ("AnchoFinalRollo".equals(entry.getKey())){
                 ly_AnchoFinalRollo.setVisibility(parseInt(entry.getValue()));
             }
-            if ("CantidadPistasCortadas".equals(entry.getKey())){
+            else if ("CantidadPistasCortadas".equals(entry.getKey())){
                 ly_CantidadPistasCortadas.setVisibility(parseInt(entry.getValue()));
             }
-            if ("PistasTroquelUsadas".equals(entry.getKey())){
+            else if ("PistasTroquelUsadas".equals(entry.getKey())){
                 ly_PistasTroquelUsadas.setVisibility(parseInt(entry.getValue()));
             }
         }

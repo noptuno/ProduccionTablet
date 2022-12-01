@@ -38,6 +38,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ly_ProveedorNombre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.8"
@@ -65,6 +66,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_Lote"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
@@ -92,6 +94,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_Ancho"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
@@ -119,10 +122,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_TipoMaterialId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -146,6 +151,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_DefectuosaKg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
@@ -173,6 +179,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_EsAbiertaoCerrada"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"

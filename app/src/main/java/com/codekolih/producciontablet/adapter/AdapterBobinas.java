@@ -1,19 +1,24 @@
 package com.codekolih.producciontablet.adapter;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteViewHolder> {
 
@@ -89,8 +94,18 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView ProveedorNombre, DefectuosaKg, Lote,Ancho,TipoMaterialId,EsAbiertaoCerrada;
+        private LinearLayout ly_ProveedorNombre, ly_DefectuosaKg, ly_Lote,ly_Ancho,ly_TipoMaterialId,ly_EsAbiertaoCerrada;
+
+
         public NoteViewHolder(View item) {
             super(item);
+
+            ly_ProveedorNombre = (LinearLayout) item.findViewById(R.id.ly_ProveedorNombre);
+            ly_DefectuosaKg = (LinearLayout) item.findViewById(R.id.ly_DefectuosaKg);
+            ly_Lote = (LinearLayout) item.findViewById(R.id.ly_Lote);
+            ly_Ancho = (LinearLayout) item.findViewById(R.id.ly_Ancho);
+            ly_TipoMaterialId = (LinearLayout) item.findViewById(R.id.ly_TipoMaterialId);
+            ly_EsAbiertaoCerrada= (LinearLayout) item.findViewById(R.id.ly_EsAbiertaoCerrada);
 
             ProveedorNombre = (TextView) item.findViewById(R.id.item_bobina_txt_ProveedorNombre);
             DefectuosaKg = (TextView) item.findViewById(R.id.item_bobina_txt_DefectuosaKg);
@@ -98,6 +113,18 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
             Ancho = (TextView) item.findViewById(R.id.item_bobina_txt_Ancho);
             TipoMaterialId = (TextView) item.findViewById(R.id.item_bobina_txt_TipoMaterialId);
             EsAbiertaoCerrada= (TextView) item.findViewById(R.id.item_bobina_txt_EsAbiertaoCerrada);
+
+
+
+            for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+                if ("Ancho".equals(entry.getKey())){
+                    ly_Ancho.setVisibility(parseInt(entry.getValue()));
+                }  else if ("EsAbiertaoCerrada".equals(entry.getKey())){
+                    ly_EsAbiertaoCerrada.setVisibility(parseInt(entry.getValue()));
+                } else if ("DefectuosaKg".equals(entry.getKey())){
+                    ly_DefectuosaKg.setVisibility(parseInt(entry.getValue()));
+                }
+            }
 
 
         }

@@ -1,18 +1,23 @@
 package com.codekolih.producciontablet.adapter;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.NoteViewHolder> {
 
@@ -88,15 +93,39 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView UsuarioId, MetrosImpresos, ScrapAjusteProduccion,ScrapAjusteProduccion_Unidades,RollosFabricdos,RollosEmpaquetados;
+        private LinearLayout ly_MetrosImpresos,ly_ScrapAjusteProduccion,ly_ScrapAjusteProduccion_Unidades, ly_RollosFabricdos, ly_RollosEmpaquetados;
         public NoteViewHolder(View item) {
             super(item);
 
+            ly_MetrosImpresos = (LinearLayout) item.findViewById(R.id.ly_MetrosImpresos);
+            ly_ScrapAjusteProduccion = (LinearLayout) item.findViewById(R.id.ly_ScrapAjusteProduccion);
+            ly_ScrapAjusteProduccion_Unidades = (LinearLayout) item.findViewById(R.id.ly_ScrapAjusteProduccion_Unidades);
+            ly_RollosFabricdos = (LinearLayout) item.findViewById(R.id.ly_RollosFabricdos);
+            ly_RollosEmpaquetados= (LinearLayout) item.findViewById(R.id.ly_RollosEmpaquetados);
 
             MetrosImpresos = (TextView) item.findViewById(R.id.item_produccion_txt_MetrosImpresos);
             ScrapAjusteProduccion = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion);
             ScrapAjusteProduccion_Unidades = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion_Unidades);
             RollosFabricdos = (TextView) item.findViewById(R.id.item_produccion_txt_RollosFabricdos);
             RollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txt_RollosEmpaquetados);
+
+
+            for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+                if ("SumMetrosImpresos".equals(entry.getKey())){
+                    ly_MetrosImpresos.setVisibility(parseInt(entry.getValue()));
+                }  else if ("ScrapAjusteInicial".equals(entry.getKey())){
+                    ly_ScrapAjusteProduccion.setVisibility(parseInt(entry.getValue()));
+                } else if ("UnidadIdScrapInicial".equals(entry.getKey())){
+                    ly_ScrapAjusteProduccion_Unidades.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("SumRollosFabricados".equals(entry.getKey())){
+                    ly_RollosFabricdos.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
+                    ly_RollosEmpaquetados.setVisibility(parseInt(entry.getValue()));
+                }
+            }
+
         }
 
         public void bind(final Produccion_Lista produccion) {

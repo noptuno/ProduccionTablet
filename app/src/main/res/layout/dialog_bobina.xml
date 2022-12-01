@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView39">
 
             <LinearLayout
-                android:id="@+id/linearLayout10"
+                android:id="@+id/lyb_ProveedorNombre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -68,7 +68,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout6"
+                android:id="@+id/lyb_Lote"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -98,7 +98,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout11"
+                android:id="@+id/lyb_Ancho"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -127,7 +127,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout12"
+                android:id="@+id/lyb_DefectuosaKg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -156,7 +156,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout9"
+                android:id="@+id/lyb_EsAbiertaoCerrada"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -176,6 +176,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:entries="@array/ABIERTAOCERRADA"
+                    android:visibility="visible"
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>

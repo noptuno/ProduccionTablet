@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.codekolih.producciontablet.HttpLayer;
@@ -24,6 +25,7 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Proveedor;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class BobinaDialogo {
@@ -36,6 +38,12 @@ public class BobinaDialogo {
     EditText edt_Lote;
     EditText edt_Ancho;
     EditText edt_DefectuosaKg;
+
+
+    LinearLayout lyb_ProveedorNombre,lyb_EsAbiertaoCerrada, lyb_Lote, lyb_Ancho,lyb_DefectuosaKg;
+
+
+
     Button btn_guardar;
     Button btn_cancelar;
 
@@ -64,11 +72,19 @@ public class BobinaDialogo {
 
         btn_guardar = dialogo.findViewById(R.id.dialogbobina_btn_guardar2);
         btn_cancelar = dialogo.findViewById(R.id.dialogbobina_btn_cancelar2);
+
         spi_ProveedorNombre = dialogo.findViewById(R.id.dialogbobina_spi_ProveedorNombre);
         spi_EsAbiertaoCerrada = dialogo.findViewById(R.id.dialogbobina_spi_EsAbiertaoCerrada);
         edt_Lote = dialogo.findViewById(R.id.dialogbobina_edt_Lote);
         edt_Ancho = dialogo.findViewById(R.id.dialogbobina_edt_Ancho);
         edt_DefectuosaKg = dialogo.findViewById(R.id.dialogbobina_edt_DefectuosaKg);
+
+        lyb_ProveedorNombre= dialogo.findViewById(R.id.lyb_ProveedorNombre);
+        lyb_EsAbiertaoCerrada= dialogo.findViewById(R.id.lyb_EsAbiertaoCerrada);
+        lyb_Lote= dialogo.findViewById(R.id.lyb_Lote);
+        lyb_Ancho= dialogo.findViewById(R.id.lyb_Ancho);
+        lyb_DefectuosaKg= dialogo.findViewById(R.id.lyb_DefectuosaKg);
+
 
         spi_ProveedorNombre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -147,6 +163,7 @@ public class BobinaDialogo {
         });
 
         cargarProveedor(contexcto);
+        OcultarVariables();
         dialogo.show();
     }
 
@@ -164,5 +181,25 @@ public class BobinaDialogo {
                 spi_ProveedorNombre.setAdapter(adapterProveedor);
 
             }
+
+
+    private void OcultarVariables() {
+
+        for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+
+            System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+
+            if ("Ancho".equals(entry.getKey())){
+                lyb_Ancho.setVisibility(parseInt(entry.getValue()));
+            }
+            else if ("EsAbiertaoCerrada".equals(entry.getKey())){
+                lyb_EsAbiertaoCerrada.setVisibility(parseInt(entry.getValue()));
+            }
+            else if ("DefectuosaKg".equals(entry.getKey())){
+                lyb_DefectuosaKg.setVisibility(parseInt(entry.getValue()));
+            }
+
+        }
+    }
 
 }

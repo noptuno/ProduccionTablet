@@ -38,9 +38,11 @@
                 android:layout_weight="1"
                 android:text="0"
                 android:textSize="18sp" />
+
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_EtiquetasEnBanda"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
@@ -65,6 +67,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_Cilindro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -89,6 +92,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_Z_AltoMasGap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -113,6 +117,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_EtiquetasPorRollo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -137,6 +142,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_Pistas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
@@ -161,6 +167,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_MetrosAImprimir"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
@@ -185,6 +192,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_MetrosPorRollo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
@@ -209,6 +217,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ly_Descripcion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
@@ -231,6 +240,81 @@
                 android:textSize="14sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_Observaciones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Observaciones"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/verificacion_txt_Observaciones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="obser"
+                android:textSize="14sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_MetrosMatTroquelar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="MetrosMatTroquelar"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/verificacion_txt_MetrosMatTroquelar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="0"
+                android:textSize="14sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ly_TroquelId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="TroquelId"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/verificacion_txt_TroquelId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="0"
+                android:textSize="14sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
 
 
     </LinearLayout>

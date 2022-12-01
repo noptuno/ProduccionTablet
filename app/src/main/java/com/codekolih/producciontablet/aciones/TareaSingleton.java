@@ -125,9 +125,9 @@ public class TareaSingleton {
 
             variablesGenrales.put("uno", "0");
             variablesGenrales.put("dos", "0");
-            variablesGenrales.put("tres", "0");
-            variablesGenrales.put("cuatro", "0");
-            variablesGenrales.put("cinco", "0");
+            variablesGenrales.put("tres", "8");
+            variablesGenrales.put("cuatro", "8");
+            variablesGenrales.put("cinco", "8");
             variablesGenrales.put("seis", "8");
 
             variablesGenrales.put("SumCantidad", "0");
@@ -166,7 +166,7 @@ public class TareaSingleton {
             Log.e("VariablesOcultar",idtipomaquina);
 
             variablesGenrales.put("uno", "0");
-            variablesGenrales.put("dos", "0");
+            variablesGenrales.put("dos", "8");
             variablesGenrales.put("tres", "8");
             variablesGenrales.put("cuatro", "8");
             variablesGenrales.put("cinco", "8");
@@ -212,7 +212,7 @@ public class TareaSingleton {
             variablesGenrales.put("tres", "0");
             variablesGenrales.put("cuatro", "0");
             variablesGenrales.put("cinco", "0");
-            variablesGenrales.put("seis", "8");
+            variablesGenrales.put("seis", "0");
 
 
             variablesGenrales.put("SumCantidad", "0");

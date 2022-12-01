@@ -108,6 +108,10 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
             layoutTareas= (LinearLayout) item.findViewById(R.id.layoutTareas);
 
 
+
+
+
+
         }
 
         public void bind(final Tareas tarea) {
