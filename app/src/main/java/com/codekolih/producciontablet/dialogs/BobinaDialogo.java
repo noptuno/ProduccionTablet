@@ -27,7 +27,6 @@ import com.codekolih.producciontablet.clases.Proveedor;
 import java.util.ArrayList;
 import java.util.Map;
 
-
 public class BobinaDialogo {
 
     private finalizarBobinaDialog interfaz_scrap;
@@ -41,8 +40,6 @@ public class BobinaDialogo {
 
 
     LinearLayout lyb_ProveedorNombre,lyb_EsAbiertaoCerrada, lyb_Lote, lyb_Ancho,lyb_DefectuosaKg;
-
-
 
     Button btn_guardar;
     Button btn_cancelar;

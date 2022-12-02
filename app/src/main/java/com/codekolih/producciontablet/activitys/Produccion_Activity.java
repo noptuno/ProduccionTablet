@@ -27,6 +27,7 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterBobinas;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Bobinas;
+import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.BobinaDialogo;
@@ -42,9 +43,10 @@ import java.util.Map;
 public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog {
 
     Tareas tarea_Seleccionada;
+    Pedido pedido_seleccionado;
     Produccion_Lista produccion_actual;
     Bobinas bobinas_actual;
-
+    private TextView  txt_SerieYNro,txt_ArticuloId,txt_Cantidad,txt_Concepto;
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private AdapterBobinas adapterBobina = new AdapterBobinas();
     private RequestQueue requestQueue;
@@ -56,6 +58,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private int produccionId;
     private int pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
     private int tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +78,14 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
         pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
         tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+
+        pedido_seleccionado = TareaSingleton.SingletonInstance().getPedidoInstanciada();
+        if (pedido_seleccionado!=null){
+            txt_SerieYNro.setText(pedido_seleccionado.getSerieYNro());
+            txt_ArticuloId.setText(pedido_seleccionado.getArticuloId());
+            txt_Cantidad.setText(String.format("%s", pedido_seleccionado.getCantidad()));
+            txt_Concepto.setText(pedido_seleccionado.getConcepto());
+        }
 
         Log.e("IdProduccionSelec",""+produccionId);
 
@@ -233,6 +244,14 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void findrid() {
 
+
+                    txt_SerieYNro= findViewById(R.id.pro_txt_SerieYNro);
+                    txt_ArticuloId= findViewById(R.id.pro_txt_ArticuloId);
+                    txt_Cantidad= findViewById(R.id.pro_txt_Cantidad);
+                    txt_Concepto= findViewById(R.id.pro_txt_Concepto);
+
+
+
                 btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
                 btn_bobina = findViewById(R.id.produccion_btn_bobina);
                 btn_scrap = findViewById(R.id.produccion_btn_scrap);
@@ -349,9 +368,12 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         if (tarea_Seleccionada.getProduccion_Lista().size()>0){
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
                 Log.e("BDproduccion",lg.toString());
-                produccion_actual = lg;
-            }
 
+                if (lg.getProduccionId()==produccionId){
+                    produccion_actual = lg;
+                }
+              //
+            }
             adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
             adapterProduccion.notifyDataSetChanged();
 
@@ -359,6 +381,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             Log.e("ERROR","NO PRODUCCION");
 
         }
+
+
+
+
+
+
+
 
         if (tarea_Seleccionada.getBobinas().size()>0){
             for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
@@ -372,15 +401,19 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         if (tarea_Seleccionada!=null){
             //datos tarea
-            txt_produccion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
-            txt_produccion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
-            txt_produccion_txt_MetrosAImprimir.setText(""+tarea_Seleccionada.getMetrosAImprimir());
-            txt_produccion_txt_MetrosPorRollo.setText(""+tarea_Seleccionada.getMetrosPorRollo());
-            txt_produccion_txt_Z_AltoMasGap.setText(""+tarea_Seleccionada.getZ_AltoMasGap());
-            txt_produccion_txt_Cilindro.setText(""+tarea_Seleccionada.getCilindro());
-            txt_produccion_txt_Pistas.setText(""+tarea_Seleccionada.getPistas());
-            txt_produccion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
-            txt_produccion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
+            txt_produccion_txt_NroDeSobre.setText(String.format("%s",tarea_Seleccionada.getNroDeSobre()));
+            txt_produccion_txt_Descripcion.setText(tarea_Seleccionada.getDescripcion());
+            txt_produccion_txt_MetrosAImprimir.setText(String.format("%s",tarea_Seleccionada.getMetrosAImprimir()));
+            txt_produccion_txt_MetrosPorRollo.setText(String.format("%s",tarea_Seleccionada.getMetrosPorRollo()));
+            txt_produccion_txt_Z_AltoMasGap.setText(String.format("%s",tarea_Seleccionada.getZ_AltoMasGap()));
+            txt_produccion_txt_Cilindro.setText(String.format("%s",tarea_Seleccionada.getCilindro()));
+            txt_produccion_txt_Pistas.setText(String.format("%s",tarea_Seleccionada.getPistas()));
+            txt_produccion_txt_EtiquetasEnBanda.setText(String.format("%s",tarea_Seleccionada.getEtiquetasEnBanda()));
+            txt_produccion_txt_EtiquetasPorRollo.setText(String.format("%s",tarea_Seleccionada.getEtiquetasPorRollo()));
+
+            txt_produccion_txt_TroquelId.setText(tarea_Seleccionada.getTroquelId());;
+            txt_produccion_txt_MetrosMatTroquelar.setText(String.format("%s",tarea_Seleccionada.getMetrosMatTroquelar()));
+            txt_produccion_txt_Observaciones.setText(tarea_Seleccionada.getObservaciones());
 
         }
 

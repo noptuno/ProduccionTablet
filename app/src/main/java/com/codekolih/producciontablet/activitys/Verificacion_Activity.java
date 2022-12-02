@@ -61,6 +61,8 @@ public class Verificacion_Activity extends AppCompatActivity {
     private Boolean pdfAbierto = false;
     private HttpLayer httpLayer;
     private TextView  txt_imprenta,txt_usuario,txt_fecha,txt_hora;
+    //pedido
+    private TextView  txt_SerieYNro,txt_ArticuloId,txt_Cantidad,txt_Concepto;
     private EditText
             edt_verificacion_AnchoFinalRolloYGap,
             edt_verificacion_CantidadPistasImpresas,
@@ -253,25 +255,24 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                 TareaSingleton.SingletonInstance().setPedidoInstanciada(response);
 
-                cargarpedidotextview();
+                txt_SerieYNro.setText(response.getSerieYNro());
+                txt_ArticuloId.setText(response.getArticuloId());
+                txt_Cantidad.setText(String.format("%s", response.getCantidad()));
+                txt_Concepto.setText(response.getConcepto());
 
 
-                Log.e("http",response.toString());
+                Log.e("httpPedido",response.toString());
 
             }
 
             @Override
             public void onError(Exception e) {
-                Log.e("http",e.toString());
+                Log.e("httperror",e.toString());
             }
         });
 
     }
 
-    private void cargarpedidotextview() {
-
-
-    }
 
 
     private void cargarVerificacion() {
@@ -415,6 +416,10 @@ public class Verificacion_Activity extends AppCompatActivity {
         txt_fecha= findViewById(R.id.verificacion_txt_fecha);
         txt_hora= findViewById(R.id.verificacion_txt_hora);
 
+        txt_SerieYNro= findViewById(R.id.ver_txt_SerieYNro);
+        txt_ArticuloId= findViewById(R.id.ver_txt_ArticuloId);
+        txt_Cantidad= findViewById(R.id.ver_txt_Cantidad);
+        txt_Concepto= findViewById(R.id.ver_txt_Concepto);
 
         btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
