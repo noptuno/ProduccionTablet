@@ -160,7 +160,6 @@ public class Login_Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess(JSONObject response) {
 
-
                         try {
                             String estado = response.getString("Estado");
 
@@ -238,7 +237,7 @@ public class Login_Activity extends AppCompatActivity {
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
         maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
         tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
-        txt_nombreImprenta.setText(nombreMaquina);
+        txt_nombreImprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
 
         if (!tipomaquinaid.equals("NO")){
             TareaSingleton.SingletonInstance().setTipoMaquina(tipomaquinaid);

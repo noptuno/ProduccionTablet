@@ -97,11 +97,11 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
         public NoteViewHolder(View item) {
             super(item);
 
-            ly_MetrosImpresos = (LinearLayout) item.findViewById(R.id.ly_MetrosImpresos);
-            ly_ScrapAjusteProduccion = (LinearLayout) item.findViewById(R.id.ly_ScrapAjusteProduccion);
-            ly_ScrapAjusteProduccion_Unidades = (LinearLayout) item.findViewById(R.id.ly_ScrapAjusteProduccion_Unidades);
-            ly_RollosFabricdos = (LinearLayout) item.findViewById(R.id.ly_RollosFabricdos);
-            ly_RollosEmpaquetados= (LinearLayout) item.findViewById(R.id.ly_RollosEmpaquetados);
+            ly_MetrosImpresos = (LinearLayout) item.findViewById(R.id.iply_MetrosImpresos);
+            ly_ScrapAjusteProduccion = (LinearLayout) item.findViewById(R.id.iply_ScrapAjusteProduccion);
+            ly_ScrapAjusteProduccion_Unidades = (LinearLayout) item.findViewById(R.id.iply_ScrapAjusteProduccion_Unidades);
+            ly_RollosFabricdos = (LinearLayout) item.findViewById(R.id.iply_RollosFabricdos);
+            ly_RollosEmpaquetados= (LinearLayout) item.findViewById(R.id.iply_RollosEmpaquetados);
 
             MetrosImpresos = (TextView) item.findViewById(R.id.item_produccion_txt_MetrosImpresos);
             ScrapAjusteProduccion = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion);
@@ -111,6 +111,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
 
             for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+
                 if ("SumMetrosImpresos".equals(entry.getKey())){
                     ly_MetrosImpresos.setVisibility(parseInt(entry.getValue()));
                 }  else if ("ScrapAjusteInicial".equals(entry.getKey())){

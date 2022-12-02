@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
@@ -16,7 +17,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayotCargarDatos"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -166,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="SERIE"
+                android:text="NroDeSobre"
                 android:textSize="12sp" />
 
             <TextView
@@ -601,6 +602,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="4"
+                android:numeric="integer"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -630,7 +633,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="2"
                 android:minHeight="48dp"
+                android:numeric="integer"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -660,7 +665,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="1"
                 android:minHeight="48dp"
+                android:numeric="integer"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -690,7 +697,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="4"
                 android:minHeight="48dp"
+                android:numeric="decimal"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -742,7 +751,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="3"
                 android:minHeight="48dp"
+                android:numeric="integer"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -771,7 +782,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="2"
                 android:minHeight="48dp"
+                android:numeric="integer"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -800,7 +813,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="2"
                 android:minHeight="48dp"
+                android:numeric="integer"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -869,13 +884,14 @@
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -888,7 +904,7 @@
                     android:id="@+id/textView34"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Imprenta"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -910,7 +926,7 @@
                     android:id="@+id/textView32"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Usuario"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -930,6 +946,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"
+            android:layout_weight="2"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -942,7 +959,7 @@
                     android:id="@+id/textView28"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Fecha"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -964,7 +981,7 @@
                     android:id="@+id/textView26"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Hora"
                     android:textSize="16sp"
                     android:textStyle="bold" />

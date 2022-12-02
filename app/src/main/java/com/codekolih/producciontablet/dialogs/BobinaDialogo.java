@@ -46,7 +46,7 @@ public class BobinaDialogo {
 
     String idproveedorSeleccionado = "0";
     String proveedorSeleccionado= "NO";
-    String abiertaocerrada = "A";
+    String abiertaocerrada = "N";
 
     public interface finalizarBobinaDialog{
 
@@ -109,8 +109,10 @@ public class BobinaDialogo {
                 if (adapterView.getItemAtPosition(i).toString().equals("Abierta")){
 
                     abiertaocerrada = "A";
-                }else{
+                }else if (adapterView.getItemAtPosition(i).toString().equals("Cerrada")){
                     abiertaocerrada = "B";
+                }else{
+                    abiertaocerrada = "N";
                 }
 
             }

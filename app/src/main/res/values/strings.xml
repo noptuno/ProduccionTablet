@@ -15,7 +15,6 @@
         <item>KG</item>
         <item>G</item>
         <item>M</item>
-        <item>MM</item>
     </string-array>
 
     <string-array name="TIPOMATERIALID">
@@ -24,6 +23,7 @@
     </string-array>
 
     <string-array name="ABIERTAOCERRADA">
+        <item>Seleccionar</item>
         <item>Abierta</item>
         <item>Cerrada</item>
     </string-array>

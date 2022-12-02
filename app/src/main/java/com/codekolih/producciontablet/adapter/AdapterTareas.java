@@ -1,5 +1,7 @@
 package com.codekolih.producciontablet.adapter;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -13,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.ColorDiagram;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHolder> {
@@ -33,7 +38,6 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
     public AdapterTareas(List<Tareas> notes) {
         this.notes = notes;
     }
-
 
     @Override
     public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -105,33 +109,55 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
             observaciones = (TextView) item.findViewById(R.id.item_tarea_txt_obseraciones);
             layoutTareas= (LinearLayout) item.findViewById(R.id.layoutTareas);
 
-
         }
 
         public void bind(final Tareas tarea) {
-
           //  Log.e("cargoRecicler",tarea.toString());
-
           //  Random random = new Random();
-
 
             ColorDiagram a = new ColorDiagram();
 
            // int color = Color.argb(255,random.nextInt(256),(random.nextInt(256)),(random.nextInt(256)));
-            layoutTareas.setBackgroundColor(a.getColor());
 
-            serieynumero.setText(""+tarea.getNroDeSobre());
+            layoutTareas.setBackgroundColor(a.getColor());
+            serieynumero.setText(String.format("%s", tarea.getNroDeSobre()));
             concepto.setText(tarea.getDescripcion());
-            totalcantidad.setText(""+tarea.getMetrosAImprimir());
-            restante.setText(""+tarea.getMetrosPorRollo());
+
+            float cont = 0;
+            if (tarea.getProduccion_Lista().size()>0){
+                for (Produccion_Lista lg : tarea.getProduccion_Lista()) {
+
+                    for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+                        if ("SumMetrosImpresos".equals(entry.getKey())){
+                            if (entry.getValue().equals("0")){
+                                cont+= lg.getMetrosImpresos();
+                            }
+                        }  else if ("SumRollosFabricados".equals(entry.getKey())){
+                            if (entry.getValue().equals("0")){
+                                cont+= lg.getRollosFabricdos();
+                            }
+                        } else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
+                            if (entry.getValue().equals("0")){
+                                cont+= lg.getRollosEmpaquetados();
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            totalcantidad.setText(String.format("%s", tarea.getMetrosAImprimir()));
+            restante.setText(String.format("%s", cont));
+
+
+
+
             observaciones.setText(tarea.getObservaciones());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (onNoteSelectedListener != null) {
-
-
 
                         onNoteSelectedListener.onClick(tarea);
                     }

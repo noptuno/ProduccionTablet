@@ -49,8 +49,8 @@ import java.util.Map;
 public class Tarea_Activity extends AppCompatActivity {
 
     private TextView txt_imprenta, txt_usuario, txt_fecha,txt_hora;
-    private String MAQUINATIPOID = "";
-    private String MAQUINAID = "";
+    private int MAQUINATIPOID = 0;
+    private int MAQUINAID = 0;
     private RequestQueue requestQueue;
     private ArrayList<Tareas> listImprentas = new ArrayList<>();
     private AdapterTareas adapterTareas = new AdapterTareas();
@@ -110,11 +110,12 @@ public class Tarea_Activity extends AppCompatActivity {
 
         //pref
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        MAQUINATIPOID = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
-        MAQUINAID = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
+        MAQUINATIPOID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0"));
+        MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
         txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
         elegirTarea =  pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");
+
 
         //TODO Validar maquinatipoid y aquinaid
 
@@ -227,11 +228,22 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Tareas> response) {
 
+
+                List<Tareas> temp = new ArrayList<>();
+
+
+
+
                 adapterTareas.setNotes(response);
                 adapterTareas.notifyDataSetChanged();
 
 
                 for (Tareas lg : response) {
+
+                    if (lg.getTipoMaquinaId()==MAQUINATIPOID){
+
+                    }
+
                    // Log.e("Datos_tareas",lg.toString());
                     Log.e("ListTareas","Cod: " + lg.getTareaId()+" Cant produccion: "+ lg.getProduccion_Lista().size() + " cantbobinas: "+ lg.getBobinas().size());
 

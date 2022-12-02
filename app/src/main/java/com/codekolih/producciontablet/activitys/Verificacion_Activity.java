@@ -71,9 +71,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_verificacion_AnchoFinalRollo,
             edt_verificacion_CantidadPistasCortadas,
             edt_verificacion_PistasTroquelUsadas;
-
     private Spinner spi_verificacion_UnidadIdScrapInicial;
-
     private LinearLayout
             ly_EtiquetasPorRollo,
             ly_EtiquetasEnBanda,
@@ -121,7 +119,13 @@ public class Verificacion_Activity extends AppCompatActivity {
         variablesFind();
 
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
+
+        String nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
+        String maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
+        String tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
+
+
+        txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina,tipomaquinaid));
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
 
         httpLayer = new HttpLayer(this);

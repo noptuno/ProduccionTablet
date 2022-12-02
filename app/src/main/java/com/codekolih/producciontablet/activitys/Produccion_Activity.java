@@ -1,5 +1,9 @@
 package com.codekolih.producciontablet.activitys;
 
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
@@ -8,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,8 +42,11 @@ import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog {
@@ -46,6 +55,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     Pedido pedido_seleccionado;
     Produccion_Lista produccion_actual;
     Bobinas bobinas_actual;
+    private TextView  txt_imprenta,txt_usuario,txt_fecha,txt_hora;
+
     private TextView  txt_SerieYNro,txt_ArticuloId,txt_Cantidad,txt_Concepto;
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private AdapterBobinas adapterBobina = new AdapterBobinas();
@@ -58,7 +69,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private int produccionId;
     private int pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
     private int tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
-
+    private SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +83,12 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         httpLayer = new HttpLayer(this);
         recyclerViewCantidad = findViewById(R.id.produccion_cantidad_recycler);
         recyclerViewBobinas = findViewById(R.id.produccion_bobina_recycler);
+
+
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+        txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
+        txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
+
 
 
         //VALIDAR
@@ -172,10 +189,22 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         recyclerViewBobinas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerViewBobinas.setAdapter(adapterBobina);
 
-
         cargarTareaHttp(); // tarea y produccion_actual y bobina actual
         ocultarVariables();
-      //  cambioEstado();
+        cargarfecha();
+
+    }
+
+    private void cargarfecha() {
+
+        SimpleDateFormat dateFormatcorta = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat horaFormatcorta = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        String fechaCortaLocal = dateFormatcorta.format(date);
+        String horaCortaLocal = horaFormatcorta.format(date);
+
+        txt_fecha.setText(fechaCortaLocal);
+        txt_hora.setText(horaCortaLocal);
 
     }
 
@@ -244,64 +273,66 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void findrid() {
 
+        txt_imprenta = findViewById(R.id.produccion_txt_imprenta);
+        txt_usuario= findViewById(R.id.produccion_txt_usuario);
+        txt_fecha= findViewById(R.id.produccion_txt_fecha);
+        txt_hora= findViewById(R.id.produccion_txt_hora);
 
-                    txt_SerieYNro= findViewById(R.id.pro_txt_SerieYNro);
-                    txt_ArticuloId= findViewById(R.id.pro_txt_ArticuloId);
-                    txt_Cantidad= findViewById(R.id.pro_txt_Cantidad);
-                    txt_Concepto= findViewById(R.id.pro_txt_Concepto);
+        txt_SerieYNro= findViewById(R.id.pro_txt_SerieYNro);
+        txt_ArticuloId= findViewById(R.id.pro_txt_ArticuloId);
+        txt_Cantidad= findViewById(R.id.pro_txt_Cantidad);
+        txt_Concepto= findViewById(R.id.pro_txt_Concepto);
 
+        btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
+        btn_bobina = findViewById(R.id.produccion_btn_bobina);
+        btn_scrap = findViewById(R.id.produccion_btn_scrap);
+        btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
+        btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
 
+        txt_produccion_AnchoFinalRolloYGap = findViewById(R.id.produccion_txt_AnchoFinalRolloYGap);
+        txt_produccion_CantidadPistasImpresas = findViewById(R.id.produccion_txt_CantidadPistasImpresas);
+        txt_produccion_CantidadTintas = findViewById(R.id.produccion_txt_CantidadTintas);
+        txt_produccion_ScrapAjusteInicial = findViewById(R.id.produccion_txt_ScrapAjusteInicial);
+        txt_produccion_AnchoFinalRollo = findViewById(R.id.produccion_txt_AnchoFinalRollo);
+        txt_produccion_CantidadPistasCortadas = findViewById(R.id.produccion_txt_CantidadPistasCortadas);
+        txt_produccion_PistasTroquelUsadas = findViewById(R.id.produccion_txt_PistasTroquelUsadas);
+        txt_produccion_UnidadIdScrapInicial = findViewById(R.id.produccion_txt_UnidadIdScrapInicial);
 
-                btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
-                btn_bobina = findViewById(R.id.produccion_btn_bobina);
-                btn_scrap = findViewById(R.id.produccion_btn_scrap);
-                btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
-                btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
+        lyp_EtiquetasPorRollo= findViewById(R.id.lyp_EtiquetasPorRollo);
+        lyp_EtiquetasEnBanda= findViewById(R.id.lyp_EtiquetasEnBanda);
+        lyp_Pistas= findViewById(R.id.lyp_Pistas);
+        lyp_Observaciones= findViewById(R.id.lyp_Observaciones);
+        lyp_MetrosAImprimir= findViewById(R.id.lyp_MetrosAImprimir);
+        lyp_NroDeSobre= findViewById(R.id.lyp_NroDeSobre);
+        lyp_Descripcion= findViewById(R.id.lyp_Descripcion);
+        lyp_Cilindro= findViewById(R.id.lyp_Cilindro);
+        lyp_Z_AltoMasGap= findViewById(R.id.lyp_Z_AltoMasGap);
+        lyp_MetrosPorRollo= findViewById(R.id.lyp_MetrosPorRollo);
+        lyp_MetrosMatTroquelar= findViewById(R.id.lyp_MetrosMatTroquelar);
+        lyp_TroquelId= findViewById(R.id.lyp_TroquelId);
 
-                txt_produccion_AnchoFinalRolloYGap = findViewById(R.id.produccion_txt_AnchoFinalRolloYGap);
-                txt_produccion_CantidadPistasImpresas = findViewById(R.id.produccion_txt_CantidadPistasImpresas);
-                txt_produccion_CantidadTintas = findViewById(R.id.produccion_txt_CantidadTintas);
-                txt_produccion_ScrapAjusteInicial = findViewById(R.id.produccion_txt_ScrapAjusteInicial);
-                txt_produccion_AnchoFinalRollo = findViewById(R.id.produccion_txt_AnchoFinalRollo);
-                txt_produccion_CantidadPistasCortadas = findViewById(R.id.produccion_txt_CantidadPistasCortadas);
-                txt_produccion_PistasTroquelUsadas = findViewById(R.id.produccion_txt_PistasTroquelUsadas);
-                txt_produccion_UnidadIdScrapInicial = findViewById(R.id.produccion_txt_UnidadIdScrapInicial);
+        lyp_AnchoFinalRolloYGap = findViewById(R.id.lyp_AnchoFinalRolloYGap);
+        lyp_CantidadPistasImpresas = findViewById(R.id.lyp_CantidadPistasImpresas);
+        lyp_CantidadTintas = findViewById(R.id.lyp_CantidadTintas);
+        lyp_ScrapAjusteInicial = findViewById(R.id.lyp_ScrapAjusteInicial);
+        lyp_AnchoFinalRollo = findViewById(R.id.lyp_AnchoFinalRollo);
+        lyp_CantidadPistasCortadas = findViewById(R.id.lyp_CantidadPistasCortadas);
+        lyp_PistasTroquelUsadas = findViewById(R.id.lyp_PistasTroquelUsadas);
+        lyp_UnidadIdScrapInicial = findViewById(R.id.lyp_UnidadIdScrapInicial);
 
-                lyp_EtiquetasPorRollo= findViewById(R.id.lyp_EtiquetasPorRollo);
-                lyp_EtiquetasEnBanda= findViewById(R.id.lyp_EtiquetasEnBanda);
-                lyp_Pistas= findViewById(R.id.lyp_Pistas);
-                lyp_Observaciones= findViewById(R.id.lyp_Observaciones);
-                lyp_MetrosAImprimir= findViewById(R.id.lyp_MetrosAImprimir);
-                lyp_NroDeSobre= findViewById(R.id.lyp_NroDeSobre);
-                lyp_Descripcion= findViewById(R.id.lyp_Descripcion);
-                lyp_Cilindro= findViewById(R.id.lyp_Cilindro);
-                lyp_Z_AltoMasGap= findViewById(R.id.lyp_Z_AltoMasGap);
-                lyp_MetrosPorRollo= findViewById(R.id.lyp_MetrosPorRollo);
-                lyp_MetrosMatTroquelar= findViewById(R.id.lyp_MetrosMatTroquelar);
-                lyp_TroquelId= findViewById(R.id.lyp_TroquelId);
+        txt_produccion_txt_NroDeSobre = findViewById(R.id.produccion_txt_NroDeSobre);
+        txt_produccion_txt_Descripcion = findViewById(R.id.produccion_txt_Descripcion);
+        txt_produccion_txt_MetrosAImprimir = findViewById(R.id.produccion_txt_MetrosAImprimir);
+        txt_produccion_txt_MetrosPorRollo = findViewById(R.id.produccion_txt_MetrosPorRollo);
+        txt_produccion_txt_Z_AltoMasGap = findViewById(R.id.produccion_txt_Z_AltoMasGap);
+        txt_produccion_txt_Cilindro = findViewById(R.id.produccion_txt_Cilindro);
+        txt_produccion_txt_Pistas = findViewById(R.id.produccion_txt_Pistas);
+        txt_produccion_txt_EtiquetasEnBanda = findViewById(R.id.produccion_txt_EtiquetasEnBanda);
+        txt_produccion_txt_EtiquetasPorRollo = findViewById(R.id.produccion_txt_EtiquetasPorRollo);
 
-                lyp_AnchoFinalRolloYGap = findViewById(R.id.lyp_AnchoFinalRolloYGap);
-                lyp_CantidadPistasImpresas = findViewById(R.id.lyp_CantidadPistasImpresas);
-                lyp_CantidadTintas = findViewById(R.id.lyp_CantidadTintas);
-                lyp_ScrapAjusteInicial = findViewById(R.id.lyp_ScrapAjusteInicial);
-                lyp_AnchoFinalRollo = findViewById(R.id.lyp_AnchoFinalRollo);
-                lyp_CantidadPistasCortadas = findViewById(R.id.lyp_CantidadPistasCortadas);
-                lyp_PistasTroquelUsadas = findViewById(R.id.lyp_PistasTroquelUsadas);
-                lyp_UnidadIdScrapInicial = findViewById(R.id.lyp_UnidadIdScrapInicial);
-
-                txt_produccion_txt_NroDeSobre = findViewById(R.id.produccion_txt_NroDeSobre);
-                txt_produccion_txt_Descripcion = findViewById(R.id.produccion_txt_Descripcion);
-                txt_produccion_txt_MetrosAImprimir = findViewById(R.id.produccion_txt_MetrosAImprimir);
-                txt_produccion_txt_MetrosPorRollo = findViewById(R.id.produccion_txt_MetrosPorRollo);
-                txt_produccion_txt_Z_AltoMasGap = findViewById(R.id.produccion_txt_Z_AltoMasGap);
-                txt_produccion_txt_Cilindro = findViewById(R.id.produccion_txt_Cilindro);
-                txt_produccion_txt_Pistas = findViewById(R.id.produccion_txt_Pistas);
-                txt_produccion_txt_EtiquetasEnBanda = findViewById(R.id.produccion_txt_EtiquetasEnBanda);
-                txt_produccion_txt_EtiquetasPorRollo = findViewById(R.id.produccion_txt_EtiquetasPorRollo);
-
-                txt_produccion_txt_TroquelId= findViewById(R.id.produccion_txt_TroquelId);
-                txt_produccion_txt_MetrosMatTroquelar= findViewById(R.id.produccion_txt_MetrosMatTroquelar);
-                txt_produccion_txt_Observaciones= findViewById(R.id.produccion_txt_Observaciones);
+        txt_produccion_txt_TroquelId= findViewById(R.id.produccion_txt_TroquelId);
+        txt_produccion_txt_MetrosMatTroquelar= findViewById(R.id.produccion_txt_MetrosMatTroquelar);
+        txt_produccion_txt_Observaciones= findViewById(R.id.produccion_txt_Observaciones);
 
     }
 
@@ -382,13 +413,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         }
 
-
-
-
-
-
-
-
         if (tarea_Seleccionada.getBobinas().size()>0){
             for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
                 Log.e("Producción_Bobin",lg.toString());
@@ -410,8 +434,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             txt_produccion_txt_Pistas.setText(String.format("%s",tarea_Seleccionada.getPistas()));
             txt_produccion_txt_EtiquetasEnBanda.setText(String.format("%s",tarea_Seleccionada.getEtiquetasEnBanda()));
             txt_produccion_txt_EtiquetasPorRollo.setText(String.format("%s",tarea_Seleccionada.getEtiquetasPorRollo()));
-
-            txt_produccion_txt_TroquelId.setText(tarea_Seleccionada.getTroquelId());;
+            txt_produccion_txt_TroquelId.setText(String.format("%s",tarea_Seleccionada.getTroquelId()));;
             txt_produccion_txt_MetrosMatTroquelar.setText(String.format("%s",tarea_Seleccionada.getMetrosMatTroquelar()));
             txt_produccion_txt_Observaciones.setText(tarea_Seleccionada.getObservaciones());
 
@@ -419,15 +442,14 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         if (produccion_actual!=null){
             //datos cargados
-            txt_produccion_AnchoFinalRolloYGap.setText(""+produccion_actual.getAnchoFinalRolloYGap());
-            txt_produccion_CantidadPistasImpresas.setText(""+produccion_actual.getCantidadPistasImpresas());
-            txt_produccion_CantidadTintas.setText(""+produccion_actual.getCantidadTintas());
-            txt_produccion_ScrapAjusteInicial.setText(""+produccion_actual.getScrapAjusteInicial());
-            txt_produccion_AnchoFinalRollo.setText(""+produccion_actual.getAnchoFinalRollo());
-            txt_produccion_CantidadPistasCortadas.setText(""+produccion_actual.getCantidadPistasCortadas());
-            txt_produccion_PistasTroquelUsadas.setText(""+produccion_actual.getPistasTroquelUsadas());
-            txt_produccion_UnidadIdScrapInicial.setText(""+produccion_actual.getScrapAjusteInicial_Unidades());
-
+            txt_produccion_AnchoFinalRolloYGap.setText(String.format("%s", produccion_actual.getAnchoFinalRolloYGap()));
+            txt_produccion_CantidadPistasImpresas.setText(String.format("%s", produccion_actual.getCantidadPistasImpresas()));
+            txt_produccion_CantidadTintas.setText(String.format("%s", produccion_actual.getCantidadTintas()));
+            txt_produccion_ScrapAjusteInicial.setText(String.format("%s", produccion_actual.getScrapAjusteInicial()));
+            txt_produccion_AnchoFinalRollo.setText(String.format("%s", produccion_actual.getAnchoFinalRollo()));
+            txt_produccion_CantidadPistasCortadas.setText(String.format("%s", produccion_actual.getCantidadPistasCortadas()));
+            txt_produccion_PistasTroquelUsadas.setText(String.format("%s", produccion_actual.getPistasTroquelUsadas()));
+            txt_produccion_UnidadIdScrapInicial.setText(String.format("%s", produccion_actual.getScrapAjusteInicial_Unidades()));
         }
 
     }
@@ -437,9 +459,30 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         Log.e("ProduccionActivity","Cantidad: " + valorFloat);
 
-        produccion_actual.setRollosEmpaquetados(valorFloat);
-        produccion_actual.setRollosFabricdos(valorFloat);
-        produccion_actual.setMetrosImpresos(valorFloat);
+        for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+
+            if ("SumMetrosImpresos".equals(entry.getKey())){
+
+                if (entry.getValue().equals("0")){
+                    produccion_actual.setMetrosImpresos(valorFloat);
+                }
+
+
+            } else if ("SumRollosFabricados".equals(entry.getKey())){
+                if (entry.getValue().equals("0")){
+                    produccion_actual.setRollosFabricdos(valorFloat);
+                }
+
+
+            }
+            else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
+                if (entry.getValue().equals("0")){
+                    produccion_actual.setRollosEmpaquetados(valorFloat);
+                }
+
+
+            }
+        }
 
         Map<String, Object> produccion = new HashMap<>();
         produccion.put("ProduccionId", produccionId);
@@ -461,6 +504,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         produccion.put("PistasTroquelUsadas", produccion_actual.getPistasTroquelUsadas());
         produccion.put("RollosEmpaquetados", produccion_actual.getRollosEmpaquetados());
         produccion.put("UsuarioId", produccion_actual.getUsuarioId());
+
+
+
 
 
         httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {

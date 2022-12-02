@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Ancho"
+                    android:text="Ancho (Milimetros)"
                     android:textSize="24sp" />
 
                 <EditText
@@ -119,8 +119,10 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="number"
+                    android:maxLength="5"
+                    android:numeric="decimal"
                     android:selectAllOnFocus="true"
-                    android:text="15"
+                    android:text="0,0"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -147,9 +149,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="number"
+                    android:inputType="number|numberDecimal"
                     android:selectAllOnFocus="true"
-                    android:text="50"
+                    android:text="0,0"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />
