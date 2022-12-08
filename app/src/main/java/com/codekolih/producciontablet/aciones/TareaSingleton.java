@@ -54,6 +54,28 @@ public class TareaSingleton {
             variablesGenrales.put("cinco", "0");
             variablesGenrales.put("seis", "8");
 
+//valdiar
+            variablesGenrales.put("1", "0"); //control del boceto o muestra contra la impresión de largada
+            variablesGenrales.put("2", "0"); //control de tipo de papel correcto
+            variablesGenrales.put("3", "0"); //control que el trabajo cumpla con la especificación
+            variablesGenrales.put("4", "0"); //control del troquelado y del estado del line
+            variablesGenrales.put("5", "0"); // control del sentido de bobinado.
+            variablesGenrales.put("6", "8"); // control para numerados (datos de pie, dirección y numeración)
+            variablesGenrales.put("7", "8"); //control para numerados (armado y control de numeración)
+            variablesGenrales.put("8", "8"); //control para largo fijo (largo de ticket)
+            variablesGenrales.put("9", "8"); //control tipo de papel y buje
+            variablesGenrales.put("10", "8");// Control del armado de la medida
+
+            //Bobina
+            variablesGenrales.put("11", "0");// control de calidad de la impresión
+            variablesGenrales.put("12", "0");//control de calidad del curado UV
+            variablesGenrales.put("13", "0");//control de calidad del troquelado y del estado del liner
+            variablesGenrales.put("14", "8"); //control de numeración
+            variablesGenrales.put("15", "8");// control del sentido de bobinado
+            variablesGenrales.put("16", "8");// control de la calidad del final del rollo
+
+
+
             //tarea unicavez
             variablesGenrales.put("SumCantidad", "8"); //FR,FE,E
             variablesGenrales.put("EtiquetasPorRollo", "8");
@@ -99,6 +121,27 @@ public class TareaSingleton {
             variablesGenrales.put("cinco", "8");
             variablesGenrales.put("seis", "8");
 
+            //valdiar
+            variablesGenrales.put("1", "0"); //control del boceto o muestra contra la impresión de largada
+            variablesGenrales.put("2", "0"); //control de tipo de papel correcto
+            variablesGenrales.put("3", "0"); //control que el trabajo cumpla con la especificación
+            variablesGenrales.put("4", "8"); //control del troquelado y del estado del line
+            variablesGenrales.put("5", "0"); // control del sentido de bobinado.
+            variablesGenrales.put("6", "0"); // control para numerados (datos de pie, dirección y numeración)
+            variablesGenrales.put("7", "0"); //control para numerados (armado y control de numeración)
+            variablesGenrales.put("8", "0"); //control para largo fijo (largo de ticket)
+            variablesGenrales.put("9", "8"); //control tipo de papel y buje
+            variablesGenrales.put("10", "8");// Control del armado de la medida
+
+            //Bobina
+            variablesGenrales.put("11", "0");// control de calidad de la impresión
+            variablesGenrales.put("12", "8");//control de calidad del curado UV
+            variablesGenrales.put("13", "8");//control de calidad del troquelado y del estado del liner
+            variablesGenrales.put("14", "0"); //control de numeración
+            variablesGenrales.put("15", "8");// control del sentido de bobinado
+            variablesGenrales.put("16", "8");// control de la calidad del final del rollo
+
+
             variablesGenrales.put("SumCantidad", "0");
             variablesGenrales.put("EtiquetasPorRollo", "8");
             variablesGenrales.put("EtiquetasEnBanda", "8");
@@ -135,6 +178,27 @@ public class TareaSingleton {
         }else if (idtipomaquina.equals("3")){
 
             Log.e("VariablesOcultar",idtipomaquina);
+
+
+            //valdiar
+            variablesGenrales.put("1", "8"); //control del boceto o muestra contra la impresión de largada
+            variablesGenrales.put("2", "8"); //control de tipo de papel correcto
+            variablesGenrales.put("3", "0"); //control que el trabajo cumpla con la especificación
+            variablesGenrales.put("4", "8"); //control del troquelado y del estado del line
+            variablesGenrales.put("5", "8"); // control del sentido de bobinado.
+            variablesGenrales.put("6", "8"); // control para numerados (datos de pie, dirección y numeración)
+            variablesGenrales.put("7", "8"); //control para numerados (armado y control de numeración)
+            variablesGenrales.put("8", "8"); //control para largo fijo (largo de ticket)
+            variablesGenrales.put("9", "0"); //control tipo de papel y buje
+            variablesGenrales.put("10", "8");// Control del armado de la medida
+
+            //Bobina
+            variablesGenrales.put("11", "0");// control de calidad de la impresión
+            variablesGenrales.put("12", "0");//control de calidad del curado UV
+            variablesGenrales.put("13", "0");//control de calidad del troquelado y del estado del liner
+            variablesGenrales.put("14", "8"); //control de numeración
+            variablesGenrales.put("15", "0");// control del sentido de bobinado
+            variablesGenrales.put("16", "8");// control de la calidad del final del rollo
 
             variablesGenrales.put("uno", "0");
             variablesGenrales.put("dos", "0");
@@ -178,6 +242,27 @@ public class TareaSingleton {
 
             Log.e("VariablesOcultar",idtipomaquina);
 
+
+            //valdiar
+            variablesGenrales.put("1", "8"); //control del boceto o muestra contra la impresión de largada
+            variablesGenrales.put("2", "8"); //control de tipo de papel correcto
+            variablesGenrales.put("3", "0"); //control que el trabajo cumpla con la especificación
+            variablesGenrales.put("4", "8"); //control del troquelado y del estado del line
+            variablesGenrales.put("5", "0"); // control del sentido de bobinado.
+            variablesGenrales.put("6", "8"); // control para numerados (datos de pie, dirección y numeración)
+            variablesGenrales.put("7", "8"); //control para numerados (armado y control de numeración)
+            variablesGenrales.put("8", "8"); //control para largo fijo (largo de ticket)
+            variablesGenrales.put("9", "0"); //control tipo de papel y buje
+            variablesGenrales.put("10", "0");// Control del armado de la medida
+
+            //Bobina
+            variablesGenrales.put("11", "8");// control de calidad de la impresión
+            variablesGenrales.put("12", "8");//control de calidad del curado UV
+            variablesGenrales.put("13", "8");//control de calidad del troquelado y del estado del liner
+            variablesGenrales.put("14", "8"); //control de numeración
+            variablesGenrales.put("15", "0");// control del sentido de bobinado
+            variablesGenrales.put("16", "0");// control de la calidad del final del rollo
+
             variablesGenrales.put("uno", "0");
             variablesGenrales.put("dos", "8");
             variablesGenrales.put("tres", "8");
@@ -220,6 +305,28 @@ public class TareaSingleton {
         }else if (idtipomaquina.equals("5")){
 
             Log.e("VariablesOcultar",idtipomaquina);
+
+
+            //valdiar
+            variablesGenrales.put("1", "8"); //control del boceto o muestra contra la impresión de largada
+            variablesGenrales.put("2", "8"); //control de tipo de papel correcto
+            variablesGenrales.put("3", "8"); //control que el trabajo cumpla con la especificación
+            variablesGenrales.put("4", "8"); //control del troquelado y del estado del line
+            variablesGenrales.put("5", "8"); // control del sentido de bobinado.
+            variablesGenrales.put("6", "8"); // control para numerados (datos de pie, dirección y numeración)
+            variablesGenrales.put("7", "8"); //control para numerados (armado y control de numeración)
+            variablesGenrales.put("8", "8"); //control para largo fijo (largo de ticket)
+            variablesGenrales.put("9", "8"); //control tipo de papel y buje
+            variablesGenrales.put("10", "8");// Control del armado de la medida
+
+            //Bobina
+            variablesGenrales.put("11", "8");// control de calidad de la impresión
+            variablesGenrales.put("12", "8");//control de calidad del curado UV
+            variablesGenrales.put("13", "8");//control de calidad del troquelado y del estado del liner
+            variablesGenrales.put("14", "8"); //control de numeración
+            variablesGenrales.put("15", "8");// control del sentido de bobinado
+            variablesGenrales.put("16", "8");// control de la calidad del final del rollo
+
 
             variablesGenrales.put("uno", "0");
             variablesGenrales.put("dos", "0");

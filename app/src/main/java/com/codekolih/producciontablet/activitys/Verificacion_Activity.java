@@ -94,7 +94,10 @@ public class Verificacion_Activity extends AppCompatActivity {
             ly_PistasTroquelUsadas,
             ly_UnidadIdScrapInicial;
 
-    private Switch uno,dos,tres,cuatro,cinco,seis;
+
+    private LinearLayout uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,dies;
+
+
     private TextView
             txt_verificacion_txt_NroDeSobre,
             txt_verificacion_txt_Descripcion,
@@ -243,9 +246,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         cargarfecha();
         CargarPedido();
 
-
        // CargarPedido();
-
 
     }
 
@@ -429,12 +430,16 @@ public class Verificacion_Activity extends AppCompatActivity {
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
         btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
 
-        uno= findViewById(R.id.switch1);
-        dos= findViewById(R.id.switch2);
-        tres= findViewById(R.id.switch3);
-        cuatro= findViewById(R.id.switch4);
-        cinco= findViewById(R.id.switch5);
-        seis= findViewById(R.id.switch6);
+        uno= findViewById(R.id.ly_uno);
+        dos= findViewById(R.id.ly_dos);
+        tres= findViewById(R.id.ly_tres);
+        cuatro= findViewById(R.id.ly_cuatro);
+        cinco= findViewById(R.id.ly_cinco);
+        seis= findViewById(R.id.ly_seis);
+        siete= findViewById(R.id.ly_siete);
+        ocho= findViewById(R.id.ly_ocho);
+        nueve= findViewById(R.id.ly_nueve);
+        dies= findViewById(R.id.ly_dies);
 
 
 
@@ -490,24 +495,31 @@ public class Verificacion_Activity extends AppCompatActivity {
 
             System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
 
-            if ("uno".equals(entry.getKey())){
+            if ("1".equals(entry.getKey())){
                 uno.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("dos".toString().equals(entry.getKey())){
+            }else if ("2".toString().equals(entry.getKey())){
                 dos.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("tres".toString().equals(entry.getKey())){
+            }else if ("3".toString().equals(entry.getKey())){
                 tres.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("cuatro".toString().equals(entry.getKey())){
+            }else if ("4".toString().equals(entry.getKey())){
                 cuatro.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("cinco".toString().equals(entry.getKey())){
+            }else if ("5".toString().equals(entry.getKey())){
                 cinco.setVisibility(parseInt(entry.getValue()));
-            }
-            if ("seis".toString().equals(entry.getKey())){
+            }else if ("6".toString().equals(entry.getKey())){
                 seis.setVisibility(parseInt(entry.getValue()));
+            }else if ("7".toString().equals(entry.getKey())){
+                siete.setVisibility(parseInt(entry.getValue()));
+            }else if ("8".toString().equals(entry.getKey())){
+                ocho.setVisibility(parseInt(entry.getValue()));
+            }else if ("9".toString().equals(entry.getKey())){
+                nueve.setVisibility(parseInt(entry.getValue()));
+            }else if ("10".toString().equals(entry.getKey())){
+                dies.setVisibility(parseInt(entry.getValue()));
             }
+
+
+
+
 
             if ("EtiquetasPorRollo".equals(entry.getKey())){
                 ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
