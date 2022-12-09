@@ -29,30 +29,16 @@
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="VALIDAR"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayoutVerificar"
-            app:layout_constraintHorizontal_bias="0.605"
-            app:layout_constraintStart_toStartOf="@+id/linearLayoutVerificar"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="600dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             android:padding="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayoutVerificar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView39">
 
@@ -67,17 +53,16 @@
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="ProveedorNombre"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/dialogbobina_spi_ProveedorNombre"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:entries="@android:array/emailAddressTypes"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -92,16 +77,16 @@
                 <TextView
                     android:id="@+id/textView20"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Lote"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/dialogbobina_edt_Lote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:selectAllOnFocus="true"
@@ -121,22 +106,22 @@
                 <TextView
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Ancho (Milimetros)"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/dialogbobina_edt_Ancho"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:ems="10"
                     android:inputType="number"
                     android:maxLength="5"
                     android:numeric="decimal"
                     android:selectAllOnFocus="true"
-                    android:text="0,0"
+                    android:text="0"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -152,20 +137,20 @@
                 <TextView
                     android:id="@+id/textView23"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="DefectuosaKg"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/dialogbobina_edt_DefectuosaKg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:ems="10"
                     android:inputType="number|numberDecimal"
                     android:selectAllOnFocus="true"
-                    android:text="0,0"
+                    android:text="0.0"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -181,106 +166,28 @@
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="EsAbiertaoCerrada"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/dialogbobina_spi_EsAbiertaoCerrada"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:entries="@array/ABIERTAOCERRADA"
                     android:visibility="visible"
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/dialogbobina_btn_guardar2"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#4CAF50"
-            android:text="Guardar"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/dialogbobina_btn_cancelar2"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="24dp"
-            android:backgroundTint="#F44336"
-            android:text="Cancelar"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/dialogbobina_btn_guardar2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/dialogbobina_btn_guardar2" />
-
-        <LinearLayout
-            android:id="@+id/linearLayoutVerificar"
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/dialogbobina_btn_guardar2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18">
-
-            <LinearLayout
-                android:id="@+id/ly_once"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <Switch
-                    android:id="@+id/once"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:switchTextAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:text="Control de calidad de la impresión"
-                    android:textSize="24sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ly_doce"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <Switch
-                    android:id="@+id/doce"
-                    android:layout_width="400dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Control de calidad del curado UV"
-                    android:textSize="24sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/ly_trece"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
 
                 <Switch
                     android:id="@+id/trece"
@@ -296,8 +203,8 @@
                 android:id="@+id/ly_catorce"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
 
                 <Switch
                     android:id="@+id/catorce"
@@ -310,11 +217,46 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ly_once"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <Switch
+                    android:id="@+id/once"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:switchTextAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:text="Control de calidad de la impresión"
+                    android:textSize="24sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_dieciseis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <Switch
+                    android:id="@+id/dieciseis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Control de la calidad del final del rollo"
+                    android:textSize="24sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ly_quince"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
 
                 <Switch
                     android:id="@+id/quince"
@@ -327,24 +269,61 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ly_dieciseis"
+                android:id="@+id/ly_doce"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
 
                 <Switch
-                    android:id="@+id/deiciseis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/doce"
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Control de la calidad del final del rollo"
+                    android:text="Control de calidad del curado UV"
                     android:textSize="24sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
-
         </LinearLayout>
+
+        <Button
+            android:id="@+id/dialogbobina_btn_guardar2"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#4CAF50"
+            android:text="Guardar"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dialogbobina_btn_cancelar2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/dialogbobina_btn_cancelar2"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#F44336"
+            android:text="Cancelar"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/dialogbobina_btn_guardar2"
+            app:layout_constraintEnd_toStartOf="@+id/dialogbobina_btn_guardar2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

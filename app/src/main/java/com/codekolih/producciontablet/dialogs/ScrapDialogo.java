@@ -69,11 +69,15 @@ public class ScrapDialogo {
             public void onClick(View view) {
 
                 try{
+
                     interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
                     dialogo.dismiss();
+
                 }catch (Exception e){
+
                     interfaz_scrap.ResultadoScrapDialogo(0,"KG");
                     dialogo.dismiss();
+
                 }
 
 

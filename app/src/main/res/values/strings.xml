@@ -12,6 +12,7 @@
 
 
     <string-array name="UNIDADES">
+        <item>Seleccionar</item>
         <item>KG</item>
         <item>G</item>
         <item>M</item>

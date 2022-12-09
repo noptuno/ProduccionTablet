@@ -47,12 +47,6 @@ public class TareaSingleton {
             Log.e("VariablesOcultar",idtipomaquina);
 
             //pregutnas
-            variablesGenrales.put("uno", "0");
-            variablesGenrales.put("dos", "0");
-            variablesGenrales.put("tres", "0");
-            variablesGenrales.put("cuatro", "0");
-            variablesGenrales.put("cinco", "0");
-            variablesGenrales.put("seis", "8");
 
 //valdiar
             variablesGenrales.put("1", "0"); //control del boceto o muestra contra la impresión de largada
@@ -114,12 +108,6 @@ public class TareaSingleton {
 
             Log.e("VariablesOcultar",idtipomaquina);
 
-            variablesGenrales.put("uno", "0");
-            variablesGenrales.put("dos", "0");
-            variablesGenrales.put("tres", "0");
-            variablesGenrales.put("cuatro", "0");
-            variablesGenrales.put("cinco", "8");
-            variablesGenrales.put("seis", "8");
 
             //valdiar
             variablesGenrales.put("1", "0"); //control del boceto o muestra contra la impresión de largada
@@ -200,12 +188,6 @@ public class TareaSingleton {
             variablesGenrales.put("15", "0");// control del sentido de bobinado
             variablesGenrales.put("16", "8");// control de la calidad del final del rollo
 
-            variablesGenrales.put("uno", "0");
-            variablesGenrales.put("dos", "0");
-            variablesGenrales.put("tres", "8");
-            variablesGenrales.put("cuatro", "8");
-            variablesGenrales.put("cinco", "8");
-            variablesGenrales.put("seis", "8");
 
             variablesGenrales.put("SumCantidad", "0");
             variablesGenrales.put("EtiquetasPorRollo", "8");
@@ -238,6 +220,7 @@ public class TareaSingleton {
             variablesGenrales.put("Ancho", "0");
             variablesGenrales.put("EsAbiertaoCerrada", "0");
             variablesGenrales.put("DefectuosaKg", "0");
+
         }else if (idtipomaquina.equals("4")){
 
             Log.e("VariablesOcultar",idtipomaquina);
@@ -263,12 +246,6 @@ public class TareaSingleton {
             variablesGenrales.put("15", "0");// control del sentido de bobinado
             variablesGenrales.put("16", "0");// control de la calidad del final del rollo
 
-            variablesGenrales.put("uno", "0");
-            variablesGenrales.put("dos", "8");
-            variablesGenrales.put("tres", "8");
-            variablesGenrales.put("cuatro", "8");
-            variablesGenrales.put("cinco", "8");
-            variablesGenrales.put("seis", "8");
 
             variablesGenrales.put("SumCantidad", "0");
             variablesGenrales.put("EtiquetasPorRollo", "0");
@@ -327,13 +304,6 @@ public class TareaSingleton {
             variablesGenrales.put("15", "8");// control del sentido de bobinado
             variablesGenrales.put("16", "8");// control de la calidad del final del rollo
 
-
-            variablesGenrales.put("uno", "0");
-            variablesGenrales.put("dos", "0");
-            variablesGenrales.put("tres", "0");
-            variablesGenrales.put("cuatro", "0");
-            variablesGenrales.put("cinco", "0");
-            variablesGenrales.put("seis", "0");
 
 
             variablesGenrales.put("SumCantidad", "0");

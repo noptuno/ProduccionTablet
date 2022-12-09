@@ -131,6 +131,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
                         TareaSingleton.SingletonInstance().setTarea(note);
 
+
                         Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
                         intent.putExtra("tarea", note);
                         startActivity(intent);
@@ -141,8 +142,10 @@ public class Tarea_Activity extends AppCompatActivity {
                         estado.put("EstadoId", "A1");
                         estado.put("TipoEstadoId","I" );
                         cambioEstado(estado,note);
-
                         finish();
+
+
+
 
                     }
 

@@ -43,6 +43,14 @@ import com.codekolih.producciontablet.dialogs.PdfActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,6 +79,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             edt_verificacion_AnchoFinalRollo,
             edt_verificacion_CantidadPistasCortadas,
             edt_verificacion_PistasTroquelUsadas;
+
     private Spinner spi_verificacion_UnidadIdScrapInicial;
     private LinearLayout
             ly_EtiquetasPorRollo,
@@ -93,10 +102,9 @@ public class Verificacion_Activity extends AppCompatActivity {
             ly_CantidadPistasCortadas,
             ly_PistasTroquelUsadas,
             ly_UnidadIdScrapInicial;
+    private LinearLayout ly_uno,ly_dos,ly_tres,ly_cuatro,ly_cinco,ly_seis,ly_siete,ly_ocho,ly_nueve,ly_dies;
 
-
-    private LinearLayout uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,dies;
-
+    private Switch uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,dies;
 
     private TextView
             txt_verificacion_txt_NroDeSobre,
@@ -110,7 +118,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_EtiquetasPorRollo;
 
     Button btn_guardar, btn_verpdf, btn_cancelar;
-    String UnidadIdScrapInicial= "KG";
+    String UnidadIdScrapInicial= "Seleccionar";
     private SharedPreferences pref;
     private boolean permisosaceptados = false;
 
@@ -196,25 +204,32 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (validarVariables()){
 
-                AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
-                build4.setMessage("¿Desea avanzar a produccion? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
+                    build4.setMessage("¿Desea avanzar a produccion? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                        cargarVerificacion();
+                            cargarVerificacion();
 
-                    }
+                        }
 
 
-                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-                AlertDialog alertDialog4 = build4.create();
-                alertDialog4.show();
+                        }
+                    });
+                    AlertDialog alertDialog4 = build4.create();
+                    alertDialog4.show();
+
+                }else{
+                    System.out.println("Error faltan datos");
+
+                }
+
 
 
 /*
@@ -233,6 +248,9 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+              //  File file = new File();
+
+              //  downloadFile("\\192.168.234.9\\Public\\PDF\\logopdf.pdf",file);
 
                 Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
                 startActivity(intent);
@@ -249,6 +267,29 @@ public class Verificacion_Activity extends AppCompatActivity {
        // CargarPedido();
 
     }
+    private static void downloadFile(String url, File outputFile) {
+        try {
+            URL u = new URL(url);
+            URLConnection conn = u.openConnection();
+            int contentLength = conn.getContentLength();
+
+            DataInputStream stream = new DataInputStream(u.openStream());
+
+            byte[] buffer = new byte[contentLength];
+            stream.readFully(buffer);
+            stream.close();
+
+            DataOutputStream fos = new DataOutputStream(new FileOutputStream(outputFile));
+            fos.write(buffer);
+            fos.flush();
+            fos.close();
+        } catch(FileNotFoundException e) {
+            return; // swallow a 404
+        } catch (IOException e) {
+            return; // swallow a 404
+        }
+    }
+
 
     private void CargarPedido() {
 
@@ -430,18 +471,27 @@ public class Verificacion_Activity extends AppCompatActivity {
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
         btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
 
-        uno= findViewById(R.id.ly_uno);
-        dos= findViewById(R.id.ly_dos);
-        tres= findViewById(R.id.ly_tres);
-        cuatro= findViewById(R.id.ly_cuatro);
-        cinco= findViewById(R.id.ly_cinco);
-        seis= findViewById(R.id.ly_seis);
-        siete= findViewById(R.id.ly_siete);
-        ocho= findViewById(R.id.ly_ocho);
-        nueve= findViewById(R.id.ly_nueve);
-        dies= findViewById(R.id.ly_dies);
+        ly_uno= findViewById(R.id.ly_uno);
+        ly_dos= findViewById(R.id.ly_dos);
+        ly_tres= findViewById(R.id.ly_tres);
+        ly_cuatro= findViewById(R.id.ly_cuatro);
+        ly_cinco= findViewById(R.id.ly_cinco);
+        ly_seis= findViewById(R.id.ly_seis);
+        ly_siete= findViewById(R.id.ly_siete);
+        ly_ocho= findViewById(R.id.ly_ocho);
+        ly_nueve= findViewById(R.id.ly_nueve);
+        ly_dies= findViewById(R.id.ly_dies);
 
-
+        uno= findViewById(R.id.uno);
+        dos= findViewById(R.id.dos);
+        tres= findViewById(R.id.tres);
+        cuatro= findViewById(R.id.cuatro);
+        cinco= findViewById(R.id.cinco);
+        seis= findViewById(R.id.seis);
+        siete= findViewById(R.id.siete);
+        ocho= findViewById(R.id.ocho);
+        nueve= findViewById(R.id.nueve);
+        dies= findViewById(R.id.dies);
 
         ly_EtiquetasPorRollo= findViewById(R.id.ly_EtiquetasPorRollo);
         ly_EtiquetasEnBanda= findViewById(R.id.ly_EtiquetasEnBanda);
@@ -496,30 +546,26 @@ public class Verificacion_Activity extends AppCompatActivity {
             System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
 
             if ("1".equals(entry.getKey())){
-                uno.setVisibility(parseInt(entry.getValue()));
+                ly_uno.setVisibility(parseInt(entry.getValue()));
             }else if ("2".toString().equals(entry.getKey())){
-                dos.setVisibility(parseInt(entry.getValue()));
+                ly_dos.setVisibility(parseInt(entry.getValue()));
             }else if ("3".toString().equals(entry.getKey())){
-                tres.setVisibility(parseInt(entry.getValue()));
+                ly_tres.setVisibility(parseInt(entry.getValue()));
             }else if ("4".toString().equals(entry.getKey())){
-                cuatro.setVisibility(parseInt(entry.getValue()));
+                ly_cuatro.setVisibility(parseInt(entry.getValue()));
             }else if ("5".toString().equals(entry.getKey())){
-                cinco.setVisibility(parseInt(entry.getValue()));
+                ly_cinco.setVisibility(parseInt(entry.getValue()));
             }else if ("6".toString().equals(entry.getKey())){
-                seis.setVisibility(parseInt(entry.getValue()));
+                ly_seis.setVisibility(parseInt(entry.getValue()));
             }else if ("7".toString().equals(entry.getKey())){
-                siete.setVisibility(parseInt(entry.getValue()));
+                ly_siete.setVisibility(parseInt(entry.getValue()));
             }else if ("8".toString().equals(entry.getKey())){
-                ocho.setVisibility(parseInt(entry.getValue()));
+                ly_ocho.setVisibility(parseInt(entry.getValue()));
             }else if ("9".toString().equals(entry.getKey())){
-                nueve.setVisibility(parseInt(entry.getValue()));
+                ly_nueve.setVisibility(parseInt(entry.getValue()));
             }else if ("10".toString().equals(entry.getKey())){
-                dies.setVisibility(parseInt(entry.getValue()));
+                ly_dies.setVisibility(parseInt(entry.getValue()));
             }
-
-
-
-
 
             if ("EtiquetasPorRollo".equals(entry.getKey())){
                 ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
@@ -576,11 +622,191 @@ public class Verificacion_Activity extends AppCompatActivity {
     }
 
 
+private boolean validarVariables(){
 
-    private void toastPersonalziado(String msg){
+        boolean validado = true;
 
-    Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+    for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
 
+        System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+
+
+        //switch
+        if ("1".equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+                if (!uno.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+        }else if ("2".toString().equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                if (!dos.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+        }else if ("3".toString().equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+                if (!tres.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }else if ("4".toString().equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+                if (!cuatro.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }else if ("5".toString().equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+
+                if (!cinco.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }else if ("6".toString().equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+                if (!seis.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }else if ("7".toString().equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                if (!siete.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }else if ("8".toString().equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                if (!ocho.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }else if ("9".toString().equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                if (!nueve.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }else if ("10".toString().equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                if (!dies.isChecked()){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+
+        //valdiar datos
+        else if ("AnchoFinalRolloYGap".equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+
+                String a = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
+                if(a.equals("0")){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+
+        else if ("CantidadPistasImpresas".equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                String a = edt_verificacion_CantidadPistasImpresas.getText().toString();
+                if(a.equals("0")){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+        else if ("CantidadTintas".equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                String a = edt_verificacion_CantidadTintas.getText().toString();
+                    if(a.equals("0")){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+        else if ("ScrapAjusteInicial".equals(entry.getKey())){
+
+            if (entry.getValue().equals("0")){
+                String a = edt_verificacion_ScrapAjusteInicial.getText().toString();
+                if (a.equals("0")){
+                    validado = false;
+                    break;
+                }
+            }
+
+        }
+
+        else if ("UnidadIdScrapInicial".equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+
+                if(UnidadIdScrapInicial.equals("Seleccionar")){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+        else if ("AnchoFinalRollo".equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+                String a = edt_verificacion_AnchoFinalRollo.getText().toString();
+                if (a.equals("0")){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+        else if ("CantidadPistasCortadas".equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+                String a = edt_verificacion_CantidadPistasCortadas.getText().toString();
+                if (a.equals("0")){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+        else if ("PistasTroquelUsadas".equals(entry.getKey())){
+            if (entry.getValue().equals("0")){
+                String a = edt_verificacion_PistasTroquelUsadas.getText().toString();
+                if (a.equals("0")){
+                    validado = false;
+                    break;
+                }
+            }
+        }
+    }
+        return validado;
 }
+
+
+
+private void toastPersonalziado(String msg){
+    Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+}
+
 
 }
