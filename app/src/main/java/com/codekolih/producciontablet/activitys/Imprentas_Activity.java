@@ -71,7 +71,6 @@ public class Imprentas_Activity extends AppCompatActivity {
               //  intent.putExtra("NombreMaquina", note.getNombreMaquina());
               //  intent.putExtra("MaquinaId", note.getMaquinaId());
 
-
                 pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString(PREF_PRODUCCION_NOMBREMAQUINA, note.getNombreMaquina());
@@ -83,6 +82,7 @@ public class Imprentas_Activity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
+
 
             }
 

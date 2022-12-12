@@ -32,6 +32,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
+import com.codekolih.producciontablet.clases.Material;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
@@ -253,6 +254,7 @@ public class Tarea_Activity extends AppCompatActivity {
                 }
                 dialogProgress.dismiss();
                 cargarProveedor();
+                cargarMateriales();
             }
             @Override
             public void onError(Exception e) {
@@ -260,6 +262,26 @@ public class Tarea_Activity extends AppCompatActivity {
                 dialogProgress.dismiss();
             }
         });
+    }
+
+    private void cargarMateriales() {
+
+        httpLayer.listaMateriales(new HttpLayer.HttpLayerResponses<ArrayList<Material>>() {
+            @Override
+            public void onSuccess(ArrayList<Material> response) {
+                TareaSingleton.SingletonInstance().setMateriales(response);
+                Log.e("TareaActivity","cargoMateriales");
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+                ArrayList<Material> listMateriales = new ArrayList<>();
+                TareaSingleton.SingletonInstance().setMateriales(listMateriales);
+            }
+        });
+
+
     }
 
 

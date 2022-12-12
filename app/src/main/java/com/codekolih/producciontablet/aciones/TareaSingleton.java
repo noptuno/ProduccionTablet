@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.clases.Material;
 import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
@@ -24,7 +25,15 @@ public class TareaSingleton {
     private int produccionId;
     private Map<String, String> tipoMaquina;
     private ArrayList<Proveedor> proveedores;
+    private ArrayList<Material> materiales;
 
+    public ArrayList<Material> getMateriales() {
+        return materiales;
+    }
+
+    public void setMateriales(ArrayList<Material> materiales) {
+        this.materiales = materiales;
+    }
 
     public Pedido getPedidoInstanciada() {
         return pedidoInstanciada;

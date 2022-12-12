@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -90,7 +92,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
 
 
-
         //VALIDAR
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
         pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
@@ -111,27 +112,50 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                Map<String, Object> estado = new HashMap<>();
-                estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "C1");
-                estado.put("TipoEstadoId","F" );
 
-                dialogProgress = ProgressHUD.show(Produccion_Activity.this);
-                httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                AlertDialog.Builder build4 = new AlertDialog.Builder(Produccion_Activity.this);
+                build4.setMessage("¿Desea Finalizar la Produccion? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSuccess(JSONObject response) {
+                    public void onClick(DialogInterface dialog, int which) {
 
-                        Log.e("Produccion_Cierre","Cargo Estado" + tarea_Seleccionada.getTareaId());
-                        dialogProgress.dismiss();
-                        finish();
+                        Map<String, Object> estado = new HashMap<>();
+                        estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                        estado.put("EstadoId", "C1");
+                        estado.put("TipoEstadoId","F" );
+
+                        dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+
+                        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                            @Override
+                            public void onSuccess(JSONObject response) {
+
+                                Log.e("Produccion_Cierre","Cargo Estado" + tarea_Seleccionada.getTareaId());
+                                dialogProgress.dismiss();
+                                finish();
+
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+
+                                Log.e("Produccion_Cierre","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
+                                dialogProgress.dismiss();
+
+                            }
+                        });
+
+
                     }
 
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onError(Exception e) {
-                        Log.e("Produccion_Cierre","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
-                        dialogProgress.dismiss();
+                    public void onClick(DialogInterface dialog, int which) {
+
+
                     }
                 });
+                AlertDialog alertDialog4 = build4.create();
+                alertDialog4.show();
 
 
             }
@@ -140,11 +164,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String, Object> estado = new HashMap<>();
-                estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "P1");
-                estado.put("TipoEstadoId","F" );
-                cambioEstado(estado);
+
+               cancelar();
+
+
 
             }
         });
@@ -193,6 +216,32 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         ocultarVariables();
         cargarfecha();
 
+    }
+
+    private void cancelar() {
+
+        AlertDialog.Builder build4 = new AlertDialog.Builder(Produccion_Activity.this);
+        build4.setMessage("¿Desea Cancelar? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Map<String, Object> estado = new HashMap<>();
+                estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                estado.put("EstadoId", "C1");
+                estado.put("TipoEstadoId","F" );
+                cambioEstado(estado);
+
+            }
+
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+            }
+        });
+        AlertDialog alertDialog4 = build4.create();
+        alertDialog4.show();
     }
 
     private void cargarfecha() {
@@ -528,13 +577,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 
     @Override
-    public void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, float Ancho, String EsAbiertaoCerrada, float DefectuosaKg) {
+    public void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, float Ancho, String EsAbiertaoCerrada, float DefectuosaKg, int idmaterial, String nombreMaterial) {
 
-
-        int TipoMaterialId = 1;
-        String  DeNombreTipoMaterial = "0";
         Bobinas bobinacargar = new Bobinas();
-
         bobinacargar.setBobinaId(0);
         bobinacargar.setTareaId(tareaId);
         bobinacargar.setProduccionId(produccionId);
@@ -542,10 +587,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         bobinacargar.setProveedorNombre(ProveedorNombre);
         bobinacargar.setLote(Lote);
         bobinacargar.setAncho(Ancho);
-        bobinacargar.setTipoMaterialId(TipoMaterialId);
+        bobinacargar.setTipoMaterialId(idmaterial);
         bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
         bobinacargar.setDefectuosaKg(DefectuosaKg);
-        bobinacargar.setNombreTipoMaterial(DeNombreTipoMaterial);
+        bobinacargar.setNombreTipoMaterial(nombreMaterial);
 
         httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
@@ -564,6 +609,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             }
         });
 
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        cancelar();
     }
 
 

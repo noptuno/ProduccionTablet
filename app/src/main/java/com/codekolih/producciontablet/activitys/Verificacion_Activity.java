@@ -171,31 +171,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
-                build4.setMessage("¿Desea cancelar el trabajo? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        Map<String, Object> estado = new HashMap<>();
-                        estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                        estado.put("EstadoId", "A1");
-                        estado.put("TipoEstadoId","F" );
-
-                        cambioEstado(estado);
-                        finish();
-                    }
-
-
-                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                AlertDialog alertDialog4 = build4.create();
-                alertDialog4.show();
-
+         cancelar();
 
             }
         });
@@ -226,8 +202,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                     alertDialog4.show();
 
                 }else{
-                    System.out.println("Error faltan datos");
-
+                    Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -267,6 +242,41 @@ public class Verificacion_Activity extends AppCompatActivity {
        // CargarPedido();
 
     }
+
+    private void cancelar() {
+
+        AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
+        build4.setMessage("¿Desea cancelar el trabajo? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+                Map<String, Object> estado = new HashMap<>();
+                estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                estado.put("EstadoId", "A1");
+                estado.put("TipoEstadoId","F" );
+
+                cambioEstado(estado);
+                finish();
+            }
+
+
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog4 = build4.create();
+        alertDialog4.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        cancelar();
+    }
+
     private static void downloadFile(String url, File outputFile) {
         try {
             URL u = new URL(url);

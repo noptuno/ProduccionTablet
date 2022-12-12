@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.clases.Bobinas;
+import com.codekolih.producciontablet.clases.Material;
 import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
@@ -102,6 +103,24 @@ public class HttpLayer {
             requestQueue.add(request);
 
         }
+
+    public void listaMateriales(HttpLayerResponses<ArrayList<Material>> listener) {
+
+        String url = Urls.materiales;
+
+        Type listOfMyClassObject = new TypeToken<ArrayList<Material>>() {}.getType();
+
+        StringRequest request = new StringRequest(
+                GET,
+                url,
+                response -> listener.onSuccess(mapObject(response, listOfMyClassObject)),
+                listener::onError
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(6000, 3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+
+    }
 
     public void actualizarProduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
 
