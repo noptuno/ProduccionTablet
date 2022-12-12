@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Tareas implements Serializable {
 
+
+
     private int TroquelId;
     private String Descripcion;
     private float Z_AltoMasGap;
