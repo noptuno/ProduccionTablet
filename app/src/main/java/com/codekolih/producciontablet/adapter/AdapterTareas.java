@@ -150,8 +150,6 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
             restante.setText(String.format("%s", cont));
 
 
-
-
             observaciones.setText(tarea.getObservaciones());
 
             itemView.setOnClickListener(new View.OnClickListener() {

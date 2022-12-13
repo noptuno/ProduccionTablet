@@ -127,6 +127,8 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
                 }
             }
 
+
+
         }
 
         public void bind(final Produccion_Lista produccion) {

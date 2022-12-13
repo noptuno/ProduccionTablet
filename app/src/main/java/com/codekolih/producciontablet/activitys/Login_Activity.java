@@ -161,9 +161,11 @@ public class Login_Activity extends AppCompatActivity {
                     public void onSuccess(JSONObject response) {
 
                         try {
+
                             String estado = response.getString("Estado");
 
                             if (estado.equals("200")){
+
                                 pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putString(PREF_PRODUCCION_USUARIO, edt_usaurio.getText().toString());
@@ -171,15 +173,14 @@ public class Login_Activity extends AppCompatActivity {
                                 Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
                             }
 
                             Log.e("http_login", response.toString());
 
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
 
                         dialogProgress.dismiss();
 
@@ -191,6 +192,7 @@ public class Login_Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"No existe usuario",Toast.LENGTH_SHORT).show();
                         Log.e("http_login", "Fallo");
                         dialogProgress.dismiss();
+
                     }
                 });
 
