@@ -98,6 +98,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
 
         pedido_seleccionado = TareaSingleton.SingletonInstance().getPedidoInstanciada();
+
         if (pedido_seleccionado!=null){
             txt_SerieYNro.setText(pedido_seleccionado.getSerieYNro());
             txt_ArticuloId.setText(pedido_seleccionado.getArticuloId());
@@ -167,8 +168,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                cancelar();
 
-
-
             }
         });
 
@@ -204,7 +203,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
             }
         });
-
 
         recyclerViewCantidad.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerViewCantidad.setAdapter(adapterProduccion);
@@ -266,8 +264,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 
                 if ("EtiquetasPorRollo".equals(entry.getKey())){
-                    lyp_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
-                }  else if ("EtiquetasEnBanda".equals(entry.getKey())){
+                    lyp_EtiquetasPorRollo.setVisibility(parseInt(entry.getValue()));
+                }  else if ("EtiquetasEnBanda".equals(entry.getKey())) {
                     lyp_EtiquetasEnBanda.setVisibility(parseInt(entry.getValue()));
                 } else if ("Pistas".equals(entry.getKey())){
                     lyp_Pistas.setVisibility(parseInt(entry.getValue()));
@@ -401,7 +399,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                 @Override
                 public void onError(Exception e) {
-                    Log.e("Produccion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
+                    Toast.makeText(getApplicationContext(),"Reintentar",Toast.LENGTH_SHORT).show();
                     dialogProgress.dismiss();
                 }
             });
@@ -410,8 +408,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 
     void cargarTareaHttp(){
-
-
 
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
@@ -433,6 +429,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onError(Exception e) {
 
+                dialogErrorPrintet("No Cargo Tarea");
                 Log.e("error_produccion",e.toString());
                 dialogProgress.dismiss();
             }
@@ -516,20 +513,15 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                     produccion_actual.setMetrosImpresos(valorFloat);
                 }
 
-
             } else if ("SumRollosFabricados".equals(entry.getKey())){
                 if (entry.getValue().equals("0")){
                     produccion_actual.setRollosFabricdos(valorFloat);
                 }
-
-
             }
             else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
                 if (entry.getValue().equals("0")){
                     produccion_actual.setRollosEmpaquetados(valorFloat);
                 }
-
-
             }
         }
 
@@ -555,9 +547,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         produccion.put("UsuarioId", produccion_actual.getUsuarioId());
 
 
-
-
-
         httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -568,6 +557,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onError(Exception e) {
 
+
+                dialogErrorPrintet("No Cargo Cantidad");
                 Toast.makeText(getApplicationContext(), "No Cargo Cantidad Reintentar",Toast.LENGTH_SHORT).show();
 
             }
@@ -600,17 +591,35 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                 cargarTareaHttp();
 
-
             }
 
             @Override
             public void onError(Exception e) {
-
+                dialogErrorPrintet("No Cargo Bobina");
             }
         });
 
     }
 
+    private void dialogErrorPrintet(String mensaje) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Produccion_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogg.dismiss();
+
+            }
+        });
+    }
 
 
     @Override
@@ -662,6 +671,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             public void onError(Exception e) {
 
                 Toast.makeText(getApplicationContext(), "No Cargo Scrap Reintentar",Toast.LENGTH_SHORT).show();
+                dialogErrorPrintet("No Cargo Scrap");
 
             }
         });
@@ -679,7 +689,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             txt_produccion_UnidadIdScrapInicial;
 
     private LinearLayout
-
 
             lyp_EtiquetasPorRollo,
             lyp_EtiquetasEnBanda,
@@ -703,7 +712,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             lyp_PistasTroquelUsadas,
             lyp_UnidadIdScrapInicial;
 
+
     private TextView
+
             txt_produccion_txt_NroDeSobre,
             txt_produccion_txt_Descripcion,
             txt_produccion_txt_MetrosAImprimir,
@@ -714,9 +725,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             txt_produccion_txt_EtiquetasEnBanda,
             txt_produccion_txt_EtiquetasPorRollo,
             txt_produccion_txt_TroquelId,
-             txt_produccion_txt_MetrosMatTroquelar,
-             txt_produccion_txt_Observaciones;
-
-
+            txt_produccion_txt_MetrosMatTroquelar,
+            txt_produccion_txt_Observaciones;
 
 }

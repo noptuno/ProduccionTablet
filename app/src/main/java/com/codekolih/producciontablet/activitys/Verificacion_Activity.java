@@ -135,7 +135,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         String maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
         String tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
 
-
         txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina,tipomaquinaid));
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
 
@@ -143,15 +142,6 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         cargarTareaSeleccionada(); // tarea y produccion_actual
 
-        txt_verificacion_txt_NroDeSobre.setText(""+tarea_Seleccionada.getNroDeSobre());
-        txt_verificacion_txt_Descripcion.setText(""+tarea_Seleccionada.getDescripcion());
-        txt_verificacion_txt_MetrosAImprimir.setText(""+tarea_Seleccionada.getMetrosAImprimir());
-        txt_verificacion_txt_MetrosPorRollo.setText(""+tarea_Seleccionada.getMetrosPorRollo());
-        txt_verificacion_txt_Z_AltoMasGap.setText(""+tarea_Seleccionada.getZ_AltoMasGap());
-        txt_verificacion_txt_Cilindro.setText(""+tarea_Seleccionada.getCilindro());
-        txt_verificacion_txt_Pistas.setText(""+tarea_Seleccionada.getPistas());
-        txt_verificacion_txt_EtiquetasEnBanda.setText(""+tarea_Seleccionada.getEtiquetasEnBanda());
-        txt_verificacion_txt_EtiquetasPorRollo.setText(""+tarea_Seleccionada.getEtiquetasPorRollo());
 
         spi_verificacion_UnidadIdScrapInicial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -191,10 +181,10 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                         }
 
-
                     }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
 
                         }
                     });
@@ -202,18 +192,10 @@ public class Verificacion_Activity extends AppCompatActivity {
                     alertDialog4.show();
 
                 }else{
+
                     Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
+
                 }
-
-
-
-/*
-                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-*/
-
-
 
             }
 
@@ -223,14 +205,10 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-              //  File file = new File();
-
-              //  downloadFile("\\192.168.234.9\\Public\\PDF\\logopdf.pdf",file);
-
+                pdfAbierto = true;
                 Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
 
             }
         });
@@ -238,8 +216,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         OcultarVariables();
         cargarfecha();
         CargarPedido();
-
-       // CargarPedido();
 
     }
 
@@ -257,7 +233,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                 estado.put("TipoEstadoId","F" );
 
                 cambioEstado(estado);
-                finish();
+
             }
 
 
@@ -277,30 +253,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         cancelar();
     }
 
-    private static void downloadFile(String url, File outputFile) {
-        try {
-            URL u = new URL(url);
-            URLConnection conn = u.openConnection();
-            int contentLength = conn.getContentLength();
-
-            DataInputStream stream = new DataInputStream(u.openStream());
-
-            byte[] buffer = new byte[contentLength];
-            stream.readFully(buffer);
-            stream.close();
-
-            DataOutputStream fos = new DataOutputStream(new FileOutputStream(outputFile));
-            fos.write(buffer);
-            fos.flush();
-            fos.close();
-        } catch(FileNotFoundException e) {
-            return; // swallow a 404
-        } catch (IOException e) {
-            return; // swallow a 404
-        }
-    }
-
-
     private void CargarPedido() {
 
         String params = ""+tarea_Seleccionada.getPedidoId();
@@ -316,7 +268,6 @@ public class Verificacion_Activity extends AppCompatActivity {
                 txt_Cantidad.setText(String.format("%s", response.getCantidad()));
                 txt_Concepto.setText(response.getConcepto());
 
-
                 Log.e("httpPedido",response.toString());
 
             }
@@ -324,12 +275,11 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onError(Exception e) {
                 Log.e("httperror",e.toString());
+                dialogErrorPrintet("No cargo Pedido");
             }
         });
 
     }
-
-
 
     private void cargarVerificacion() {
 
@@ -394,7 +344,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                         estado.put("EstadoId", "P1");
                         estado.put("TipoEstadoId","I" );
                         cambioEstado(estado);
-                        finish();
+
                     }
 
                 } catch (JSONException e) {
@@ -407,7 +357,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onError(Exception e) {
                 dialogProgress.dismiss();
-
+                dialogErrorPrintet("No cargo Datos");
                 Log.e("http_altaproduccion","Fallo");
             }
         });
@@ -426,22 +376,22 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     }
 
-
-
     private void cargarTareaSeleccionada() {
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
+            finish();
+        }else{
+            txt_verificacion_txt_NroDeSobre.setText(String.format("%s", tarea_Seleccionada.getNroDeSobre()));
+            txt_verificacion_txt_Descripcion.setText(String.format("%s", tarea_Seleccionada.getDescripcion()));
+            txt_verificacion_txt_MetrosAImprimir.setText(String.format("%s", tarea_Seleccionada.getMetrosAImprimir()));
+            txt_verificacion_txt_MetrosPorRollo.setText(String.format("%s", tarea_Seleccionada.getMetrosPorRollo()));
+            txt_verificacion_txt_Z_AltoMasGap.setText(String.format("%s", tarea_Seleccionada.getZ_AltoMasGap()));
+            txt_verificacion_txt_Cilindro.setText(String.format("%s", tarea_Seleccionada.getCilindro()));
+            txt_verificacion_txt_Pistas.setText(String.format("%s", tarea_Seleccionada.getPistas()));
+            txt_verificacion_txt_EtiquetasEnBanda.setText(String.format("%s", tarea_Seleccionada.getEtiquetasEnBanda()));
+            txt_verificacion_txt_EtiquetasPorRollo.setText(String.format("%s", tarea_Seleccionada.getEtiquetasPorRollo()));
         }
-
-    /*
-        if (tarea_Seleccionada.getProduccion_Lista().size()>0){
-            for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-                Log.e("Activity",lg.toString());
-                produccion_actual = lg;
-            }
-        }
-    */
 
     }
 
@@ -452,17 +402,36 @@ public class Verificacion_Activity extends AppCompatActivity {
             public void onSuccess(JSONObject response) {
 
                 Log.e("Verificacion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
-
+                finish();
             }
 
             @Override
             public void onError(Exception e) {
 
-                Log.e("Verificacion_Activity","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
-
+                Toast.makeText(getApplicationContext(),"Reintentar",Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private void dialogErrorPrintet(String mensaje) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Verificacion_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogg.dismiss();
+
+            }
+        });
     }
 
     private void variablesFind() {
@@ -525,7 +494,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         ly_CantidadPistasCortadas= findViewById(R.id.ly_CantidadPistasCortadas);
         ly_PistasTroquelUsadas= findViewById(R.id.ly_PistasTroquelUsadas);
         ly_UnidadIdScrapInicial= findViewById(R.id.ly_UnidadIdScrapInicial);
-
 
 
         edt_verificacion_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
@@ -630,9 +598,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             }
         }
     }
-
-
-private boolean validarVariables(){
+    private boolean validarVariables(){
 
         boolean validado = true;
 
@@ -733,7 +699,7 @@ private boolean validarVariables(){
             if (entry.getValue().equals("0")){
 
                 String a = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
-                if(a.equals("0")){
+                if(a.equals("0") || a.equals("") ){
                     validado = false;
                     break;
                 }
@@ -744,7 +710,7 @@ private boolean validarVariables(){
 
             if (entry.getValue().equals("0")){
                 String a = edt_verificacion_CantidadPistasImpresas.getText().toString();
-                if(a.equals("0")){
+                if(a.equals("0") || a.equals("") ){
                     validado = false;
                     break;
                 }
@@ -754,7 +720,7 @@ private boolean validarVariables(){
 
             if (entry.getValue().equals("0")){
                 String a = edt_verificacion_CantidadTintas.getText().toString();
-                    if(a.equals("0")){
+                    if(a.equals("0") || a.equals("") ){
                     validado = false;
                     break;
                 }
@@ -764,7 +730,7 @@ private boolean validarVariables(){
 
             if (entry.getValue().equals("0")){
                 String a = edt_verificacion_ScrapAjusteInicial.getText().toString();
-                if (a.equals("0")){
+                if(a.equals("0") || a.equals("") ){
                     validado = false;
                     break;
                 }
@@ -774,7 +740,6 @@ private boolean validarVariables(){
 
         else if ("UnidadIdScrapInicial".equals(entry.getKey())){
             if (entry.getValue().equals("0")){
-
                 if(UnidadIdScrapInicial.equals("Seleccionar")){
                     validado = false;
                     break;
@@ -784,7 +749,7 @@ private boolean validarVariables(){
         else if ("AnchoFinalRollo".equals(entry.getKey())){
             if (entry.getValue().equals("0")){
                 String a = edt_verificacion_AnchoFinalRollo.getText().toString();
-                if (a.equals("0")){
+                if(a.equals("0") || a.equals("") ){
                     validado = false;
                     break;
                 }
@@ -793,7 +758,7 @@ private boolean validarVariables(){
         else if ("CantidadPistasCortadas".equals(entry.getKey())){
             if (entry.getValue().equals("0")){
                 String a = edt_verificacion_CantidadPistasCortadas.getText().toString();
-                if (a.equals("0")){
+                if(a.equals("0") || a.equals("") ){
                     validado = false;
                     break;
                 }
@@ -802,21 +767,23 @@ private boolean validarVariables(){
         else if ("PistasTroquelUsadas".equals(entry.getKey())){
             if (entry.getValue().equals("0")){
                 String a = edt_verificacion_PistasTroquelUsadas.getText().toString();
-                if (a.equals("0")){
+                if(a.equals("0") || a.equals("") ){
                     validado = false;
                     break;
                 }
             }
         }
     }
+
+    if (pdfAbierto = false){
+
+        validado = false;
+        toastPersonalziado("Debe abrir las especificaciones");
+    }
         return validado;
 }
-
-
-
-private void toastPersonalziado(String msg){
-    Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
-}
-
+    private void toastPersonalziado(String msg){
+        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+    }
 
 }

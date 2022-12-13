@@ -142,11 +142,7 @@ public class Tarea_Activity extends AppCompatActivity {
                         estado.put("TareaId", note.getTareaId());
                         estado.put("EstadoId", "A1");
                         estado.put("TipoEstadoId","I" );
-                        cambioEstado(estado,note);
-                        finish();
-
-
-
+                        cambioEstado(estado);
 
                     }
 
@@ -169,11 +165,9 @@ public class Tarea_Activity extends AppCompatActivity {
         cargarTarea();
         cargarfecha();
 
-
-
     }
 
-    private void cambioEstado( Map<String, Object> estado,Tareas note ) {
+    private void cambioEstado( Map<String, Object> estado ) {
 
 
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
@@ -182,13 +176,13 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 Log.e("Tarea_Activity","Cargo Estado");
 
-
+                finish();
             }
 
             @Override
             public void onError(Exception e) {
                 Log.e("Tarea_Activity","Error al cargar Estado");
-
+                Toast.makeText(getApplicationContext(),"No cargo Estado",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -203,12 +197,14 @@ public class Tarea_Activity extends AppCompatActivity {
                     TareaSingleton.SingletonInstance().setProveedores(response);
                     Log.e("TareaActivity","cargoProveedores");
 
+                    cargarMateriales();
                 }
 
                 @Override
                 public void onError(Exception e) {
                     ArrayList<Proveedor> listProveedores = new ArrayList<>();
                     TareaSingleton.SingletonInstance().setProveedores(listProveedores);
+                    dialogErrorPrintet("No cargo Proveedor");
                 }
             });
     }
@@ -232,34 +228,30 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Tareas> response) {
 
-
                 List<Tareas> temp = new ArrayList<>();
-
-
-
 
                 adapterTareas.setNotes(response);
                 adapterTareas.notifyDataSetChanged();
-
 
                 for (Tareas lg : response) {
 
                     if (lg.getTipoMaquinaId()==MAQUINATIPOID){
 
                     }
-
                    // Log.e("Datos_tareas",lg.toString());
                     Log.e("ListTareas","Cod: " + lg.getTareaId()+" Cant produccion: "+ lg.getProduccion_Lista().size() + " cantbobinas: "+ lg.getBobinas().size());
-
                 }
+
                 dialogProgress.dismiss();
                 cargarProveedor();
-                cargarMateriales();
+
             }
+
             @Override
             public void onError(Exception e) {
                 Log.e("TareaActivity",e.toString());
                 dialogProgress.dismiss();
+                dialogErrorPrintet("No cargo Tareas");
             }
         });
     }
@@ -278,11 +270,31 @@ public class Tarea_Activity extends AppCompatActivity {
             public void onError(Exception e) {
                 ArrayList<Material> listMateriales = new ArrayList<>();
                 TareaSingleton.SingletonInstance().setMateriales(listMateriales);
+                dialogErrorPrintet("No cargo Materiales");
             }
         });
 
 
     }
 
+    private void dialogErrorPrintet(String mensaje) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Tarea_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogg.dismiss();
+
+            }
+        });
+    }
 
 }
