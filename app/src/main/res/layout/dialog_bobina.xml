@@ -20,7 +20,7 @@
             android:id="@+id/textView39"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="CARGAR BOBINA"
             android:textColor="@color/white"
             android:textSize="28sp"
@@ -33,9 +33,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
             android:orientation="vertical"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,15 +52,40 @@
                     android:id="@+id/textView2312"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:text="NombreTipoMaterial"
                     android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/dialogbobina_spi_NombreTipoMaterial"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:entries="@array/material"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyb_ProveedorNombre"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="ProveedorNombre"
+                    android:textSize="20sp" />
+
+                <Spinner
+                    android:id="@+id/dialogbobina_spi_ProveedorNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
                     android:entries="@array/material"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
@@ -79,7 +102,7 @@
                     android:id="@+id/textView20"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:text="Lote"
                     android:textSize="20sp" />
 
@@ -108,7 +131,7 @@
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:text="Ancho (Milimetros)"
                     android:textSize="20sp" />
 
@@ -129,30 +152,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/lyb_ProveedorNombre"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="ProveedorNombre"
-                    android:textSize="20sp" />
-
-                <Spinner
-                    android:id="@+id/dialogbobina_spi_ProveedorNombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/lyb_DefectuosaKg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -163,7 +162,7 @@
                     android:id="@+id/textView23"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:text="DefectuosaKg"
                     android:textSize="20sp" />
 
@@ -175,7 +174,7 @@
                     android:ems="10"
                     android:inputType="number|numberDecimal"
                     android:selectAllOnFocus="true"
-                    android:text="0.0"
+                    android:text="0"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -192,14 +191,14 @@
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:text="EsAbiertaoCerrada"
                     android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/dialogbobina_spi_EsAbiertaoCerrada"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="48dp"
                     android:layout_weight="2"
                     android:entries="@array/ABIERTAOCERRADA"
                     android:visibility="visible"
@@ -319,12 +318,12 @@
 
         <Button
             android:id="@+id/dialogbobina_btn_guardar2"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:backgroundTint="#4CAF50"
             android:text="Guardar"
             android:textColor="@color/white"
@@ -333,23 +332,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/dialogbobina_btn_cancelar2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
             android:id="@+id/dialogbobina_btn_cancelar2"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:backgroundTint="#F44336"
             android:text="Cancelar"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/dialogbobina_btn_guardar2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/dialogbobina_btn_guardar2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

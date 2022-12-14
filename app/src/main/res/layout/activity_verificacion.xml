@@ -7,154 +7,135 @@
     tools:context=".activitys.Verificacion_Activity">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
+        android:id="@+id/linearLayoutDatos"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
             android:id="@+id/textView24"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="Pedido"
-            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:background="#00897B"
+            android:text="Pedido:"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView41"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:text="ArticuloId"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView44"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:text="Concepto"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/ver_txt_Concepto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Concepto" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView41"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="ArticuloId"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/ver_txt_ArticuloId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="ArticuloId" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/ver_txt_ArticuloId"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView38"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:text="SerieYNro"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/ver_txt_SerieYNro"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="SerieYNro" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView45"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Cantidad"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/ver_txt_Cantidad"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Cantidad" />
-                </LinearLayout>
-
-            </LinearLayout>
+                android:text="ArticuloId"
+                android:textSize="18sp" />
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutDatos"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16">
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SerieYNro"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ver_txt_SerieYNro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SerieYNro"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cantidad"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ver_txt_Cantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cantidad"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Concepto"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ver_txt_Concepto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Concepto"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:background="#00897B"
+            android:text="Tarea:"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/ly_NroDeSobre"
@@ -168,7 +149,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="NroDeSobre"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_NroDeSobre"
@@ -192,7 +174,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="EtiquetasEnBanda"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_EtiquetasEnBanda"
@@ -217,7 +200,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Cilindro"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Cilindro"
@@ -242,7 +226,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Z_AltoMasGap"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Z_AltoMasGap"
@@ -267,7 +252,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="EtiquetasPorRollo"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_EtiquetasPorRollo"
@@ -292,7 +278,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Pistas"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Pistas"
@@ -317,7 +304,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="MetrosAImprimir"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_MetrosAImprimir"
@@ -342,7 +330,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="MetrosPorRollo"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_MetrosPorRollo"
@@ -367,7 +356,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Descripcion"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Descripcion"
@@ -392,7 +382,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="Observaciones"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_Observaciones"
@@ -417,7 +408,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="MetrosMatTroquelar"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_MetrosMatTroquelar"
@@ -426,9 +418,10 @@
                 android:layout_weight="1"
                 android:inputType="textPersonName"
                 android:text="0"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ly_TroquelId"
             android:layout_width="match_parent"
@@ -441,7 +434,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="TroquelId"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/verificacion_txt_TroquelId"
@@ -450,20 +444,19 @@
                 android:layout_weight="1"
                 android:inputType="textPersonName"
                 android:text="0"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
-
 
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayoutVerificar"
-        android:layout_width="400dp"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -483,7 +476,7 @@
                 android:layout_weight="1"
                 android:switchTextAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:text="control del boceto o muestra contra la impresión de largada"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -500,7 +493,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="control de tipo de papel correcto"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -517,7 +510,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control que el trabajo cumpla con la especificación"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -534,7 +527,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control del troquelado y del estado del line"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -568,7 +561,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control para numerados (datos de pie, dirección y numeración)"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -585,7 +578,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control para numerados (armado y control de numeración)"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -602,7 +595,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control para largo fijo (largo de ticket)"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -619,7 +612,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control tipo de papel y buje"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -636,7 +629,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control del armado de la medida"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -647,10 +640,10 @@
         android:id="@+id/linearLayotCargarDatos"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutVerificar"
         app:layout_constraintStart_toEndOf="@+id/linearLayoutDatos"
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -664,16 +657,16 @@
             <TextView
                 android:id="@+id/textView100"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2"
+                android:layout_weight="4"
                 android:text="AnchoFinalRolloYGap"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_AnchoFinalRolloYGap"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
@@ -682,7 +675,7 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -696,15 +689,15 @@
             <TextView
                 android:id="@+id/textView101"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:text="CantidadPistasImpresas"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_CantidadPistasImpresas"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
@@ -714,7 +707,7 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -728,15 +721,15 @@
             <TextView
                 android:id="@+id/textView103"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:text="CantidadTintas"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_CantidadTintas"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
@@ -746,7 +739,7 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -759,16 +752,16 @@
             <TextView
                 android:id="@+id/textView104"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2"
+                android:layout_weight="4"
                 android:text="ScrapAjusteInicial"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_ScrapAjusteInicial"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
@@ -778,7 +771,7 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -791,8 +784,8 @@
             <TextView
                 android:id="@+id/textView105"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:text="UnidadIdScrapInicial"
                 android:textSize="12sp" />
 
@@ -814,15 +807,15 @@
             <TextView
                 android:id="@+id/textView106"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:text="AnchoFinalRollo"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_AnchoFinalRollo"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
@@ -832,7 +825,7 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -845,15 +838,15 @@
             <TextView
                 android:id="@+id/textView107"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:text="CantidadPistasCortadas"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_CantidadPistasCortadas"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
@@ -863,7 +856,7 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -876,15 +869,15 @@
             <TextView
                 android:id="@+id/textView108"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
                 android:text="PistasTroquelUsadas"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/verificacion_edt_PistasTroquelUsadas"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
@@ -894,7 +887,7 @@
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
 
@@ -904,23 +897,24 @@
         android:id="@+id/textView16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="8dp"
         android:background="#009688"
         android:padding="5dp"
-        android:text="Datos de la Tarea"
+        android:text="Información"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/linearLayoutDatos"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutDatos"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="8dp"
         android:background="#009688"
         android:padding="5dp"
         android:text="Cargar datos"
@@ -937,7 +931,7 @@
         android:id="@+id/textView17"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="8dp"
         android:background="#009688"
         android:padding="5dp"
         android:text="Verificación"
@@ -945,7 +939,7 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutVerificar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/linearLayoutVerificar"
         app:layout_constraintTop_toTopOf="parent" />
@@ -953,15 +947,12 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="@+id/textView16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutDatos"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -981,15 +972,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Imprenta"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/verificacion_txt_imprenta"
                     android:layout_width="match_parent"
-                    android:layout_height="22dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="imprenta A asd" />
+                    android:text="imprenta A asd"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -1003,7 +995,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Usuario"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -1011,19 +1003,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="david" />
+                    android:text="david"
+                    android:textSize="14sp" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:padding="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1036,20 +1018,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Fecha"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/verificacion_txt_fecha"
                     android:layout_width="match_parent"
-                    android:layout_height="22dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="25/10/2022" />
+                    android:text="25/10/2022"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
@@ -1058,7 +1041,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Hora"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -1066,9 +1049,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="10:10:45" />
+                    android:text="10:10:45"
+                    android:textSize="14sp" />
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 
     <Button

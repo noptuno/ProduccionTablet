@@ -14,7 +14,7 @@ public class ProgressHUD extends ProgressDialog {
 
         ProgressHUD dialog = new ProgressHUD(context);
         dialog.setMessage("Loading..."); // Setting Message
-        dialog.setTitle("ProgressDialog"); // Setting Title
+        dialog.setTitle("Enviando Datos ..."); // Setting Title
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner// Display Progress Dialog
         dialog.setCancelable(false);
         dialog.show();

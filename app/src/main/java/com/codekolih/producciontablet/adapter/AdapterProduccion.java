@@ -94,6 +94,10 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView UsuarioId, MetrosImpresos, ScrapAjusteProduccion,ScrapAjusteProduccion_Unidades,RollosFabricdos,RollosEmpaquetados;
         private LinearLayout ly_MetrosImpresos,ly_ScrapAjusteProduccion,ly_ScrapAjusteProduccion_Unidades, ly_RollosFabricdos, ly_RollosEmpaquetados;
+
+        private LinearLayout lyp_AnchoFinalRolloYGap,lyp_CantidadPistasImpresas,lyp_CantidadTintas,lyp_ScrapAjusteInicial,lyp_AnchoFinalRollo,lyp_CantidadPistasCortadas,lyp_PistasTroquelUsadas,lyp_UnidadIdScrapInicial;
+        private TextView AnchoFinalRolloYGap,CantidadPistasImpresas,CantidadTintas,ScrapAjusteInicial,AnchoFinalRollo,CantidadPistasCortadas,PistasTroquelUsadas,UnidadIdScrapInicial;
+
         public NoteViewHolder(View item) {
             super(item);
 
@@ -103,6 +107,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             ly_RollosFabricdos = (LinearLayout) item.findViewById(R.id.iply_RollosFabricdos);
             ly_RollosEmpaquetados= (LinearLayout) item.findViewById(R.id.iply_RollosEmpaquetados);
 
+
             MetrosImpresos = (TextView) item.findViewById(R.id.item_produccion_txt_MetrosImpresos);
             ScrapAjusteProduccion = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion);
             ScrapAjusteProduccion_Unidades = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion_Unidades);
@@ -110,7 +115,28 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             RollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txt_RollosEmpaquetados);
 
 
+            //produccio unicavez
+            AnchoFinalRolloYGap = (TextView) item.findViewById(R.id.item_produccion_AnchoFinalRolloYGap);
+            CantidadPistasImpresas = (TextView) item.findViewById(R.id.item_produccion_CantidadPistasImpresas);
+            CantidadTintas = (TextView) item.findViewById(R.id.item_produccion_CantidadTintas);
+            ScrapAjusteInicial = (TextView) item.findViewById(R.id.item_produccion_ScrapAjusteInicial);
+            AnchoFinalRollo = (TextView) item.findViewById(R.id.item_produccion_AnchoFinalRollo);
+            CantidadPistasCortadas = (TextView) item.findViewById(R.id.item_produccion_CantidadPistasCortadas);
+            PistasTroquelUsadas = (TextView) item.findViewById(R.id.item_produccion_PistasTroquelUsadas);
+            UnidadIdScrapInicial = (TextView) item.findViewById(R.id.item_produccion_UnidadIdScrapInicial);
+
+            lyp_AnchoFinalRolloYGap = (LinearLayout) item.findViewById(R.id.iply_AnchoFinalRolloYGap);
+            lyp_CantidadPistasImpresas = (LinearLayout) item.findViewById(R.id.iply_CantidadPistasImpresas);
+            lyp_CantidadTintas = (LinearLayout) item.findViewById(R.id.iply_CantidadTintas);
+            lyp_ScrapAjusteInicial =(LinearLayout) item.findViewById(R.id.iply__ScrapAjusteInicial);
+            lyp_AnchoFinalRollo = (LinearLayout) item.findViewById(R.id.iply_AnchoFinalRollo);
+            lyp_CantidadPistasCortadas = (LinearLayout) item.findViewById(R.id.iply_CantidadPistasCortadas);
+            lyp_PistasTroquelUsadas = (LinearLayout) item.findViewById(R.id.iply_PistasTroquelUsadas);
+            lyp_UnidadIdScrapInicial = (LinearLayout) item.findViewById(R.id.iply_UnidadIdScrapInicial);
+
             for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+
+
 
                 if ("SumMetrosImpresos".equals(entry.getKey())){
                     ly_MetrosImpresos.setVisibility(parseInt(entry.getValue()));
@@ -125,6 +151,35 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
                 else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
                     ly_RollosEmpaquetados.setVisibility(parseInt(entry.getValue()));
                 }
+
+
+
+                //produccion unicavez
+
+                else if ("AnchoFinalRolloYGap".equals(entry.getKey())){
+                    lyp_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("CantidadPistasImpresas".equals(entry.getKey())){
+                    lyp_CantidadPistasImpresas.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("CantidadTintas".equals(entry.getKey())){
+                    lyp_CantidadTintas.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("ScrapAjusteInicial".equals(entry.getKey())){
+                    lyp_ScrapAjusteInicial.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("UnidadIdScrapInicial".equals(entry.getKey())){
+                    lyp_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("AnchoFinalRollo".equals(entry.getKey())){
+                    lyp_AnchoFinalRollo.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("CantidadPistasCortadas".equals(entry.getKey())){
+                    lyp_CantidadPistasCortadas.setVisibility(parseInt(entry.getValue()));
+                }
+                else if ("PistasTroquelUsadas".equals(entry.getKey())){
+                    lyp_PistasTroquelUsadas.setVisibility(parseInt(entry.getValue()));
+                }
             }
 
 
@@ -133,11 +188,21 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
         public void bind(final Produccion_Lista produccion) {
 
-            MetrosImpresos.setText((""+produccion.getMetrosImpresos()));
-            ScrapAjusteProduccion.setText((""+produccion.getScrapAjusteProduccion()));
+            MetrosImpresos.setText((String.format("%s", produccion.getMetrosImpresos())));
+            ScrapAjusteProduccion.setText((String.format("%s", produccion.getScrapAjusteProduccion())));
             ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));
-            RollosFabricdos.setText((""+produccion.getRollosFabricdos()));
-            RollosEmpaquetados.setText((""+produccion.getRollosEmpaquetados()));
+            RollosFabricdos.setText((String.format("%s", produccion.getRollosFabricdos())));
+            RollosEmpaquetados.setText((String.format("%s", produccion.getRollosEmpaquetados())));
+
+            //datos tarea unicavez
+            AnchoFinalRolloYGap.setText((String.format("%s", produccion.getAnchoFinalRolloYGap())));
+            CantidadPistasImpresas.setText((String.format("%s", produccion.getCantidadPistasImpresas())));
+            CantidadTintas.setText((String.format("%s", produccion.getCantidadTintas())));
+            ScrapAjusteInicial.setText((String.format("%s", produccion.getScrapAjusteInicial())));
+            AnchoFinalRollo.setText((String.format("%s", produccion.getAnchoFinalRollo())));
+            CantidadPistasCortadas.setText((String.format("%s", produccion.getCantidadPistasCortadas())));
+            PistasTroquelUsadas.setText((String.format("%s", produccion.getPistasTroquelUsadas())));
+            UnidadIdScrapInicial.setText((String.format("%s", produccion.getScrapAjusteInicial_Unidades())));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

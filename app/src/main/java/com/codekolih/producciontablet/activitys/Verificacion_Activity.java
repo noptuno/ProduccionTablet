@@ -546,7 +546,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             }
 
             if ("EtiquetasPorRollo".equals(entry.getKey())){
-                ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
+                ly_EtiquetasPorRollo.setVisibility(parseInt(entry.getValue()));
             }  else if ("EtiquetasEnBanda".equals(entry.getKey())){
                 ly_EtiquetasEnBanda.setVisibility(parseInt(entry.getValue()));
             } else if ("Pistas".equals(entry.getKey())){

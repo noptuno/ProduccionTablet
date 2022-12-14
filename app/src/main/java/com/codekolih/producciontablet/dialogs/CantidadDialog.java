@@ -9,14 +9,21 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.TareaSingleton;
+
+import java.util.Map;
 
 
 public class CantidadDialog {
 
     private finalizarCuadro interfaz;
+
+    private TextView nombrevariable;
     private EditText edt_numero;
     Button btn_cancelar, btn_aceptar;
     private HttpLayer httpLayer;
@@ -40,6 +47,7 @@ public class CantidadDialog {
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_num);
 
+        nombrevariable = dialogo.findViewById(R.id.textView5);
         btn_aceptar = dialogo.findViewById(R.id.cantidad_btn_confirmar);
         btn_cancelar= dialogo.findViewById(R.id.cantidad_btn_cancelar);
         edt_numero = dialogo.findViewById(R.id.et_numero);
@@ -51,17 +59,15 @@ public class CantidadDialog {
 
                 try{
 
+                    String a = edt_numero.getText().toString();
+                    if(a.equals("0") || a.equals("")){
 
-                    String num = edt_numero.getText().toString();
-
-                    if (num.length()>0){
-
-                        float numfloat = Float.parseFloat(num);
+                        Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
+                    }else{
+                        float numfloat = Float.parseFloat(a);
                         interfaz.ResultadoCantidadDialogo(numfloat);
                         dialogo.dismiss();
-
                     }
-
 
                 }catch (Exception e){
 
@@ -84,6 +90,32 @@ public class CantidadDialog {
         });
 
         dialogo.show();
+
+
+        cargarnombrevariable();
+    }
+
+    private void cargarnombrevariable() {
+
+        for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+
+            if ("SumMetrosImpresos".equals(entry.getKey())){
+
+                if (entry.getValue().equals("0")){
+                    nombrevariable.setText("Metros Impresos");
+                }
+
+            } else if ("SumRollosFabricados".equals(entry.getKey())){
+                if (entry.getValue().equals("0")){
+                    nombrevariable.setText("Rollos Fabricados");
+                }
+            }
+            else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
+                if (entry.getValue().equals("0")){
+                    nombrevariable.setText("Rollos Empaquetados");
+                }
+            }
+        }
     }
 
 }

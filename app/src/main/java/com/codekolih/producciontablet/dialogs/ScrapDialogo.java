@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.codekolih.producciontablet.R;
 
@@ -70,8 +71,13 @@ public class ScrapDialogo {
 
                 try{
 
-                    interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
-                    dialogo.dismiss();
+                    String a = numero.getText().toString();
+                    if(a.equals("0") || a.equals("") || unidad.equals("Seleccionar")){
+                        Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
+                    }else{
+                        interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
+                        dialogo.dismiss();
+                    }
 
                 }catch (Exception e){
 
@@ -79,7 +85,6 @@ public class ScrapDialogo {
                     dialogo.dismiss();
 
                 }
-
 
             }
         });

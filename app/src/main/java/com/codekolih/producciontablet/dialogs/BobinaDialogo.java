@@ -174,22 +174,22 @@ public class BobinaDialogo {
 
                    if (validarVariables()){
 
-
                        int idproveedor = parseInt(idproveedorSeleccionado);
                        String ProveedorNombre = proveedorSeleccionado;
                        String Lote = edt_Lote.getText().toString();
                        float Ancho = parseFloat(edt_Ancho.getText().toString());
                        String EsAbiertaoCerrada = abiertaocerrada;
                        float DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
-
                        int tipoMaterialId = parseInt(TipoMaterialId);
                        String ProveedorMaterial = NombreTipoMaterial;
 
                        try{
-                           interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
-                           dialogo.dismiss();
-                       }catch (Exception e){
+                           if (!Lote.equals("")){
+                               interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
+                               dialogo.dismiss();
+                           }
 
+                       }catch (Exception e){
                            Log.e("ErrorBobina",e.toString());
                        }
 
@@ -266,7 +266,7 @@ public class BobinaDialogo {
 
                 if (entry.getValue().equals("0")){
                     String a = edt_Ancho.getText().toString();
-                    if(a.equals("0")){
+                    if(a.equals("0") || a.equals("") ){
                         validado = false;
                         break;
                     }
@@ -288,13 +288,11 @@ public class BobinaDialogo {
             else if ("DefectuosaKg".equals(entry.getKey())){
                 if (entry.getValue().equals("0")){
                     String a = edt_DefectuosaKg.getText().toString();
-                    if(a.equals("0")){
+                    if(a.equals("0") || a.equals("")){
                         validado = false;
                         break;
                     }
                 }
-
-
 
             }else if ("11".equals(entry.getKey())){
                 if (entry.getValue().equals("0")){
