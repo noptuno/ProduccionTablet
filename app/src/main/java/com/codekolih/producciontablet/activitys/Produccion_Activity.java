@@ -61,9 +61,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private TextView  cantidadtotal;
     private float totaldadscrap;
-
     private TextView  txt_imprenta,txt_usuario,txt_fecha,txt_hora;
-
     private TextView  txt_SerieYNro,txt_ArticuloId,txt_Cantidad,txt_Concepto;
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private AdapterBobinas adapterBobina = new AdapterBobinas();
@@ -427,6 +425,7 @@ if (totaldadscrap>0){
 
         float contcantidad = 0;
         float contscrap = 0;
+
         if (tarea_Seleccionada.getProduccion_Lista().size()>0){
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
                 Log.e("BDproduccion",lg.toString());
@@ -453,11 +452,11 @@ if (totaldadscrap>0){
                     produccion_actual = lg;
                 }
 
-                contcantidad+= lg.getScrapAjusteProduccion();
+                contscrap+= lg.getScrapAjusteProduccion();
             }
 
-            totaldadscrap = contcantidad;
-            cantidadtotal.setText(String.format("%s", contscrap));
+            totaldadscrap = contscrap;
+            cantidadtotal.setText(String.format("%s", contcantidad));
 
             adapterProduccion.setNotes(tarea_Seleccionada.getProduccion_Lista());
             adapterProduccion.notifyDataSetChanged();

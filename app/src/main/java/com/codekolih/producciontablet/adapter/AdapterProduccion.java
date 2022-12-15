@@ -97,7 +97,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
         private LinearLayout lyp_AnchoFinalRolloYGap,lyp_CantidadPistasImpresas,lyp_CantidadTintas,lyp_ScrapAjusteInicial,lyp_AnchoFinalRollo,lyp_CantidadPistasCortadas,lyp_PistasTroquelUsadas,lyp_UnidadIdScrapInicial;
         private TextView AnchoFinalRolloYGap,CantidadPistasImpresas,CantidadTintas,ScrapAjusteInicial,AnchoFinalRollo,CantidadPistasCortadas,PistasTroquelUsadas,UnidadIdScrapInicial;
-
+        private TextView fecha;
         public NoteViewHolder(View item) {
             super(item);
 
@@ -107,7 +107,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             ly_RollosFabricdos = (LinearLayout) item.findViewById(R.id.iply_RollosFabricdos);
             ly_RollosEmpaquetados= (LinearLayout) item.findViewById(R.id.iply_RollosEmpaquetados);
 
-
+             fecha = (TextView) item.findViewById(R.id.item_fecha);
             MetrosImpresos = (TextView) item.findViewById(R.id.item_produccion_txt_MetrosImpresos);
             ScrapAjusteProduccion = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion);
             ScrapAjusteProduccion_Unidades = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion_Unidades);
@@ -188,6 +188,9 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
         public void bind(final Produccion_Lista produccion) {
 
+
+            String f = produccion.getFecha().substring(0,8);
+            fecha.setText((String.format("%s",  f)));
             MetrosImpresos.setText((String.format("%s", produccion.getMetrosImpresos())));
             ScrapAjusteProduccion.setText((String.format("%s", produccion.getScrapAjusteProduccion())));
             ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));

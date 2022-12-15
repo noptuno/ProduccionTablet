@@ -28,7 +28,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
-        android:background="#52B8EA"
+        android:background="#267ABD"
         android:orientation="vertical">
 
         <LinearLayout
@@ -48,9 +48,10 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Proveedor"
 
+                    android:textColor="#FBFBFB"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -61,8 +62,7 @@
                     android:layout_weight="1"
                     android:text="proveedor"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
 
@@ -77,9 +77,10 @@
                     android:id="@+id/textView131"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Material"
 
+                    android:textColor="#FBFBFB"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -90,9 +91,9 @@
                     android:layout_weight="1"
                     android:text="1"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ly_Lote"
                 android:layout_width="match_parent"
@@ -104,9 +105,10 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Lote"
 
+                    android:textColor="#FBFBFB"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -117,8 +119,7 @@
                     android:layout_weight="1"
                     android:text="1"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -132,9 +133,10 @@
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Ancho"
 
+                    android:textColor="#FBFBFB"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -145,8 +147,7 @@
                     android:layout_weight="1"
                     android:text="1"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -160,9 +161,10 @@
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Defectuoso Kg"
 
+                    android:textColor="#FBFBFB"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -173,8 +175,7 @@
                     android:layout_weight="1"
                     android:text="1"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -188,9 +189,10 @@
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Estado"
 
+                    android:textColor="#FBFBFB"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -201,8 +203,7 @@
                     android:layout_weight="1"
                     android:text="1"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="24sp" />
             </LinearLayout>
 
         </LinearLayout>
