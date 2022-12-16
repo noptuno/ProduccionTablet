@@ -45,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class Tarea_Activity extends AppCompatActivity {
     private SharedPreferences pref;
     private RecyclerView recyclerViewTareas;
     private Button btn_cerrar_sesion;
-    private String elegirTarea="false";
+    private String PermiteCambioPrioridad ="false";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,53 +116,29 @@ public class Tarea_Activity extends AppCompatActivity {
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         MAQUINATIPOID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0"));
         MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
+
+
+
         txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
-        elegirTarea =  pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");
-
+        PermiteCambioPrioridad =  pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");
+        Log.e("ElegirTarea: ", PermiteCambioPrioridad);
 
         //TODO Validar maquinatipoid y aquinaid
 
         adapterTareas.setOnNoteSelectedListener(new AdapterTareas.OnNoteSelectedListener() {
             @Override
-            public void onClick(Tareas note) {
+            public void onClick(Tareas note, int a) {
 
-
-
-
-                AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
-                build4.setMessage("¿Desea Seleccionar la Tarea : " + note.getDescripcion()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        TareaSingleton.SingletonInstance().setTarea(note);
-
-                        Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
-                        intent.putExtra("tarea", note);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-                        Map<String, Object> estado = new HashMap<>();
-                        estado.put("TareaId", note.getTareaId());
-                        estado.put("EstadoId", "A1");
-                        estado.put("TipoEstadoId","I" );
-                        cambioEstado(estado);
-
+                if (PermiteCambioPrioridad.equals("false")){
+                    if (a==0){
+                        elegirTarea(note);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"No puede elegir esa Tarea",Toast.LENGTH_SHORT).show();
                     }
-
-                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                AlertDialog alertDialog4 = build4.create();
-                alertDialog4.show();
-
-
-
-
+                }else{
+                    elegirTarea(note);
+                }
             }
         });
 
@@ -177,7 +154,38 @@ public class Tarea_Activity extends AppCompatActivity {
         cargarfecha();
 
     }
+private void elegirTarea(Tareas note){
 
+    AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
+    build4.setMessage("¿Desea Seleccionar la Tarea : " + note.getDescripcion()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+
+            TareaSingleton.SingletonInstance().setTarea(note);
+
+            Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
+            intent.putExtra("tarea", note);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+            Map<String, Object> estado = new HashMap<>();
+            estado.put("TareaId", note.getTareaId());
+            estado.put("EstadoId", "A1");
+            estado.put("TipoEstadoId","I" );
+            cambioEstado(estado);
+
+        }
+
+    }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+        }
+    });
+    AlertDialog alertDialog4 = build4.create();
+    alertDialog4.show();
+}
 
     private boolean isNetDisponible() {
 
@@ -252,8 +260,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 List<Tareas> temp = new ArrayList<>();
 
-                adapterTareas.setNotes(response);
-                adapterTareas.notifyDataSetChanged();
+
 
 
 
@@ -261,10 +268,17 @@ public class Tarea_Activity extends AppCompatActivity {
 
                     if (lg.getTipoMaquinaId()==MAQUINATIPOID){
 
+                        temp.add(lg);
+
+                        Log.e("Tareas para filtrar: ",""+lg.getTareaId());
+
                     }
                    // Log.e("Datos_tareas",lg.toString());
                     Log.e("ListTareas","Cod: " + lg.getTareaId()+" Cant produccion: "+ lg.getProduccion_Lista().size() + " cantbobinas: "+ lg.getBobinas().size());
                 }
+
+                adapterTareas.setNotes(response);
+                adapterTareas.notifyDataSetChanged();
 
                 dialogProgress.dismiss();
                 cargarProveedor();

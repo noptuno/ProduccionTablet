@@ -72,8 +72,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private int BOBINA_ACTIVITY = 1;
     RecyclerView recyclerViewCantidad,recyclerViewBobinas;
     private int produccionId;
-    private int pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
-    private int tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+    private int pedidoId;
+    private int tareaId;
     private SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +114,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-if (totaldadscrap>0){
-    if (parseFloat(cantidadtotal.getText().toString())>0){
+            if (totaldadscrap>0){
+                 if (parseFloat(cantidadtotal.getText().toString())>0){
 
         if (tarea_Seleccionada.getBobinas().size()>0){
             AlertDialog.Builder build4 = new AlertDialog.Builder(Produccion_Activity.this);
@@ -124,7 +124,7 @@ if (totaldadscrap>0){
                 public void onClick(DialogInterface dialog, int which) {
 
                     Map<String, Object> estado = new HashMap<>();
-                    estado.put("TareaId", tarea_Seleccionada.getTareaId());
+                    estado.put("TareaId", tareaId);
                     estado.put("EstadoId", "C1");
                     estado.put("TipoEstadoId","F" );
 
@@ -545,12 +545,14 @@ if (totaldadscrap>0){
         produccion.put("RollosEmpaquetados", produccion_actual.getRollosEmpaquetados());
         produccion.put("UsuarioId", produccion_actual.getUsuarioId());
 
-         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+        dialogProgress = ProgressHUD.show(Produccion_Activity.this);
         httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
             dialogProgress.dismiss();
                 cargarTareaHttp();
+
+                btn_cantidad.setText("MODIFICAR CANTIDAD");
             }
 
             @Override
@@ -668,6 +670,7 @@ if (totaldadscrap>0){
 
                 dialogProgress.dismiss();
                 cargarTareaHttp();
+                btn_scrap.setText("MODIFICAR SCRAP");
 
             }
 

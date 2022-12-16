@@ -1,5 +1,6 @@
 package com.codekolih.producciontablet.activitys;
 
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CAMBIOPRIORIDAD;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_ELEGIRTAREA;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;

@@ -10,6 +10,8 @@ public class Variables {
     public static final String PREF_PRODUCCION_ELEGIRTAREA= "ELEGIRTAREA";
     public static final String PREF_PRODUCCION_USUARIO= "USUARUIO";
     public static final String PREF_SETSTRING= "SETSTRING";
+    public static final String PREF_PRODUCCION_CAMBIOPRIORIDAD= "CAMBIOPRIORIDAD";
+
 
 
 

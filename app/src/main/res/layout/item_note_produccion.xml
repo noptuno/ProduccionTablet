@@ -61,7 +61,7 @@
                         android:layout_weight="1"
                         android:text="RUBACH"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -76,7 +76,7 @@
                         android:id="@+id/textV1231"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_weight="2"
+                        android:layout_weight="4"
                         android:text="Fecha"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -89,7 +89,16 @@
                         android:ems="10"
                         android:text="12/12/12"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/item_hora"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="12:12:12"
+                        android:textColor="#F6F0F0"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 

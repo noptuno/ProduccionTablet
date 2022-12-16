@@ -89,7 +89,7 @@ private int contadorgeneral = 0;
 
 
     public interface OnNoteSelectedListener {
-        void onClick(Tareas note);
+        void onClick(Tareas note,int p);
     }
 
     public interface OnNoteDetailListener {
@@ -171,7 +171,7 @@ private int contadorgeneral = 0;
 
                     if (onNoteSelectedListener != null) {
 
-                        onNoteSelectedListener.onClick(tarea);
+                        onNoteSelectedListener.onClick(tarea,getAdapterPosition());
 
                     }
                 }
