@@ -100,15 +100,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
         tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
 
+        /*
         pedido_seleccionado = TareaSingleton.SingletonInstance().getPedidoInstanciada();
 
         if (pedido_seleccionado!=null){
-            txt_SerieYNro.setText(pedido_seleccionado.getSerieYNro());
-            txt_ArticuloId.setText(pedido_seleccionado.getArticuloId());
-            txt_Cantidad.setText(String.format("%s", pedido_seleccionado.getCantidad()));
-            txt_Concepto.setText(pedido_seleccionado.getConcepto());
-        }
 
+        }
+*/
         Log.e("IdProduccionSelec",""+produccionId);
 
 
@@ -477,6 +475,13 @@ if (totaldadscrap>0){
 
         if (tarea_Seleccionada!=null){
             //datos tarea
+
+
+            txt_SerieYNro.setText(tarea_Seleccionada.getSerieYNro());
+            txt_ArticuloId.setText(tarea_Seleccionada.getArticuloId());
+            txt_Cantidad.setText(String.format("%s", tarea_Seleccionada.getCantidad()));
+            txt_Concepto.setText(tarea_Seleccionada.getConcepto());
+
             txt_produccion_txt_NroDeSobre.setText(String.format("%s",tarea_Seleccionada.getNroDeSobre()));
             txt_produccion_txt_Descripcion.setText(tarea_Seleccionada.getDescripcion());
             txt_produccion_txt_MetrosAImprimir.setText(String.format("%s",tarea_Seleccionada.getMetrosAImprimir()));

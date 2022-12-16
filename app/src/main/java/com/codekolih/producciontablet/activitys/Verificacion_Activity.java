@@ -215,7 +215,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         OcultarVariables();
         cargarfecha();
-        CargarPedido();
+        //CargarPedido();
 
     }
 
@@ -382,6 +382,12 @@ public class Verificacion_Activity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
             finish();
         }else{
+
+            txt_SerieYNro.setText(tarea_Seleccionada.getSerieYNro());
+            txt_ArticuloId.setText(tarea_Seleccionada.getArticuloId());
+            txt_Cantidad.setText(String.format("%s", tarea_Seleccionada.getCantidad()));
+            txt_Concepto.setText(tarea_Seleccionada.getConcepto());
+
             txt_verificacion_txt_NroDeSobre.setText(String.format("%s", tarea_Seleccionada.getNroDeSobre()));
             txt_verificacion_txt_Descripcion.setText(String.format("%s", tarea_Seleccionada.getDescripcion()));
             txt_verificacion_txt_MetrosAImprimir.setText(String.format("%s", tarea_Seleccionada.getMetrosAImprimir()));

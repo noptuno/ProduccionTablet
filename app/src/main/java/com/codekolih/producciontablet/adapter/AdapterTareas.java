@@ -30,6 +30,9 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
     private OnNoteSelectedListener onNoteSelectedListener;
     private OnNoteDetailListener onDetailListener;
     private Context context;
+private int contadorgeneral = 0;
+    private int posiciones = 0;
+
 
     public AdapterTareas() {
         this.notes = new ArrayList<>();
@@ -51,7 +54,10 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
 
     @Override
     public void onBindViewHolder(NoteViewHolder view, int pos) {
-        view.bind(notes.get(pos));
+
+        Log.e("Posiciones",""+pos);
+
+        view.bind(notes.get(pos),pos);
     }
 
     @Override
@@ -90,19 +96,25 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
         void onDetail(Tareas note);
     }
 
+
+
     public Tareas getposicionactual(int position) {
         return notes.get(position);
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder {
-        private TextView serieynumero,concepto,totalcantidad,restante,observaciones;
-        private LinearLayout layoutTareas;
 
+
+    public class NoteViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView serieynumero,concepto,totalcantidad,restante,observaciones,articuloid;
+        private LinearLayout layoutTareas;
+        private int pos;
 
         public NoteViewHolder(View item) {
             super(item);
 
             serieynumero = (TextView) item.findViewById(R.id.item_tarea_txt_syn);
+            articuloid = (TextView) item.findViewById(R.id.item_tarea_txt_articuloid);
             concepto = (TextView) item.findViewById(R.id.item_tarea_txt_concepto);
             totalcantidad = (TextView) item.findViewById(R.id.item_tarea_txt_totalcantidad);
             restante = (TextView) item.findViewById(R.id.item_tarea_txt_restante);
@@ -111,7 +123,9 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
 
         }
 
-        public void bind(final Tareas tarea) {
+        public void bind(final Tareas tarea, int poss) {
+            this.pos = poss;
+
           //  Log.e("cargoRecicler",tarea.toString());
           //  Random random = new Random();
 
@@ -120,8 +134,9 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
            // int color = Color.argb(255,random.nextInt(256),(random.nextInt(256)),(random.nextInt(256)));
 
             layoutTareas.setBackgroundColor(a.getColor());
-            serieynumero.setText(String.format("%s", tarea.getNroDeSobre()));
-            concepto.setText(tarea.getDescripcion());
+            articuloid.setText(String.format("%s", tarea.getArticuloId()));
+            serieynumero.setText(String.format("%s", tarea.getSerieYNro()));
+            concepto.setText(tarea.getConcepto());
 
             float cont = 0;
             if (tarea.getProduccion_Lista().size()>0){
@@ -146,18 +161,18 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
 
             }
 
-            totalcantidad.setText(String.format("%s", tarea.getMetrosAImprimir()));
+            totalcantidad.setText(String.format("%s", tarea.getCantidad()));
             restante.setText(String.format("%s", cont));
 
-
-            observaciones.setText(tarea.getObservaciones());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     if (onNoteSelectedListener != null) {
 
                         onNoteSelectedListener.onClick(tarea);
+
                     }
                 }
             });

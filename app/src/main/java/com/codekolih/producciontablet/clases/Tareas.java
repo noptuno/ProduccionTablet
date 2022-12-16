@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 public class Tareas implements Serializable {
 
+
+    private String SerieYNro;
+    private String ArticuloId;
+    private String Concepto;
+    private int Cantidad;
     private int TroquelId;
     private String Descripcion;
     private float Z_AltoMasGap;
@@ -37,9 +42,14 @@ public class Tareas implements Serializable {
     private String Estado;
     private boolean EsPedidoFinal;
 
+
+
+
     private ArrayList<Bobinas> Bobinas = new ArrayList<Bobinas>();
     private ArrayList<EstadosOp> EstadosOp = new ArrayList<EstadosOp>();
     private ArrayList<Produccion_Lista> Produccion_Lista = new ArrayList<Produccion_Lista>();
+
+
 
     public ArrayList<Produccion_Lista> getProduccion_Lista() {
         return Produccion_Lista;
@@ -83,6 +93,19 @@ public class Tareas implements Serializable {
         return a;
     }
     // Getter Methods
+
+    public String getSerieYNro() {
+        return SerieYNro;
+    }
+    public String getArticuloId() {
+        return ArticuloId;
+    }
+    public String getConcepto() {
+        return Concepto;
+    }
+    public int getCantidad() {
+        return Cantidad;
+    }
 
     public int getTroquelId() {
         return TroquelId;
@@ -201,6 +224,27 @@ public class Tareas implements Serializable {
     }
 
     // Setter Methods
+
+
+    public void setSerieYNro(String serieYNro) {
+        SerieYNro = serieYNro;
+    }
+
+
+    public void setArticuloId(String articuloId) {
+        ArticuloId = articuloId;
+    }
+
+
+    public void setConcepto(String concepto) {
+        Concepto = concepto;
+    }
+
+
+
+    public void setCantidad(int cantidad) {
+        Cantidad = cantidad;
+    }
 
     public void setTroquelId( int TroquelId ) {
         this.TroquelId = TroquelId;

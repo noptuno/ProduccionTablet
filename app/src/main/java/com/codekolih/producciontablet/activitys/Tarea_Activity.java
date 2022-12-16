@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -124,6 +126,9 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note) {
 
+
+
+
                 AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
                 build4.setMessage("¿Desea Seleccionar la Tarea : " + note.getDescripcion()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
@@ -131,7 +136,6 @@ public class Tarea_Activity extends AppCompatActivity {
 
 
                         TareaSingleton.SingletonInstance().setTarea(note);
-
 
                         Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
                         intent.putExtra("tarea", note);
@@ -162,9 +166,27 @@ public class Tarea_Activity extends AppCompatActivity {
         });
 
         //todo valdiar internet
-        cargarTarea();
+
+        if  (isNetDisponible()){
+
+            cargarTarea();
+        }else {
+            dialogErrorPrintet("No hay Internet");
+        }
+
         cargarfecha();
 
+    }
+
+
+    private boolean isNetDisponible() {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo actNetInfo = connectivityManager.getActiveNetworkInfo();
+
+        return (actNetInfo != null && actNetInfo.isConnected());
     }
 
     private void cambioEstado( Map<String, Object> estado ) {
@@ -232,6 +254,8 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 adapterTareas.setNotes(response);
                 adapterTareas.notifyDataSetChanged();
+
+
 
                 for (Tareas lg : response) {
 
