@@ -261,9 +261,6 @@ private void elegirTarea(Tareas note){
                 List<Tareas> temp = new ArrayList<>();
 
 
-
-
-
                 for (Tareas lg : response) {
 
                     if (lg.getTipoMaquinaId()==MAQUINATIPOID){
@@ -277,7 +274,7 @@ private void elegirTarea(Tareas note){
                     Log.e("ListTareas","Cod: " + lg.getTareaId()+" Cant produccion: "+ lg.getProduccion_Lista().size() + " cantbobinas: "+ lg.getBobinas().size());
                 }
 
-                adapterTareas.setNotes(response);
+                adapterTareas.setNotes(temp);
                 adapterTareas.notifyDataSetChanged();
 
                 dialogProgress.dismiss();

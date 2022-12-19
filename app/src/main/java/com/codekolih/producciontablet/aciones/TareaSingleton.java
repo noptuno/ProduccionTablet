@@ -338,7 +338,7 @@ public class TareaSingleton {
             variablesGenrales.put("UnidadIdScrapInicial", "8");
             variablesGenrales.put("SumRollosFabricados", "8");//FE,FR
             variablesGenrales.put("AnchoFinalRollo", "0");
-            variablesGenrales.put("CantidadPistasCortadas", ".8");
+            variablesGenrales.put("CantidadPistasCortadas", "8");
             variablesGenrales.put("PistasTroquelUsadas", "8");
             variablesGenrales.put("SumRollosEmpaquedatos", "0");//e
 

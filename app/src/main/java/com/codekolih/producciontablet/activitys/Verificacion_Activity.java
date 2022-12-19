@@ -229,8 +229,8 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                 Map<String, Object> estado = new HashMap<>();
                 estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "A1");
-                estado.put("TipoEstadoId","F" );
+                estado.put("EstadoId", "C2");
+                estado.put("TipoEstadoId","I" );
 
                 cambioEstado(estado);
 

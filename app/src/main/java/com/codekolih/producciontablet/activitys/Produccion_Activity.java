@@ -126,7 +126,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                     Map<String, Object> estado = new HashMap<>();
                     estado.put("TareaId", tareaId);
                     estado.put("EstadoId", "C1");
-                    estado.put("TipoEstadoId","F" );
+                    estado.put("TipoEstadoId","I" );
 
                     dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
@@ -244,8 +244,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                 Map<String, Object> estado = new HashMap<>();
                 estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "C1");
-                estado.put("TipoEstadoId","F" );
+                estado.put("EstadoId", "C2");
+                estado.put("TipoEstadoId","I" );
                 cambioEstado(estado);
 
             }

@@ -106,7 +106,7 @@ private int contadorgeneral = 0;
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView serieynumero,concepto,totalcantidad,restante,observaciones,articuloid;
+        private TextView serieynumero,concepto,totalcantidad,restante,observaciones,articuloid,item_ultimoEstado;
         private LinearLayout layoutTareas;
         private int pos;
 
@@ -120,6 +120,8 @@ private int contadorgeneral = 0;
             restante = (TextView) item.findViewById(R.id.item_tarea_txt_restante);
             observaciones = (TextView) item.findViewById(R.id.item_tarea_txt_obseraciones);
             layoutTareas= (LinearLayout) item.findViewById(R.id.layoutTareas);
+
+            item_ultimoEstado= (TextView) item.findViewById(R.id.item_tarea_ultimoEstado);
 
         }
 
@@ -160,7 +162,7 @@ private int contadorgeneral = 0;
                 }
 
             }
-
+            item_ultimoEstado.setText(tarea.getUltimoEstadoIdAvance());
             totalcantidad.setText(String.format("%s", tarea.getCantidad()));
             restante.setText(String.format("%s", cont));
 
