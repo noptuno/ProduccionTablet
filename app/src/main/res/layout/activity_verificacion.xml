@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".activitys.Verificacion_Activity">
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="350dp"
+        android:layout_width="400dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -155,7 +156,7 @@
                     android:id="@+id/textView41"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1.8"
                     android:text="ArticuloId"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -163,7 +164,7 @@
                 <TextView
                     android:id="@+id/ver_txt_ArticuloId"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="ArticuloId"
                     android:textSize="16sp" />
@@ -180,7 +181,7 @@
                     android:id="@+id/textView38"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="1.8"
                     android:text="SerieYNro"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -188,7 +189,7 @@
                 <TextView
                     android:id="@+id/ver_txt_SerieYNro"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="SerieYNro"
                     android:textSize="16sp" />
@@ -205,7 +206,7 @@
                     android:id="@+id/textView45"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="1.8"
                     android:text="Cantidad"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -213,7 +214,7 @@
                 <TextView
                     android:id="@+id/ver_txt_Cantidad"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Cantidad"
                     android:textSize="16sp" />
@@ -230,7 +231,7 @@
                     android:id="@+id/textView44"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_weight="1.8"
                     android:text="Concepto"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -266,7 +267,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.8"
                     android:text="Observaciones"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -274,7 +275,7 @@
                 <TextView
                     android:id="@+id/verificacion_txt_Observaciones"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="textPersonName"
                     android:text="obser"
@@ -292,7 +293,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.8"
                     android:text="Alto Mas Gap"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -318,8 +319,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="EtiquetasEnBanda"
+                    android:layout_weight="1.8"
+                    android:text="Etiquetas en Banda"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -344,7 +345,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.8"
                     android:text="Cilindro"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -370,8 +371,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="MetrosAImprimir"
+                    android:layout_weight="1.8"
+                    android:text="Metros a Imprimir"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -396,8 +397,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="MetrosPorRollo"
+                    android:layout_weight="1.8"
+                    android:text="Metros Por Rollo"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -422,8 +423,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="NroDeSobre"
+                    android:layout_weight="1.8"
+                    android:text="Nro de Sobre"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -447,8 +448,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="MetrosMatTroquelar"
+                    android:layout_weight="1.8"
+                    android:text="Metros Mat Troquelar"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -473,8 +474,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="EtiquetasPorRollo"
+                    android:layout_weight="1.8"
+                    android:text="Etiquetas Por Rollo"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -499,7 +500,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.8"
                     android:text="Pistas"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -525,7 +526,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.8"
                     android:text="Descripcion"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -551,7 +552,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.8"
                     android:text="TroquelId"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -571,13 +572,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutVerificar"
-        android:layout_width="500dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayotCargarDatos"
         app:layout_constraintTop_toBottomOf="@+id/textView17">
 
         <LinearLayout
@@ -662,7 +665,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Control del sentido de bobinado"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
@@ -757,10 +760,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayotCargarDatos"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/linearLayoutVerificar"
@@ -1074,8 +1078,8 @@
     <Button
         android:id="@+id/verificacion_btn_verpdf"
         android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="24dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:text="VER ESPECIFICACIONES"
@@ -1084,17 +1088,17 @@
         android:textStyle="bold"
         app:icon="@drawable/ic_pdf"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/verificacion_btn_cancelar" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/verificacion_btn_guardar"
         android:layout_width="200dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:backgroundTint="#4CAF50"
-        android:text="Producción"
+        android:text="Iniciar Producción"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -1104,8 +1108,7 @@
     <Button
         android:id="@+id/verificacion_btn_cancelar"
         android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:backgroundTint="#F44336"
@@ -1114,6 +1117,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/linearLayotCargarDatos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

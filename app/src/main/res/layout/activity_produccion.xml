@@ -6,9 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".activitys.Produccion_Activity">
 
+    <Button
+        android:id="@+id/verificacion_btn_verpdf2"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fondo"
+        android:text="VER ESPECIFICACIONES"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="350dp"
+        android:layout_width="400dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -18,7 +32,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -151,7 +165,7 @@
                     android:id="@+id/textView41"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="Articulo"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -176,7 +190,7 @@
                     android:id="@+id/textView45"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="Cantidad"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -201,7 +215,7 @@
                     android:id="@+id/textView38"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="Serie y Nro"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -253,14 +267,14 @@
             <LinearLayout
                 android:id="@+id/lyp_EtiquetasPorRollo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Etiquetas Por Rollo"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -286,7 +300,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Cilindro"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -338,7 +352,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="SERIE"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -362,7 +376,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Pistas"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -412,8 +426,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Etiquetas En Banda"
+                    android:layout_weight="2"
+                    android:text="Etiquetas en Banda"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -438,8 +452,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="MetrosAImprimir"
+                    android:layout_weight="2"
+                    android:text="Metros a Imprimir"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -464,7 +478,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Id Troquel "
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -490,7 +504,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Metros a Troquelar"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -516,7 +530,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Alto Mas Gap"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -542,7 +556,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="Metros Por Rollo"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -684,20 +698,18 @@
         android:id="@+id/produccion_btn_finalziar"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:text="FINALZIAR"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/produccion_bobina_recycler" />
 
     <Button
         android:id="@+id/produccion_btn_cancelar"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:backgroundTint="#F44336"
@@ -705,7 +717,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/produccion_bobina_recycler" />
 
     <TextView
         android:id="@+id/textView25"

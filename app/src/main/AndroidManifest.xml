@@ -25,18 +25,19 @@
             android:exported="false" />
         <activity
             android:name=".dialogs.PdfActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/Theme.ProduccionTablet.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".activitys.Verificacion_Activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/Theme.ProduccionTablet.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".activitys.Produccion_Activity"
             android:exported="false"
             android:label="Produccion de Tarea"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:theme="@style/Theme.ProduccionTablet.NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
 
         <activity
             android:name=".activitys.Tarea_Activity"

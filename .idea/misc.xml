@@ -36,7 +36,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_inicio_sesion.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_observaciones.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_pdf.xml" value="0.25" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_produccion.xml" value="0.22" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_produccion.xml" value="0.16" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_tareas.xml" value="0.14" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/activity_verificacion.xml" value="0.22" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/alerdialogerror.xml" value="0.18333333333333332" />
@@ -46,7 +46,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/dialog_scrap.xml" value="0.33" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/item_note_bobina.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/item_note_imprentas.xml" value="0.33" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/item_note_produccion.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/item_note_produccion.xml" value="0.67" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/item_note_tareas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/layout/list_datos_pedido.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/DMR/DMRPRODUCCION/app/src/main/res/menu/main.xml" value="0.36666666666666664" />

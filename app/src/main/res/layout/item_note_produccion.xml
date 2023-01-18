@@ -5,8 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="5dp"
     android:foreground="?android:attr/selectableItemBackground"
-    android:textAlignment="center"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -35,21 +40,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:background="#009688"
+                android:background="#176AAC"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/iply_Usuario"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.2"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView14"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:text="Usuario"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -58,26 +63,28 @@
                         android:id="@+id/item_produccion_txt_Usuario"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="RUBACH"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/iply_Fecha"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.2"
                     android:orientation="vertical"
                     android:visibility="visible">
 
                     <TextView
                         android:id="@+id/textV1231"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="4"
-                        android:text="Fecha"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Fecha y hora"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -85,260 +92,15 @@
                         android:id="@+id/item_fecha"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:text="12/12/12"
+                        android:text="12/12/12 12:25:25"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/white"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/item_hora"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="12:12:12"
-                        android:textColor="#F6F0F0"
-                        android:textSize="10sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/iply_CantidadTintas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:id="@+id/textView103"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:text="Cantidad Tintas"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_CantidadTintas"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="0"
-                        android:textColor="@color/white"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/iply_PistasTroquelUsadas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView108"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:text="PistasTroquel Usadas"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_PistasTroquelUsadas"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:selectAllOnFocus="true"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/iply_CantidadPistasImpresas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView101"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:text="Cantidad Pistas Impresas"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_CantidadPistasImpresas"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/iply__ScrapAjusteInicial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView104"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="Scrap Ajuste Inicial"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_ScrapAjusteInicial"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/iply_UnidadIdScrapInicial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView105"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:text="Unidad"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_UnidadIdScrapInicial"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="KG"
-                        android:textColor="@color/white"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/iply_AnchoFinalRollo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView106"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:text="Ancho Final Rollo"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_AnchoFinalRollo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/iply_AnchoFinalRolloYGap"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView100"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:text="Ancho Final Rollo"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_AnchoFinalRolloYGap"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/iply_CantidadPistasCortadas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView107"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:text="Cantidad Pistas Cortadas"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/item_produccion_CantidadPistasCortadas"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="5.8"
-                app:srcCompat="@android:drawable/btn_default" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:background="#155283"
-                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/iply_MetrosImpresos"
@@ -350,8 +112,8 @@
                     <TextView
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:text="Metros Impresos"
 
                         android:textColor="@color/white"
@@ -370,15 +132,15 @@
                 <LinearLayout
                     android:id="@+id/iply_RollosEmpaquetados"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView12"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:text="Rollos Empaquetados"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -403,8 +165,8 @@
                     <TextView
                         android:id="@+id/textView11"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:text="Rollos Fabricdos"
 
                         android:textColor="@color/white"
@@ -430,8 +192,8 @@
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:text="Scrap"
 
                         android:textColor="@color/white"
@@ -457,8 +219,8 @@
                     <TextView
                         android:id="@+id/textView10"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:text="Unidad"
                         android:textColor="@color/white"
                         android:textSize="12sp" />

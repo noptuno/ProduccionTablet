@@ -14,11 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.ProduccionTablet.NoActionBar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+    <style name="Theme.ProduccionTablet.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
+
+
 
     <style name="Theme.ProduccionTablet.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
