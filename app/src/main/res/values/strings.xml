@@ -17,6 +17,11 @@
         <item>G</item>
         <item>M</item>
     </string-array>
+    <string-array name="CIERRE">
+        <item>Cancelar y cerrar la tarea</item>
+        <item>Cancelar  y continuar la tarea</item>
+    </string-array>
+
 
     <string-array name="TIPOMATERIALID">
         <item>1</item>

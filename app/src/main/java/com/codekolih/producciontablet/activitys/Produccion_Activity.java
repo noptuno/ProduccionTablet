@@ -40,6 +40,7 @@ import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.BobinaDialogo;
 import com.codekolih.producciontablet.dialogs.CantidadDialog;
+import com.codekolih.producciontablet.dialogs.MotivoCierreDialog;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog {
+public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog, MotivoCierreDialog.finalizarMotivo {
 
     Tareas tarea_Seleccionada;
     Pedido pedido_seleccionado;
@@ -106,7 +107,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         if (pedido_seleccionado!=null){
 
         }
-*/
+        */
         Log.e("IdProduccionSelec",""+produccionId);
 
 
@@ -127,28 +128,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                     estado.put("TareaId", tareaId);
                     estado.put("EstadoId", "C1");
                     estado.put("TipoEstadoId","I" );
-
-                    dialogProgress = ProgressHUD.show(Produccion_Activity.this);
-
-                    httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-
-                            Log.e("Produccion_Cierre","Cargo Estado" + tarea_Seleccionada.getTareaId());
-                            dialogProgress.dismiss();
-                            finish();
-
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-
-                            Log.e("Produccion_Cierre","Error al cargar Estado" + tarea_Seleccionada.getTareaId());
-                            dialogProgress.dismiss();
-
-                        }
-                    });
-
+                    cambioEstado(estado);
 
                 }
 
@@ -237,28 +217,11 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void cancelar() {
 
-        AlertDialog.Builder build4 = new AlertDialog.Builder(Produccion_Activity.this);
-        build4.setMessage("¿Desea Cancelar? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-                Map<String, Object> estado = new HashMap<>();
-                estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "C2");
-                estado.put("TipoEstadoId","I" );
-                cambioEstado(estado);
-
-            }
-
-        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        new MotivoCierreDialog(Produccion_Activity.this,Produccion_Activity.this);
 
 
-            }
-        });
-        AlertDialog alertDialog4 = build4.create();
-        alertDialog4.show();
+
     }
 
     private void cargarfecha() {
@@ -364,7 +327,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void cambioEstado( Map<String, Object> estado) {
 
-
+        Log.e("Resultado","cambi oestado ");
             dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
             httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
@@ -630,6 +593,63 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         cancelar();
     }
 
+    @Override
+    public void ResultadoMotivoDialogo(String motivo, String tipocierre) {
+
+            Log.e("Resultado","recibido" + motivo + " " + tipocierre);
+
+
+            Map<String, Object> produccion = new HashMap<>();
+            produccion.put("ProduccionId", produccionId);
+            produccion.put("PedidoId", pedidoId);
+            produccion.put("TareaId", tareaId);
+            produccion.put("MetrosImpresos", produccion_actual.getMetrosImpresos());
+            produccion.put("AnchoFinalRolloYGap", produccion_actual.getAnchoFinalRollo());
+            produccion.put("CantidadPistasImpresas", produccion_actual.getCantidadPistasImpresas());
+            produccion.put("CantidadTintas", produccion_actual.getCantidadTintas());
+            produccion.put("AnchoBobinaUsadoCm", produccion_actual.getAnchoBobinaUsadoCm());
+            produccion.put("ScrapAjusteInicial", produccion_actual.getScrapAjusteInicial());
+            produccion.put("ScrapAjusteInicial_Unidades", produccion_actual.getScrapAjusteInicial_Unidades());
+            produccion.put("ScrapAjusteProduccion", produccion_actual.getScrapAjusteProduccion());
+            produccion.put("ScrapAjusteProduccion_Unidades", produccion_actual.getScrapAjusteProduccion_Unidades());
+            produccion.put("ObservacionesCierre", motivo);
+            produccion.put("RollosFabricdos", produccion_actual.getRollosFabricdos());
+            produccion.put("AnchoFinalRollo", produccion_actual.getAnchoFinalRollo());
+            produccion.put("CantidadPistasCortadas", produccion_actual.getCantidadPistasCortadas());
+            produccion.put("PistasTroquelUsadas", produccion_actual.getPistasTroquelUsadas());
+            produccion.put("RollosEmpaquetados", produccion_actual.getRollosEmpaquetados());
+            produccion.put("UsuarioId", produccion_actual.getUsuarioId());
+
+            dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+
+            httpLayer.actualizarProduccion(GsonUtils.toJSON(produccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                @Override
+                public void onSuccess(JSONObject response) {
+
+                    dialogProgress.dismiss();
+
+                    Log.e("Resultado","recibido" + motivo + " " + tipocierre);
+
+
+                    Map<String, Object> estado = new HashMap<>();
+                    estado.put("TareaId", tareaId);
+                    estado.put("EstadoId", tipocierre);
+                    estado.put("TipoEstadoId","I" );
+                    cambioEstado(estado);
+
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    dialogProgress.dismiss();
+
+                    Toast.makeText(getApplicationContext(), "No Cargo Actualizo la Tarea Reintentar",Toast.LENGTH_SHORT).show();
+                    dialogErrorPrintet("No Cargo Motivo");
+
+                }
+            });
+        }
+
 
     @Override
     public void ResultadoScrapDialogo(float cantidad, String unidad) {
@@ -716,5 +736,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             txt_produccion_txt_TroquelId,
             txt_produccion_txt_MetrosMatTroquelar,
             txt_produccion_txt_Observaciones;
+
 
 }
