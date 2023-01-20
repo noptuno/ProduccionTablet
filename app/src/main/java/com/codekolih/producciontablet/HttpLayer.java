@@ -70,12 +70,12 @@ public class HttpLayer {
     }
 
 
-    public void cargarBobinas(Bobinas bobinas, HttpLayerResponses<JSONObject> listener) {
+    public void cargarBobinas(Bobinas bobinas, HttpLayerResponses<JSONObject> listener,String USUARIO) {
 
         JSONObject jsonObject = GsonUtils.toJSON(bobinas);
         JsonObjectRequest request = new JsonObjectRequest(
                 POST,
-                Urls.agregarbobinas,
+                Urls.agregarbobinas + USUARIO,
                 jsonObject,
                 listener::onSuccess,
                 listener::onError
@@ -122,11 +122,11 @@ public class HttpLayer {
 
     }
 
-    public void actualizarProduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
+    public void actualizarProduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener,String USUARIO) {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 PUT,
-                Urls.UpdateProduccion,
+                Urls.UpdateProduccion+USUARIO,
                 jsonObject,
                 listener::onSuccess,
                 listener::onError
@@ -137,11 +137,11 @@ public class HttpLayer {
 
     }
 
-    public void cargarEstado(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
+    public void cargarEstado(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener,String USUARIO) {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 POST,
-                Urls.estadoOperativo,
+                Urls.estadoOperativo+USUARIO,
                 jsonObject,
                 listener::onSuccess,
                 listener::onError
@@ -153,11 +153,11 @@ public class HttpLayer {
     }
 
 
-    public void altaproduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener) {
+    public void altaproduccion(JSONObject jsonObject, HttpLayerResponses<JSONObject> listener,String USUARIO) {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 POST,
-                Urls.altaproduccion,
+                Urls.altaproduccion + USUARIO,
                 jsonObject,
                 listener::onSuccess,
                 listener::onError

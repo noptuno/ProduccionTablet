@@ -360,7 +360,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                 dialogErrorPrintet("No cargo Datos");
                 Log.e("http_altaproduccion","Fallo");
             }
-        });
+        },"rubach");
     }
 
     private void cargarfecha() {
@@ -416,7 +416,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"Reintentar",Toast.LENGTH_SHORT).show();
             }
-        });
+        },"rubach");
 
     }
 

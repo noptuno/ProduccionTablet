@@ -55,6 +55,7 @@ public class Tarea_Activity extends AppCompatActivity {
     private TextView txt_imprenta, txt_usuario, txt_fecha,txt_hora;
     private int MAQUINATIPOID = 0;
     private int MAQUINAID = 0;
+    private String USUARIO;
     private RequestQueue requestQueue;
     private ArrayList<Tareas> listImprentas = new ArrayList<>();
     private AdapterTareas adapterTareas = new AdapterTareas();
@@ -116,7 +117,7 @@ public class Tarea_Activity extends AppCompatActivity {
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         MAQUINATIPOID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0"));
         MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
-
+        USUARIO = pref.getString(PREF_PRODUCCION_USUARIO, "NO");
 
 
         txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
@@ -214,7 +215,7 @@ private void elegirTarea(Tareas note){
                 Log.e("Tarea_Activity","Error al cargar Estado");
                 Toast.makeText(getApplicationContext(),"No cargo Estado",Toast.LENGTH_SHORT).show();
             }
-        });
+        },"rubach");
 
     }
 

@@ -11,24 +11,20 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
-import com.codekolih.producciontablet.aciones.TareaSingleton;
-
-import java.util.Map;
 
 
 public class MotivoCierreDialog {
 
     private finalizarMotivo interfaz;
 
-    private Spinner spinner_opcion_motivo;
     private EditText edit_motivo;
-    Button cierre_btn_cancelar, cierre_btn_confirmar;
-    private String opcionSpinnerSeleccionada = "Cancelar y cerrar la tarea";
+    Button cierre_btn_cancelar,
+    cierre_btn_cancelarycerrar,cierre_btn_cancelarycontinuar;
+
 
     private HttpLayer httpLayer;
     public interface finalizarMotivo{
@@ -45,39 +41,38 @@ public class MotivoCierreDialog {
         interfaz = actividad;
         final Dialog dialogo = new Dialog(contexcto);
 
-
-
         dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogo.setCancelable(false);
         dialogo.setCanceledOnTouchOutside(false);
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_motivo_cierre);
 
-        spinner_opcion_motivo = dialogo.findViewById(R.id.spinner_opcion);
-        cierre_btn_cancelar = dialogo.findViewById(R.id.cierre_btn_confirmar);
-        cierre_btn_confirmar= dialogo.findViewById(R.id.cierre_btn_cancelar);
+        cierre_btn_cancelarycerrar = dialogo.findViewById(R.id.cierre_btn_cancelarycerrar);
+        cierre_btn_cancelarycontinuar= dialogo.findViewById(R.id.cierre_btn_cancelarycontinuar);
+
+        cierre_btn_cancelar= dialogo.findViewById(R.id.cierre_btn_cancelar);
         edit_motivo = dialogo.findViewById(R.id.edit_motivo);
 
         edit_motivo.requestFocus();
 
-
-        spinner_opcion_motivo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        cierre_btn_cancelarycontinuar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                opcionSpinnerSeleccionada = adapterView.getItemAtPosition(i).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onClick(View view) {
 
 
+                String motivo = edit_motivo.getText().toString();
+                if(motivo.length() > 1){
+
+                    interfaz.ResultadoMotivoDialogo(motivo,"C2");
+                    dialogo.dismiss();
+
+                }else{
+                    Toast.makeText(contexcto,"Escriba Motivo",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-
-        cierre_btn_confirmar.setOnClickListener(new View.OnClickListener() {
+        cierre_btn_cancelarycerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -85,15 +80,8 @@ public class MotivoCierreDialog {
                     String motivo = edit_motivo.getText().toString();
                     if(motivo.length() > 1){
 
-                        if (opcionSpinnerSeleccionada.equals("Cancelar y cerrar la tarea")){
-
-                            interfaz.ResultadoMotivoDialogo(motivo,"F1");
+                     interfaz.ResultadoMotivoDialogo(motivo,"F1");
                             dialogo.dismiss();
-
-                        }else{
-                            interfaz.ResultadoMotivoDialogo(motivo,"C2");
-                            dialogo.dismiss();
-                        }
 
                     }else{
                         Toast.makeText(contexcto,"Escriba Motivo",Toast.LENGTH_SHORT).show();

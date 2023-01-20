@@ -344,7 +344,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                     Toast.makeText(getApplicationContext(),"Reintentar",Toast.LENGTH_SHORT).show();
                     dialogProgress.dismiss();
                 }
-            });
+            },"rubach");
 
     }
 
@@ -526,7 +526,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 Toast.makeText(getApplicationContext(), "No Cargo Cantidad Reintentar",Toast.LENGTH_SHORT).show();
 
             }
-        });
+        },"rubach");
 
     }
 
@@ -563,7 +563,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 dialogProgress.dismiss();
                 dialogErrorPrintet("No Cargo Bobina");
             }
-        });
+        },"rubach");
 
     }
 
@@ -647,7 +647,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                     dialogErrorPrintet("No Cargo Motivo");
 
                 }
-            });
+            },"rubach");
         }
 
 
@@ -701,7 +701,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 dialogErrorPrintet("No Cargo Scrap");
 
             }
-        });
+        },"rubach");
     }
 
 

@@ -9,48 +9,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#30ADBC"
+        android:background="#00BCD4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/cierre_btn_cancelarycerrar"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#C3382E"
+            android:text="Cancelar y Cerrar la Tarea"
+            app:icon="@android:drawable/ic_menu_info_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
+
         <TextView
             android:id="@+id/textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="MOTIVO CIERRE"
-            android:textColor="@color/white"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="100dp"
+            android:text="Cancelar Trabajo"
+            android:textColor="@color/black"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinner_opcion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/CIERRE"
-            app:layout_constraintEnd_toEndOf="@+id/textview"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview" />
-
         <TextView
             android:id="@+id/textView33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Motivo:"
+            android:layout_marginTop="16dp"
+            android:text="Describir motivo:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_opcion" />
+            app:layout_constraintTop_toBottomOf="@+id/textview" />
 
         <EditText
             android:id="@+id/edit_motivo"
@@ -61,41 +66,36 @@
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:textColor="#F8F1F1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
         <Button
-            android:id="@+id/cierre_btn_confirmar"
-            android:layout_width="wrap_content"
+            android:id="@+id/cierre_btn_cancelarycontinuar"
+            android:layout_width="350dp"
             android:layout_height="80dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#4CAF50"
-            android:text="Confirmar"
-            app:icon="@android:drawable/ic_menu_save"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#1E5520"
+            android:text="Cancelar y continuar la tarea"
+            app:icon="@android:drawable/ic_menu_info_details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cierre_btn_cancelar"
-            app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cierre_btn_cancelarycerrar" />
 
         <Button
             android:id="@+id/cierre_btn_cancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#F44336"
-            android:text="Cancelar"
+            android:layout_width="65dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
             app:icon="@android:drawable/ic_menu_close_clear_cancel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cierre_btn_confirmar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
