@@ -22,10 +22,19 @@ public class TareaSingleton {
     private static TareaSingleton tareaSingle;
     private Tareas tareaInstanciada;
     private Pedido pedidoInstanciada;
+    private String usuarioIniciado;
     private int produccionId;
     private Map<String, String> tipoMaquina;
     private ArrayList<Proveedor> proveedores;
     private ArrayList<Material> materiales;
+
+    public String getUsuarioIniciado() {
+        return usuarioIniciado;
+    }
+
+    public void setUsuarioIniciado(String usuarioIniciado) {
+        this.usuarioIniciado = usuarioIniciado;
+    }
 
     public ArrayList<Material> getMateriales() {
         return materiales;
@@ -221,7 +230,7 @@ public class TareaSingleton {
             variablesGenrales.put("UnidadIdScrapInicial", "0");
             variablesGenrales.put("SumRollosFabricados", "0");//FE,FR
             variablesGenrales.put("AnchoFinalRollo", "0");
-            variablesGenrales.put("CantidadPistasCortadas", ".0");
+            variablesGenrales.put("CantidadPistasCortadas", "0");
             variablesGenrales.put("PistasTroquelUsadas", "8");
             variablesGenrales.put("SumRollosEmpaquedatos", "8");//e
 

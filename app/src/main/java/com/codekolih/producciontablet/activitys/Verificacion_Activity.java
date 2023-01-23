@@ -63,6 +63,7 @@ import java.util.Map;
 public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
+    private String USUARIO;
     Pedido pedido_Cargado;
     //Produccion_Lista produccion_actual;
     private ProgressHUD dialogProgress;
@@ -135,12 +136,17 @@ public class Verificacion_Activity extends AppCompatActivity {
         String maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
         String tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
 
-        txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina,tipomaquinaid));
-        txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
 
         httpLayer = new HttpLayer(this);
 
-        cargarTareaSeleccionada(); // tarea y produccion_actual
+
+        txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina,tipomaquinaid));
+
+        //usuario
+        USUARIO = pref.getString(PREF_PRODUCCION_USUARIO, "NO");
+        txt_usuario.setText(USUARIO);
+
+        cargarTareaSeleccionada(); // tarea y produccion_actual // usuario
 
 
         spi_verificacion_UnidadIdScrapInicial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -360,7 +366,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                 dialogErrorPrintet("No cargo Datos");
                 Log.e("http_altaproduccion","Fallo");
             }
-        },"rubach");
+        },USUARIO);
     }
 
     private void cargarfecha() {
@@ -416,7 +422,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"Reintentar",Toast.LENGTH_SHORT).show();
             }
-        },"rubach");
+        },USUARIO);
 
     }
 

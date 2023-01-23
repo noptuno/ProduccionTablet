@@ -117,7 +117,8 @@ public class Tarea_Activity extends AppCompatActivity {
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         MAQUINATIPOID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0"));
         MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
-        USUARIO = pref.getString(PREF_PRODUCCION_USUARIO, "NO");
+
+        USUARIO =  TareaSingleton.SingletonInstance().getUsuarioIniciado();
 
 
         txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
@@ -158,7 +159,7 @@ public class Tarea_Activity extends AppCompatActivity {
 private void elegirTarea(Tareas note){
 
     AlertDialog.Builder build4 = new AlertDialog.Builder(Tarea_Activity.this);
-    build4.setMessage("¿Desea Seleccionar la Tarea : " + note.getDescripcion()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+    build4.setMessage("¿Desea Seleccionar la Tarea : " + note.getArticuloId()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
 
@@ -215,7 +216,7 @@ private void elegirTarea(Tareas note){
                 Log.e("Tarea_Activity","Error al cargar Estado");
                 Toast.makeText(getApplicationContext(),"No cargo Estado",Toast.LENGTH_SHORT).show();
             }
-        },"rubach");
+        },USUARIO);
 
     }
 
@@ -264,7 +265,7 @@ private void elegirTarea(Tareas note){
 
                 for (Tareas lg : response) {
 
-                    if (lg.getTipoMaquinaId()==MAQUINATIPOID){
+                    if (lg.getMaquinaId()==MAQUINAID){
 
                         temp.add(lg);
 

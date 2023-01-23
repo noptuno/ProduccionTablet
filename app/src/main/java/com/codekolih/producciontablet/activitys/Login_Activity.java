@@ -81,7 +81,7 @@ public class Login_Activity extends AppCompatActivity {
     private AutoCompleteTextView edt_usaurio;
 
     private static final String[] COUNTRIES = new String[] {
-            "RUBACH", "DAVID", "PETER", "ENRIQUE", "JOSE"
+            "rubach", "david", "peter", "enrique", "jose"
     };
 
     @Override
@@ -101,11 +101,11 @@ public class Login_Activity extends AppCompatActivity {
         edt_pass= findViewById(R.id.login_edt_password);
         edt_pass.setTransformationMethod(new PasswordTransformationMethod());
 
+
         edt_usaurio = findViewById(R.id.login_edt_login);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, COUNTRIES);
         edt_usaurio.setAdapter(adapter);
-
 
         edt_usaurio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -166,10 +166,9 @@ public class Login_Activity extends AppCompatActivity {
 
                             if (estado.equals("200")){
 
-                                pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString(PREF_PRODUCCION_USUARIO, edt_usaurio.getText().toString());
-                                editor.apply();
+                                //CargarUsuario
+                                TareaSingleton.SingletonInstance().setUsuarioIniciado(edt_usaurio.getText().toString());
+
                                 Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

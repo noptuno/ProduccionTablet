@@ -6,64 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".activitys.Login_Activity">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
+    <Button
+        android:id="@+id/login_btn_IniciarSesion"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/fondo"
+        android:text="Iniciar Sesion"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/login_edt_password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta">
+        app:layout_constraintTop_toTopOf="@+id/login_edt_login" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="24dp"
-            app:srcCompat="@drawable/ic_baseline_supervised_user_circle_24" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_edt_password"
+        app:layout_constraintEnd_toStartOf="@+id/login_edt_login"
+        app:layout_constraintTop_toTopOf="@+id/login_edt_login"
+        app:srcCompat="@drawable/ic_baseline_supervised_user_circle_24" />
 
-        <AutoCompleteTextView
-            android:id="@+id/login_edt_login"
-            android:layout_width="400dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="8dp"
-            android:autoText="true"
-            android:inputType="text|textCapWords"
-            android:selectAllOnFocus="true"
-            android:text="RUBACH" />
+    <AutoCompleteTextView
+        android:id="@+id/login_edt_login"
+        android:layout_width="400dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:autoText="true"
+        android:inputType="text|textCapWords"
+        android:selectAllOnFocus="true"
+        android:text="rubach"
+        app:layout_constraintEnd_toStartOf="@+id/login_btn_IniciarSesion"
+        app:layout_constraintTop_toTopOf="@+id/space" />
 
-        <EditText
+    <EditText
 
-            android:id="@+id/login_edt_password"
-            android:layout_width="400dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:selectAllOnFocus="true"
-            android:text="1234567"
-            android:textSize="34sp" />
-
-        <Button
-            android:id="@+id/login_btn_IniciarSesion"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/fondo"
-            android:text="Iniciar Sesion"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:id="@+id/login_edt_password"
+        android:layout_width="400dp"
+        android:layout_height="70dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
+        android:text="1234567"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="@+id/login_edt_login"
+        app:layout_constraintStart_toStartOf="@+id/login_edt_login"
+        app:layout_constraintTop_toBottomOf="@+id/login_edt_login" />
 
     <TextView
         android:id="@+id/login_txt_nombreimprenta"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:background="@color/teal_700"
@@ -78,23 +76,22 @@
     <ImageButton
         android:id="@+id/login_btn_cargarImprenta"
         android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/teal_700"
+        android:background="@drawable/fondo"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:padding="5dp"
-        android:tint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/login_txt_nombreimprenta"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back" />
+        app:srcCompat="@drawable/ic_cambio_imprenta" />
 
     <Space
         android:id="@+id/space"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta" />

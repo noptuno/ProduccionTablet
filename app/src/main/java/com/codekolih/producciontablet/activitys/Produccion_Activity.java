@@ -75,6 +75,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private int produccionId;
     private int pedidoId;
     private int tareaId;
+    private String USUARIO;
     private SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,14 +101,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
         pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
         tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+        USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
+        txt_usuario.setText(USUARIO);
 
-        /*
-        pedido_seleccionado = TareaSingleton.SingletonInstance().getPedidoInstanciada();
 
-        if (pedido_seleccionado!=null){
-
-        }
-        */
         Log.e("IdProduccionSelec",""+produccionId);
 
 
@@ -327,7 +324,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void cambioEstado( Map<String, Object> estado) {
 
-        Log.e("Resultado","cambi oestado ");
+        Log.e("Resultado","cambio estado ");
             dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
             httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
@@ -344,7 +341,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                     Toast.makeText(getApplicationContext(),"Reintentar",Toast.LENGTH_SHORT).show();
                     dialogProgress.dismiss();
                 }
-            },"rubach");
+            },USUARIO);
 
     }
 
@@ -382,6 +379,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
             Log.e("ERROR","NO TAREA");
+            finish();
         }
 
         float contcantidad = 0;
@@ -526,7 +524,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 Toast.makeText(getApplicationContext(), "No Cargo Cantidad Reintentar",Toast.LENGTH_SHORT).show();
 
             }
-        },"rubach");
+        },USUARIO);
 
     }
 
@@ -563,7 +561,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 dialogProgress.dismiss();
                 dialogErrorPrintet("No Cargo Bobina");
             }
-        },"rubach");
+        },USUARIO);
 
     }
 
@@ -647,7 +645,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                     dialogErrorPrintet("No Cargo Motivo");
 
                 }
-            },"rubach");
+            },USUARIO);
         }
 
 
@@ -701,7 +699,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 dialogErrorPrintet("No Cargo Scrap");
 
             }
-        },"rubach");
+        },USUARIO);
     }
 
 

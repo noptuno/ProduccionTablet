@@ -135,7 +135,7 @@ private int contadorgeneral = 0;
 
            // int color = Color.argb(255,random.nextInt(256),(random.nextInt(256)),(random.nextInt(256)));
 
-            layoutTareas.setBackgroundColor(a.getColor());
+           // layoutTareas.setBackgroundColor(a.getColor());
             articuloid.setText(String.format("%s", tarea.getArticuloId()));
             serieynumero.setText(String.format("%s", tarea.getSerieYNro()));
             concepto.setText(tarea.getConcepto());
