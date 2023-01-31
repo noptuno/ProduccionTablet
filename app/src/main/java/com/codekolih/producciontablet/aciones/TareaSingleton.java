@@ -190,7 +190,7 @@ public class TareaSingleton {
             variablesGenrales.put("1", "8"); //control del boceto o muestra contra la impresión de largada
             variablesGenrales.put("2", "8"); //control de tipo de papel correcto
             variablesGenrales.put("3", "0"); //control que el trabajo cumpla con la especificación
-            variablesGenrales.put("4", "8"); //control del troquelado y del estado del line
+            variablesGenrales.put("4", "0"); //control del troquelado y del estado del line
             variablesGenrales.put("5", "8"); // control del sentido de bobinado.
             variablesGenrales.put("6", "8"); // control para numerados (datos de pie, dirección y numeración)
             variablesGenrales.put("7", "8"); //control para numerados (armado y control de numeración)

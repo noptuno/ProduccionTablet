@@ -47,7 +47,7 @@ public class CantidadDialog {
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_num);
 
-        nombrevariable = dialogo.findViewById(R.id.textView5);
+        nombrevariable = dialogo.findViewById(R.id.item_tarea_txt_nombrecurso);
         btn_aceptar = dialogo.findViewById(R.id.cantidad_btn_confirmar);
         btn_cancelar= dialogo.findViewById(R.id.cantidad_btn_cancelar);
         edt_numero = dialogo.findViewById(R.id.et_numero);

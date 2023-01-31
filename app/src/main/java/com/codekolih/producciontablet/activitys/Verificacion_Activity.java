@@ -108,6 +108,8 @@ public class Verificacion_Activity extends AppCompatActivity {
     private Switch uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,dies;
 
     private TextView
+
+            txt_verificacion_txt_Observaciones,
             txt_verificacion_txt_NroDeSobre,
             txt_verificacion_txt_Descripcion,
             txt_verificacion_txt_MetrosAImprimir,
@@ -310,7 +312,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
         newproduccion.put("ScrapAjusteProduccion", 0);
         newproduccion.put("ScrapAjusteProduccion_Unidades", "KG");
-        newproduccion.put("ObservacionesCierre", "Sin cierre");
+        newproduccion.put("ObservacionesCierre", "");
         newproduccion.put("RollosFabricdos", 0);
         newproduccion.put("AnchoFinalRollo", AnchoFinalRollo);
         newproduccion.put("CantidadPistasCortadas", CantidadPistasCortadas);
@@ -394,6 +396,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_Cantidad.setText(String.format("%s", tarea_Seleccionada.getCantidad()));
             txt_Concepto.setText(tarea_Seleccionada.getConcepto());
 
+            txt_verificacion_txt_Observaciones.setText(String.format("%s", tarea_Seleccionada.getObservaciones()));
             txt_verificacion_txt_NroDeSobre.setText(String.format("%s", tarea_Seleccionada.getNroDeSobre()));
             txt_verificacion_txt_Descripcion.setText(String.format("%s", tarea_Seleccionada.getDescripcion()));
             txt_verificacion_txt_MetrosAImprimir.setText(String.format("%s", tarea_Seleccionada.getMetrosAImprimir()));
@@ -516,6 +519,8 @@ public class Verificacion_Activity extends AppCompatActivity {
         edt_verificacion_AnchoFinalRollo= findViewById(R.id.verificacion_edt_AnchoFinalRollo);
         edt_verificacion_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
         edt_verificacion_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
+
+        txt_verificacion_txt_Observaciones= findViewById(R.id.verificacion_txt_Observaciones);
 
         txt_verificacion_txt_NroDeSobre = findViewById(R.id.verificacion_txt_NroDeSobre);
         txt_verificacion_txt_Descripcion = findViewById(R.id.verificacion_txt_Descripcion);

@@ -107,6 +107,7 @@ private int contadorgeneral = 0;
     public class NoteViewHolder extends RecyclerView.ViewHolder {
 
         private TextView serieynumero,concepto,totalcantidad,restante,observaciones,articuloid,item_ultimoEstado;
+        private TextView txtproducir,txtrestante;
         private LinearLayout layoutTareas;
         private int pos;
 
@@ -118,6 +119,11 @@ private int contadorgeneral = 0;
             concepto = (TextView) item.findViewById(R.id.item_tarea_txt_concepto);
             totalcantidad = (TextView) item.findViewById(R.id.item_tarea_txt_totalcantidad);
             restante = (TextView) item.findViewById(R.id.item_tarea_txt_restante);
+
+            txtproducir = (TextView) item.findViewById(R.id.item_tarea_txt_nombrecantidad);
+                    txtrestante = (TextView) item.findViewById(R.id.item_tarea_txt_nombrecurso);
+
+
             observaciones = (TextView) item.findViewById(R.id.item_tarea_txt_obseraciones);
             layoutTareas= (LinearLayout) item.findViewById(R.id.layoutTareas);
 
@@ -146,14 +152,24 @@ private int contadorgeneral = 0;
 
                     for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
                         if ("SumMetrosImpresos".equals(entry.getKey())){
+                            txtproducir.setText("METROS A PRODUCIR");
+                            txtrestante.setText("METROS EN CURSO");
                             if (entry.getValue().equals("0")){
                                 cont+= lg.getMetrosImpresos();
                             }
                         }  else if ("SumRollosFabricados".equals(entry.getKey())){
+
+                            txtproducir.setText("ROLLOS A PRODUCIR");
+                            txtrestante.setText("ROLLOS EN CURSO");
+
                             if (entry.getValue().equals("0")){
                                 cont+= lg.getRollosFabricdos();
                             }
                         } else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
+
+                            txtproducir.setText("ROLLOS A PRODUCIR");
+                            txtrestante.setText("ROLLOS EN CURSO");
+
                             if (entry.getValue().equals("0")){
                                 cont+= lg.getRollosEmpaquetados();
                             }

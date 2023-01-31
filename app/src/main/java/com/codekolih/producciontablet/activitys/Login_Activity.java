@@ -4,8 +4,6 @@ import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_C
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
-import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
-import static com.codekolih.producciontablet.aciones.Variables.PREF_SETSTRING;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -17,13 +15,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -43,17 +40,12 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
-import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Usuario;
-import com.codekolih.producciontablet.dialogs.BobinaDialogo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -84,6 +76,33 @@ public class Login_Activity extends AppCompatActivity {
             "rubach", "david", "peter", "enrique", "jose"
     };
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuimprentaschange, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.seleccionar_imprenta:
+
+                Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +115,6 @@ public class Login_Activity extends AppCompatActivity {
         //Referencias
         btn_inicioSesion = findViewById(R.id.login_btn_IniciarSesion);
         txt_nombreImprenta = findViewById(R.id.login_txt_nombreimprenta);
-        btn_cargarImprenta = findViewById(R.id.login_btn_cargarImprenta);
         //edt_usaurio= findViewById(R.id.login_edt_user);
         edt_pass= findViewById(R.id.login_edt_password);
         edt_pass.setTransformationMethod(new PasswordTransformationMethod());
@@ -124,17 +142,7 @@ public class Login_Activity extends AppCompatActivity {
 
 
 
-        btn_cargarImprenta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-
-                Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-            }
-        });
 
 
         btn_inicioSesion.setOnClickListener(new View.OnClickListener() {

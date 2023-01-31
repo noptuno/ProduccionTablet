@@ -260,7 +260,7 @@
             <LinearLayout
                 android:id="@+id/ly_Observaciones"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
@@ -268,17 +268,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.8"
-                    android:text="Observaciones"
+                    android:text="Observaciones."
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/verificacion_txt_Observaciones"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="textPersonName"
-                    android:text="obser"
+                    android:text="obser..."
                     android:textSize="14sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
@@ -527,7 +527,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.8"
-                    android:text="Descripcion"
+                    android:text="Descripcion del Troquel"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -784,7 +784,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
-                android:text="AnchoFinalRolloYGap"
+                android:text="Ancho del Rollo Final + Gab"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -1098,7 +1098,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:backgroundTint="#4CAF50"
-        android:text="Iniciar Producción"
+        android:text="IR A PRODUCCION"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"

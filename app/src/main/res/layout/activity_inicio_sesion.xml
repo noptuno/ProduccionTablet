@@ -34,14 +34,13 @@
         android:id="@+id/login_edt_login"
         android:layout_width="400dp"
         android:layout_height="70dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:autoText="true"
         android:inputType="text|textCapWords"
         android:selectAllOnFocus="true"
         android:text="rubach"
         app:layout_constraintEnd_toStartOf="@+id/login_btn_IniciarSesion"
-        app:layout_constraintTop_toTopOf="@+id/space" />
+        tools:layout_editor_absoluteY="89dp" />
 
     <EditText
 
@@ -60,40 +59,37 @@
 
     <TextView
         android:id="@+id/login_txt_nombreimprenta"
-        android:layout_width="wrap_content"
+        android:layout_width="189dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:background="@color/teal_700"
         android:padding="5dp"
         android:text="NO"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/login_btn_cargarImprenta"
-        android:layout_width="80dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/fondo"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:padding="5dp"
-        app:layout_constraintStart_toEndOf="@+id/login_txt_nombreimprenta"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_cambio_imprenta" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <Space
         android:id="@+id/space"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn_cargarImprenta" />
+        tools:layout_editor_absoluteY="88dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Imprenta seleccionada: "
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

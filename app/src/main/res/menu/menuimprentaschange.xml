@@ -5,7 +5,7 @@
     <item
         android:id="@+id/seleccionar_imprenta"
         android:drawableLeft="@drawable/ic_find"
-        android:title="Cargar"
+        android:title="Seleccionar otra Imprenta"
         app:showAsAction="never" />
 
 

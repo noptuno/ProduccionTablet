@@ -1,6 +1,5 @@
 package com.codekolih.producciontablet.activitys;
 
-import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CAMBIOPRIORIDAD;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_ELEGIRTAREA;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
@@ -17,6 +16,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -28,11 +29,9 @@ import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
-import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.clases.Imprentas;
-import com.codekolih.producciontablet.clases.Proveedor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +44,7 @@ public class Imprentas_Activity extends AppCompatActivity {
     private ProgressHUD dialogProgress;
     private SharedPreferences pref;
     private HttpLayer httpLayer;
+    private Button btnregresar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,14 @@ public class Imprentas_Activity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.verificacion_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapterImprentas);
+
+        btnregresar = findViewById(R.id.btn_regresar);
+        btnregresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         adapterImprentas.setOnNoteSelectedListener(new AdapterImprentas.OnNoteSelectedListener(){
             @Override
@@ -181,7 +189,7 @@ private void cargarConfiguracion() {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.cargar:
+            case R.id.seleccionar_imprenta:
 
                 cargarDatos();
 
