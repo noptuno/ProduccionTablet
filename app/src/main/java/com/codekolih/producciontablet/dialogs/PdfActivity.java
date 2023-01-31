@@ -10,9 +10,21 @@ import com.codekolih.producciontablet.R;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.shockwave.pdfium.PdfDocument;
 
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.ConnectException;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class PdfActivity extends AppCompatActivity {
 
@@ -26,8 +38,84 @@ public class PdfActivity extends AppCompatActivity {
 
         pdfView = findViewById(R.id.pdf_view_pdf);
 
-        AbriPdf();
+        /*
+        try {
+        URL url1 =new URL("File://192.168.234.144/pdf/fact.pdf");
+        byte[] ba1 = new byte[1024];
+        int baLength;
+        FileOutputStream fos1 = new FileOutputStream("fact.pdf");
+
+                try {
+                    // Read the PDF from the URL and save to a local file
+                    InputStream is1 = url1.openStream();
+                    while ((baLength = is1.read(ba1)) != -1) {
+                        fos1.write(ba1, 0, baLength);
+                    }
+                    fos1.flush();
+                    fos1.close();
+
+                    // Load the PDF document and display its page count
+                    System.out.print("DONE.\nProcessing the PDF ... ");
+
+                    pdfView.fromStream(is1).defaultPage(0).onLoad(new OnLoadCompleteListener() {
+                        @Override
+                        public void loadComplete(int nbPages) {
+
+                        }
+                    }).scrollHandle(new DefaultScrollHandle(PdfActivity.this)).load();
+
+                    is1.close();
+
+                } catch (ConnectException ce) {
+                    System.out.println("FAILED.\n[" + ce.getMessage() + "]\n");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+
+        } catch (MalformedURLException malformedURLException) {
+            malformedURLException.printStackTrace();
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        }
+*/
+        InputStream in=null;
+        try {
+            URL url=new URL("File://192.168.234.144/pdf/fact.pdf");
+//          in=url.openStream();
+            URLConnection conn=url.openConnection();
+            conn.connect();
+            in=conn.getInputStream();
+            while (true) {
+                int read=in.read();
+                if (read==-1) break;
+                System.out.write(read);
+            }
+
+            pdfView.fromStream(in).defaultPage(0).onLoad(new OnLoadCompleteListener() {
+                @Override
+                public void loadComplete(int nbPages) {
+
+                }
+            }).scrollHandle(new DefaultScrollHandle(PdfActivity.this)).load();
+
+        }
+        catch (SocketTimeoutException e){
+            System.out.println("timed out");
+        }
+        catch (MalformedURLException e) {
+            System.out.println("URL not valid");
+        }
+
+        catch (IOException e) {
+            System.out.println("unable to get data");
+        }
+
+      //  AbriPdf();
     }
+
+
+
 
     public void AbriPdf() {
 

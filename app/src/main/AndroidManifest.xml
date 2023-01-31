@@ -23,7 +23,11 @@
         <activity
             android:name=".dialogs.PdfActivity"
             android:theme="@style/Theme.ProduccionTablet.NoActionBar"
-            android:exported="false" />
+            android:exported="true">
+
+
+
+        </activity>
         <activity
             android:name=".activitys.Verificacion_Activity"
             android:windowSoftInputMode="adjustNothing"
