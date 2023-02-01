@@ -61,7 +61,7 @@ public class TareaSingleton {
         Map<String, String> variablesGenrales = new HashMap<>();
 
         if (idtipomaquina.equals("1")){
-
+//IE
             Log.e("VariablesOcultar",idtipomaquina);
 
             //pregutnas
@@ -123,7 +123,7 @@ public class TareaSingleton {
             variablesGenrales.put("DefectuosaKg", "0");
 
         }else if (idtipomaquina.equals("2")){
-
+//IR
             Log.e("VariablesOcultar",idtipomaquina);
 
 
@@ -158,7 +158,7 @@ public class TareaSingleton {
             variablesGenrales.put("Descripcion", "8");
             variablesGenrales.put("Cilindro", "8");
             variablesGenrales.put("Z_AltoMasGap", "8");
-            variablesGenrales.put("MetrosPorRollo", "8");
+            variablesGenrales.put("MetrosPorRollo", "0");
             variablesGenrales.put("MetrosMatTroquelar", "8");
             variablesGenrales.put("TroquelId", "8");
 
@@ -182,7 +182,7 @@ public class TareaSingleton {
 
 
         }else if (idtipomaquina.equals("3")){
-
+//FE
             Log.e("VariablesOcultar",idtipomaquina);
 
 
@@ -240,7 +240,7 @@ public class TareaSingleton {
             variablesGenrales.put("DefectuosaKg", "0");
 
         }else if (idtipomaquina.equals("4")){
-
+                //FR
             Log.e("VariablesOcultar",idtipomaquina);
 
 

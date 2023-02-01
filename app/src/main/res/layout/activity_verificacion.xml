@@ -784,7 +784,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
-                android:text="Ancho del Rollo Final + Gab"
+                android:text="Ancho del Rollo Final + Gab en Milimetros"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -882,7 +882,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
-                android:text="ScrapAjusteInicial"
+                android:text="Scrap Ajuste Inicial"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -892,8 +892,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number"
-                android:maxLength="4"
+                android:inputType="number|numberDecimal"
+                android:maxLength="6"
                 android:minHeight="48dp"
                 android:numeric="decimal"
                 android:selectAllOnFocus="true"
@@ -914,7 +914,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="UnidadIdScrapInicial"
+                android:text="Unidad Scrap Inicial"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -938,7 +938,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="AnchoFinalRollo"
+                android:text="Ancho Final Rollo"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -948,10 +948,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number"
-                android:maxLength="3"
+                android:inputType="number|numberDecimal"
+                android:maxLength="5"
                 android:minHeight="48dp"
-                android:numeric="integer"
+                android:numeric="integer|decimal"
                 android:selectAllOnFocus="true"
                 android:text="0"
                 android:textAllCaps="true"
@@ -970,7 +970,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="CantidadPistasCortadas"
+                android:text="Cantidad Pistas Cortadas"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -1002,7 +1002,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="PistasTroquelUsadas"
+                android:text="PistasTroquel Usadas"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
