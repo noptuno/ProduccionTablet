@@ -184,9 +184,12 @@ public class BobinaDialogo {
                        String ProveedorMaterial = NombreTipoMaterial;
 
                        try{
-                           if (!Lote.equals("")){
+                           if (!Lote.equals("") && DefectuosaKg>0){
                                interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
                                dialogo.dismiss();
+                           }else{
+
+                               Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
                            }
 
                        }catch (Exception e){

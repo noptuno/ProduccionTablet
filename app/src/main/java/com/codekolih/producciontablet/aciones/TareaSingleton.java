@@ -58,15 +58,15 @@ public class TareaSingleton {
 
     public void setTipoMaquina(String idtipomaquina) {
 
+
+        // 8 OCULTAR
+        // 0 MOSTRAR
         Map<String, String> variablesGenrales = new HashMap<>();
 
         if (idtipomaquina.equals("1")){
 //IE
             Log.e("VariablesOcultar",idtipomaquina);
 
-            //pregutnas
-
-//valdiar
             variablesGenrales.put("1", "0"); //control del boceto o muestra contra la impresión de largada
             variablesGenrales.put("2", "0"); //control de tipo de papel correcto
             variablesGenrales.put("3", "0"); //control que el trabajo cumpla con la especificación
@@ -182,7 +182,7 @@ public class TareaSingleton {
 
 
         }else if (idtipomaquina.equals("3")){
-//FE
+//FR
             Log.e("VariablesOcultar",idtipomaquina);
 
 
@@ -240,7 +240,7 @@ public class TareaSingleton {
             variablesGenrales.put("DefectuosaKg", "0");
 
         }else if (idtipomaquina.equals("4")){
-                //FR
+                //FE
             Log.e("VariablesOcultar",idtipomaquina);
 
 
@@ -270,7 +270,7 @@ public class TareaSingleton {
             variablesGenrales.put("EtiquetasEnBanda", "0");
             variablesGenrales.put("Pistas", "0");
             variablesGenrales.put("Observaciones", "0");
-            variablesGenrales.put("MetrosAImprimir", "0");
+            variablesGenrales.put("MetrosAImprimir", "8");
             variablesGenrales.put("NroDeSobre", "0");
             variablesGenrales.put("Descripcion", "0");
             variablesGenrales.put("Cilindro", "0");
@@ -286,11 +286,11 @@ public class TareaSingleton {
             variablesGenrales.put("CantidadTintas", "8");
             variablesGenrales.put("ScrapAjusteInicial", "0");
             variablesGenrales.put("UnidadIdScrapInicial", "0");
-            variablesGenrales.put("SumRollosFabricados", "8");//FE,FR
+            variablesGenrales.put("SumRollosFabricados", "0");//FE,FR
             variablesGenrales.put("AnchoFinalRollo", "8");
             variablesGenrales.put("CantidadPistasCortadas", ("8"));
             variablesGenrales.put("PistasTroquelUsadas", "0");
-            variablesGenrales.put("SumRollosEmpaquedatos", "0");//e
+            variablesGenrales.put("SumRollosEmpaquedatos", "8");//e
 
             //bobina
             variablesGenrales.put("Ancho", "0");
@@ -298,7 +298,7 @@ public class TareaSingleton {
             variablesGenrales.put("DefectuosaKg", "0");
 
         }else if (idtipomaquina.equals("5")){
-
+//E
             Log.e("VariablesOcultar",idtipomaquina);
 
 

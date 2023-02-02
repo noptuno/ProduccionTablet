@@ -13,9 +13,9 @@
 
     <string-array name="UNIDADES">
         <item>Seleccionar</item>
-        <item>KG</item>
-        <item>G</item>
-        <item>M</item>
+        <item>Kilos</item>
+        <item>Gramos</item>
+        <item>Metros</item>
     </string-array>
     <string-array name="CIERRE">
         <item>Cancelar y cerrar la tarea</item>

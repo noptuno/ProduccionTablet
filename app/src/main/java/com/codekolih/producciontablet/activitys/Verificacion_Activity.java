@@ -64,6 +64,9 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
     private String USUARIO;
+
+    private int tipoimprenta;
+
     Pedido pedido_Cargado;
     //Produccion_Lista produccion_actual;
     private ProgressHUD dialogProgress;
@@ -155,7 +158,17 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                UnidadIdScrapInicial =  adapterView.getItemAtPosition(i).toString();
+        String unidad = "Seleccionar";
+               if (adapterView.getItemAtPosition(i).toString().equals("Kilos")){
+                   unidad = "KG";
+               }else if (adapterView.getItemAtPosition(i).toString().equals("Gramos")){
+                   unidad = "KG";
+               }else if(adapterView.getItemAtPosition(i).toString().equals("Metros")){
+                   unidad = "KG";
+
+               }
+
+                UnidadIdScrapInicial =  unidad;
 
             }
 
@@ -234,13 +247,17 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                finish();
 
+            /*
                 Map<String, Object> estado = new HashMap<>();
                 estado.put("TareaId", tarea_Seleccionada.getTareaId());
                 estado.put("EstadoId", "C2");
                 estado.put("TipoEstadoId","I" );
 
                 cambioEstado(estado);
+        */
+
 
             }
 
@@ -599,7 +616,25 @@ public class Verificacion_Activity extends AppCompatActivity {
                 ly_CantidadTintas.setVisibility(parseInt(entry.getValue()));
             }
             else if ("ScrapAjusteInicial".equals(entry.getKey())){
+
                 ly_ScrapAjusteInicial.setVisibility(parseInt(entry.getValue()));
+
+                if (tarea_Seleccionada.getTipoMaquinaId() == 4){
+
+                    edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
+
+                }else if(tarea_Seleccionada.getTipoMaquinaId() == 5){
+
+                    edt_verificacion_ScrapAjusteInicial.setMaxEms(5);
+
+                }else if (tarea_Seleccionada.getTipoMaquinaId() == 1){
+
+                        edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
+                }else if (tarea_Seleccionada.getTipoMaquinaId() == 2){
+
+                    edt_verificacion_ScrapAjusteInicial.setMaxEms(5);
+                }
+
             }
             else if ("UnidadIdScrapInicial".equals(entry.getKey())){
                 ly_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));

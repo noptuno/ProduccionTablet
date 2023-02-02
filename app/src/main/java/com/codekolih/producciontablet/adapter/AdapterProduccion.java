@@ -96,6 +96,8 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
         private LinearLayout lyp_AnchoFinalRolloYGap,lyp_CantidadPistasImpresas,lyp_CantidadTintas,lyp_ScrapAjusteInicial,lyp_AnchoFinalRollo,lyp_CantidadPistasCortadas,lyp_PistasTroquelUsadas,lyp_UnidadIdScrapInicial;
         private TextView AnchoFinalRolloYGap,CantidadPistasImpresas,CantidadTintas,ScrapAjusteInicial,AnchoFinalRollo,CantidadPistasCortadas,PistasTroquelUsadas,UnidadIdScrapInicial;
         private TextView fecha;
+        private TextView textviewRollosEmpaquetados;
+
 
         public NoteViewHolder(View item) {
             super(item);
@@ -111,6 +113,8 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             ScrapAjusteProduccion_Unidades = (TextView) item.findViewById(R.id.item_produccion_txt_ScrapAjusteProduccion_Unidades);
             RollosFabricdos = (TextView) item.findViewById(R.id.item_produccion_txt_RollosFabricdos);
             RollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txt_RollosEmpaquetados);
+
+            textviewRollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txtview_RollosEmpaquetados);
 
 
             //produccio unicavez
@@ -150,6 +154,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
                 }
                 else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
                     ly_RollosEmpaquetados.setVisibility(parseInt(entry.getValue()));
+                    textviewRollosEmpaquetados.setText("Rollos Producidos");
                 }
 
 

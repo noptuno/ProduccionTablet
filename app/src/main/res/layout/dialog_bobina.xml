@@ -151,7 +151,6 @@
                     android:ems="10"
                     android:inputType="number|numberDecimal"
                     android:selectAllOnFocus="true"
-                    android:text="0"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />

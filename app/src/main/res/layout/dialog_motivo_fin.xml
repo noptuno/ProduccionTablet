@@ -17,14 +17,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/cierre_btn_cancelarycerrar"
+            android:id="@+id/cierre_btn_finincompleto"
             android:layout_width="600dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#BC3E35"
-            android:text="cancelar y volver a este mismo trabajo"
+            android:text="TRABAJO QUEDO INCOMPLETO"
             android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_info_details"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="100dp"
-            android:text="MOTIVO PARA CANCELAR EL TRABAJO"
+            android:text="FIN DE TURNO"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Describir motivo:"
+            android:text="Detalle del trabajo"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -74,7 +74,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
         <Button
-            android:id="@+id/cierre_btn_cancelarycontinuar"
+            android:id="@+id/cierre_btn_finterminado"
             android:layout_width="600dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -82,13 +82,13 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
             android:backgroundTint="#208C24"
-            android:text="cancecalar y saltear este trabajo"
+            android:text="TRABAJO QUEDO TERMINADO"
             android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_info_details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cierre_btn_cancelarycerrar" />
+            app:layout_constraintTop_toBottomOf="@+id/cierre_btn_finincompleto" />
 
         <Button
             android:id="@+id/cierre_btn_cancelar"

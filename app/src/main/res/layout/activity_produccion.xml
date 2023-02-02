@@ -7,6 +7,19 @@
     tools:context=".activitys.Produccion_Activity">
 
     <Button
+        android:id="@+id/produccion_btn_finalziar2"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fondo"
+        android:text="FIN DE TURNO"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/produccion_btn_finalziar" />
+
+    <Button
         android:id="@+id/verificacion_btn_verpdf2"
         android:layout_width="250dp"
         android:layout_height="60dp"
@@ -26,6 +39,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/produccion_btn_cancelar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15">
@@ -696,24 +710,25 @@
 
     <Button
         android:id="@+id/produccion_btn_finalziar"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
-        android:text="FINALZIAR"
+        android:text="FIN DE TRABAJO"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/produccion_bobina_recycler" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/produccion_btn_cancelar"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:backgroundTint="#F44336"
-        android:text="CANCELAR"
+        android:text="CANCELAR TRABAJO"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

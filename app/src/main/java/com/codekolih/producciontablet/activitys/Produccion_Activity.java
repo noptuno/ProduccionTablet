@@ -41,6 +41,7 @@ import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.BobinaDialogo;
 import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.MotivoCierreDialog;
+import com.codekolih.producciontablet.dialogs.MotivoFinTurnoDialog;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
 import org.json.JSONObject;
@@ -53,7 +54,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog, MotivoCierreDialog.finalizarMotivo {
+public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog, MotivoCierreDialog.finalizarMotivo,MotivoFinTurnoDialog.finalizarMotivo {
 
     Tareas tarea_Seleccionada;
     Pedido pedido_seleccionado;
@@ -69,7 +70,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
-    private Button btn_cantidad, btn_bobina,btn_scrap, btn_finalizar, btn_cancelar;
+    private Button btn_cantidad, btn_bobina,btn_scrap, btn_finalizar, btn_cancelar, btn_finturno;
     private int BOBINA_ACTIVITY = 1;
     RecyclerView recyclerViewCantidad,recyclerViewBobinas;
     private int produccionId;
@@ -153,10 +154,19 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 
 
+            }
+        });
 
+
+        btn_finturno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               finalizar();
 
             }
         });
+
 
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +219,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         cargarTareaHttp(); // tarea y produccion_actual y bobina actual
         ocultarVariables();
         cargarfecha();
+
+    }
+
+    private void finalizar() {
+
+
+        new MotivoFinTurnoDialog(Produccion_Activity.this,Produccion_Activity.this);
 
     }
 
@@ -288,7 +305,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         btn_scrap = findViewById(R.id.produccion_btn_scrap);
         btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
         btn_cancelar= findViewById(R.id.produccion_btn_cancelar);
-
+        btn_finturno = findViewById(R.id.produccion_btn_finalziar2);
         cantidadtotal = findViewById(R.id.txt_produccion_cantidadtotal);
 
 
@@ -591,6 +608,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         cancelar();
     }
 
+
+
+
     @Override
     public void ResultadoMotivoDialogo(String motivo, String tipocierre) {
 
@@ -734,6 +754,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             txt_produccion_txt_TroquelId,
             txt_produccion_txt_MetrosMatTroquelar,
             txt_produccion_txt_Observaciones;
+
 
 
 }

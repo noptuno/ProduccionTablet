@@ -151,6 +151,7 @@ private int contadorgeneral = 0;
                 for (Produccion_Lista lg : tarea.getProduccion_Lista()) {
 
                     for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+
                         if ("SumMetrosImpresos".equals(entry.getKey())){
                             txtproducir.setText("METROS A PRODUCIR");
                             txtrestante.setText("METROS EN CURSO");

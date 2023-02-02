@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.InputType;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.clases.Tareas;
 
 import java.util.Map;
 
@@ -22,7 +24,7 @@ import java.util.Map;
 public class CantidadDialog {
 
     private finalizarCuadro interfaz;
-
+    Tareas tarea_Seleccionada;
     private TextView nombrevariable;
     private EditText edt_numero;
     Button btn_cancelar, btn_aceptar;
@@ -51,6 +53,18 @@ public class CantidadDialog {
         btn_aceptar = dialogo.findViewById(R.id.cantidad_btn_confirmar);
         btn_cancelar= dialogo.findViewById(R.id.cantidad_btn_cancelar);
         edt_numero = dialogo.findViewById(R.id.et_numero);
+
+        tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea();
+
+        if (tarea_Seleccionada.getTipoMaquinaId()== 4){
+            edt_numero.setMaxEms(5);
+            edt_numero.setInputType(InputType.TYPE_CLASS_NUMBER);
+        }else if (tarea_Seleccionada.getTipoMaquinaId()== 1){
+
+            edt_numero.setMaxEms(5);
+            edt_numero.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        }
 
 
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +126,8 @@ public class CantidadDialog {
             }
             else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
                 if (entry.getValue().equals("0")){
-                    nombrevariable.setText("Rollos Empaquetados");
+                    nombrevariable.setText("Rollos Producidos");
+
                 }
             }
         }
