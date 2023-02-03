@@ -68,14 +68,14 @@
                         android:text="RUBACH"
                         android:textAlignment="viewStart"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="24sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/iply_Fecha"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="3.2"
+                    android:layout_weight="3"
                     android:orientation="vertical"
                     android:visibility="visible">
 
@@ -95,8 +95,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:text="12/12/12 12:25:25"
-                        android:textAlignment="viewStart"
+                        android:text="12/12/12"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 

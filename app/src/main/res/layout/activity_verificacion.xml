@@ -574,9 +574,9 @@
         android:id="@+id/linearLayoutVerificar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="24dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -762,9 +762,9 @@
         android:id="@+id/linearLayotCargarDatos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/linearLayoutVerificar"
@@ -1092,7 +1092,7 @@
 
     <Button
         android:id="@+id/verificacion_btn_guardar"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
@@ -1107,7 +1107,7 @@
 
     <Button
         android:id="@+id/verificacion_btn_cancelar"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"

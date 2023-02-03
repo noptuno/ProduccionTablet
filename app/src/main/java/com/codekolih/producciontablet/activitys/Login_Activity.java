@@ -56,7 +56,6 @@ public class Login_Activity extends AppCompatActivity {
     private Set<String> history;
 
 
-
     private Button btn_inicioSesion;
     private ImageButton btn_cargarImprenta;
     private ProgressDialog progressDialog;
@@ -65,17 +64,16 @@ public class Login_Activity extends AppCompatActivity {
     private RequestQueue requestQueue;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private String nombreMaquina;
-    private String maquinaId,tipomaquinaid;
+    private String maquinaId, tipomaquinaid;
     private SharedPreferences pref;
     private boolean permisosEscritura;
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
     private AutoCompleteTextView edt_usaurio;
 
-    private static final String[] COUNTRIES = new String[] {
+    private static final String[] COUNTRIES = new String[]{
             "rubach", "david", "peter", "enrique", "jose"
     };
-
 
 
     @Override
@@ -116,7 +114,7 @@ public class Login_Activity extends AppCompatActivity {
         btn_inicioSesion = findViewById(R.id.login_btn_IniciarSesion);
         txt_nombreImprenta = findViewById(R.id.login_txt_nombreimprenta);
         //edt_usaurio= findViewById(R.id.login_edt_user);
-        edt_pass= findViewById(R.id.login_edt_password);
+        edt_pass = findViewById(R.id.login_edt_password);
         edt_pass.setTransformationMethod(new PasswordTransformationMethod());
 
 
@@ -133,7 +131,6 @@ public class Login_Activity extends AppCompatActivity {
         });
 
 
-
         //Inicializar
 
         requestQueue = Volley.newRequestQueue(this);
@@ -141,93 +138,84 @@ public class Login_Activity extends AppCompatActivity {
         //cargar
 
 
-
-
-
-
         btn_inicioSesion.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
 
+                String imprenta = txt_nombreImprenta.getText().toString();
+                String usuario = edt_usaurio.getText().toString();
+                String pass = edt_pass.getText().toString();
 
+                if (!imprenta.equals("NO") && !usuario.equals("") && !pass.equals("")) {
 
-            String imprenta = txt_nombreImprenta.getText().toString();
-            String usuario = edt_usaurio.getText().toString();
-            String pass = edt_pass.getText().toString();
+                    Map<String, Object> login = new HashMap<>();
+                    login.put("UserName", edt_usaurio.getText().toString());
+                    login.put("Password", edt_pass.getText().toString());
+                    login.put("MacAddress", "");
 
-            if (!imprenta.equals("NO") && !usuario.equals("") && !pass.equals("")) {
+                    dialogProgress = ProgressHUD.show(Login_Activity.this);
+                    httpLayer.login(GsonUtils.toJSON(login), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
 
-                Map<String, Object> login = new HashMap<>();
-                login.put("UserName", edt_usaurio.getText().toString());
-                login.put("Password", edt_pass.getText().toString());
-                login.put("MacAddress", "");
+                            try {
 
-                dialogProgress = ProgressHUD.show(Login_Activity.this);
-                httpLayer.login(GsonUtils.toJSON(login), new HttpLayer.HttpLayerResponses<JSONObject>() {
-                    @Override
-                    public void onSuccess(JSONObject response) {
+                                String estado = response.getString("Estado");
 
-                        try {
+                                if (estado.equals("200")) {
 
-                            String estado = response.getString("Estado");
+                                    //CargarUsuario
+                                    TareaSingleton.SingletonInstance().setUsuarioIniciado(edt_usaurio.getText().toString());
 
-                            if (estado.equals("200")){
+                                    Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                                //CargarUsuario
-                                TareaSingleton.SingletonInstance().setUsuarioIniciado(edt_usaurio.getText().toString());
+                                }
 
-                                Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                Log.e("http_login", response.toString());
 
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
 
-                            Log.e("http_login", response.toString());
+                            dialogProgress.dismiss();
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
 
-                        dialogProgress.dismiss();
+                        @Override
+                        public void onError(Exception e) {
 
-                    }
+                            Toast.makeText(getApplicationContext(), "No existe usuario", Toast.LENGTH_SHORT).show();
+                            Log.e("http_login", "Fallo");
+                            dialogProgress.dismiss();
 
-                    @Override
-                    public void onError(Exception e) {
-
-                        Toast.makeText(getApplicationContext(),"No existe usuario",Toast.LENGTH_SHORT).show();
-                        Log.e("http_login", "Fallo");
-                        dialogProgress.dismiss();
-
-                    }
-                });
+                        }
+                    });
 
 
-            }else{
-                Toast.makeText(getApplicationContext(),"Faltan datos",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Faltan datos", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
-
-
-        }
-    });
-
+        });
 
 
         pedir_permiso_escritura();
 
 
-        }
+    }
 
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
 
 
     }
-
 
 
     private void pedir_permiso_escritura() {
@@ -236,7 +224,7 @@ public class Login_Activity extends AppCompatActivity {
         int writeExternalPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (writeExternalPermission != PackageManager.PERMISSION_GRANTED || readExternalPermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_REQUEST_CODE);
-        }else{
+        } else {
             permisosEscritura = false;
         }
 
@@ -250,9 +238,9 @@ public class Login_Activity extends AppCompatActivity {
         tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
         txt_nombreImprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
 
-        if (!tipomaquinaid.equals("NO")){
+        if (!tipomaquinaid.equals("NO")) {
             TareaSingleton.SingletonInstance().setTipoMaquina(tipomaquinaid);
-        }else{
+        } else {
             Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -279,9 +267,9 @@ public class Login_Activity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.e("Usuario Response",response);
+                        Log.e("Usuario Response", response);
 
-                        Usuario a = GsonUtils.parse(response,Usuario.class);
+                        Usuario a = GsonUtils.parse(response, Usuario.class);
                         Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
                         intent.putExtra("MaquinaId", maquinaId);
                         startActivity(intent);

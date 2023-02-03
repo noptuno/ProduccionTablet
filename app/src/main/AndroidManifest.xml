@@ -27,7 +27,9 @@
 
 
 
+
         </activity>
+
         <activity
             android:name=".activitys.Verificacion_Activity"
             android:windowSoftInputMode="adjustNothing"
@@ -51,6 +53,7 @@
             android:label="Seleccionar Imprentas" />
         <activity
             android:name=".activitys.Login_Activity"
+            android:label="Iniciar Sesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

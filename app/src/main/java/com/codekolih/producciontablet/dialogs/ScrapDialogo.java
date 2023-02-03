@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +47,7 @@ public class ScrapDialogo {
         Spinner spinner = (Spinner) dialogo.findViewById(R.id.spinner);
 
 
+
         Button aceptar = dialogo.findViewById(R.id.scrap_btn_confirmar);
         Button cancelar = dialogo.findViewById(R.id.scrap_btn_cancelar);
         EditText numero = dialogo.findViewById(R.id.et_numero);
@@ -53,18 +55,18 @@ public class ScrapDialogo {
 
         tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea();
 
-        if (tarea_Seleccionada.getTipoMaquinaId()== 4){
+        if (tarea_Seleccionada.getTipoMaquinaId()== 3){
             numero.setMaxEms(6);
-            numero.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+          numero.setInputType(InputType.TYPE_CLASS_NUMBER);
         } else if (tarea_Seleccionada.getTipoMaquinaId()== 1){
             numero.setMaxEms(6);
-            numero.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+           // numero.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
         }else if (tarea_Seleccionada.getTipoMaquinaId()== 5){
             numero.setMaxEms(5);
-            numero.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+           // numero.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
         }else if (tarea_Seleccionada.getTipoMaquinaId()== 2){
             numero.setMaxEms(5);
-            numero.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+          //  numero.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
         }
 
 
@@ -77,9 +79,9 @@ public class ScrapDialogo {
                 if (adapterView.getItemAtPosition(i).toString().equals("Kilos")){
                     unidadd = "KG";
                 }else if (adapterView.getItemAtPosition(i).toString().equals("Gramos")){
-                    unidadd = "KG";
+                    unidadd = "G";
                 }else if(adapterView.getItemAtPosition(i).toString().equals("Metros")){
-                    unidadd = "KG";
+                    unidadd = "M";
                 }
 
                 unidad =  unidadd;

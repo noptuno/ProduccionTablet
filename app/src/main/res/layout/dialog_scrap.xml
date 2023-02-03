@@ -47,7 +47,7 @@
 
         <Button
             android:id="@+id/scrap_btn_confirmar"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="80dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
@@ -63,7 +63,7 @@
 
         <Button
             android:id="@+id/scrap_btn_cancelar"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="80dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
@@ -100,7 +100,7 @@
             android:layout_marginTop="4dp"
             android:cursorVisible="true"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:maxLength="6"
             android:numeric="decimal"
             android:selectAllOnFocus="true"

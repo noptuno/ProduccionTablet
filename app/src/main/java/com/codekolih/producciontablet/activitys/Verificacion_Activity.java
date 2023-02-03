@@ -72,9 +72,9 @@ public class Verificacion_Activity extends AppCompatActivity {
     private ProgressHUD dialogProgress;
     private Boolean pdfAbierto = false;
     private HttpLayer httpLayer;
-    private TextView  txt_imprenta,txt_usuario,txt_fecha,txt_hora;
+    private TextView txt_imprenta, txt_usuario, txt_fecha, txt_hora;
     //pedido
-    private TextView  txt_SerieYNro,txt_ArticuloId,txt_Cantidad,txt_Concepto;
+    private TextView txt_SerieYNro, txt_ArticuloId, txt_Cantidad, txt_Concepto;
     private EditText
             edt_verificacion_AnchoFinalRolloYGap,
             edt_verificacion_CantidadPistasImpresas,
@@ -106,9 +106,9 @@ public class Verificacion_Activity extends AppCompatActivity {
             ly_CantidadPistasCortadas,
             ly_PistasTroquelUsadas,
             ly_UnidadIdScrapInicial;
-    private LinearLayout ly_uno,ly_dos,ly_tres,ly_cuatro,ly_cinco,ly_seis,ly_siete,ly_ocho,ly_nueve,ly_dies;
+    private LinearLayout ly_uno, ly_dos, ly_tres, ly_cuatro, ly_cinco, ly_seis, ly_siete, ly_ocho, ly_nueve, ly_dies;
 
-    private Switch uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,dies;
+    private Switch uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, dies;
 
     private TextView
 
@@ -124,7 +124,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_EtiquetasPorRollo;
 
     Button btn_guardar, btn_verpdf, btn_cancelar;
-    String UnidadIdScrapInicial= "Seleccionar";
+    String UnidadIdScrapInicial = "Seleccionar";
     private SharedPreferences pref;
     private boolean permisosaceptados = false;
 
@@ -132,7 +132,7 @@ public class Verificacion_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificacion);
-        Log.e("VrerivicacionActivity","INICIO");
+        Log.e("VrerivicacionActivity", "INICIO");
         variablesFind();
 
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
@@ -145,7 +145,7 @@ public class Verificacion_Activity extends AppCompatActivity {
         httpLayer = new HttpLayer(this);
 
 
-        txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina,tipomaquinaid));
+        txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
 
         //usuario
         USUARIO = pref.getString(PREF_PRODUCCION_USUARIO, "NO");
@@ -158,17 +158,17 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        String unidad = "Seleccionar";
-               if (adapterView.getItemAtPosition(i).toString().equals("Kilos")){
-                   unidad = "KG";
-               }else if (adapterView.getItemAtPosition(i).toString().equals("Gramos")){
-                   unidad = "KG";
-               }else if(adapterView.getItemAtPosition(i).toString().equals("Metros")){
-                   unidad = "KG";
+                String unidad = "Seleccionar";
+                if (adapterView.getItemAtPosition(i).toString().equals("Kilos")) {
+                    unidad = "KG";
+                } else if (adapterView.getItemAtPosition(i).toString().equals("Gramos")) {
+                    unidad = "KG";
+                } else if (adapterView.getItemAtPosition(i).toString().equals("Metros")) {
+                    unidad = "KG";
 
-               }
+                }
 
-                UnidadIdScrapInicial =  unidad;
+                UnidadIdScrapInicial = unidad;
 
             }
 
@@ -182,7 +182,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-         cancelar();
+                cancelar();
 
             }
         });
@@ -191,7 +191,7 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (validarVariables()){
+                if (validarVariables()) {
 
                     AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
                     build4.setMessage("¿Desea avanzar a produccion? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -212,9 +212,9 @@ public class Verificacion_Activity extends AppCompatActivity {
                     AlertDialog alertDialog4 = build4.create();
                     alertDialog4.show();
 
-                }else{
+                } else {
 
-                    Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Faltan Datos", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -247,16 +247,13 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                finish();
 
-            /*
                 Map<String, Object> estado = new HashMap<>();
                 estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "C2");
-                estado.put("TipoEstadoId","I" );
+                estado.put("EstadoId", "A1");
+                estado.put("TipoEstadoId", "F");
 
                 cambioEstado(estado);
-        */
 
 
             }
@@ -280,7 +277,7 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     private void CargarPedido() {
 
-        String params = ""+tarea_Seleccionada.getPedidoId();
+        String params = "" + tarea_Seleccionada.getPedidoId();
 
         httpLayer.getPedido(params, new HttpLayer.HttpLayerResponses<Pedido>() {
             @Override
@@ -293,13 +290,13 @@ public class Verificacion_Activity extends AppCompatActivity {
                 txt_Cantidad.setText(String.format("%s", response.getCantidad()));
                 txt_Concepto.setText(response.getConcepto());
 
-                Log.e("httpPedido",response.toString());
+                Log.e("httpPedido", response.toString());
 
             }
 
             @Override
             public void onError(Exception e) {
-                Log.e("httperror",e.toString());
+                Log.e("httperror", e.toString());
                 dialogErrorPrintet("No cargo Pedido");
             }
         });
@@ -323,9 +320,9 @@ public class Verificacion_Activity extends AppCompatActivity {
         newproduccion.put("MetrosImpresos", 0);
         newproduccion.put("AnchoFinalRolloYGap", AnchoFinalRolloYGap);
         newproduccion.put("CantidadPistasImpresas", CantidadPistasImpresas);
-        newproduccion.put("CantidadTintas",CantidadTintas );
+        newproduccion.put("CantidadTintas", CantidadTintas);
         newproduccion.put("AnchoBobinaUsadoCm", 0);
-        newproduccion.put("ScrapAjusteInicial",  ScrapAjusteInicial );
+        newproduccion.put("ScrapAjusteInicial", ScrapAjusteInicial);
         newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
         newproduccion.put("ScrapAjusteProduccion", 0);
         newproduccion.put("ScrapAjusteProduccion_Unidades", "KG");
@@ -343,15 +340,15 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject response) {
 
-                Log.e("http",response.toString());
+                Log.e("http", response.toString());
 
                 try {
                     String esthttp = response.getString("RespuestaMensaje");
 
-                    if (esthttp.equals("OK")){
+                    if (esthttp.equals("OK")) {
 
                         String RespuestaDato = response.getString("RespuestaDato");
-                        if (RespuestaDato.length()>0){
+                        if (RespuestaDato.length() > 0) {
 
                             String[] valirIdProduccion = RespuestaDato.split(":");
                             String id = valirIdProduccion[1];
@@ -364,11 +361,13 @@ public class Verificacion_Activity extends AppCompatActivity {
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         dialogProgress.dismiss();
 
+
                         Map<String, Object> estado = new HashMap<>();
                         estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                        estado.put("EstadoId", "P1");
-                        estado.put("TipoEstadoId","I" );
+                        estado.put("EstadoId", "A1");
+                        estado.put("TipoEstadoId", "F");
                         cambioEstado(estado);
+
 
                     }
 
@@ -376,16 +375,16 @@ public class Verificacion_Activity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-             //   actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
+                //   actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
             }
 
             @Override
             public void onError(Exception e) {
                 dialogProgress.dismiss();
                 dialogErrorPrintet("No cargo Datos");
-                Log.e("http_altaproduccion","Fallo");
+                Log.e("http_altaproduccion", "Fallo");
             }
-        },USUARIO);
+        }, USUARIO);
     }
 
     private void cargarfecha() {
@@ -403,10 +402,10 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     private void cargarTareaSeleccionada() {
 
-        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea())==null){
-            Toast.makeText(getApplicationContext(),"Instancia Creada",Toast.LENGTH_LONG).show();
+        if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea()) == null) {
+            Toast.makeText(getApplicationContext(), "Instancia Creada", Toast.LENGTH_LONG).show();
             finish();
-        }else{
+        } else {
 
             txt_SerieYNro.setText(tarea_Seleccionada.getSerieYNro());
             txt_ArticuloId.setText(tarea_Seleccionada.getArticuloId());
@@ -427,22 +426,22 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     }
 
-    private void cambioEstado( Map<String, Object> estado ) {
+    private void cambioEstado(Map<String, Object> estado) {
 
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
-                Log.e("Verificacion_Activity","Cargo Estado" + tarea_Seleccionada.getTareaId());
+                Log.e("Verificacion_Activity", "Cargo Estado" + tarea_Seleccionada.getTareaId());
                 finish();
             }
 
             @Override
             public void onError(Exception e) {
 
-                Toast.makeText(getApplicationContext(),"Reintentar",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Reintentar", Toast.LENGTH_SHORT).show();
             }
-        },USUARIO);
+        }, USUARIO);
 
     }
 
@@ -469,373 +468,360 @@ public class Verificacion_Activity extends AppCompatActivity {
     private void variablesFind() {
 
         txt_imprenta = findViewById(R.id.verificacion_txt_imprenta);
-        txt_usuario= findViewById(R.id.verificacion_txt_usuario);
-        txt_fecha= findViewById(R.id.verificacion_txt_fecha);
-        txt_hora= findViewById(R.id.verificacion_txt_hora);
+        txt_usuario = findViewById(R.id.verificacion_txt_usuario);
+        txt_fecha = findViewById(R.id.verificacion_txt_fecha);
+        txt_hora = findViewById(R.id.verificacion_txt_hora);
 
-        txt_SerieYNro= findViewById(R.id.ver_txt_SerieYNro);
-        txt_ArticuloId= findViewById(R.id.ver_txt_ArticuloId);
-        txt_Cantidad= findViewById(R.id.ver_txt_Cantidad);
-        txt_Concepto= findViewById(R.id.ver_txt_Concepto);
+        txt_SerieYNro = findViewById(R.id.ver_txt_SerieYNro);
+        txt_ArticuloId = findViewById(R.id.ver_txt_ArticuloId);
+        txt_Cantidad = findViewById(R.id.ver_txt_Cantidad);
+        txt_Concepto = findViewById(R.id.ver_txt_Concepto);
 
-        btn_verpdf =findViewById(R.id.verificacion_btn_verpdf);
+        btn_verpdf = findViewById(R.id.verificacion_btn_verpdf);
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
         btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
 
-        ly_uno= findViewById(R.id.ly_uno);
-        ly_dos= findViewById(R.id.ly_dos);
-        ly_tres= findViewById(R.id.ly_tres);
-        ly_cuatro= findViewById(R.id.ly_cuatro);
-        ly_cinco= findViewById(R.id.ly_cinco);
-        ly_seis= findViewById(R.id.ly_seis);
-        ly_siete= findViewById(R.id.ly_siete);
-        ly_ocho= findViewById(R.id.ly_ocho);
-        ly_nueve= findViewById(R.id.ly_nueve);
-        ly_dies= findViewById(R.id.ly_dies);
+        ly_uno = findViewById(R.id.ly_uno);
+        ly_dos = findViewById(R.id.ly_dos);
+        ly_tres = findViewById(R.id.ly_tres);
+        ly_cuatro = findViewById(R.id.ly_cuatro);
+        ly_cinco = findViewById(R.id.ly_cinco);
+        ly_seis = findViewById(R.id.ly_seis);
+        ly_siete = findViewById(R.id.ly_siete);
+        ly_ocho = findViewById(R.id.ly_ocho);
+        ly_nueve = findViewById(R.id.ly_nueve);
+        ly_dies = findViewById(R.id.ly_dies);
 
-        uno= findViewById(R.id.uno);
-        dos= findViewById(R.id.dos);
-        tres= findViewById(R.id.tres);
-        cuatro= findViewById(R.id.cuatro);
-        cinco= findViewById(R.id.cinco);
-        seis= findViewById(R.id.seis);
-        siete= findViewById(R.id.siete);
-        ocho= findViewById(R.id.ocho);
-        nueve= findViewById(R.id.nueve);
-        dies= findViewById(R.id.dies);
+        uno = findViewById(R.id.uno);
+        dos = findViewById(R.id.dos);
+        tres = findViewById(R.id.tres);
+        cuatro = findViewById(R.id.cuatro);
+        cinco = findViewById(R.id.cinco);
+        seis = findViewById(R.id.seis);
+        siete = findViewById(R.id.siete);
+        ocho = findViewById(R.id.ocho);
+        nueve = findViewById(R.id.nueve);
+        dies = findViewById(R.id.dies);
 
-        ly_EtiquetasPorRollo= findViewById(R.id.ly_EtiquetasPorRollo);
-        ly_EtiquetasEnBanda= findViewById(R.id.ly_EtiquetasEnBanda);
-        ly_Pistas= findViewById(R.id.ly_Pistas);
-        ly_Observaciones= findViewById(R.id.ly_Observaciones);
-        ly_MetrosAImprimir= findViewById(R.id.ly_MetrosAImprimir);
-        ly_NroDeSobre= findViewById(R.id.ly_NroDeSobre);
-        ly_Descripcion= findViewById(R.id.ly_Descripcion);
-        ly_Cilindro= findViewById(R.id.ly_Cilindro);
-        ly_Z_AltoMasGap= findViewById(R.id.ly_Z_AltoMasGap);
-        ly_MetrosPorRollo= findViewById(R.id.ly_MetrosPorRollo);
-        ly_MetrosMatTroquelar= findViewById(R.id.ly_MetrosMatTroquelar);
-        ly_TroquelId= findViewById(R.id.ly_TroquelId);
+        ly_EtiquetasPorRollo = findViewById(R.id.ly_EtiquetasPorRollo);
+        ly_EtiquetasEnBanda = findViewById(R.id.ly_EtiquetasEnBanda);
+        ly_Pistas = findViewById(R.id.ly_Pistas);
+        ly_Observaciones = findViewById(R.id.ly_Observaciones);
+        ly_MetrosAImprimir = findViewById(R.id.ly_MetrosAImprimir);
+        ly_NroDeSobre = findViewById(R.id.ly_NroDeSobre);
+        ly_Descripcion = findViewById(R.id.ly_Descripcion);
+        ly_Cilindro = findViewById(R.id.ly_Cilindro);
+        ly_Z_AltoMasGap = findViewById(R.id.ly_Z_AltoMasGap);
+        ly_MetrosPorRollo = findViewById(R.id.ly_MetrosPorRollo);
+        ly_MetrosMatTroquelar = findViewById(R.id.ly_MetrosMatTroquelar);
+        ly_TroquelId = findViewById(R.id.ly_TroquelId);
 
 
-        ly_AnchoFinalRolloYGap= findViewById(R.id.ly_AnchoFinalRolloYGap);
-        ly_CantidadPistasImpresas= findViewById(R.id.ly_CantidadPistasImpresas);
-        ly_CantidadTintas= findViewById(R.id.ly_CantidadTintas);
-        ly_ScrapAjusteInicial= findViewById(R.id.ly_ScrapAjusteInicial);
-        ly_AnchoFinalRollo= findViewById(R.id.ly_AnchoFinalRollo);
-        ly_CantidadPistasCortadas= findViewById(R.id.ly_CantidadPistasCortadas);
-        ly_PistasTroquelUsadas= findViewById(R.id.ly_PistasTroquelUsadas);
-        ly_UnidadIdScrapInicial= findViewById(R.id.ly_UnidadIdScrapInicial);
+        ly_AnchoFinalRolloYGap = findViewById(R.id.ly_AnchoFinalRolloYGap);
+        ly_CantidadPistasImpresas = findViewById(R.id.ly_CantidadPistasImpresas);
+        ly_CantidadTintas = findViewById(R.id.ly_CantidadTintas);
+        ly_ScrapAjusteInicial = findViewById(R.id.ly_ScrapAjusteInicial);
+        ly_AnchoFinalRollo = findViewById(R.id.ly_AnchoFinalRollo);
+        ly_CantidadPistasCortadas = findViewById(R.id.ly_CantidadPistasCortadas);
+        ly_PistasTroquelUsadas = findViewById(R.id.ly_PistasTroquelUsadas);
+        ly_UnidadIdScrapInicial = findViewById(R.id.ly_UnidadIdScrapInicial);
 
 
         edt_verificacion_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
-        edt_verificacion_CantidadPistasImpresas= findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
-        edt_verificacion_CantidadTintas= findViewById(R.id.verificacion_edt_CantidadTintas);
-        edt_verificacion_ScrapAjusteInicial= findViewById(R.id.verificacion_edt_ScrapAjusteInicial);
-        spi_verificacion_UnidadIdScrapInicial= findViewById(R.id.verificacion_spi_UnidadIdScrapInicial);
-        edt_verificacion_AnchoFinalRollo= findViewById(R.id.verificacion_edt_AnchoFinalRollo);
-        edt_verificacion_CantidadPistasCortadas= findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
-        edt_verificacion_PistasTroquelUsadas= findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
+        edt_verificacion_CantidadPistasImpresas = findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
+        edt_verificacion_CantidadTintas = findViewById(R.id.verificacion_edt_CantidadTintas);
+        edt_verificacion_ScrapAjusteInicial = findViewById(R.id.verificacion_edt_ScrapAjusteInicial);
+        spi_verificacion_UnidadIdScrapInicial = findViewById(R.id.verificacion_spi_UnidadIdScrapInicial);
+        edt_verificacion_AnchoFinalRollo = findViewById(R.id.verificacion_edt_AnchoFinalRollo);
+        edt_verificacion_CantidadPistasCortadas = findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
+        edt_verificacion_PistasTroquelUsadas = findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
 
-        txt_verificacion_txt_Observaciones= findViewById(R.id.verificacion_txt_Observaciones);
+        txt_verificacion_txt_Observaciones = findViewById(R.id.verificacion_txt_Observaciones);
 
         txt_verificacion_txt_NroDeSobre = findViewById(R.id.verificacion_txt_NroDeSobre);
         txt_verificacion_txt_Descripcion = findViewById(R.id.verificacion_txt_Descripcion);
         txt_verificacion_txt_MetrosAImprimir = findViewById(R.id.verificacion_txt_MetrosAImprimir);
         txt_verificacion_txt_MetrosPorRollo = findViewById(R.id.verificacion_txt_MetrosPorRollo);
 
-        txt_verificacion_txt_Z_AltoMasGap= findViewById(R.id.verificacion_txt_Z_AltoMasGap);
-        txt_verificacion_txt_Cilindro= findViewById(R.id.verificacion_txt_Cilindro);
-        txt_verificacion_txt_Pistas= findViewById(R.id.verificacion_txt_Pistas);
-        txt_verificacion_txt_EtiquetasEnBanda= findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
-        txt_verificacion_txt_EtiquetasPorRollo= findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
+        txt_verificacion_txt_Z_AltoMasGap = findViewById(R.id.verificacion_txt_Z_AltoMasGap);
+        txt_verificacion_txt_Cilindro = findViewById(R.id.verificacion_txt_Cilindro);
+        txt_verificacion_txt_Pistas = findViewById(R.id.verificacion_txt_Pistas);
+        txt_verificacion_txt_EtiquetasEnBanda = findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
+        txt_verificacion_txt_EtiquetasPorRollo = findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
 
     }
+
     private void OcultarVariables() {
 
         for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
 
             System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
 
-            if ("1".equals(entry.getKey())){
+            if ("1".equals(entry.getKey())) {
                 ly_uno.setVisibility(parseInt(entry.getValue()));
-            }else if ("2".toString().equals(entry.getKey())){
+            } else if ("2".toString().equals(entry.getKey())) {
                 ly_dos.setVisibility(parseInt(entry.getValue()));
-            }else if ("3".toString().equals(entry.getKey())){
+            } else if ("3".toString().equals(entry.getKey())) {
                 ly_tres.setVisibility(parseInt(entry.getValue()));
-            }else if ("4".toString().equals(entry.getKey())){
+            } else if ("4".toString().equals(entry.getKey())) {
                 ly_cuatro.setVisibility(parseInt(entry.getValue()));
-            }else if ("5".toString().equals(entry.getKey())){
+            } else if ("5".toString().equals(entry.getKey())) {
                 ly_cinco.setVisibility(parseInt(entry.getValue()));
-            }else if ("6".toString().equals(entry.getKey())){
+            } else if ("6".toString().equals(entry.getKey())) {
                 ly_seis.setVisibility(parseInt(entry.getValue()));
-            }else if ("7".toString().equals(entry.getKey())){
+            } else if ("7".toString().equals(entry.getKey())) {
                 ly_siete.setVisibility(parseInt(entry.getValue()));
-            }else if ("8".toString().equals(entry.getKey())){
+            } else if ("8".toString().equals(entry.getKey())) {
                 ly_ocho.setVisibility(parseInt(entry.getValue()));
-            }else if ("9".toString().equals(entry.getKey())){
+            } else if ("9".toString().equals(entry.getKey())) {
                 ly_nueve.setVisibility(parseInt(entry.getValue()));
-            }else if ("10".toString().equals(entry.getKey())){
+            } else if ("10".toString().equals(entry.getKey())) {
                 ly_dies.setVisibility(parseInt(entry.getValue()));
             }
 
-            if ("EtiquetasPorRollo".equals(entry.getKey())){
+            if ("EtiquetasPorRollo".equals(entry.getKey())) {
                 ly_EtiquetasPorRollo.setVisibility(parseInt(entry.getValue()));
-            }  else if ("EtiquetasEnBanda".equals(entry.getKey())){
+            } else if ("EtiquetasEnBanda".equals(entry.getKey())) {
                 ly_EtiquetasEnBanda.setVisibility(parseInt(entry.getValue()));
-            } else if ("Pistas".equals(entry.getKey())){
+            } else if ("Pistas".equals(entry.getKey())) {
                 ly_Pistas.setVisibility(parseInt(entry.getValue()));
-            }else if ("Observaciones".equals(entry.getKey())){
+            } else if ("Observaciones".equals(entry.getKey())) {
                 ly_Observaciones.setVisibility(parseInt(entry.getValue()));
-            }else if ("MetrosAImprimir".equals(entry.getKey())){
+            } else if ("MetrosAImprimir".equals(entry.getKey())) {
                 ly_MetrosAImprimir.setVisibility(parseInt(entry.getValue()));
-            }else if ("NroDeSobre".equals(entry.getKey())){
+            } else if ("NroDeSobre".equals(entry.getKey())) {
                 ly_NroDeSobre.setVisibility(parseInt(entry.getValue()));
-            }else if ("Descripcion".equals(entry.getKey())){
+            } else if ("Descripcion".equals(entry.getKey())) {
                 ly_Descripcion.setVisibility(parseInt(entry.getValue()));
-            }else if ("Cilindro".equals(entry.getKey())){
+            } else if ("Cilindro".equals(entry.getKey())) {
                 ly_Cilindro.setVisibility(parseInt(entry.getValue()));
-            }else if ("Z_AltoMasGap".equals(entry.getKey())){
+            } else if ("Z_AltoMasGap".equals(entry.getKey())) {
                 ly_Z_AltoMasGap.setVisibility(parseInt(entry.getValue()));
-            }else if ("MetrosPorRollo".equals(entry.getKey())){
+            } else if ("MetrosPorRollo".equals(entry.getKey())) {
                 ly_MetrosPorRollo.setVisibility(parseInt(entry.getValue()));
-            }else if ("MetrosMatTroquelar".equals(entry.getKey())){
+            } else if ("MetrosMatTroquelar".equals(entry.getKey())) {
                 ly_MetrosMatTroquelar.setVisibility(parseInt(entry.getValue()));
-            }else if ("TroquelId".equals(entry.getKey())){
+            } else if ("TroquelId".equals(entry.getKey())) {
                 ly_TroquelId.setVisibility(parseInt(entry.getValue()));
             }
 
 
-            if ("AnchoFinalRolloYGap".equals(entry.getKey())){
+            if ("AnchoFinalRolloYGap".equals(entry.getKey())) {
                 ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));
-            }
-            else if ("CantidadPistasImpresas".equals(entry.getKey())){
+            } else if ("CantidadPistasImpresas".equals(entry.getKey())) {
                 ly_CantidadPistasImpresas.setVisibility(parseInt(entry.getValue()));
-            }
-            else if ("CantidadTintas".equals(entry.getKey())){
+            } else if ("CantidadTintas".equals(entry.getKey())) {
                 ly_CantidadTintas.setVisibility(parseInt(entry.getValue()));
-            }
-            else if ("ScrapAjusteInicial".equals(entry.getKey())){
+            } else if ("ScrapAjusteInicial".equals(entry.getKey())) {
 
                 ly_ScrapAjusteInicial.setVisibility(parseInt(entry.getValue()));
 
-                if (tarea_Seleccionada.getTipoMaquinaId() == 4){
+                if (tarea_Seleccionada.getTipoMaquinaId() == 4) {
 
                     edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
 
-                }else if(tarea_Seleccionada.getTipoMaquinaId() == 5){
+                } else if (tarea_Seleccionada.getTipoMaquinaId() == 5) {
 
                     edt_verificacion_ScrapAjusteInicial.setMaxEms(5);
 
-                }else if (tarea_Seleccionada.getTipoMaquinaId() == 1){
+                } else if (tarea_Seleccionada.getTipoMaquinaId() == 1) {
 
-                        edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
-                }else if (tarea_Seleccionada.getTipoMaquinaId() == 2){
+                    edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
+                } else if (tarea_Seleccionada.getTipoMaquinaId() == 2) {
 
                     edt_verificacion_ScrapAjusteInicial.setMaxEms(5);
                 }
 
-            }
-            else if ("UnidadIdScrapInicial".equals(entry.getKey())){
+            } else if ("UnidadIdScrapInicial".equals(entry.getKey())) {
                 ly_UnidadIdScrapInicial.setVisibility(parseInt(entry.getValue()));
-            }
-            else if ("AnchoFinalRollo".equals(entry.getKey())){
+            } else if ("AnchoFinalRollo".equals(entry.getKey())) {
                 ly_AnchoFinalRollo.setVisibility(parseInt(entry.getValue()));
-            }
-            else if ("CantidadPistasCortadas".equals(entry.getKey())){
+            } else if ("CantidadPistasCortadas".equals(entry.getKey())) {
                 ly_CantidadPistasCortadas.setVisibility(parseInt(entry.getValue()));
-            }
-            else if ("PistasTroquelUsadas".equals(entry.getKey())){
+            } else if ("PistasTroquelUsadas".equals(entry.getKey())) {
                 ly_PistasTroquelUsadas.setVisibility(parseInt(entry.getValue()));
             }
         }
     }
-    private boolean validarVariables(){
+
+    private boolean validarVariables() {
 
         boolean validado = true;
 
-    for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
+        for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
 
-        System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+            System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
 
 
-        //switch
-        if ("1".equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                if (!uno.isChecked()){
-                    validado = false;
-                    break;
+            //switch
+            if ("1".equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    if (!uno.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
-        }else if ("2".toString().equals(entry.getKey())){
+            } else if ("2".toString().equals(entry.getKey())) {
 
-            if (entry.getValue().equals("0")){
-                if (!dos.isChecked()){
-                    validado = false;
-                    break;
+                if (entry.getValue().equals("0")) {
+                    if (!dos.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
-        }else if ("3".toString().equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                if (!tres.isChecked()){
-                    validado = false;
-                    break;
+            } else if ("3".toString().equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    if (!tres.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
 
-        }else if ("4".toString().equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                if (!cuatro.isChecked()){
-                    validado = false;
-                    break;
+            } else if ("4".toString().equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    if (!cuatro.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
 
-        }else if ("5".toString().equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
+            } else if ("5".toString().equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
 
-                if (!cinco.isChecked()){
-                    validado = false;
-                    break;
+                    if (!cinco.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
 
-        }else if ("6".toString().equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                if (!seis.isChecked()){
-                    validado = false;
-                    break;
+            } else if ("6".toString().equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    if (!seis.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
 
-        }else if ("7".toString().equals(entry.getKey())){
+            } else if ("7".toString().equals(entry.getKey())) {
 
-            if (entry.getValue().equals("0")){
-                if (!siete.isChecked()){
-                    validado = false;
-                    break;
+                if (entry.getValue().equals("0")) {
+                    if (!siete.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
 
-        }else if ("8".toString().equals(entry.getKey())){
+            } else if ("8".toString().equals(entry.getKey())) {
 
-            if (entry.getValue().equals("0")){
-                if (!ocho.isChecked()){
-                    validado = false;
-                    break;
+                if (entry.getValue().equals("0")) {
+                    if (!ocho.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
 
-        }else if ("9".toString().equals(entry.getKey())){
+            } else if ("9".toString().equals(entry.getKey())) {
 
-            if (entry.getValue().equals("0")){
-                if (!nueve.isChecked()){
-                    validado = false;
-                    break;
+                if (entry.getValue().equals("0")) {
+                    if (!nueve.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
 
-        }else if ("10".toString().equals(entry.getKey())){
+            } else if ("10".toString().equals(entry.getKey())) {
 
-            if (entry.getValue().equals("0")){
-                if (!dies.isChecked()){
-                    validado = false;
-                    break;
-                }
-            }
-        }
-
-        //valdiar datos
-        else if ("AnchoFinalRolloYGap".equals(entry.getKey())){
-
-            if (entry.getValue().equals("0")){
-
-                String a = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
-                if(a.equals("0") || a.equals("") ){
-                    validado = false;
-                    break;
-                }
-            }
-        }
-
-        else if ("CantidadPistasImpresas".equals(entry.getKey())){
-
-            if (entry.getValue().equals("0")){
-                String a = edt_verificacion_CantidadPistasImpresas.getText().toString();
-                if(a.equals("0") || a.equals("") ){
-                    validado = false;
-                    break;
-                }
-            }
-        }
-        else if ("CantidadTintas".equals(entry.getKey())){
-
-            if (entry.getValue().equals("0")){
-                String a = edt_verificacion_CantidadTintas.getText().toString();
-                    if(a.equals("0") || a.equals("") ){
-                    validado = false;
-                    break;
-                }
-            }
-        }
-        else if ("ScrapAjusteInicial".equals(entry.getKey())){
-
-            if (entry.getValue().equals("0")){
-                String a = edt_verificacion_ScrapAjusteInicial.getText().toString();
-                if(a.equals("0") || a.equals("") ){
-                    validado = false;
-                    break;
+                if (entry.getValue().equals("0")) {
+                    if (!dies.isChecked()) {
+                        validado = false;
+                        break;
+                    }
                 }
             }
 
-        }
+            //valdiar datos
+            else if ("AnchoFinalRolloYGap".equals(entry.getKey())) {
 
-        else if ("UnidadIdScrapInicial".equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                if(UnidadIdScrapInicial.equals("Seleccionar")){
-                    validado = false;
-                    break;
+                if (entry.getValue().equals("0")) {
+
+                    String a = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
+                    if (a.equals("0") || a.equals("")) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
-        }
-        else if ("AnchoFinalRollo".equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                String a = edt_verificacion_AnchoFinalRollo.getText().toString();
-                if(a.equals("0") || a.equals("") ){
-                    validado = false;
-                    break;
+            } else if ("CantidadPistasImpresas".equals(entry.getKey())) {
+
+                if (entry.getValue().equals("0")) {
+                    String a = edt_verificacion_CantidadPistasImpresas.getText().toString();
+                    if (a.equals("0") || a.equals("")) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
-        }
-        else if ("CantidadPistasCortadas".equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                String a = edt_verificacion_CantidadPistasCortadas.getText().toString();
-                if(a.equals("0") || a.equals("") ){
-                    validado = false;
-                    break;
+            } else if ("CantidadTintas".equals(entry.getKey())) {
+
+                if (entry.getValue().equals("0")) {
+                    String a = edt_verificacion_CantidadTintas.getText().toString();
+                    if (a.equals("0") || a.equals("")) {
+                        validado = false;
+                        break;
+                    }
                 }
-            }
-        }
-        else if ("PistasTroquelUsadas".equals(entry.getKey())){
-            if (entry.getValue().equals("0")){
-                String a = edt_verificacion_PistasTroquelUsadas.getText().toString();
-                if(a.equals("0") || a.equals("") ){
-                    validado = false;
-                    break;
+            } else if ("ScrapAjusteInicial".equals(entry.getKey())) {
+
+                if (entry.getValue().equals("0")) {
+                    String a = edt_verificacion_ScrapAjusteInicial.getText().toString();
+                    if (a.equals("0") || a.equals("")) {
+                        validado = false;
+                        break;
+                    }
+                }
+
+            } else if ("UnidadIdScrapInicial".equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    if (UnidadIdScrapInicial.equals("Seleccionar")) {
+                        validado = false;
+                        break;
+                    }
+                }
+            } else if ("AnchoFinalRollo".equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    String a = edt_verificacion_AnchoFinalRollo.getText().toString();
+                    if (a.equals("0") || a.equals("")) {
+                        validado = false;
+                        break;
+                    }
+                }
+            } else if ("CantidadPistasCortadas".equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    String a = edt_verificacion_CantidadPistasCortadas.getText().toString();
+                    if (a.equals("0") || a.equals("")) {
+                        validado = false;
+                        break;
+                    }
+                }
+            } else if ("PistasTroquelUsadas".equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    String a = edt_verificacion_PistasTroquelUsadas.getText().toString();
+                    if (a.equals("0") || a.equals("")) {
+                        validado = false;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    if (pdfAbierto = false){
+        if (pdfAbierto = false) {
 
-        validado = false;
-        toastPersonalziado("Debe abrir las especificaciones");
-    }
+            validado = false;
+            toastPersonalziado("Debe abrir las especificaciones");
+        }
         return validado;
-}
-    private void toastPersonalziado(String msg){
-        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+    }
+
+    private void toastPersonalziado(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
 }

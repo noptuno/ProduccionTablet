@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -37,6 +38,12 @@ public class PdfActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pdf);
 
         pdfView = findViewById(R.id.pdf_view_pdf);
+
+
+        URI uri = new File("File://192.168.234.144/pdf/fact.pdf").toURI();
+
+
+
 
         /*
         try {
@@ -79,37 +86,7 @@ public class PdfActivity extends AppCompatActivity {
             fileNotFoundException.printStackTrace();
         }
 */
-        InputStream in=null;
-        try {
-            URL url=new URL("File://192.168.234.144/pdf/fact.pdf");
-//          in=url.openStream();
-            URLConnection conn=url.openConnection();
-            conn.connect();
-            in=conn.getInputStream();
-            while (true) {
-                int read=in.read();
-                if (read==-1) break;
-                System.out.write(read);
-            }
 
-            pdfView.fromStream(in).defaultPage(0).onLoad(new OnLoadCompleteListener() {
-                @Override
-                public void loadComplete(int nbPages) {
-
-                }
-            }).scrollHandle(new DefaultScrollHandle(PdfActivity.this)).load();
-
-        }
-        catch (SocketTimeoutException e){
-            System.out.println("timed out");
-        }
-        catch (MalformedURLException e) {
-            System.out.println("URL not valid");
-        }
-
-        catch (IOException e) {
-            System.out.println("unable to get data");
-        }
 
       //  AbriPdf();
     }

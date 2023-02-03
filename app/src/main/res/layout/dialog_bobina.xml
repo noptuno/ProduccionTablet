@@ -319,7 +319,7 @@
 
         <Button
             android:id="@+id/dialogbobina_btn_guardar2"
-            android:layout_width="120dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
@@ -337,7 +337,7 @@
 
         <Button
             android:id="@+id/dialogbobina_btn_cancelar2"
-            android:layout_width="120dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
