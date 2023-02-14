@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Tareas;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 
@@ -58,11 +60,18 @@ public class CantidadDialog {
 
         if (tarea_Seleccionada.getTipoMaquinaId()== 4){
             edt_numero.setMaxEms(5);
-            edt_numero.setInputType(InputType.TYPE_CLASS_NUMBER);
-        }else if (tarea_Seleccionada.getTipoMaquinaId()== 1){
+            edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
 
+
+        }else if (tarea_Seleccionada.getTipoMaquinaId()== 1){
             edt_numero.setMaxEms(5);
-            edt_numero.setInputType(InputType.TYPE_CLASS_NUMBER);
+            edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+        }else{
+            edt_numero.setMaxEms(5);
+            edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
 
         }
 
