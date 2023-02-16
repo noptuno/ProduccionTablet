@@ -493,11 +493,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
 
             if ("SumMetrosImpresos".equals(entry.getKey())) {
-
                 if (entry.getValue().equals("0")) {
                     produccion_actual.setMetrosImpresos(valorFloat);
                 }
-
             } else if ("SumRollosFabricados".equals(entry.getKey())) {
                 if (entry.getValue().equals("0")) {
                     produccion_actual.setRollosFabricdos(valorFloat);
@@ -648,9 +646,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             public void onSuccess(JSONObject response) {
 
                 dialogProgress.dismiss();
-
                 Log.e("Resultado", "recibido" + motivo);
-
                 cambioEstado(estado);
 
             }

@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.codekolih.producciontablet.R;
@@ -52,6 +53,7 @@ public class PdfActivity extends AppCompatActivity {
 
     private PDFView pdfView;
     private long downloadID;
+    private Button regresar;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -61,54 +63,26 @@ public class PdfActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pdf);
 
         pdfView = findViewById(R.id.pdf_view_pdf);
+        regresar = findViewById(R.id.btncancelar);
 
-       AbriPdf();
-
-     registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-
-        String url = "file://192.168.1.21/pdfs/tspl.pdf";
-        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(url);
-        DownloadManager.Request request = new DownloadManager.Request(uri);
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
-
-        long reference = manager.enqueue(request);
+        AbriPdf();
 
 
     }
 
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // using broadcast method
-        unregisterReceiver(onDownloadComplete);
-    }
-
-    // using broadcast method
-    private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //Fetching the download id received with the broadcast
-            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-            //Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadID == id) {
-                Toast.makeText(PdfActivity.this, "Download Completed", Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
 
     public void AbriPdf() {
 
-        String url = "file://192.168.1.21/pdfs/tspl.pdf";
-                Uri myUri = Uri.parse(url);
-
-            pdfView.fromUri(myUri).defaultPage(0).onLoad(new OnLoadCompleteListener() {
+/*
+            pdfView.fromUri("myUri").defaultPage(0).onLoad(new OnLoadCompleteListener() {
                 @Override
                 public void loadComplete(int nbPages) {
 
                 }
             }).scrollHandle(new DefaultScrollHandle(PdfActivity.this)).load();
 
+    }
+
+    */
     }
 }

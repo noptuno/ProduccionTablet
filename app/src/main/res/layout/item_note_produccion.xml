@@ -68,7 +68,7 @@
                         android:text="RUBACH"
                         android:textAlignment="viewStart"
                         android:textColor="@color/white"
-                        android:textSize="24sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout

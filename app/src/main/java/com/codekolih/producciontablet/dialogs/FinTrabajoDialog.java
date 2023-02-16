@@ -43,7 +43,6 @@ public class FinTrabajoDialog {
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_fin_trabajo);
 
-
         cierre_btn_fin_de_trabajo_terminado= dialogo.findViewById(R.id.cierre_btn_findetrabajoterminado);
         cierre_btn_cancelar= dialogo.findViewById(R.id.cierre_btn_cancelar);
         edit_motivo = dialogo.findViewById(R.id.edit_motivo);

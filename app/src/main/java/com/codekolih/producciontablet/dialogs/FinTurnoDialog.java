@@ -22,8 +22,7 @@ public class FinTurnoDialog {
     private finalizarTurno interfaz;
 
     private EditText edit_motivo;
-    Button cierre_btn_cancelar,
-            cierre_btn_fin_de_turno_sin_terminar,cierre_btn_fin_de_turno_terminado;
+    Button cierre_btn_cancelar,cierre_btn_fin_de_turno_sin_terminar,cierre_btn_fin_de_turno_terminado;
 
 
     private HttpLayer httpLayer;
@@ -33,10 +32,7 @@ public class FinTurnoDialog {
 
     }
 
-
-
     public FinTurnoDialog(Context contexcto , finalizarTurno actividad){
-
 
         httpLayer = new HttpLayer(contexcto);
         interfaz = actividad;

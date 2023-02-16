@@ -81,7 +81,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="Lote"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/dialogbobina_edt_Lote"
@@ -110,7 +111,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="Ancho (Milimetros)"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/dialogbobina_edt_Ancho"
@@ -141,7 +143,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="DefectuosaKg"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/dialogbobina_edt_DefectuosaKg"
@@ -169,7 +172,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="EsAbiertaoCerrada"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/dialogbobina_spi_EsAbiertaoCerrada"
@@ -201,7 +205,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="ProveedorNombre"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/dialogbobina_spi_ProveedorNombre"

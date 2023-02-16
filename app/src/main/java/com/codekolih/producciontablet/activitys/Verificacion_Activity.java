@@ -17,6 +17,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -236,7 +238,53 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         OcultarVariables();
         cargarfecha();
+        establecerlimitesnumericos();
         //CargarPedido();
+
+    }
+
+    private void establecerlimitesnumericos() {
+
+        if (tarea_Seleccionada.getTipoMaquinaId()== 4){
+
+
+            edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
+            edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
+
+
+        }else{
+
+            edt_verificacion_AnchoFinalRolloYGap.setMaxEms(4);
+            edt_verificacion_AnchoFinalRolloYGap.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_AnchoFinalRolloYGap.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+
+            edt_verificacion_CantidadPistasImpresas.setMaxEms(2);
+            edt_verificacion_CantidadPistasImpresas.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_CantidadPistasImpresas.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+
+            edt_verificacion_CantidadTintas.setMaxEms(1);
+            edt_verificacion_CantidadTintas.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_CantidadTintas.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+
+            edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
+            edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
+
+
+            edt_verificacion_AnchoFinalRollo.setMaxEms(5);
+            edt_verificacion_AnchoFinalRollo.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_AnchoFinalRollo.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
+
+            edt_verificacion_CantidadPistasCortadas.setMaxEms(2);
+            edt_verificacion_CantidadPistasCortadas.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_CantidadPistasCortadas.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+
+            edt_verificacion_PistasTroquelUsadas.setMaxEms(2);
+            edt_verificacion_PistasTroquelUsadas.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_PistasTroquelUsadas.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+
+        }
 
     }
 
@@ -810,13 +858,14 @@ public class Verificacion_Activity extends AppCompatActivity {
                     }
                 }
             }
+
+            if (pdfAbierto = false) {
+                validado = false;
+                toastPersonalziado("Debe abrir las especificaciones");
+            }
         }
 
-        if (pdfAbierto = false) {
 
-            validado = false;
-            toastPersonalziado("Debe abrir las especificaciones");
-        }
         return validado;
     }
 
