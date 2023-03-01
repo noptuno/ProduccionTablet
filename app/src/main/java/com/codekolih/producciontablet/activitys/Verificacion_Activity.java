@@ -247,10 +247,9 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         if (tarea_Seleccionada.getTipoMaquinaId()== 4){
 
-
             edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
             edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
-            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
+            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 
 
         }else{

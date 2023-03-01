@@ -184,6 +184,7 @@ public class BobinaDialogo {
                        String ProveedorMaterial = NombreTipoMaterial;
 
                        try{
+
                            if (!Lote.equals("") && DefectuosaKg>0){
                                interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
                                dialogo.dismiss();
@@ -370,7 +371,6 @@ public class BobinaDialogo {
             }
             else if ("EsAbiertaoCerrada".equals(entry.getKey())){
                 lyb_EsAbiertaoCerrada.setVisibility(parseInt(entry.getValue()));
-
             }
             else if ("DefectuosaKg".equals(entry.getKey())){
                 lyb_DefectuosaKg.setVisibility(parseInt(entry.getValue()));

@@ -292,9 +292,9 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.8"
-                    android:text="Alto Mas Gap"
+                    android:text="Alto Mas Gap en milimetros"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -318,7 +318,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.8"
                     android:text="Etiquetas en Banda"
                     android:textSize="16sp"
@@ -449,7 +449,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.8"
-                    android:text="Metros Mat Troquelar"
+                    android:text="Metros Material a Troquelar"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -501,7 +501,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.8"
-                    android:text="Pistas"
+                    android:text="Pistas totales del troquel"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -511,7 +511,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="textPersonName"
-                    android:text="KG"
+                    android:text="0"
                     android:textSize="18sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
@@ -525,7 +525,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.8"
                     android:text="Descripcion del Troquel"
                     android:textSize="16sp"
@@ -938,7 +938,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Ancho Final Rollo"
+                android:text="Ancho Final Rollo en milimetros"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

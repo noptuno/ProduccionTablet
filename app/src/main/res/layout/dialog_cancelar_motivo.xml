@@ -82,7 +82,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
             android:backgroundTint="#208C24"
-            android:text="cancecalar y saltear este trabajo"
+            android:text="cancelar y saltear este trabajo"
             android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_info_details"
             app:layout_constraintBottom_toBottomOf="parent"
