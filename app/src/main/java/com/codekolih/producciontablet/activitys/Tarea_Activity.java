@@ -116,11 +116,12 @@ public class Tarea_Activity extends AppCompatActivity {
         //pref
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         MAQUINATIPOID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0"));
-        MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
+        MAQUINAID  = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
+
+        Log.e("TipoMaquinaid: ", ""+MAQUINATIPOID);
+        Log.e("MaquinaId: ", ""+MAQUINAID);
 
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
-
-
         txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
         PermiteCambioPrioridad = pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");

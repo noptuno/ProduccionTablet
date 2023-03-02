@@ -117,9 +117,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                         if (tarea_Seleccionada.getBobinas().size() > 0) {
 
-
                             new FinTrabajoDialog(Produccion_Activity.this, Produccion_Activity.this);
-
 
                         } else {
                             Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
@@ -142,7 +140,30 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                finalizar();
+                if (totaldadscrap > 0) {
+                    if (parseFloat(cantidadtotal.getText().toString()) > 0) {
+
+                        if (tarea_Seleccionada.getBobinas().size() > 0) {
+
+                            finalizar();
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "Hay que cargar Produccion", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -199,6 +220,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         cargarTareaHttp(); // tarea y produccion_actual y bobina actual
         ocultarVariables();
         cargarfecha();
+        cargarEstadoProduccion();
 
 
     }
@@ -475,13 +497,12 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             txt_produccion_txt_EtiquetasEnBanda.setText(String.format("%s", tarea_Seleccionada.getEtiquetasEnBanda()));
             txt_produccion_txt_EtiquetasPorRollo.setText(String.format("%s", tarea_Seleccionada.getEtiquetasPorRollo()));
             txt_produccion_txt_TroquelId.setText(String.format("%s", tarea_Seleccionada.getTroquelId()));
-            ;
             txt_produccion_txt_MetrosMatTroquelar.setText(String.format("%s", tarea_Seleccionada.getMetrosMatTroquelar()));
             txt_produccion_txt_Observaciones.setText(tarea_Seleccionada.getObservaciones());
 
         }
 
-        cargarEstadoProduccion();
+
 
     }
 
@@ -567,7 +588,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         bobinacargar.setDefectuosaKg(DefectuosaKg);
         bobinacargar.setNombreTipoMaterial(nombreMaterial);
 
+
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+
         httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {

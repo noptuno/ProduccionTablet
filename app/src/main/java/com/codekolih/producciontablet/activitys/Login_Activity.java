@@ -64,7 +64,7 @@ public class Login_Activity extends AppCompatActivity {
     private RequestQueue requestQueue;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private String nombreMaquina;
-    private String maquinaId, tipomaquinaid;
+    private String maquinaId,tipomaquinaid;
     private SharedPreferences pref;
     private boolean permisosEscritura;
     private ProgressHUD dialogProgress;
@@ -234,12 +234,12 @@ public class Login_Activity extends AppCompatActivity {
 
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
-        maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
-        tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
+        maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
+        tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0");
         txt_nombreImprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
 
-        if (!tipomaquinaid.equals("NO")) {
-            TareaSingleton.SingletonInstance().setTipoMaquina(tipomaquinaid);
+        if (!tipomaquinaid.equals("0")) {
+            TareaSingleton.SingletonInstance().setTipoMaquina((tipomaquinaid));
         } else {
             Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
             startActivity(intent);

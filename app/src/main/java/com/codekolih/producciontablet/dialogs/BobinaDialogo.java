@@ -1,11 +1,15 @@
 package com.codekolih.producciontablet.dialogs;
 
 
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -51,7 +55,8 @@ public class BobinaDialogo {
     Switch once, doce, trece, catorce, quince, dieciseis;
     Button btn_guardar;
     Button btn_cancelar;
-
+    private SharedPreferences pref;
+    private String MAQUINATIPOID = "0";
 
     public interface finalizarBobinaDialog{
 
@@ -102,6 +107,9 @@ public class BobinaDialogo {
         quince= dialogo.findViewById(R.id.quince);
         dieciseis= dialogo.findViewById(R.id.dieciseis);
 
+
+        pref = contexcto.getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+        MAQUINATIPOID = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0");
 
         spi_NombreTipoMaterial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -184,14 +192,28 @@ public class BobinaDialogo {
                        String ProveedorMaterial = NombreTipoMaterial;
 
                        try{
+                           if (MAQUINATIPOID.equals("5")){
 
-                           if (!Lote.equals("") && DefectuosaKg>0){
-                               interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
-                               dialogo.dismiss();
+                               if (!Lote.equals("")){
+                                   interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
+                                   dialogo.dismiss();
+                               }else{
+                                   Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
+                               }
                            }else{
 
-                               Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
+                               if (!Lote.equals("") && DefectuosaKg>0){
+
+                                   interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
+                                   dialogo.dismiss();
+
+                               }else{
+
+                                   Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
+                               }
+
                            }
+
 
                        }catch (Exception e){
                            Log.e("ErrorBobina",e.toString());

@@ -28,6 +28,7 @@ public class TareaSingleton {
     private ArrayList<Proveedor> proveedores;
     private ArrayList<Material> materiales;
 
+
     public String getUsuarioIniciado() {
         return usuarioIniciado;
     }

@@ -5,6 +5,7 @@ import static com.android.volley.Request.Method.POST;
 import static com.android.volley.Request.Method.PUT;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -73,6 +74,8 @@ public class HttpLayer {
     public void cargarBobinas(Bobinas bobinas, HttpLayerResponses<JSONObject> listener,String USUARIO) {
 
         JSONObject jsonObject = GsonUtils.toJSON(bobinas);
+
+        Log.e("enviobobina",""+jsonObject.toString());
         JsonObjectRequest request = new JsonObjectRequest(
                 POST,
                 Urls.agregarbobinas + USUARIO,
