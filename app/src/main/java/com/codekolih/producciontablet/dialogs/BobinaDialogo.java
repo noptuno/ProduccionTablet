@@ -38,7 +38,7 @@ public class BobinaDialogo {
 
     private finalizarBobinaDialog interfaz_scrap;
     String idproveedorSeleccionado = "0";
-    String TipoMaterialId = "0";
+    String TipoMaterialId = "1";
 
     String unidad = "Seleccionar";
     Spinner  spi_ProveedorNombre,spi_EsAbiertaoCerrada,spi_NombreTipoMaterial;

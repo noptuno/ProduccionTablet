@@ -55,7 +55,7 @@ public class FinTrabajoDialog {
                 String motivo = edit_motivo.getText().toString();
                 if(motivo.length() > 1){
 
-                    interfaz.ResultadoFinTrabajoDialogo(motivo,"C1");
+                    interfaz.ResultadoFinTrabajoDialogo(motivo,"F1");
                     dialogo.dismiss();
 
                 }else{

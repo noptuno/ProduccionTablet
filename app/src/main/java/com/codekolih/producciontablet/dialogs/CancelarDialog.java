@@ -63,7 +63,7 @@ public class CancelarDialog {
                 String motivo = edit_motivo.getText().toString();
                 if(motivo.length() > 1){
 
-                    interfaz.ResultadoMotivoDialogo(motivo,"C2");
+                    interfaz.ResultadoMotivoDialogo(motivo,"C1");
                     dialogo.dismiss();
 
                 }else{
@@ -80,7 +80,7 @@ public class CancelarDialog {
                     String motivo = edit_motivo.getText().toString();
                     if(motivo.length() > 1){
 
-                     interfaz.ResultadoMotivoDialogo(motivo,"F1");
+                     interfaz.ResultadoMotivoDialogo(motivo,"C2");
                             dialogo.dismiss();
 
                     }else{

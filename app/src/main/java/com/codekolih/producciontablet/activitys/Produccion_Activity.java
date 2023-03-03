@@ -33,6 +33,7 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterBobinas;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Bobinas;
+import com.codekolih.producciontablet.clases.EstadosOp;
 import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
@@ -217,10 +218,32 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         recyclerViewBobinas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerViewBobinas.setAdapter(adapterBobina);
 
-        cargarTareaHttp(); // tarea y produccion_actual y bobina actual
+
+        cargarEstadoProduccion();
         ocultarVariables();
         cargarfecha();
-        cargarEstadoProduccion();
+
+
+
+
+    }
+
+    private void cargartodoslosestados(Tareas a) {
+
+        List<EstadosOp> response = a.getEstadosOp();
+
+        for (EstadosOp tareatemp : response) {
+
+            Log.e("Estados","Tarea: "+ tareatemp.getTareaId() + "\n"+
+                    "id estado: "+tareatemp.getEstadoId() + "\n"+
+                    "nombreEstado: " +tareatemp.getNombreEstado() + "\n"+
+                    "fecha: " +tareatemp.getFechaInicio() + "\n"
+
+            );
+
+        }
+
+
 
 
     }
@@ -238,6 +261,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onSuccess(JSONObject response) {
                 Log.e("Produccion_Activity", "Cargo Estado Produccion P1 en I " + tareaId);
+
+                cargarTareaHttp(); // tarea y produccion_actual y bobina actual
 
             }
 
@@ -370,11 +395,14 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         Log.e("Resultado", "cambio estado ");
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
+
+        Log.e("EstadoInsert", ""+ GsonUtils.toJSON(estado).toString());
+
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
 
-                Log.e("Produccion_Activity", "Cargo Estado" + tarea_Seleccionada.getTareaId());
+                Log.e("onSuccess CE", response.toString());
                 dialogProgress.dismiss();
                 finish();
             }
@@ -401,6 +429,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                     if (tareatemp.getPedidoId() == pedidoId && tareatemp.getTareaId() == tareaId) {
                         TareaSingleton.SingletonInstance().setTarea(tareatemp);
+                        cargartodoslosestados(tareatemp);
                         break;
                     }
                 }
@@ -554,6 +583,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onSuccess(JSONObject response) {
                 dialogProgress.dismiss();
+
+                Log.e("onSuccess AP", response.toString());
                 cargarTareaHttp();
 
                 btn_cantidad.setText("MODIFICAR CANTIDAD");
@@ -595,7 +626,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onSuccess(JSONObject response) {
 
-                Log.e("Bobina_activit", response.toString());
+                Log.e("onSuccess CB", response.toString());
+
                 dialogProgress.dismiss();
                 cargarTareaHttp();
 
@@ -639,8 +671,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
     private void actualziarmotivoyestado(String motivo, Map<String, Object> estado) {
 
-        Log.e("Resultado", "recibido" + motivo);
-
         Map<String, Object> produccion = new HashMap<>();
         produccion.put("ProduccionId", produccionId);
         produccion.put("PedidoId", pedidoId);
@@ -669,7 +699,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             public void onSuccess(JSONObject response) {
 
                 dialogProgress.dismiss();
-                Log.e("Resultado", "recibido" + motivo);
+                Log.e("onSuccess AP", response.toString());
                 cambioEstado(estado);
 
             }
@@ -717,7 +747,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
-        estado.put("EstadoId", "C1");
+        estado.put("EstadoId", tipocierre);
         estado.put("TipoEstadoId", "F");
 
         actualziarmotivoyestado(motivo, estado);

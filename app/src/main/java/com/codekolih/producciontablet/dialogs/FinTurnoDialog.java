@@ -77,7 +77,7 @@ public class FinTurnoDialog {
                     String motivo = edit_motivo.getText().toString();
                     if(motivo.length() > 1){
 
-                     interfaz.ResultadoFinTurnoDialogo(motivo,"C1");
+                     interfaz.ResultadoFinTurnoDialogo(motivo,"F1");
                             dialogo.dismiss();
 
                     }else{
