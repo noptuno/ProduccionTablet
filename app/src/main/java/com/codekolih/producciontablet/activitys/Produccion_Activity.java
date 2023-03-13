@@ -1,6 +1,7 @@
 package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
@@ -55,6 +56,7 @@ import java.util.Map;
 
 public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog, CancelarDialog.finalizarMotivo, FinTurnoDialog.finalizarTurno, FinTrabajoDialog.finalizarTarea {
 
+
     Tareas tarea_Seleccionada;
     Pedido pedido_seleccionado;
     Produccion_Lista produccion_actual;
@@ -77,7 +79,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private int tareaId;
     private String USUARIO;
     private SharedPreferences pref;
-
+    private int MAQUINAID = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +98,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
         txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
-
+        MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
 
         //VALIDAR
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
@@ -421,7 +423,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
-        httpLayer.getTareas("0/0", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+        httpLayer.getTareas(MAQUINAID+ "/F", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 
@@ -723,7 +725,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
         estado.put("EstadoId", tipocierre);
-        estado.put("TipoEstadoId", "F");
+        estado.put("TipoEstadoId", "I");
 
         actualziarmotivoyestado(motivo, estado);
     }
@@ -735,7 +737,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
         estado.put("EstadoId", tipocierre);
-        estado.put("TipoEstadoId", "F");
+        estado.put("TipoEstadoId", "I");
 
         actualziarmotivoyestado(motivo, estado);
 
@@ -748,7 +750,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
         estado.put("EstadoId", tipocierre);
-        estado.put("TipoEstadoId", "F");
+        estado.put("TipoEstadoId", "I");
 
         actualziarmotivoyestado(motivo, estado);
 

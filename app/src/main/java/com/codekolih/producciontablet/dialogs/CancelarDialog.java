@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class CancelarDialog {
 
@@ -62,6 +65,8 @@ public class CancelarDialog {
 
                 String motivo = edit_motivo.getText().toString();
                 if(motivo.length() > 1){
+
+
 
                     interfaz.ResultadoMotivoDialogo(motivo,"C1");
                     dialogo.dismiss();

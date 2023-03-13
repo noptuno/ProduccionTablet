@@ -258,7 +258,10 @@ public class Tarea_Activity extends AppCompatActivity {
     void cargarTarea() {
 
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
-        httpLayer.getTareas("0/0", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+
+
+
+        httpLayer.getTareas(MAQUINAID + "/F", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 
