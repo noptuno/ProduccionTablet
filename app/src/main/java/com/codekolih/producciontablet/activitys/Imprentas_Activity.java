@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -99,8 +101,6 @@ public class Imprentas_Activity extends AppCompatActivity {
 
         });
 
-        cargarConfiguracion();
-
         cargarDatos();
 
 
@@ -145,7 +145,7 @@ private void cargarDatos(){
                         Toast.makeText(Imprentas_Activity.this, "Fallo", Toast.LENGTH_LONG).show();
                         dialogProgress.dismiss();
 
-
+                        dialogError("No cargo Datos");
 
                     }
                 });
@@ -157,26 +157,31 @@ private void cargarDatos(){
 }
 
 
+    private void dialogError(String mensaje) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Imprentas_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogg.dismiss();
 
 
+                if (mensaje.equals("No cargo Datos")){
 
-private void cargarConfiguracion() {
+                    cargarDatos();
 
+                }
 
-    }
-
-    public void actualizarReciclerView(boolean a) {
-        runOnUiThread(() -> {
-            if (a){
-                adapterImprentas.setNotes(listImprentas);
-                adapterImprentas.notifyDataSetChanged();
-                Toast.makeText(Imprentas_Activity.this,"Actualizo",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(Imprentas_Activity.this,"Error Api",Toast.LENGTH_SHORT).show();
             }
-
         });
-
     }
 
 

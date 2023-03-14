@@ -5,8 +5,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -19,51 +19,44 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProduccionTablet"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
-
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".Bobina_Activity"
+            android:exported="false" />
         <activity
             android:name=".dialogs.PdfActivity"
-            android:theme="@style/Theme.ProduccionTablet.NoActionBar"
-            android:exported="true">
-
-
-
-
-        </activity>
-
+            android:exported="true"
+            android:theme="@style/Theme.ProduccionTablet.NoActionBar"></activity>
         <activity
             android:name=".activitys.Verificacion_Activity"
-            android:windowSoftInputMode="adjustNothing"
+            android:exported="false"
             android:theme="@style/Theme.ProduccionTablet.NoActionBar"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".activitys.Produccion_Activity"
             android:exported="false"
             android:label="Produccion de Tarea"
             android:theme="@style/Theme.ProduccionTablet.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
-
         <activity
             android:name=".activitys.Tarea_Activity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:label="Tareas Disponibles" />
+            android:label="Tareas Disponibles"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activitys.Imprentas_Activity"
             android:exported="false"
             android:label="Seleccionar Imprentas" />
         <activity
             android:name=".activitys.Login_Activity"
-            android:label="Iniciar Sesion"
-            android:exported="true">
-
+            android:exported="true"
+            android:label="Iniciar Sesion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <provider
@@ -73,9 +66,17 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path"></meta-data>
+                android:resource="@xml/file_path" />
         </provider>
 
+        <receiver
+            android:name=".activitys.bootapp"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

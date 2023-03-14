@@ -146,6 +146,15 @@ public class Tarea_Activity extends AppCompatActivity {
         });
 
         //todo valdiar internet
+        validarinternet();
+
+
+        cargarfecha();
+
+    }
+
+
+    private void validarinternet(){
 
         if (isNetDisponible()) {
 
@@ -153,9 +162,6 @@ public class Tarea_Activity extends AppCompatActivity {
         } else {
             dialogErrorPrintet("No hay Internet");
         }
-
-        cargarfecha();
-
     }
 
     private void elegirTarea(Tareas note) {
@@ -259,30 +265,31 @@ public class Tarea_Activity extends AppCompatActivity {
 
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
 
-
-
-        httpLayer.getTareas(MAQUINAID + "/F", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+        httpLayer.getTareas(MAQUINAID + "/O", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 
                 List<Tareas> temp = new ArrayList<>();
 
+                    for (Tareas lg : response) {
 
-                for (Tareas lg : response) {
+                        if (lg.getMaquinaId() == MAQUINAID) {
 
-                    if (lg.getMaquinaId() == MAQUINAID) {
+                            temp.add(lg);
 
-                        temp.add(lg);
+                            Log.e("Tareas para filtrar: ", "" + lg.getTareaId());
 
-                        Log.e("Tareas para filtrar: ", "" + lg.getTareaId());
-
+                        }
+                        // Log.e("Datos_tareas",lg.toString());
+                        Log.e("ListTareas", "Cod: " + lg.getTareaId() + " Cant produccion: " + lg.getProduccion_Lista().size() + " cantbobinas: " + lg.getBobinas().size());
                     }
-                    // Log.e("Datos_tareas",lg.toString());
-                    Log.e("ListTareas", "Cod: " + lg.getTareaId() + " Cant produccion: " + lg.getProduccion_Lista().size() + " cantbobinas: " + lg.getBobinas().size());
-                }
 
-                adapterTareas.setNotes(temp);
-                adapterTareas.notifyDataSetChanged();
+                    adapterTareas.setNotes(temp);
+                    adapterTareas.notifyDataSetChanged();
+
+
+
+
 
                 dialogProgress.dismiss();
                 cargarProveedor();
@@ -334,6 +341,19 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialogg.dismiss();
+
+
+                if (mensaje.equals("No hay Internet")){
+                    validarinternet();
+                }else if(mensaje.equals("No cargo Tareas")){
+                    cargarTarea();
+                }else if(mensaje.equals("No cargo Proveedor")){
+                    cargarProveedor();
+                }else if(mensaje.equals("No cargo Materiales")){
+                    cargarMateriales();
+                }
+
+
 
             }
         });

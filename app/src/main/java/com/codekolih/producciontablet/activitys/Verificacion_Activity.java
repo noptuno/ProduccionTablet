@@ -294,17 +294,9 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-
-                Map<String, Object> estado = new HashMap<>();
-                estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                estado.put("EstadoId", "A1");
-                estado.put("TipoEstadoId", "F");
-
-                cambioEstado(estado);
-
+                cambioEstadoA1F();
 
             }
-
 
         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -322,33 +314,6 @@ public class Verificacion_Activity extends AppCompatActivity {
         cancelar();
     }
 
-    private void CargarPedido() {
-
-        String params = "" + tarea_Seleccionada.getPedidoId();
-
-        httpLayer.getPedido(params, new HttpLayer.HttpLayerResponses<Pedido>() {
-            @Override
-            public void onSuccess(Pedido response) {
-
-                TareaSingleton.SingletonInstance().setPedidoInstanciada(response);
-
-                txt_SerieYNro.setText(response.getSerieYNro());
-                txt_ArticuloId.setText(response.getArticuloId());
-                txt_Cantidad.setText(String.format("%s", response.getCantidad()));
-                txt_Concepto.setText(response.getConcepto());
-
-                Log.e("httpPedido", response.toString());
-
-            }
-
-            @Override
-            public void onError(Exception e) {
-                Log.e("httperror", e.toString());
-                dialogErrorPrintet("No cargo Pedido");
-            }
-        });
-
-    }
 
     private void cargarVerificacion() {
 
@@ -395,6 +360,7 @@ public class Verificacion_Activity extends AppCompatActivity {
                     if (esthttp.equals("OK")) {
 
                         String RespuestaDato = response.getString("RespuestaDato");
+
                         if (RespuestaDato.length() > 0) {
 
                             String[] valirIdProduccion = RespuestaDato.split(":");
@@ -403,18 +369,10 @@ public class Verificacion_Activity extends AppCompatActivity {
                         }
 
 
-                        Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
                         dialogProgress.dismiss();
 
-
-                        Map<String, Object> estado = new HashMap<>();
-                        estado.put("TareaId", tarea_Seleccionada.getTareaId());
-                        estado.put("EstadoId", "A1");
-                        estado.put("TipoEstadoId", "F");
-                        cambioEstado(estado);
-
+                        cambioEstadoFinVerificacion();
 
                     }
 
@@ -422,14 +380,14 @@ public class Verificacion_Activity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                //   actualziarTarea(tarea_Seleccionada.getPedidoId(),tarea_Seleccionada.getTareaId());
             }
 
             @Override
             public void onError(Exception e) {
                 dialogProgress.dismiss();
-                dialogErrorPrintet("No cargo Datos");
-                Log.e("http_altaproduccion", "Fallo");
+
+                dialogError("No cargo Datos");
+
             }
         }, USUARIO);
     }
@@ -450,7 +408,7 @@ public class Verificacion_Activity extends AppCompatActivity {
     private void cargarTareaSeleccionada() {
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea()) == null) {
-            Toast.makeText(getApplicationContext(), "Instancia Creada", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Instancia NO Creada", Toast.LENGTH_LONG).show();
             finish();
         } else {
 
@@ -473,7 +431,13 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     }
 
-    private void cambioEstado(Map<String, Object> estado) {
+    private void cambioEstadoA1F() {
+
+        Map<String, Object> estado = new HashMap<>();
+        estado.put("TareaId", tarea_Seleccionada.getTareaId());
+        estado.put("EstadoId", "A1");
+        estado.put("TipoEstadoId", "F");
+
 
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
@@ -486,7 +450,35 @@ public class Verificacion_Activity extends AppCompatActivity {
             @Override
             public void onError(Exception e) {
 
-                Toast.makeText(getApplicationContext(), "Reintentar", Toast.LENGTH_SHORT).show();
+                dialogError("No cambio Estado, Presionar Ok");
+            }
+        }, USUARIO);
+
+    }
+
+    private void cambioEstadoFinVerificacion() {
+
+        Map<String, Object> estado = new HashMap<>();
+        estado.put("TareaId", tarea_Seleccionada.getTareaId());
+        estado.put("EstadoId", "A1");
+        estado.put("TipoEstadoId", "F");
+
+
+        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.e("Verificacion_Activity", "Cargo Estado" + tarea_Seleccionada.getTareaId());
+                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                dialogError("No cambio estado fin verificacion");
             }
         }, USUARIO);
 
@@ -872,4 +864,37 @@ public class Verificacion_Activity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
+
+    private void dialogError(String mensaje) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Verificacion_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogg.dismiss();
+
+
+                if (mensaje.equals("No cambio Estado, Presionar Ok")){
+
+                    cambioEstadoA1F();
+
+                }else if(mensaje.equals("No cargo Datos")){
+
+                    cargarVerificacion();
+
+                }else if(mensaje.equals("No cambio estado fin verificacion")){
+                    cambioEstadoFinVerificacion();
+                }
+
+            }
+        });
+    }
 }

@@ -270,7 +270,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
             @Override
             public void onError(Exception e) {
-                Toast.makeText(getApplicationContext(), "No registro", Toast.LENGTH_SHORT).show();
+
+                dialogError("No cargo el estado inicial");
+
+
             }
         }, USUARIO);
 
@@ -423,11 +426,13 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
-        httpLayer.getTareas(MAQUINAID+ "/F", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+        httpLayer.getTareas(MAQUINAID+ "/O", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 
                 for (Tareas tareatemp : response) {
+
+                    Log.e("MSG","" + response.toString());
 
                     if (tareatemp.getPedidoId() == pedidoId && tareatemp.getTareaId() == tareaId) {
                         TareaSingleton.SingletonInstance().setTarea(tareatemp);
@@ -443,7 +448,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onError(Exception e) {
 
-                dialogErrorPrintet("No Cargo Tarea");
+                dialogError("No Cargo Tarea");
                 Log.e("error_produccion", e.toString());
                 dialogProgress.dismiss();
             }
@@ -453,7 +458,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     void cargarTareaSeleccionada() {
 
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea()) == null) {
-            Log.e("ERROR", "NO TAREA");
+
+            Toast.makeText(getApplicationContext(), "Hubo un problema critico con la carga de Tarea Seleecionada", Toast.LENGTH_SHORT).show();
+
             finish();
         }
 
@@ -496,7 +503,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             adapterProduccion.notifyDataSetChanged();
 
         } else {
-            Log.e("ERROR", "NO PRODUCCION");
+            Log.e("MSG", "no hay produccion para mostrar");
+
         }
 
         if (tarea_Seleccionada.getBobinas().size() > 0) {
@@ -810,6 +818,36 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         }, USUARIO);
     }
 
+
+    private void dialogError(String mensaje) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Produccion_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogg.dismiss();
+
+
+                if (mensaje.equals("No cargo el estado inicial")){
+
+                    cargarEstadoProduccion();
+
+                }else if(mensaje.equals("No Cargo Tarea")){
+
+                    cargarTareaHttp();
+                }
+
+            }
+        });
+    }
 
     private LinearLayout
 
