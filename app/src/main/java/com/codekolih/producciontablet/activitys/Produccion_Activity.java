@@ -203,13 +203,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
              //   new BobinaDialogo(Produccion_Activity.this, Produccion_Activity.this);
 
 
-
-                int tareaid = tareaId;
-                int produccionid = produccionId;
                 Intent intent = new Intent(Produccion_Activity.this, Bobina_Activity.class);
-                intent.putExtra("tareaId", tareaid);
-                intent.putExtra("produccionId", produccionid);
-                startActivity(intent);
+               // intent.putExtra("tareaId", tareaid);
+               // intent.putExtra("produccionId", produccionid);
+                startActivityForResult(intent, CODIGO_PARA_LA_ACTIVIDAD_2);
 
 
                 /*
@@ -242,8 +239,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         cargarfecha();
 
 
-        Intent intent = new Intent(this, Bobina_Activity.class);
-        startActivityForResult(intent, CODIGO_PARA_LA_ACTIVIDAD_2);
+
 
 
     }
@@ -444,7 +440,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
-        httpLayer.getTareas(MAQUINAID+ "/O", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+        httpLayer.getTareas(MAQUINAID+ "/F", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 
@@ -639,6 +635,9 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
 
             String onSuccessRecibido = data.getStringExtra("onSuccess");
+
+
+            Log.e("recibo",""+onSuccessRecibido);
 
             if (onSuccessRecibido.equals("ok")){
 

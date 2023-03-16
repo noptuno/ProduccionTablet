@@ -120,13 +120,6 @@ public class Bobina_Activity extends AppCompatActivity {
         Log.e("cargado ","" +tareaid + produccionid);
 
 
-        Intent intent = getIntent();
-        tareaid = intent.getIntExtra("tareaid",0);
-        produccionid = intent.getIntExtra("produccionId",0);
-
-        Log.e("InterntRecibido ","" +tareaid + produccionid);
-
-
         spi_NombreTipoMaterial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

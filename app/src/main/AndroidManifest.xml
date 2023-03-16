@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Bobina_Activity"
+            android:name=".activitys.Bobina_Activity"
             android:exported="false" />
         <activity
             android:name=".dialogs.PdfActivity"

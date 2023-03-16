@@ -85,6 +85,7 @@ public class PdfActivity extends AppCompatActivity {
         pdfView = findViewById(R.id.pdf_view_pdf);
         regresar = findViewById(R.id.btncancelar);
 
+        //ClientCredential clientCredential = new ClientCredential("client_id", "client_secret");
 
 
         pdfView.fromAsset("ejemplo.pdf").defaultPage(0).onLoad(new OnLoadCompleteListener() {
