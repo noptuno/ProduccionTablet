@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,7 +55,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, BobinaDialogo.finalizarBobinaDialog, CancelarDialog.finalizarMotivo, FinTurnoDialog.finalizarTurno, FinTrabajoDialog.finalizarTarea {
+public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, CancelarDialog.finalizarMotivo, FinTurnoDialog.finalizarTurno, FinTrabajoDialog.finalizarTarea {
 
 
     Tareas tarea_Seleccionada;
@@ -80,6 +81,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private String USUARIO;
     private SharedPreferences pref;
     private int MAQUINAID = 0;
+    private static final int CODIGO_PARA_LA_ACTIVIDAD_2 = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,10 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         Log.e("ProduccionActivity", "INICIO");
 
         findrid();
+
+
+
+
 
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
@@ -194,7 +200,17 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                new BobinaDialogo(Produccion_Activity.this, Produccion_Activity.this);
+             //   new BobinaDialogo(Produccion_Activity.this, Produccion_Activity.this);
+
+
+
+                int tareaid = tareaId;
+                int produccionid = produccionId;
+                Intent intent = new Intent(Produccion_Activity.this, Bobina_Activity.class);
+                intent.putExtra("tareaId", tareaid);
+                intent.putExtra("produccionId", produccionid);
+                startActivity(intent);
+
 
                 /*
                 Intent i = new Intent(Produccion_Activity.this, BobinaActivity.class);
@@ -226,6 +242,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         cargarfecha();
 
 
+        Intent intent = new Intent(this, Bobina_Activity.class);
+        startActivityForResult(intent, CODIGO_PARA_LA_ACTIVIDAD_2);
 
 
     }
@@ -613,44 +631,26 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     }
 
 
-    @Override
-    public void ResultadoBobinaDialogo(int ProveedorId, String ProveedorNombre, String Lote, float Ancho, String EsAbiertaoCerrada, float DefectuosaKg, int idmaterial, String nombreMaterial) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        Bobinas bobinacargar = new Bobinas();
-        bobinacargar.setBobinaId(0);
-        bobinacargar.setTareaId(tareaId);
-        bobinacargar.setProduccionId(produccionId);
-        bobinacargar.setProveedorId(ProveedorId);
-        bobinacargar.setProveedorNombre(ProveedorNombre);
-        bobinacargar.setLote(Lote);
-        bobinacargar.setAncho(Ancho);
-        bobinacargar.setTipoMaterialId(idmaterial);
-        bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
-        bobinacargar.setDefectuosaKg(DefectuosaKg);
-        bobinacargar.setNombreTipoMaterial(nombreMaterial);
+        if (requestCode == CODIGO_PARA_LA_ACTIVIDAD_2 && resultCode == Bobina_Activity.RESULT_OK) {
+            //Obtener el string enviado desde la actividad 2 utilizando la clave correspondiente
 
 
-        dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+            String onSuccessRecibido = data.getStringExtra("onSuccess");
 
-        httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject response) {
+            if (onSuccessRecibido.equals("ok")){
 
-                Log.e("onSuccess CB", response.toString());
-
-                dialogProgress.dismiss();
                 cargarTareaHttp();
-
+            }else{
+                Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onError(Exception e) {
-                dialogProgress.dismiss();
-                dialogErrorPrintet("No Cargo Bobina");
-            }
-        }, USUARIO);
-
+        }
     }
+
+
 
     private void dialogErrorPrintet(String mensaje) {
 
