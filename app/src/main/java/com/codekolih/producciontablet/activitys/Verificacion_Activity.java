@@ -66,9 +66,9 @@ public class Verificacion_Activity extends AppCompatActivity {
 
     Tareas tarea_Seleccionada;
     private String USUARIO;
-
+    private String nombrepdf;
     private int tipoimprenta;
-
+    private static final int CODIGOABRIRPDF = 1;
     Pedido pedido_Cargado;
     //Produccion_Lista produccion_actual;
     private ProgressHUD dialogProgress;
@@ -229,9 +229,12 @@ public class Verificacion_Activity extends AppCompatActivity {
             public void onClick(View view) {
 
                 pdfAbierto = true;
+
                 Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
-                startActivity(intent);
+                intent.putExtra("nombrepdf", nombrepdf);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                startActivityForResult(intent, CODIGOABRIRPDF);
+
 
             }
         });
@@ -348,6 +351,8 @@ public class Verificacion_Activity extends AppCompatActivity {
 
         dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
 
+        Log.e("json",GsonUtils.toJSON(newproduccion).toString());
+
         httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -369,17 +374,16 @@ public class Verificacion_Activity extends AppCompatActivity {
                         }
 
 
-
-                        dialogProgress.dismiss();
-
                         cambioEstadoFinVerificacion();
 
                     }
 
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
+                    dialogProgress.dismiss();
                 }
 
+                dialogProgress.dismiss();
             }
 
             @Override
@@ -427,6 +431,8 @@ public class Verificacion_Activity extends AppCompatActivity {
             txt_verificacion_txt_Pistas.setText(String.format("%s", tarea_Seleccionada.getPistas()));
             txt_verificacion_txt_EtiquetasEnBanda.setText(String.format("%s", tarea_Seleccionada.getEtiquetasEnBanda()));
             txt_verificacion_txt_EtiquetasPorRollo.setText(String.format("%s", tarea_Seleccionada.getEtiquetasPorRollo()));
+
+            nombrepdf = tarea_Seleccionada.getArchivoEspecificacion();
         }
 
     }
@@ -848,12 +854,13 @@ public class Verificacion_Activity extends AppCompatActivity {
                         break;
                     }
                 }
-            }
-
-            if (pdfAbierto = false) {
+            }else if(pdfAbierto = false) {
                 validado = false;
                 toastPersonalziado("Debe abrir las especificaciones");
+                break;
             }
+
+
         }
 
 

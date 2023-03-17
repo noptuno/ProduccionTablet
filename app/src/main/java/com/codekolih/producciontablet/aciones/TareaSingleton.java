@@ -23,6 +23,16 @@ public class TareaSingleton {
     private Tareas tareaInstanciada;
     private Pedido pedidoInstanciada;
     private String usuarioIniciado;
+    private String nombrepdf;
+
+    public String getNombrepdf() {
+        return nombrepdf;
+    }
+
+    public void setNombrepdf(String nombrepdf) {
+        this.nombrepdf = nombrepdf;
+    }
+
     private int produccionId;
     private Map<String, String> tipoMaquina;
     private ArrayList<Proveedor> proveedores;

@@ -92,9 +92,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
         findrid();
 
 
-
-
-
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
         recyclerViewCantidad = findViewById(R.id.produccion_cantidad_recycler);
