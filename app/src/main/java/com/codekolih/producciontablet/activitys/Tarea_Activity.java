@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,8 @@ public class Tarea_Activity extends AppCompatActivity {
     private Button btn_cerrar_sesion;
     private String PermiteCambioPrioridad = "false";
 
+    private ImageButton btnactualizar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,17 @@ public class Tarea_Activity extends AppCompatActivity {
         txt_fecha = findViewById(R.id.tarea_txt_fecha);
         txt_hora = findViewById(R.id.txt_tarea_hora);
         btn_cerrar_sesion = findViewById(R.id.tarea_btn_cerraSesion);
+        btnactualizar = findViewById(R.id.btnactualziartarea);
+
+        btnactualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                validarinternet();
+
+            }
+        });
+
 
         btn_cerrar_sesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,7 +280,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
         dialogProgress = ProgressHUD.show(Tarea_Activity.this);
 
-        httpLayer.getTareas(MAQUINAID + "/F", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+        httpLayer.getTareas(MAQUINAID + "/O", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 
@@ -287,9 +301,6 @@ public class Tarea_Activity extends AppCompatActivity {
 
                     adapterTareas.setNotes(temp);
                     adapterTareas.notifyDataSetChanged();
-
-
-
 
 
                 dialogProgress.dismiss();

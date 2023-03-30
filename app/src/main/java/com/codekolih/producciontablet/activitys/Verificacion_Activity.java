@@ -8,6 +8,7 @@ import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_U
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
+import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
@@ -62,7 +64,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Verificacion_Activity extends AppCompatActivity {
+public class Verificacion_Activity extends OcultarTeclado {
 
     Tareas tarea_Seleccionada;
     private String USUARIO;
@@ -156,6 +158,10 @@ public class Verificacion_Activity extends AppCompatActivity {
         cargarTareaSeleccionada(); // tarea y produccion_actual // usuario
 
 
+        ConstraintLayout constraintLayout = findViewById(R.id.constrain_verificacion);
+
+        addKeyboardHideListener(constraintLayout);
+
         spi_verificacion_UnidadIdScrapInicial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -164,9 +170,9 @@ public class Verificacion_Activity extends AppCompatActivity {
                 if (adapterView.getItemAtPosition(i).toString().equals("Kilos")) {
                     unidad = "KG";
                 } else if (adapterView.getItemAtPosition(i).toString().equals("Gramos")) {
-                    unidad = "KG";
+                    unidad = "G";
                 } else if (adapterView.getItemAtPosition(i).toString().equals("Metros")) {
-                    unidad = "KG";
+                    unidad = "M";
 
                 }
 

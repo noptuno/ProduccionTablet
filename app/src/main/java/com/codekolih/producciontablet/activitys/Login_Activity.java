@@ -5,11 +5,12 @@ import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_M
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +41,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
+import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.clases.Usuario;
 
 import org.json.JSONException;
@@ -49,7 +51,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Login_Activity extends AppCompatActivity {
+public class Login_Activity extends OcultarTeclado {
 
     public static final String PREFS_NAME = "PingBusPrefs";
     public static final String PREFS_SEARCH_HISTORY = "SearchHistory";
@@ -101,6 +103,7 @@ public class Login_Activity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +119,11 @@ public class Login_Activity extends AppCompatActivity {
         //edt_usaurio= findViewById(R.id.login_edt_user);
         edt_pass = findViewById(R.id.login_edt_password);
         edt_pass.setTransformationMethod(new PasswordTransformationMethod());
+
+
+        ConstraintLayout constraintLayout = findViewById(R.id.constrain_login);
+
+        addKeyboardHideListener(constraintLayout);
 
 
         edt_usaurio = findViewById(R.id.login_edt_login);
@@ -216,6 +224,8 @@ public class Login_Activity extends AppCompatActivity {
 
 
     }
+
+
 
 
     private void pedir_permiso_escritura() {

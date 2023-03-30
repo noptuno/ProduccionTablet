@@ -3,6 +3,7 @@ package com.codekolih.producciontablet.adapter;
 import static java.lang.Integer.parseInt;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.codekolih.producciontablet.clases.Produccion_Lista;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.NoteViewHolder> {
 
@@ -48,6 +50,12 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
     @Override
     public void onBindViewHolder(NoteViewHolder view, int pos) {
         view.bind(notes.get(pos));
+
+        if (pos == 0) {
+            view.linearbackground.setBackgroundColor(Color.RED);
+        } else {
+            view.linearbackground.setBackgroundColor(Color.BLUE);
+        }
     }
 
     @Override
@@ -92,7 +100,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView UsuarioId, MetrosImpresos, ScrapAjusteProduccion,ScrapAjusteProduccion_Unidades,RollosFabricdos,RollosEmpaquetados;
-        private LinearLayout ly_MetrosImpresos,ly_ScrapAjusteProduccion,ly_ScrapAjusteProduccion_Unidades, ly_RollosFabricdos, ly_RollosEmpaquetados;
+        private LinearLayout ly_MetrosImpresos,ly_ScrapAjusteProduccion,ly_ScrapAjusteProduccion_Unidades, ly_RollosFabricdos, ly_RollosEmpaquetados,linearbackground;
         private LinearLayout lyp_AnchoFinalRolloYGap,lyp_CantidadPistasImpresas,lyp_CantidadTintas,lyp_ScrapAjusteInicial,lyp_AnchoFinalRollo,lyp_CantidadPistasCortadas,lyp_PistasTroquelUsadas,lyp_UnidadIdScrapInicial;
         private TextView AnchoFinalRolloYGap,CantidadPistasImpresas,CantidadTintas,ScrapAjusteInicial,AnchoFinalRollo,CantidadPistasCortadas,PistasTroquelUsadas,UnidadIdScrapInicial;
         private TextView fecha;
@@ -115,6 +123,11 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             RollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txt_RollosEmpaquetados);
 
             textviewRollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txtview_RollosEmpaquetados);
+
+            UsuarioId = item.findViewById(R.id.item_produccion_txt_Usuario);
+
+            linearbackground = item.findViewById(R.id.linearlayoutbacground);
+
 
 
             //produccio unicavez
@@ -204,6 +217,13 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));
             RollosFabricdos.setText((String.format("%s", produccion.getRollosFabricdos())));
             RollosEmpaquetados.setText((String.format("%s", produccion.getRollosEmpaquetados())));
+            UsuarioId.setText((String.format("%s", produccion.getUserNameId())));
+/*
+
+            Random random = new Random();
+            int color = Color.argb(255,random.nextInt(256),(random.nextInt(256)),(random.nextInt(256)));
+            linearbackground.setBackgroundColor(color);
+*/
 
             //datos tarea unicavez
             /*

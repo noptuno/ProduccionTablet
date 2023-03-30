@@ -6,6 +6,7 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Bobinas;
@@ -38,7 +40,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Bobina_Activity extends AppCompatActivity {
+public class Bobina_Activity extends OcultarTeclado {
 
     String idproveedorSeleccionado = "0";
     String TipoMaterialId = "1";
@@ -119,6 +121,11 @@ public class Bobina_Activity extends AppCompatActivity {
 
         Log.e("cargado ","" +tareaid + produccionid);
 
+        getSupportActionBar().hide();
+
+        ConstraintLayout constraintLayout = findViewById(R.id.constrain_bobina);
+
+        addKeyboardHideListener(constraintLayout);
 
         spi_NombreTipoMaterial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -406,7 +413,7 @@ public class Bobina_Activity extends AppCompatActivity {
             else if ("DefectuosaKg".equals(entry.getKey())){
                 if (entry.getValue().equals("0")){
                     String a = edt_DefectuosaKg.getText().toString();
-                    if(a.equals("0") || a.equals("")){
+                    if(a.equals("")){
                         validado = false;
                         break;
                     }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constrain_bobina"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activitys.Bobina_Activity">
@@ -60,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_weight="2"
+                    android:dropDownSelector="@drawable/fondo"
                     android:entries="@array/material"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
@@ -116,9 +118,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:ems="10"
+                    android:hint="Descripción del lote"
                     android:inputType="textPersonName"
                     android:selectAllOnFocus="true"
-                    android:text="AD123"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />

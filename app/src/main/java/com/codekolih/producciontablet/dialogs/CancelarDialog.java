@@ -62,6 +62,24 @@ public class CancelarDialog {
             @Override
             public void onClick(View view) {
 
+                String motivo = edit_motivo.getText().toString();
+                if(motivo.length() > 1){
+
+                    interfaz.ResultadoMotivoDialogo(motivo,"C2");
+                    dialogo.dismiss();
+
+                }else{
+                    Toast.makeText(contexcto,"Escriba Motivo",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+        cierre_btn_cancelarycerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
 
                 String motivo = edit_motivo.getText().toString();
                 if(motivo.length() > 1){
@@ -74,23 +92,9 @@ public class CancelarDialog {
                 }else{
                     Toast.makeText(contexcto,"Escriba Motivo",Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        cierre_btn_cancelarycerrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
 
-                    String motivo = edit_motivo.getText().toString();
-                    if(motivo.length() > 1){
 
-                     interfaz.ResultadoMotivoDialogo(motivo,"C2");
-                            dialogo.dismiss();
-
-                    }else{
-                        Toast.makeText(contexcto,"Escriba Motivo",Toast.LENGTH_SHORT).show();
-                    }
             }
         });
 

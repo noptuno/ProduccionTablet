@@ -20,6 +20,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="CustomDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:background">#F1EAEA</item>
+        <item name="android:textColor">#088D9E</item>
+    </style>
 
 
     <style name="Theme.ProduccionTablet.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

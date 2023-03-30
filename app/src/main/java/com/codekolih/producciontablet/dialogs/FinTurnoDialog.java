@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.activitys.Produccion_Activity;
 
 
 public class FinTurnoDialog {
@@ -59,7 +60,6 @@ public class FinTurnoDialog {
                 String motivo = edit_motivo.getText().toString();
                 if(motivo.length() > 1){
 
-
                     interfaz.ResultadoFinTurnoDialogo(motivo,"C1");
                     dialogo.dismiss();
 
@@ -72,7 +72,6 @@ public class FinTurnoDialog {
         cierre_btn_fin_de_turno_terminado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                     String motivo = edit_motivo.getText().toString();
                     if(motivo.length() > 1){

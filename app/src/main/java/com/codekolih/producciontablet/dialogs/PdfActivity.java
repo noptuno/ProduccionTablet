@@ -37,8 +37,10 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.activitys.Login_Activity;
+import com.codekolih.producciontablet.activitys.Verificacion_Activity;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.github.barteksc.pdfviewer.util.Util;
 import com.shockwave.pdfium.PdfDocument;
@@ -64,6 +66,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.xml.transform.stream.StreamSource;
@@ -79,7 +83,7 @@ public class PdfActivity extends AppCompatActivity {
 
     private PDFView pdfView;
     private long downloadID;
-    private Button regresar;
+    private Button regresar,continuar;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private ProgressHUD dialogProgress;
     private String nombrepdf = "null";
@@ -94,13 +98,23 @@ public class PdfActivity extends AppCompatActivity {
 
         pdfView = findViewById(R.id.pdf_view_pdf);
         regresar = findViewById(R.id.btncancelar);
+        continuar = findViewById(R.id.btncontinuar);
+
+        continuar.setVisibility(View.GONE);
+
 
         nombrepdf = TareaSingleton.SingletonInstance().getNombrepdf();
 
 
         dialogProgress = ProgressHUD.show(PdfActivity.this);
 
-
+        continuar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogProgress.dismiss();
+                finish();
+            }
+        });
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,18 +123,35 @@ public class PdfActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
         //ClientCredential clientCredential = new ClientCredential("client_id", "client_secret");
 
         Toast.makeText(getApplicationContext(),nombrepdf,Toast.LENGTH_SHORT).show();
 
-        String direccionServidor = "192.168.234.9";
-        int puerto = 21;
-        String usuario = "Usuario1";
-        String contrasena = "123456789";
-        String rutaArchivo = "logo.pdf";
-        String nombreArchivo = "logo.pdf";
-        DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, rutaArchivo, nombreArchivo);
-        downloadTask.execute();
+            Log.e("nombre",nombrepdf);
+
+        int index = nombrepdf.lastIndexOf("\\");
+        String fileNameWithExt = nombrepdf.substring(index + 1);
+
+        if(fileNameWithExt.endsWith(".pdf") || fileNameWithExt.endsWith(".PDF")) {
+
+            String direccionServidor = "192.168.234.9";
+            int puerto = 21;
+            String usuario = "Usuario1";
+            String contrasena = "123456789";
+            String rutaArchivo = fileNameWithExt;
+            String nombreArchivo = fileNameWithExt;
+
+            DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, rutaArchivo, nombreArchivo);
+            downloadTask.execute();
+
+        }
+
+
+
 
     }
 
@@ -155,7 +186,6 @@ public class PdfActivity extends AppCompatActivity {
                 ftpClient.logout();
                 ftpClient.disconnect();
 
-
                 if (exitoDescarga){
 
                     return new File(getFilesDir(), nombreArchivo);
@@ -177,19 +207,31 @@ public class PdfActivity extends AppCompatActivity {
             dialogProgress.dismiss();
 
             if (exitoDescarga!=null) {
-                pdfView.fromFile(exitoDescarga).defaultPage(0).onLoad(new OnLoadCompleteListener() {
-                    @Override
-                    public void loadComplete(int nbPages) {
-                        abriopdf = true;
-                    }
-                }).scrollHandle(new DefaultScrollHandle(PdfActivity.this)).load();
+
+                    pdfView.fromFile(exitoDescarga).defaultPage(0).onLoad(new OnLoadCompleteListener() {
+                        @Override
+                        public void loadComplete(int nbPages) {
+/*
+                            pageCount = nbPages;
+                            abriopdf = true;
+                            if (pdfView.getCurrentPage() == pageCount - 1) {
+
+                                // El usuario ha leído todo el PDF, habilitar el botón de finalizar
+                                continuar.setVisibility(View.VISIBLE);
+                            }
+*/
+
+                        }
+                    }).scrollHandle(new DefaultScrollHandle(PdfActivity.this)).load();
+
 
             } else{
                 abriopdf = false;
             Toast.makeText(getApplicationContext(),"No se encontro documento",Toast.LENGTH_SHORT).show();
             }
         }
+
     }
-
-
+    int currentPage = 0;
+    int pageCount = 0;
 }

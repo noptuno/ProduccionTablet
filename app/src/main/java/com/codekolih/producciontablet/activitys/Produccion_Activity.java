@@ -1,5 +1,6 @@
 package com.codekolih.producciontablet.activitys;
 
+import static com.codekolih.producciontablet.R.id.constrain_produccion;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
@@ -9,6 +10,7 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
+import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.adapter.AdapterBobinas;
@@ -55,7 +58,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Produccion_Activity extends AppCompatActivity implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, CancelarDialog.finalizarMotivo, FinTurnoDialog.finalizarTurno, FinTrabajoDialog.finalizarTarea {
+public class Produccion_Activity extends OcultarTeclado implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, CancelarDialog.finalizarMotivo, FinTurnoDialog.finalizarTurno, FinTrabajoDialog.finalizarTarea {
 
 
     Tareas tarea_Seleccionada;
@@ -81,6 +84,11 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
     private String USUARIO;
     private SharedPreferences pref;
     private int MAQUINAID = 0;
+
+    private boolean cargobobina = false;
+    private boolean cargocantidad = false;
+    private boolean cargascrap = false;
+
     private static final int CODIGO_PARA_LA_ACTIVIDAD_2 = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,22 +121,22 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         Log.e("IdProduccionSelec", "" + produccionId);
 
+        ConstraintLayout constraintLayout = findViewById(R.id.constrain_produccion);
+
+        addKeyboardHideListener(constraintLayout);
 
         btn_finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (totaldadscrap > 0) {
-                    if (parseFloat(cantidadtotal.getText().toString()) > 0) {
 
-                        if (tarea_Seleccionada.getBobinas().size() > 0) {
-
+                if (cargascrap) {
+                    if (cargocantidad) {
+                        if (cargobobina) {
                             new FinTrabajoDialog(Produccion_Activity.this, Produccion_Activity.this);
-
                         } else {
                             Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
                         }
-
                     } else {
                         Toast.makeText(getApplicationContext(), "Hay que cargar Produccion", Toast.LENGTH_SHORT).show();
                     }
@@ -136,7 +144,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
                     Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
@@ -146,29 +153,23 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onClick(View view) {
 
-                if (totaldadscrap > 0) {
-                    if (parseFloat(cantidadtotal.getText().toString()) > 0) {
-
-                        if (tarea_Seleccionada.getBobinas().size() > 0) {
-
-                            finalizar();
-
+                    if (cargascrap) {
+                        if (cargocantidad) {
+                            if (cargobobina) {
+                                finalizar();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-
-                            Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getApplicationContext(), "Hay que cargar Produccion", Toast.LENGTH_SHORT).show();
                         }
-
                     } else {
 
-                        Toast.makeText(getApplicationContext(), "Hay que cargar Produccion", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
                     }
 
-                } else {
 
-                    Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
-                }
+
 
 
             }
@@ -255,9 +256,6 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             );
 
         }
-
-
-
 
     }
 
@@ -437,7 +435,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
 
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
-        httpLayer.getTareas(MAQUINAID+ "/F", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
+        httpLayer.getTareas(MAQUINAID+ "/O", new HttpLayer.HttpLayerResponses<List<Tareas>>() {
             @Override
             public void onSuccess(List<Tareas> response) {
 
@@ -604,7 +602,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             @Override
             public void onSuccess(JSONObject response) {
                 dialogProgress.dismiss();
-
+                cargocantidad = true;
                 Log.e("onSuccess AP", response.toString());
                 cargarTareaHttp();
 
@@ -637,7 +635,7 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
             Log.e("recibo",""+onSuccessRecibido);
 
             if (onSuccessRecibido.equals("ok")){
-
+                cargobobina = true;
                 cargarTareaHttp();
             }else{
                 Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
@@ -801,6 +799,8 @@ public class Produccion_Activity extends AppCompatActivity implements CantidadDi
                 dialogProgress.dismiss();
                 cargarTareaHttp();
                 btn_scrap.setText("MODIFICAR SCRAP");
+
+                 cargascrap = true;
 
             }
 
