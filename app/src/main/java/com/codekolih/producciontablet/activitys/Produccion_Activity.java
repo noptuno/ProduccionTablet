@@ -47,6 +47,7 @@ import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.CancelarDialog;
 import com.codekolih.producciontablet.dialogs.FinTrabajoDialog;
 import com.codekolih.producciontablet.dialogs.FinTurnoDialog;
+import com.codekolih.producciontablet.dialogs.PdfActivity;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
 import org.json.JSONObject;
@@ -75,7 +76,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
-    private Button btn_cantidad, btn_bobina, btn_scrap, btn_finalizar, btn_cancelar, btn_finturno;
+    private Button btn_cantidad, btn_bobina, btn_scrap, btn_finalizar, btn_cancelar, btn_finturno, btnverpdf;
     private int BOBINA_ACTIVITY = 1;
     RecyclerView recyclerViewCantidad, recyclerViewBobinas;
     private int produccionId;
@@ -90,6 +91,8 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     private boolean cargascrap = false;
 
     private static final int CODIGO_PARA_LA_ACTIVIDAD_2 = 1;
+    private String nombrepdf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +127,23 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_produccion);
 
         addKeyboardHideListener(constraintLayout);
+
+
+        btnverpdf=findViewById(R.id.produccion_btn_verpdf);
+
+
+        btnverpdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Produccion_Activity.this, PdfActivity.class);
+                intent.putExtra("nombrepdf", nombrepdf);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                startActivity(intent);
+
+            }
+        });
+
 
         btn_finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -475,6 +495,10 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
         float contcantidad = 0;
         float contscrap = 0;
+
+
+        nombrepdf = tarea_Seleccionada.getArchivoEspecificacion();
+
 
         if (tarea_Seleccionada.getProduccion_Lista().size() > 0) {
             for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {

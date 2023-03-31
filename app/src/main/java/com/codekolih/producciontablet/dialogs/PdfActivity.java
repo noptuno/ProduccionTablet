@@ -43,6 +43,7 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.github.barteksc.pdfviewer.util.Util;
+import com.google.android.material.slider.BaseOnChangeListener;
 import com.shockwave.pdfium.PdfDocument;
 
 
@@ -83,11 +84,11 @@ public class PdfActivity extends AppCompatActivity {
 
     private PDFView pdfView;
     private long downloadID;
-    private Button regresar,continuar;
+    private Button regresar;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private ProgressHUD dialogProgress;
     private String nombrepdf = "null";
-    private boolean abriopdf = false;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -98,9 +99,6 @@ public class PdfActivity extends AppCompatActivity {
 
         pdfView = findViewById(R.id.pdf_view_pdf);
         regresar = findViewById(R.id.btncancelar);
-        continuar = findViewById(R.id.btncontinuar);
-
-        continuar.setVisibility(View.GONE);
 
 
         nombrepdf = TareaSingleton.SingletonInstance().getNombrepdf();
@@ -108,13 +106,6 @@ public class PdfActivity extends AppCompatActivity {
 
         dialogProgress = ProgressHUD.show(PdfActivity.this);
 
-        continuar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogProgress.dismiss();
-                finish();
-            }
-        });
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,18 +114,12 @@ public class PdfActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-        //ClientCredential clientCredential = new ClientCredential("client_id", "client_secret");
-
-        Toast.makeText(getApplicationContext(),nombrepdf,Toast.LENGTH_SHORT).show();
-
-            Log.e("nombre",nombrepdf);
-
+       Log.e("nombre",nombrepdf);
         int index = nombrepdf.lastIndexOf("\\");
-        String fileNameWithExt = nombrepdf.substring(index + 1);
+       String fileNameWithExt = nombrepdf.substring(index + 1);
+
+          //  String fileNameWithExt = "Manual SGT completo.pdf";
+
 
         if(fileNameWithExt.endsWith(".pdf") || fileNameWithExt.endsWith(".PDF")) {
 
@@ -142,7 +127,7 @@ public class PdfActivity extends AppCompatActivity {
             int puerto = 21;
             String usuario = "Usuario1";
             String contrasena = "123456789";
-            String rutaArchivo = fileNameWithExt;
+            String rutaArchivo = "imprenta/"+ fileNameWithExt;
             String nombreArchivo = fileNameWithExt;
 
             DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, rutaArchivo, nombreArchivo);
@@ -174,12 +159,16 @@ public class PdfActivity extends AppCompatActivity {
 
         @Override
         protected File doInBackground(Void... voids) {
+
             FTPClient ftpClient = new FTPClient();
             try {
                 ftpClient.connect(direccionServidor, puerto);
                 ftpClient.login(usuario, contrasena);
                 ftpClient.enterLocalPassiveMode();
-                FileOutputStream outputStream = openFileOutput(nombreArchivo, Context.MODE_PRIVATE);
+               // FileOutputStream outputStream = openFileOutput(nombreArchivo, Context.MODE_PRIVATE);
+
+                File archivoDescargado = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), nombreArchivo);
+                FileOutputStream outputStream = new FileOutputStream(archivoDescargado);
                 boolean exitoDescarga = ftpClient.retrieveFile(rutaArchivo, outputStream);
 
                 outputStream.close();
@@ -187,13 +176,20 @@ public class PdfActivity extends AppCompatActivity {
                 ftpClient.disconnect();
 
                 if (exitoDescarga){
-
-                    return new File(getFilesDir(), nombreArchivo);
-
+                    if (archivoDescargado.exists()){
+                        if(archivoDescargado.canRead()){
+                            return archivoDescargado;
+                        }else{
+                            return null;
+                        }
+                    }else{
+                        return null;
+                    }
                 }else{
-
+                    Log.e("Hubo error","error");
                     return null;
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
                 dialogProgress.dismiss();
@@ -202,36 +198,24 @@ public class PdfActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(File exitoDescarga) {
+        protected void onPostExecute(File archivodescargado) {
 
             dialogProgress.dismiss();
 
-            if (exitoDescarga!=null) {
+            if (archivodescargado!=null) {
 
-                    pdfView.fromFile(exitoDescarga).defaultPage(0).onLoad(new OnLoadCompleteListener() {
+                    pdfView.fromFile(archivodescargado).defaultPage(0).onLoad(new OnLoadCompleteListener() {
                         @Override
                         public void loadComplete(int nbPages) {
-/*
-                            pageCount = nbPages;
-                            abriopdf = true;
-                            if (pdfView.getCurrentPage() == pageCount - 1) {
-
-                                // El usuario ha leído todo el PDF, habilitar el botón de finalizar
-                                continuar.setVisibility(View.VISIBLE);
-                            }
-*/
 
                         }
                     }).scrollHandle(new DefaultScrollHandle(PdfActivity.this)).load();
 
 
             } else{
-                abriopdf = false;
-            Toast.makeText(getApplicationContext(),"No se encontro documento",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"No se encontro documento",Toast.LENGTH_SHORT).show();
             }
         }
 
     }
-    int currentPage = 0;
-    int pageCount = 0;
 }

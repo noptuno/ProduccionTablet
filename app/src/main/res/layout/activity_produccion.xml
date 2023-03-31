@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toStartOf="@+id/produccion_btn_finalziar" />
 
     <Button
-        android:id="@+id/verificacion_btn_verpdf2"
+        android:id="@+id/produccion_btn_verpdf"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
