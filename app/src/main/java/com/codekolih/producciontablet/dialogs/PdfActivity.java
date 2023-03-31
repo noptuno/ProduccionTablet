@@ -87,7 +87,7 @@ public class PdfActivity extends AppCompatActivity {
     private Button regresar;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private ProgressHUD dialogProgress;
-    private String nombrepdf = "null";
+    private String rutapdf = "null";
 
 
 
@@ -101,8 +101,12 @@ public class PdfActivity extends AppCompatActivity {
         regresar = findViewById(R.id.btncancelar);
 
 
-        nombrepdf = TareaSingleton.SingletonInstance().getNombrepdf();
+        rutapdf = TareaSingleton.SingletonInstance().getNombrepdf();
 
+        Log.e("ruta",rutapdf);
+
+
+        rutapdf = "c:\\a\\s\\imprenta\\A MANO 500G_CURVAS_MASAS SURTIDAS 132 X 84.pdf";
 
         dialogProgress = ProgressHUD.show(PdfActivity.this);
 
@@ -114,30 +118,26 @@ public class PdfActivity extends AppCompatActivity {
             }
         });
 
-       Log.e("nombre",nombrepdf);
-        int index = nombrepdf.lastIndexOf("\\");
-       String fileNameWithExt = nombrepdf.substring(index + 1);
-
-          //  String fileNameWithExt = "Manual SGT completo.pdf";
+        if (!rutapdf.isEmpty() && !rutapdf.endsWith("null") && (rutapdf.endsWith(".pdf")||rutapdf.endsWith(".PDF") )){
 
 
-        if(fileNameWithExt.endsWith(".pdf") || fileNameWithExt.endsWith(".PDF")) {
+            int penultimoSeparador = rutapdf.lastIndexOf("\\", rutapdf.lastIndexOf("\\") - 1);
+            String resultado = rutapdf.substring(penultimoSeparador + 1);
 
-            String direccionServidor = "192.168.234.9";
-            int puerto = 21;
-            String usuario = "Usuario1";
-            String contrasena = "123456789";
-            String rutaArchivo = "imprenta/"+ fileNameWithExt;
-            String nombreArchivo = fileNameWithExt;
 
-            DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, rutaArchivo, nombreArchivo);
-            downloadTask.execute();
+            Log.e("Archivo",resultado);
 
+                String direccionServidor = "192.168.234.9";
+                int puerto = 21;
+                String usuario = "Produccion";
+                String contrasena = "123456789";
+
+                DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, resultado, resultado);
+                downloadTask.execute();
+
+        }else{
+            Toast.makeText(getApplicationContext(),"El archivo no es pdf",Toast.LENGTH_SHORT).show();
         }
-
-
-
-
     }
 
     private class DownloadTask extends AsyncTask<Void, Void, File> {
@@ -165,8 +165,6 @@ public class PdfActivity extends AppCompatActivity {
                 ftpClient.connect(direccionServidor, puerto);
                 ftpClient.login(usuario, contrasena);
                 ftpClient.enterLocalPassiveMode();
-               // FileOutputStream outputStream = openFileOutput(nombreArchivo, Context.MODE_PRIVATE);
-
                 File archivoDescargado = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), nombreArchivo);
                 FileOutputStream outputStream = new FileOutputStream(archivoDescargado);
                 boolean exitoDescarga = ftpClient.retrieveFile(rutaArchivo, outputStream);
