@@ -33,6 +33,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
+import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterImprentas;
 import com.codekolih.producciontablet.clases.Imprentas;
 
@@ -101,7 +102,10 @@ public class Imprentas_Activity extends AppCompatActivity {
 
         });
 
-        cargarDatos();
+        if (Validarinternet.validarConexionInternet(this)) {
+            cargarDatos();
+        }
+
 
 
     }

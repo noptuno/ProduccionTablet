@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constrain_bobina"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#C900ACC1"
     tools:context=".activitys.Bobina_Activity">
 
     <TextView
@@ -61,7 +62,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_weight="2"
-                    android:dropDownSelector="@drawable/fondo"
                     android:entries="@array/material"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>

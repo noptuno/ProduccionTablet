@@ -860,7 +860,7 @@ public class Verificacion_Activity extends OcultarTeclado {
                         break;
                     }
                 }
-            }else if(pdfAbierto = false) {
+            }else if(!pdfAbierto) {
                 validado = false;
                 toastPersonalziado("Debe abrir las especificaciones");
                 break;

@@ -11,11 +11,15 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -42,6 +46,7 @@ import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.aciones.OcultarTeclado;
+import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.clases.Usuario;
 
 import org.json.JSONException;
@@ -211,9 +216,9 @@ public class Login_Activity extends OcultarTeclado {
             }
         });
 
-
         pedir_permiso_escritura();
 
+        Validarinternet.validarConexionInternet(this);
 
     }
 
@@ -264,6 +269,8 @@ public class Login_Activity extends OcultarTeclado {
         cargarMaquinas();
 
     }
+
+
 
     public void ObtenerDatosDelUsuario() {
 

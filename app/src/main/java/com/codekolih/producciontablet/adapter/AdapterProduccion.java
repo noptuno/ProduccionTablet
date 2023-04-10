@@ -4,6 +4,7 @@ import static java.lang.Integer.parseInt;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
+import com.codekolih.producciontablet.clases.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,6 +220,8 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             RollosFabricdos.setText((String.format("%s", produccion.getRollosFabricdos())));
             RollosEmpaquetados.setText((String.format("%s", produccion.getRollosEmpaquetados())));
             UsuarioId.setText((String.format("%s", produccion.getUserNameId())));
+            Log.e("usaurioAdapter", produccion.getUserNameId());
+
 /*
 
             Random random = new Random();

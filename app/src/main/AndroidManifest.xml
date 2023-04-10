@@ -31,11 +31,7 @@
             android:exported="true"
             android:theme="@style/Theme.ProduccionTablet.NoActionBar">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -63,7 +59,11 @@
             android:name=".activitys.Login_Activity"
             android:exported="true"
             android:label="Iniciar Sesion">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 

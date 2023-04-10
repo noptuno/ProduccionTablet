@@ -107,12 +107,12 @@ public class PdfActivity extends AppCompatActivity {
             Log.e("ruta",rutapdf);
         }
 
-        dialogProgress = ProgressHUD.show(PdfActivity.this);
+    //    dialogProgress = ProgressHUD.show(PdfActivity.this);
 
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogProgress.dismiss();
+                //dialogProgress.dismiss();
                 finish();
             }
         });
@@ -136,7 +136,7 @@ public class PdfActivity extends AppCompatActivity {
                 String contrasena = "123456789";
 
                 DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, "imprenta\\", "1.1.1.001.0.pdf");
-                downloadTask.execute();
+            //  downloadTask.execute();
 
         }else{
             Toast.makeText(getApplicationContext(),"El archivo no es pdf",Toast.LENGTH_SHORT).show();

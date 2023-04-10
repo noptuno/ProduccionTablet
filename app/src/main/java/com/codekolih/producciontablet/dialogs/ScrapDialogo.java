@@ -2,9 +2,13 @@ package com.codekolih.producciontablet.dialogs;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ImageFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.InputType;
@@ -21,7 +25,12 @@ import android.widget.Toast;
 
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.activitys.Tarea_Activity;
+import com.codekolih.producciontablet.activitys.Verificacion_Activity;
 import com.codekolih.producciontablet.clases.Tareas;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ScrapDialogo {
@@ -133,8 +142,33 @@ public class ScrapDialogo {
                     if(a.equals("") || unidad.equals("Seleccionar")){
                         Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
                     }else{
-                        interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
-                        dialogo.dismiss();
+
+                        if (a.equals("0")){
+
+                            AlertDialog.Builder build4 = new AlertDialog.Builder(contexcto);
+                            build4.setMessage("¿esta seguro que es cero?: ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
+                                    dialogo.dismiss();
+
+                                }
+
+                            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            AlertDialog alertDialog4 = build4.create();
+                            alertDialog4.show();
+
+                        }else{
+                            interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
+                            dialogo.dismiss();
+                        }
+
                     }
                 }catch (Exception e){
                     interfaz_scrap.ResultadoScrapDialogo(0,"KG");

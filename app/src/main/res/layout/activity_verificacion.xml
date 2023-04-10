@@ -10,10 +10,12 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
+        style="@android:style/Widget.ScrollView"
         android:layout_width="400dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:scrollbarStyle="outsideOverlay"
         app:layout_constraintBottom_toTopOf="@+id/verificacion_btn_cancelar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16">
@@ -278,8 +280,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    android:text="obser..."
+                    android:text="ASD ASDASDA DASD ASDDDD ASSA AAAADDJJJJJJ ASD AS"
                     android:textSize="14sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>

@@ -35,6 +35,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterBobinas;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Bobinas;
@@ -120,7 +121,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
         txt_usuario.setText(USUARIO);
-
 
         Log.e("IdProduccionSelec", "" + produccionId);
 
@@ -256,7 +256,9 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         ocultarVariables();
         cargarfecha();
 
+        if (Validarinternet.validarConexionInternet(this)) {
 
+        }
 
 
 

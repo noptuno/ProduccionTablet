@@ -34,6 +34,7 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
 import com.codekolih.producciontablet.clases.Material;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
@@ -93,7 +94,8 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                validarinternet();
+                cargarTarea();
+
 
             }
         });
@@ -160,23 +162,17 @@ public class Tarea_Activity extends AppCompatActivity {
         });
 
         //todo valdiar internet
-        validarinternet();
 
+        if (Validarinternet.validarConexionInternet(this)) {
+            cargarTarea();
+        }
 
         cargarfecha();
 
     }
 
 
-    private void validarinternet(){
 
-        if (isNetDisponible()) {
-
-            cargarTarea();
-        } else {
-            dialogErrorPrintet("No hay Internet");
-        }
-    }
 
     private void elegirTarea(Tareas note) {
 
@@ -354,10 +350,7 @@ public class Tarea_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 dialogg.dismiss();
 
-
-                if (mensaje.equals("No hay Internet")){
-                    validarinternet();
-                }else if(mensaje.equals("No cargo Tareas")){
+                if(mensaje.equals("No cargo Tareas")){
                     cargarTarea();
                 }else if(mensaje.equals("No cargo Proveedor")){
                     cargarProveedor();

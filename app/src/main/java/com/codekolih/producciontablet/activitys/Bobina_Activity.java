@@ -237,7 +237,7 @@ public class Bobina_Activity extends OcultarTeclado {
                                 }
                             }else{
 
-                                if (!Lote.equals("") && DefectuosaKg>0){
+                                if (!Lote.equals("")){
 
 
 
