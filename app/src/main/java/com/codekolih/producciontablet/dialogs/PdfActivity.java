@@ -101,13 +101,13 @@ public class PdfActivity extends AppCompatActivity {
         rutapdf = TareaSingleton.SingletonInstance().getNombrepdf();
 
         if(rutapdf==null){
-            rutapdf = "c:\\a\\s\\imprenta\\1.1.1.001.0.pdf";
+            rutapdf = "c:\\a\\s\\asdasd\\imprenta\\1.1.1.001.0.pdf";
             Log.e("ruta",rutapdf);
+            Toast.makeText(getApplicationContext(),"No hubo ruta",Toast.LENGTH_SHORT).show();
         }else{
             Log.e("ruta",rutapdf);
         }
 
-    //    dialogProgress = ProgressHUD.show(PdfActivity.this);
 
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,27 +119,33 @@ public class PdfActivity extends AppCompatActivity {
 
         if (rutapdf.endsWith(".pdf")||rutapdf.endsWith(".PDF")){
 
-            int penultimoSeparador = rutapdf.lastIndexOf("\\", rutapdf.lastIndexOf("\\") - 1);
 
-            String nombre = rutapdf.substring(penultimoSeparador + 1);
+            String nombreArchivo = rutapdf.substring(rutapdf.lastIndexOf("\\") + 1);
+            Log.e("nombreArchivo",nombreArchivo);
+            String nombreCarpeta = rutapdf.substring(0, rutapdf.lastIndexOf("\\"));
+            Log.e("nombreCarpeta",nombreCarpeta);
+            nombreCarpeta = nombreCarpeta.substring(nombreCarpeta.lastIndexOf("\\") + 1);
+            Log.e("nombreCarpeta",nombreCarpeta);
 
-            //String resultado = rutapdf.substring(rutapdf.lastIndexOf("\\") + 1);
+            String rutaRemota = "/" + nombreCarpeta + "/" + nombreArchivo;
 
-           // String resultado = ("\\" + nombre);
-          //  String resultado = "/" + nombre.replace("\\", "/");
+            Log.e("rutaRemota",rutaRemota);
 
-            Log.e("Archivo",nombre);
+
 
                 String direccionServidor = "192.168.234.9";
                 int puerto = 21;
                 String usuario = "Produccion";
                 String contrasena = "123456789";
+            //DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, rutaRemota, nombreArchivo);
 
-                DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, "imprenta\\", "1.1.1.001.0.pdf");
-            //  downloadTask.execute();
+           DownloadTask downloadTask = new DownloadTask(direccionServidor, puerto, usuario, contrasena, rutaRemota, nombreArchivo);
+            dialogProgress = ProgressHUD.show(PdfActivity.this);
+            downloadTask.execute();
 
         }else{
             Toast.makeText(getApplicationContext(),"El archivo no es pdf",Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 

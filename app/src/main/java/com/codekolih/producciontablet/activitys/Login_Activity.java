@@ -39,6 +39,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.codekolih.producciontablet.BuildConfig;
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
@@ -66,7 +67,7 @@ public class Login_Activity extends OcultarTeclado {
     private Button btn_inicioSesion;
     private ImageButton btn_cargarImprenta;
     private ProgressDialog progressDialog;
-    private TextView txt_nombreImprenta;
+    private TextView txt_nombreImprenta, txtversionapp;
     private EditText edt_pass;
     private RequestQueue requestQueue;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
@@ -107,12 +108,22 @@ public class Login_Activity extends OcultarTeclado {
         return super.onOptionsItemSelected(item);
     }
 
+    public String getVersionName(){
+        return BuildConfig.VERSION_NAME;
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
+
+
+        txtversionapp = findViewById(R.id.txtversion);
+
+        txtversionapp.setText("Versión: " + getVersionName());
+
 
         httpLayer = new HttpLayer(this);
         requestQueue = Volley.newRequestQueue(this);

@@ -147,12 +147,10 @@ public class Verificacion_Activity extends OcultarTeclado {
 
 
         httpLayer = new HttpLayer(this);
-
-
         txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
 
         //usuario
-        USUARIO = pref.getString(PREF_PRODUCCION_USUARIO, "NO");
+        USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
         txt_usuario.setText(USUARIO);
 
         cargarTareaSeleccionada(); // tarea y produccion_actual // usuario

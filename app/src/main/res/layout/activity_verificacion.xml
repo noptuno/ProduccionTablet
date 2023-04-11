@@ -10,12 +10,15 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        style="@android:style/Widget.ScrollView"
         android:layout_width="400dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:scrollbarStyle="outsideOverlay"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="15dp"
+        android:scrollbarThumbVertical="@color/design_default_color_primary"
+        android:scrollbarTrackVertical="@color/design_default_color_secondary"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/verificacion_btn_cancelar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16">
@@ -23,7 +26,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="16dp">
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
@@ -512,7 +516,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:inputType="textPersonName"
                     android:text="0"
                     android:textSize="18sp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -538,7 +541,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:inputType="textPersonName"
                     android:text="datos"
                     android:textSize="14sp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -569,7 +571,10 @@
                     android:textSize="18sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
+
         </LinearLayout>
+
+
     </ScrollView>
 
     <LinearLayout

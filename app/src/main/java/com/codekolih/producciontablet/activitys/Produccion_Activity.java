@@ -112,7 +112,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
-        txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
         MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
 
         //VALIDAR
