@@ -216,7 +216,23 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             fecha.setText((String.format("%s",  f + " "+ h)));
             MetrosImpresos.setText((String.format("%s", produccion.getMetrosImpresos())));
             ScrapAjusteProduccion.setText((String.format("%s", produccion.getScrapAjusteProduccion())));
-            ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));
+
+
+            String unidad = produccion.getScrapAjusteProduccion_Unidades();
+
+            if (unidad.equals("G")){
+
+                ScrapAjusteProduccion_Unidades.setText("Gramos");
+
+            }else if(unidad.equals("KG")){
+                ScrapAjusteProduccion_Unidades.setText("Kilos");
+
+            }else if(unidad.equals("M")){
+                ScrapAjusteProduccion_Unidades.setText("Metros");
+            }
+
+           // ScrapAjusteProduccion_Unidades.setText((produccion.getScrapAjusteProduccion_Unidades()));
+
             RollosFabricdos.setText((String.format("%s", produccion.getRollosFabricdos())));
             RollosEmpaquetados.setText((String.format("%s", produccion.getRollosEmpaquetados())));
             UsuarioId.setText((String.format("%s", produccion.getUserNameId())));

@@ -90,9 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="number|text"
                     android:selectAllOnFocus="true"
-                    android:text="AD123"
                     android:textAllCaps="true"
                     android:textSize="34sp"
                     tools:ignore="TouchTargetSizeCheck" />

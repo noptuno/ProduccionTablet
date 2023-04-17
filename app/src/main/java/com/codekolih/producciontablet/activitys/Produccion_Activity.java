@@ -103,12 +103,10 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
         findrid();
 
-
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
         recyclerViewCantidad = findViewById(R.id.produccion_cantidad_recycler);
         recyclerViewBobinas = findViewById(R.id.produccion_bobina_recycler);
-
 
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
@@ -189,8 +187,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
 
 
-
-
             }
         });
 
@@ -255,11 +251,15 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         ocultarVariables();
         cargarfecha();
 
-        if (Validarinternet.validarConexionInternet(this)) {
 
-        }
+    }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+     Validarinternet.validarConexionInternet(this);
 
     }
 

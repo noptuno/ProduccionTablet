@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -139,7 +140,7 @@ public class Login_Activity extends OcultarTeclado {
 
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_login);
 
-        addKeyboardHideListener(constraintLayout);
+       // addKeyboardHideListener(constraintLayout);
 
 
         edt_usaurio = findViewById(R.id.login_edt_login);
@@ -189,6 +190,8 @@ public class Login_Activity extends OcultarTeclado {
 
                                 if (estado.equals("200")) {
 
+
+                                    edt_pass.setText("");
                                     //CargarUsuario
                                     TareaSingleton.SingletonInstance().setUsuarioIniciado(edt_usaurio.getText().toString());
 
@@ -196,8 +199,10 @@ public class Login_Activity extends OcultarTeclado {
                                     startActivity(intent);
                                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                                }
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
 
+                                }
                                 Log.e("http_login", response.toString());
 
                             } catch (JSONException e) {
@@ -229,10 +234,27 @@ public class Login_Activity extends OcultarTeclado {
 
         pedir_permiso_escritura();
 
-        Validarinternet.validarConexionInternet(this);
+
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Validarinternet.validarConexionInternet(this);
+
+        if (TareaSingleton.SingletonInstance().getUsuarioIniciado() != null && !TareaSingleton.SingletonInstance().getUsuarioIniciado().isEmpty()) {
+            edt_usaurio.setText(TareaSingleton.SingletonInstance().getUsuarioIniciado());
+            edt_pass.requestFocus();
+
+        } else {
+            edt_usaurio.requestFocus();
+        }
+
+
+
+    }
 
     @Override
     protected void onStop() {
@@ -262,7 +284,8 @@ public class Login_Activity extends OcultarTeclado {
         nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
         maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
         tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0");
-        txt_nombreImprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
+
+        txt_nombreImprenta.setText(String.format("%s", nombreMaquina));
 
         if (!tipomaquinaid.equals("0")) {
             TareaSingleton.SingletonInstance().setTipoMaquina((tipomaquinaid));

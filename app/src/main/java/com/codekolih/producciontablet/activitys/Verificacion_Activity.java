@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -37,6 +38,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
@@ -249,6 +251,47 @@ public class Verificacion_Activity extends OcultarTeclado {
         //CargarPedido();
 
     }
+
+    private void dialogaviso(String mensaje) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Verificacion_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        // Agregamos esto para cambiar los colores de la vista
+        mView.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
+        mPassword.setTextColor(getResources().getColor(android.R.color.white));
+
+        // Definimos la tarea a ejecutar después de 5 minutos
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPassword.setText("Han pasado 5 minutos");
+                mView.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_light));
+                mPassword.setTextColor(getResources().getColor(android.R.color.black));
+            }
+        }, 5 * 60 * 1000);
+
+
+    }
+    private Handler mHandler;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Validarinternet.validarConexionInternet(this)) {
+
+        }
+
+
+    }
+
+
 
     private void establecerlimitesnumericos() {
 

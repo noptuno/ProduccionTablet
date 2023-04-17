@@ -288,58 +288,6 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/lyp_EtiquetasPorRollo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Etiquetas Por Rollo"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/produccion_txt_EtiquetasPorRollo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    android:text="0"
-                    android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyp_Cilindro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Cilindro"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/produccion_txt_Cilindro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:text="0"
-                    android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/lyp_Observaciones"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -365,6 +313,110 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lyp_Z_AltoMasGap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Alto Mas Gap en Milimetros"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/produccion_txt_Z_AltoMasGap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName"
+                    android:text="0"
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyp_Cilindro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Cilindro"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/produccion_txt_Cilindro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:text="0"
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyp_MetrosAImprimir"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Metros a Imprimir"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/produccion_txt_MetrosAImprimir"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:text="0,0"
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyp_MetrosPorRollo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Metros Por Rollo"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/produccion_txt_MetrosPorRollo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName"
+                    android:text="0,0"
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lyp_NroDeSobre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -373,7 +425,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Nro deSobre"
                     android:textSize="16sp"
@@ -389,6 +441,84 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lyp_MetrosMatTroquelar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Metros Material a Troquelar"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/produccion_txt_MetrosMatTroquelar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName"
+                    android:text="0"
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyp_EtiquetasPorRollo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Etiquetas Por Rollo"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/produccion_txt_EtiquetasPorRollo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName"
+                    android:text="0"
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyp_EtiquetasEnBanda"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Etiquetas en Banda"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/produccion_txt_EtiquetasEnBanda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName"
+                    android:text="0"
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lyp_Pistas"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -397,9 +527,9 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Pistas"
+                    android:text="Pistas totales del Troquel"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -423,9 +553,9 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Descripción"
+                    android:text="Descripción del troquel"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -436,58 +566,6 @@
                     android:layout_weight="1"
                     android:text="infor"
                     android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyp_EtiquetasEnBanda"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Etiquetas en Banda"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/produccion_txt_EtiquetasEnBanda"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    android:text="0"
-                    android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyp_MetrosAImprimir"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Metros a Imprimir"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/produccion_txt_MetrosAImprimir"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:text="0,0"
-                    android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <LinearLayout
@@ -513,84 +591,6 @@
                     android:layout_weight="1"
                     android:inputType="textPersonName"
                     android:text="0"
-                    android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyp_MetrosMatTroquelar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Metros a Troquelar"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/produccion_txt_MetrosMatTroquelar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    android:text="0"
-                    android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyp_Z_AltoMasGap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Alto Mas Gap"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/produccion_txt_Z_AltoMasGap"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    android:text="0"
-                    android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyp_MetrosPorRollo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Metros Por Rollo"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/produccion_txt_MetrosPorRollo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    android:text="0,0"
                     android:textSize="18sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>

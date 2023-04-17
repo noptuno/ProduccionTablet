@@ -2,10 +2,8 @@ package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_ELEGIRTAREA;
-import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
-import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +17,9 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -37,7 +35,6 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
 import com.codekolih.producciontablet.clases.Material;
-import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
@@ -47,7 +44,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -100,7 +96,6 @@ public class Tarea_Activity extends AppCompatActivity {
             }
         });
 
-
         btn_cerrar_sesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +107,6 @@ public class Tarea_Activity extends AppCompatActivity {
                         finish();
 
                     }
-
 
                 }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
@@ -129,17 +123,12 @@ public class Tarea_Activity extends AppCompatActivity {
         recyclerViewTareas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerViewTareas.setAdapter(adapterTareas);
 
-        //pref
-        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        MAQUINATIPOID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0"));
-        MAQUINAID  = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
-
-        Log.e("TipoMaquinaid: ", ""+MAQUINATIPOID);
-        Log.e("MaquinaId: ", ""+MAQUINAID);
-
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
-        txt_imprenta.setText(pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"));
-        txt_usuario.setText(pref.getString(PREF_PRODUCCION_USUARIO, "NO"));
+        txt_usuario.setText(USUARIO);
+
+        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+        txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
+
         PermiteCambioPrioridad = pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");
         Log.e("ElegirTarea: ", PermiteCambioPrioridad);
 
@@ -163,15 +152,86 @@ public class Tarea_Activity extends AppCompatActivity {
 
         //todo valdiar internet
 
-        if (Validarinternet.validarConexionInternet(this)) {
-            cargarTarea();
-        }
 
         cargarfecha();
 
     }
+    private Handler mHandler;
+    private boolean mIsHandlerWaiting = false;
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Validarinternet.validarConexionInternet(this)) {
+            cargarTarea();
+        }
+
+        startHandler();
+
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Detener el Handler cuando la actividad pierda el primer plano
+        stopHandler();
+    }
+
+    private void startHandler() {
+        mHandler = new Handler();
+        mHandler.postDelayed(mRunnable, 10000);
+    }
+
+    private void stopHandler() {
+        mHandler.removeCallbacks(mRunnable);
+    }
+
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+            if (!mIsHandlerWaiting) {
+                final AlertDialog dialog = dialogaviso("Han pasado 5 minutos y debe continuar");
+                mIsHandlerWaiting = true;
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        // Establecer la variable booleana como false para permitir que el Handler vuelva a ejecutarse
+                        mIsHandlerWaiting = false;
+                        startHandler();
+                    }
+                });
+                stopHandler();
+            }
+        }
+    };
+
+    private AlertDialog dialogaviso(String mensaje) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Tarea_Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
+        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
+        Button mLogin = mView.findViewById(R.id.btnReintentar);
+        mLogin.setText("Continuar");
+        mPassword.setText(mensaje);
+        mBuilder.setView(mView);
+        final AlertDialog dialogg = mBuilder.create();
+        dialogg.show();
+
+        // Agregamos esto para cambiar los colores de la vista
+        mView.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
+        mPassword.setTextColor(getResources().getColor(android.R.color.white));
+
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogg.dismiss();
+            }
+        });
+
+        return dialogg;
+    }
 
 
     private void elegirTarea(Tareas note) {
