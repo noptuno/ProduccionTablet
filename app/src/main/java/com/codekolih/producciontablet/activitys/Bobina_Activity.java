@@ -154,9 +154,15 @@ public class Bobina_Activity extends OcultarTeclado {
 
                 String nombreProveedor = adapterView.getItemAtPosition(i).toString();
 
-                String[] parts = nombreProveedor.split("-");
-                idproveedorSeleccionado = parts[0];
-                proveedorSeleccionado = parts[1];
+
+                if (!nombreProveedor.equals(unidad)){
+                    String[] parts = nombreProveedor.split("-");
+                    idproveedorSeleccionado = parts[0];
+                    proveedorSeleccionado = parts[1];
+                }else{
+                    proveedorSeleccionado = unidad;
+                }
+
 
             }
 
@@ -177,7 +183,7 @@ public class Bobina_Activity extends OcultarTeclado {
                 }else if (adapterView.getItemAtPosition(i).toString().equals("Cerrada")){
                     abiertaocerrada = "B";
                 }else{
-                    abiertaocerrada = "Seleccionar";
+                    abiertaocerrada = unidad;
                 }
 
             }
@@ -194,7 +200,7 @@ public class Bobina_Activity extends OcultarTeclado {
             @Override
             public void onClick(View view) {
 
-                if (idproveedorSeleccionado.length()>0 && proveedorSeleccionado.length()>0 && edt_Lote.getText().length()>0 && NombreTipoMaterial.length()>0){
+                if (!proveedorSeleccionado.equals(unidad)&&idproveedorSeleccionado.length()>0 && proveedorSeleccionado.length()>0 && edt_Lote.getText().length()>0 && NombreTipoMaterial.length()>0){
 
                     if (validarVariables()){
 
@@ -353,6 +359,7 @@ public class Bobina_Activity extends OcultarTeclado {
 
         listProveedores = new ArrayList<>();
 
+        listProveedores.add(unidad);
         for (Proveedor proveeedores : TareaSingleton.SingletonInstance().getProveedores()){
             listProveedores.add( proveeedores.getProveedorlId()+"-" +proveeedores.getNombre()  );
         }
@@ -360,13 +367,14 @@ public class Bobina_Activity extends OcultarTeclado {
         adapterProveedor = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, listProveedores);
         adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         spi_ProveedorNombre.setAdapter(adapterProveedor);
+        spi_ProveedorNombre.setSelection(0);
 
     }
 
     private void cargarMaterial(Context c) {
 
         listMaterial = new ArrayList<>();
-
+        listMaterial.add(unidad);
         for (Material materiales : TareaSingleton.SingletonInstance().getMateriales()){
             listMaterial.add( materiales.getTipoMaterialId()+"-" +materiales.getNombre()  );
         }
@@ -375,6 +383,7 @@ public class Bobina_Activity extends OcultarTeclado {
         adapterMateriales.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
         spi_NombreTipoMaterial.setAdapter(adapterMateriales);
+        spi_NombreTipoMaterial.setSelection(0);
 
     }
 

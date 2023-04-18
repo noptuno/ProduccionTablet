@@ -18,16 +18,14 @@
 
         <Button
             android:id="@+id/cierre_btn_cancelarycerrar"
-            android:layout_width="600dp"
+            android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="#BC3E35"
+            android:backgroundTint="#12982F"
             android:text="cancelar y volver a este mismo trabajo"
             android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_info_details"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
 
@@ -75,20 +73,20 @@
 
         <Button
             android:id="@+id/cierre_btn_cancelarycontinuar"
-            android:layout_width="600dp"
+            android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#208C24"
+            android:backgroundTint="#B51B1B"
             android:text="cancelar y saltear este trabajo"
             android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_info_details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cierre_btn_cancelarycerrar" />
+            app:layout_constraintStart_toEndOf="@+id/cierre_btn_cancelarycerrar"
+            app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
 
         <Button
             android:id="@+id/cierre_btn_cancelar"

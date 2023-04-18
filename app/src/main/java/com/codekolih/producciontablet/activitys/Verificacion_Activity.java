@@ -38,6 +38,7 @@ import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.aciones.Utils;
 import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Pedido;
@@ -141,17 +142,23 @@ public class Verificacion_Activity extends OcultarTeclado {
         Log.e("VrerivicacionActivity", "INICIO");
         variablesFind();
 
-        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-
-        String nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
-        String maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "NO");
-        String tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
-
-
         httpLayer = new HttpLayer(this);
-        txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
 
-        //usuario
+        try {
+            pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+            String nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
+            String tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
+            txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
+
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Hubo un problema en los datos de Preference", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+
+
+
+
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
         txt_usuario.setText(USUARIO);
 
@@ -252,33 +259,12 @@ public class Verificacion_Activity extends OcultarTeclado {
 
     }
 
-    private void dialogaviso(String mensaje) {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Verificacion_Activity.this);
-        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
-        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
-        Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mPassword.setText(mensaje);
-        mBuilder.setView(mView);
-        final AlertDialog dialogg = mBuilder.create();
-        dialogg.show();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-        // Agregamos esto para cambiar los colores de la vista
-        mView.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
-        mPassword.setTextColor(getResources().getColor(android.R.color.white));
-
-        // Definimos la tarea a ejecutar después de 5 minutos
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mPassword.setText("Han pasado 5 minutos");
-                mView.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_light));
-                mPassword.setTextColor(getResources().getColor(android.R.color.black));
-            }
-        }, 5 * 60 * 1000);
-
-
+        Utils.stopHandler();
     }
-    private Handler mHandler;
 
     @Override
     protected void onResume() {
@@ -286,9 +272,8 @@ public class Verificacion_Activity extends OcultarTeclado {
 
         if (Validarinternet.validarConexionInternet(this)) {
 
+            Utils.startHandler(Utils.getRunnable(this, "Debe avanzar a Produccion"));
         }
-
-
     }
 
 
@@ -925,7 +910,7 @@ public class Verificacion_Activity extends OcultarTeclado {
         View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
         final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
         Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mPassword.setText(mensaje);
+        mPassword.setText(mensaje + " Problema API");
         mBuilder.setView(mView);
         final AlertDialog dialogg = mBuilder.create();
         dialogg.show();

@@ -124,7 +124,7 @@
                     android:inputType="textPersonName"
                     android:selectAllOnFocus="true"
                     android:textAllCaps="true"
-                    android:textSize="34sp"
+                    android:textSize="24sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -157,7 +157,7 @@
                     android:selectAllOnFocus="true"
                     android:text="0"
                     android:textAllCaps="true"
-                    android:textSize="34sp"
+                    android:textSize="24sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -188,7 +188,7 @@
                     android:selectAllOnFocus="true"
                     android:text="0"
                     android:textAllCaps="true"
-                    android:textSize="34sp"
+                    android:textSize="24sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 

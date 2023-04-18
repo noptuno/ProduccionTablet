@@ -108,9 +108,22 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         recyclerViewCantidad = findViewById(R.id.produccion_cantidad_recycler);
         recyclerViewBobinas = findViewById(R.id.produccion_bobina_recycler);
 
-        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
-        MAQUINAID = Integer.parseInt(pref.getString(PREF_PRODUCCION_MAQUINAID, "0"));
+        try {
+            pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+            txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
+            MAQUINAID = pref.getInt(PREF_PRODUCCION_MAQUINAID,0);
+            
+            if (MAQUINAID==0){
+                Toast.makeText(getApplicationContext(), "No hay imprenta seleccionada", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Hubo un problema en los datos de Preference", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+
 
         //VALIDAR
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
@@ -653,17 +666,15 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         if (requestCode == CODIGO_PARA_LA_ACTIVIDAD_2 && resultCode == Bobina_Activity.RESULT_OK) {
             //Obtener el string enviado desde la actividad 2 utilizando la clave correspondiente
 
-
             String onSuccessRecibido = data.getStringExtra("onSuccess");
-
-
-            Log.e("recibo",""+onSuccessRecibido);
 
             if (onSuccessRecibido.equals("ok")){
                 cargobobina = true;
                 cargarTareaHttp();
             }else{
-                Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
+
+                dialogErrorPrintet("No Cargo Bobina");
+
             }
 
         }
@@ -677,7 +688,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
         final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
         Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mPassword.setText(mensaje);
+        mPassword.setText(mensaje + " Problema API");
         mBuilder.setView(mView);
         final AlertDialog dialogg = mBuilder.create();
         dialogg.show();
@@ -846,7 +857,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
         final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
         Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mPassword.setText(mensaje);
+        mPassword.setText(mensaje + " Problema API");
         mBuilder.setView(mView);
         final AlertDialog dialogg = mBuilder.create();
         dialogg.show();

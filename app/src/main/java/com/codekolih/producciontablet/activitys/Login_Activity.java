@@ -18,15 +18,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -48,6 +45,7 @@ import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.aciones.OcultarTeclado;
+import com.codekolih.producciontablet.aciones.Utils;
 import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.clases.Usuario;
 
@@ -73,7 +71,8 @@ public class Login_Activity extends OcultarTeclado {
     private RequestQueue requestQueue;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private String nombreMaquina;
-    private String maquinaId,tipomaquinaid;
+    private int maquinaId;
+    private String tipomaquinaid;
     private SharedPreferences pref;
     private boolean permisosEscritura;
     private ProgressHUD dialogProgress;
@@ -238,6 +237,7 @@ public class Login_Activity extends OcultarTeclado {
 
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -252,18 +252,17 @@ public class Login_Activity extends OcultarTeclado {
             edt_usaurio.requestFocus();
         }
 
-
+      // Utils.startHandler(Utils.getRunnable(this, "Debe avanzar a Produccion"));
 
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
 
+      // Utils.stopHandler();
 
     }
-
-
 
 
     private void pedir_permiso_escritura() {
@@ -281,19 +280,32 @@ public class Login_Activity extends OcultarTeclado {
     private void cargarMaquinas() {
 
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
-        maquinaId = pref.getString(PREF_PRODUCCION_MAQUINAID, "0");
-        tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0");
 
-        txt_nombreImprenta.setText(String.format("%s", nombreMaquina));
+        try {
+            nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
+            maquinaId = pref.getInt(PREF_PRODUCCION_MAQUINAID, 0);
+            tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0");
 
-        if (!tipomaquinaid.equals("0")) {
-            TareaSingleton.SingletonInstance().setTipoMaquina((tipomaquinaid));
-        } else {
+            txt_nombreImprenta.setText(String.format("%s", nombreMaquina));
+
+            if (!tipomaquinaid.equals("0")) {
+
+                TareaSingleton.SingletonInstance().setTipoMaquina((tipomaquinaid));
+
+            } else {
+
+                Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+            }
+
+        }catch (Exception e){
             Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
+
     }
 
     @Override
@@ -371,6 +383,10 @@ public class Login_Activity extends OcultarTeclado {
             }
         }
     }
+
+
+
+
 
 
 }

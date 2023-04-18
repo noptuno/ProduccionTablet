@@ -56,7 +56,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
         if (pos == 0) {
             view.linearbackground.setBackgroundColor(Color.RED);
         } else {
-            view.linearbackground.setBackgroundColor(Color.BLUE);
+            view.linearbackground.setBackgroundColor(Color.parseColor("#176AAC"));
         }
     }
 

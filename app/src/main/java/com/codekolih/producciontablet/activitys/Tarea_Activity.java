@@ -2,6 +2,7 @@ package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_ELEGIRTAREA;
+import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
 
@@ -32,6 +33,7 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.aciones.Utils;
 import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
 import com.codekolih.producciontablet.clases.Material;
@@ -44,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -126,11 +129,28 @@ public class Tarea_Activity extends AppCompatActivity {
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
         txt_usuario.setText(USUARIO);
 
-        pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
-        txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
+        try {
+            pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
+            MAQUINAID = pref.getInt(PREF_PRODUCCION_MAQUINAID,0);
 
-        PermiteCambioPrioridad = pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");
-        Log.e("ElegirTarea: ", PermiteCambioPrioridad);
+            if (MAQUINAID==0){
+                Toast.makeText(getApplicationContext(), "No hay imprenta seleccionada", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
+
+            PermiteCambioPrioridad = pref.getString(PREF_PRODUCCION_ELEGIRTAREA, "false");
+            Log.e("ElegirTarea: ", PermiteCambioPrioridad);
+
+        }catch (Exception e){
+
+            Toast.makeText(getApplicationContext(), "Hubo un problema en los datos de Preference", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+
+
 
         //TODO Validar maquinatipoid y aquinaid
 
@@ -156,8 +176,17 @@ public class Tarea_Activity extends AppCompatActivity {
         cargarfecha();
 
     }
-    private Handler mHandler;
-    private boolean mIsHandlerWaiting = false;
+
+    private Handler mHandler = new Handler();
+
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!isFinishing()) {
+                finish();
+            }
+        }
+    };
 
 
     @Override
@@ -166,71 +195,24 @@ public class Tarea_Activity extends AppCompatActivity {
 
         if (Validarinternet.validarConexionInternet(this)) {
             cargarTarea();
+            mHandler.postDelayed(mRunnable, 300000);
         }
 
-        startHandler();
 
     }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        mHandler.removeCallbacks(mRunnable);
+        mHandler.postDelayed(mRunnable, 300000);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
 
-        // Detener el Handler cuando la actividad pierda el primer plano
-        stopHandler();
-    }
-
-    private void startHandler() {
-        mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 10000);
-    }
-
-    private void stopHandler() {
         mHandler.removeCallbacks(mRunnable);
-    }
-
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-
-            if (!mIsHandlerWaiting) {
-                final AlertDialog dialog = dialogaviso("Han pasado 5 minutos y debe continuar");
-                mIsHandlerWaiting = true;
-                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        // Establecer la variable booleana como false para permitir que el Handler vuelva a ejecutarse
-                        mIsHandlerWaiting = false;
-                        startHandler();
-                    }
-                });
-                stopHandler();
-            }
-        }
-    };
-
-    private AlertDialog dialogaviso(String mensaje) {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Tarea_Activity.this);
-        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
-        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
-        Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mLogin.setText("Continuar");
-        mPassword.setText(mensaje);
-        mBuilder.setView(mView);
-        final AlertDialog dialogg = mBuilder.create();
-        dialogg.show();
-
-        // Agregamos esto para cambiar los colores de la vista
-        mView.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
-        mPassword.setTextColor(getResources().getColor(android.R.color.white));
-
-        mLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogg.dismiss();
-            }
-        });
-
-        return dialogg;
     }
 
 
@@ -350,7 +332,7 @@ public class Tarea_Activity extends AppCompatActivity {
 
                             Log.e("Tareas para filtrar: ", "" + lg.getTareaId());
 
-                        }
+                       }
                         // Log.e("Datos_tareas",lg.toString());
                         Log.e("ListTareas", "Cod: " + lg.getTareaId() + " Cant produccion: " + lg.getProduccion_Lista().size() + " cantbobinas: " + lg.getBobinas().size());
                     }
@@ -400,7 +382,7 @@ public class Tarea_Activity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
         final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
         Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mPassword.setText(mensaje);
+        mPassword.setText(mensaje + " Problema API");
         mBuilder.setView(mView);
         final AlertDialog dialogg = mBuilder.create();
         dialogg.show();

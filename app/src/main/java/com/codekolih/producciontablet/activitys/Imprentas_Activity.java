@@ -87,7 +87,7 @@ public class Imprentas_Activity extends AppCompatActivity {
                 pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString(PREF_PRODUCCION_NOMBREMAQUINA, note.getNombreMaquina());
-                editor.putString(PREF_PRODUCCION_MAQUINAID, ""+note.getMaquinaId());
+                editor.putInt(PREF_PRODUCCION_MAQUINAID, note.getMaquinaId());
                 editor.putString(PREF_PRODUCCION_MAQUINATIPOID, ""+note.getMaquinaTipoId());
                 editor.putString(PREF_PRODUCCION_ELEGIRTAREA, ""+note.getPermiteCambioPrioridad());
                 editor.apply();
@@ -167,7 +167,7 @@ private void cargarDatos(){
         View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
         final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
         Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mPassword.setText(mensaje);
+        mPassword.setText(mensaje + " Problema API");
         mBuilder.setView(mView);
         final AlertDialog dialogg = mBuilder.create();
         dialogg.show();
