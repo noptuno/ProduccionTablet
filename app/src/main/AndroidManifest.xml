@@ -24,17 +24,13 @@
 
         <activity
             android:name=".activitys.Bobina_Activity"
-            android:exported="true">
-
-
-
-        </activity>
+            android:theme="@style/Theme.ProduccionTablet.NoActionBar"
+            android:exported="true" />
 
         <activity
             android:name=".dialogs.PdfActivity"
             android:exported="true"
             android:theme="@style/Theme.ProduccionTablet.NoActionBar">
-
 
 
         </activity>

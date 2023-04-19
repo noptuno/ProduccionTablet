@@ -42,7 +42,7 @@ public class FinTurnoDialog {
         dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogo.setCancelable(false);
         dialogo.setCanceledOnTouchOutside(false);
-        dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
+       // dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_fin_turno);
 
         cierre_btn_fin_de_turno_sin_terminar= dialogo.findViewById(R.id.cierre_btn_findeturnosinterminar);

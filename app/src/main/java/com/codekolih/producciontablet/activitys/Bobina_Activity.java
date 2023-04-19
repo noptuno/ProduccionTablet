@@ -121,7 +121,7 @@ public class Bobina_Activity extends OcultarTeclado {
 
         Log.e("cargado ","" +tareaid + produccionid);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_bobina);
 
@@ -283,6 +283,10 @@ public class Bobina_Activity extends OcultarTeclado {
                         Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
 
                     }
+
+                }else{
+
+                    Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
 
                 }
 
