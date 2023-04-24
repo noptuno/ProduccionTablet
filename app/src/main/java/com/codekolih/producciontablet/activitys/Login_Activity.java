@@ -178,50 +178,53 @@ public class Login_Activity extends OcultarTeclado {
                     login.put("Password", edt_pass.getText().toString());
                     login.put("MacAddress", "");
 
-                    dialogProgress = ProgressHUD.show(Login_Activity.this);
-                    httpLayer.login(GsonUtils.toJSON(login), new HttpLayer.HttpLayerResponses<JSONObject>() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
+                    if (Validarinternet.validarConexionInternet(Login_Activity.this)){
 
-                            try {
+                        dialogProgress = ProgressHUD.show(Login_Activity.this);
+                        httpLayer.login(GsonUtils.toJSON(login), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                            @Override
+                            public void onSuccess(JSONObject response) {
 
-                                String estado = response.getString("Estado");
+                                try {
 
-                                if (estado.equals("200")) {
+                                    String estado = response.getString("Estado");
+
+                                    if (estado.equals("200")) {
 
 
-                                    edt_pass.setText("");
-                                    //CargarUsuario
-                                    TareaSingleton.SingletonInstance().setUsuarioIniciado(edt_usaurio.getText().toString());
+                                        edt_pass.setText("");
+                                        //CargarUsuario
+                                        TareaSingleton.SingletonInstance().setUsuarioIniciado(edt_usaurio.getText().toString());
 
-                                    Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                        Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                                }else{
-                                    Toast.makeText(getApplicationContext(), "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(), "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
 
+                                    }
+                                    Log.e("http_login", response.toString());
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                Log.e("http_login", response.toString());
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                dialogProgress.dismiss();
+
                             }
 
-                            dialogProgress.dismiss();
+                            @Override
+                            public void onError(Exception e) {
 
-                        }
+                                Toast.makeText(getApplicationContext(), "No existe usuario", Toast.LENGTH_SHORT).show();
+                                Log.e("http_login", "Fallo");
+                                dialogProgress.dismiss();
 
-                        @Override
-                        public void onError(Exception e) {
+                            }
+                        });
 
-                            Toast.makeText(getApplicationContext(), "No existe usuario", Toast.LENGTH_SHORT).show();
-                            Log.e("http_login", "Fallo");
-                            dialogProgress.dismiss();
-
-                        }
-                    });
-
+                    }
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Faltan datos", Toast.LENGTH_SHORT).show();

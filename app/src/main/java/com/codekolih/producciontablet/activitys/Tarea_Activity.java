@@ -93,7 +93,11 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                cargarTarea();
+
+                if (Validarinternet.validarConexionInternet(getApplicationContext())){
+                    cargarTarea();
+                }
+
 
 
             }
@@ -275,7 +279,6 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onError(Exception e) {
                 Log.e("Tarea_Activity", "Error al cargar Estado");
-                Toast.makeText(getApplicationContext(), "No cargo Estado", Toast.LENGTH_SHORT).show();
             }
         }, USUARIO);
 

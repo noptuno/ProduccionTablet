@@ -159,20 +159,22 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             @Override
             public void onClick(View view) {
 
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
 
-                if (cargascrap) {
-                    if (cargocantidad) {
-                        if (cargobobina) {
-                            new FinTrabajoDialog(Produccion_Activity.this, Produccion_Activity.this);
+                    if (cargascrap) {
+                        if (cargocantidad) {
+                            if (cargobobina) {
+                                new FinTrabajoDialog(Produccion_Activity.this, Produccion_Activity.this);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Hay que cargar Produccion", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), "Hay que cargar Produccion", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
 
-                    Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -182,6 +184,8 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         btn_finturno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
 
                     if (cargascrap) {
                         if (cargocantidad) {
@@ -198,7 +202,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                         Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
                     }
 
-
+                }
 
             }
         });
@@ -208,7 +212,10 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             @Override
             public void onClick(View view) {
 
-                cancelar();
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
+                    cancelar();
+                }
+
 
             }
         });
@@ -217,7 +224,11 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             @Override
             public void onClick(View view) {
 
-                new CantidadDialog(Produccion_Activity.this, Produccion_Activity.this);
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
+
+                    new CantidadDialog(Produccion_Activity.this, Produccion_Activity.this);
+                }
+
 
             }
         });
@@ -228,11 +239,15 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
              //   new BobinaDialogo(Produccion_Activity.this, Produccion_Activity.this);
 
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
+                    Intent intent = new Intent(Produccion_Activity.this, Bobina_Activity.class);
+                    // intent.putExtra("tareaId", tareaid);
+                    // intent.putExtra("produccionId", produccionid);
+                    startActivityForResult(intent, CODIGO_PARA_LA_ACTIVIDAD_2);
+                }
 
-                Intent intent = new Intent(Produccion_Activity.this, Bobina_Activity.class);
-               // intent.putExtra("tareaId", tareaid);
-               // intent.putExtra("produccionId", produccionid);
-                startActivityForResult(intent, CODIGO_PARA_LA_ACTIVIDAD_2);
+
+
 
 
                 /*
@@ -247,8 +262,11 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         btn_scrap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
 
-                new ScrapDialogo(Produccion_Activity.this, Produccion_Activity.this);
+                    new ScrapDialogo(Produccion_Activity.this, Produccion_Activity.this);
+                }
+
 
             }
         });
@@ -272,7 +290,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     protected void onResume() {
         super.onResume();
 
-     Validarinternet.validarConexionInternet(this);
+     Validarinternet.validarConexionInternet(Produccion_Activity.this);
 
     }
 
@@ -324,16 +342,21 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
     private void finalizar() {
 
+        if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
 
-        new FinTurnoDialog(Produccion_Activity.this, Produccion_Activity.this);
+            new FinTurnoDialog(Produccion_Activity.this, Produccion_Activity.this);
+
+        }
+
 
     }
 
     private void cancelar() {
 
+        if (Validarinternet.validarConexionInternet(Produccion_Activity.this)) {
 
-        new CancelarDialog(Produccion_Activity.this, Produccion_Activity.this);
-
+            new CancelarDialog(Produccion_Activity.this, Produccion_Activity.this);
+        }
 
     }
 
@@ -439,6 +462,8 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     }
 
     private void cambioEstado(Map<String, Object> estado) {
+
+
 
         Log.e("Resultado", "cambio estado ");
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
@@ -711,6 +736,8 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
     private void actualziarmotivoyestado(String motivo, Map<String, Object> estado) {
 
+
+
         Map<String, Object> produccion = new HashMap<>();
         produccion.put("ProduccionId", produccionId);
         produccion.put("PedidoId", pedidoId);
@@ -766,6 +793,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         estado.put("TipoEstadoId", "I");
 
         actualziarmotivoyestado(motivo, estado);
+
     }
 
     @Override

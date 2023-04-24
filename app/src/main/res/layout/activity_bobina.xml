@@ -124,7 +124,7 @@
                     android:layout_weight="2"
                     android:ems="10"
 
-                    android:hint="Numeor del Lote"
+                    android:hint="Numero de Lote"
                     android:inputType="text|textCapCharacters"
                     android:selectAllOnFocus="true"
                     android:textAllCaps="true"

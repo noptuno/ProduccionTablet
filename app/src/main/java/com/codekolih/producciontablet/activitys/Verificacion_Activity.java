@@ -155,15 +155,10 @@ public class Verificacion_Activity extends OcultarTeclado {
             finish();
         }
 
-
-
-
-
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
         txt_usuario.setText(USUARIO);
 
         cargarTareaSeleccionada(); // tarea y produccion_actual // usuario
-
 
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_verificacion);
 
@@ -227,14 +222,12 @@ public class Verificacion_Activity extends OcultarTeclado {
                     AlertDialog alertDialog4 = build4.create();
                     alertDialog4.show();
 
-                } else {
 
-                    Toast.makeText(getApplicationContext(), "Faltan Datos", Toast.LENGTH_SHORT).show();
-
-                }
-
+            } else {
+                Toast.makeText(getApplicationContext(), "Faltan Datos", Toast.LENGTH_SHORT).show();
             }
 
+        }
         });
 
         btn_verpdf.setOnClickListener(new View.OnClickListener() {
@@ -270,10 +263,9 @@ public class Verificacion_Activity extends OcultarTeclado {
     protected void onResume() {
         super.onResume();
 
-        if (Validarinternet.validarConexionInternet(this)) {
+       Validarinternet.validarConexionInternet(this);
 
-            Utils.startHandler(Utils.getRunnable(this, "Debe avanzar a Produccion"));
-        }
+        Utils.startHandler(Utils.getRunnable(this, "Debe avanzar a Produccion"));
     }
 
 
@@ -352,81 +344,86 @@ public class Verificacion_Activity extends OcultarTeclado {
 
     private void cargarVerificacion() {
 
-        String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
-        String CantidadPistasImpresas = edt_verificacion_CantidadPistasImpresas.getText().toString();
-        String CantidadTintas = edt_verificacion_CantidadTintas.getText().toString();
-        String ScrapAjusteInicial = edt_verificacion_ScrapAjusteInicial.getText().toString();
-        String AnchoFinalRollo = edt_verificacion_AnchoFinalRollo.getText().toString();
-        String CantidadPistasCortadas = edt_verificacion_CantidadPistasCortadas.getText().toString();
-        String PistasTroquelUsadas = edt_verificacion_PistasTroquelUsadas.getText().toString();
 
-        Map<String, Object> newproduccion = new HashMap<>();
-        newproduccion.put("ProduccionId", 0);
-        newproduccion.put("PedidoId", tarea_Seleccionada.getPedidoId());
-        newproduccion.put("TareaId", tarea_Seleccionada.getTareaId());
-        newproduccion.put("MetrosImpresos", 0);
-        newproduccion.put("AnchoFinalRolloYGap", AnchoFinalRolloYGap);
-        newproduccion.put("CantidadPistasImpresas", CantidadPistasImpresas);
-        newproduccion.put("CantidadTintas", CantidadTintas);
-        newproduccion.put("AnchoBobinaUsadoCm", 0);
-        newproduccion.put("ScrapAjusteInicial", ScrapAjusteInicial);
-        newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
-        newproduccion.put("ScrapAjusteProduccion", 0);
-        newproduccion.put("ScrapAjusteProduccion_Unidades", "KG");
-        newproduccion.put("ObservacionesCierre", "");
-        newproduccion.put("RollosFabricdos", 0);
-        newproduccion.put("AnchoFinalRollo", AnchoFinalRollo);
-        newproduccion.put("CantidadPistasCortadas", CantidadPistasCortadas);
-        newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
-        newproduccion.put("RollosEmpaquetados", 0);
-        newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
+        if (Validarinternet.validarConexionInternet(Verificacion_Activity.this)){
 
-        dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+            String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
+            String CantidadPistasImpresas = edt_verificacion_CantidadPistasImpresas.getText().toString();
+            String CantidadTintas = edt_verificacion_CantidadTintas.getText().toString();
+            String ScrapAjusteInicial = edt_verificacion_ScrapAjusteInicial.getText().toString();
+            String AnchoFinalRollo = edt_verificacion_AnchoFinalRollo.getText().toString();
+            String CantidadPistasCortadas = edt_verificacion_CantidadPistasCortadas.getText().toString();
+            String PistasTroquelUsadas = edt_verificacion_PistasTroquelUsadas.getText().toString();
 
-        Log.e("json",GsonUtils.toJSON(newproduccion).toString());
+            Map<String, Object> newproduccion = new HashMap<>();
+            newproduccion.put("ProduccionId", 0);
+            newproduccion.put("PedidoId", tarea_Seleccionada.getPedidoId());
+            newproduccion.put("TareaId", tarea_Seleccionada.getTareaId());
+            newproduccion.put("MetrosImpresos", 0);
+            newproduccion.put("AnchoFinalRolloYGap", AnchoFinalRolloYGap);
+            newproduccion.put("CantidadPistasImpresas", CantidadPistasImpresas);
+            newproduccion.put("CantidadTintas", CantidadTintas);
+            newproduccion.put("AnchoBobinaUsadoCm", 0);
+            newproduccion.put("ScrapAjusteInicial", ScrapAjusteInicial);
+            newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
+            newproduccion.put("ScrapAjusteProduccion", 0);
+            newproduccion.put("ScrapAjusteProduccion_Unidades", "KG");
+            newproduccion.put("ObservacionesCierre", "");
+            newproduccion.put("RollosFabricdos", 0);
+            newproduccion.put("AnchoFinalRollo", AnchoFinalRollo);
+            newproduccion.put("CantidadPistasCortadas", CantidadPistasCortadas);
+            newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
+            newproduccion.put("RollosEmpaquetados", 0);
+            newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
 
-        httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject response) {
+            dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
 
-                Log.e("http", response.toString());
+            Log.e("json",GsonUtils.toJSON(newproduccion).toString());
 
-                try {
-                    String esthttp = response.getString("RespuestaMensaje");
+            httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
+                @Override
+                public void onSuccess(JSONObject response) {
 
-                    if (esthttp.equals("OK")) {
+                    Log.e("http", response.toString());
 
-                        String RespuestaDato = response.getString("RespuestaDato");
+                    try {
+                        String esthttp = response.getString("RespuestaMensaje");
 
-                        if (RespuestaDato.length() > 0) {
+                        if (esthttp.equals("OK")) {
 
-                            String[] valirIdProduccion = RespuestaDato.split(":");
-                            String id = valirIdProduccion[1];
-                            TareaSingleton.SingletonInstance().setProduccionId(Integer.parseInt(id));
+                            String RespuestaDato = response.getString("RespuestaDato");
+
+                            if (RespuestaDato.length() > 0) {
+
+                                String[] valirIdProduccion = RespuestaDato.split(":");
+                                String id = valirIdProduccion[1];
+                                TareaSingleton.SingletonInstance().setProduccionId(Integer.parseInt(id));
+                            }
+
+
+                            cambioEstadoFinVerificacion();
+
                         }
 
-
-                        cambioEstadoFinVerificacion();
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        dialogProgress.dismiss();
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
                     dialogProgress.dismiss();
                 }
 
-                dialogProgress.dismiss();
-            }
+                @Override
+                public void onError(Exception e) {
+                    dialogProgress.dismiss();
 
-            @Override
-            public void onError(Exception e) {
-                dialogProgress.dismiss();
+                    dialogError("No cargo Datos");
 
-                dialogError("No cargo Datos");
+                }
+            }, USUARIO);
+        }
+        }
 
-            }
-        }, USUARIO);
-    }
 
     private void cargarfecha() {
 
