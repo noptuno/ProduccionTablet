@@ -22,11 +22,13 @@
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#BC3E35"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#348037"
             android:text="TRABAJO QUEDO INCOMPLETO"
             android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_info_details"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cierre_btn_findeturnoterminado"
             app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
 
         <TextView
@@ -36,7 +38,7 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="100dp"
-            android:text="FIN DE TURNO"
+            android:text="FIN DE TRABAJO"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -79,14 +81,15 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#208C24"
+            android:backgroundTint="#B56E06"
             android:text="TRABAJO QUEDO TERMINADO"
             android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_info_details"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cierre_btn_findeturnosinterminar"
-            app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
+            app:layout_constraintEnd_toStartOf="@+id/cierre_btn_findeturnosinterminar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_motivo"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/cierre_btn_cancelar"

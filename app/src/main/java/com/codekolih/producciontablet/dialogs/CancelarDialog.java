@@ -1,23 +1,18 @@
 package com.codekolih.producciontablet.dialogs;
 
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class CancelarDialog {
@@ -28,11 +23,9 @@ public class CancelarDialog {
     Button cierre_btn_cancelar,
     cierre_btn_cancelarycerrar,cierre_btn_cancelarycontinuar;
 
-
-    private HttpLayer httpLayer;
     public interface finalizarMotivo{
 
-        void ResultadoMotivoDialogo(String motivo,String tipocierre);
+        void ResultadoMotivoCancelarDialogo(String motivo, String tipocierre);
 
     }
 
@@ -41,7 +34,6 @@ public class CancelarDialog {
     public CancelarDialog(Context contexcto , finalizarMotivo actividad){
 
 
-        httpLayer = new HttpLayer(contexcto);
         interfaz = actividad;
         final Dialog dialogo = new Dialog(contexcto);
 
@@ -65,7 +57,7 @@ public class CancelarDialog {
                 String motivo = edit_motivo.getText().toString();
                 if(motivo.length() > 1){
 
-                    interfaz.ResultadoMotivoDialogo(motivo,"C2");
+                    interfaz.ResultadoMotivoCancelarDialogo(motivo,"C2");
                     dialogo.dismiss();
 
                 }else{
@@ -86,7 +78,7 @@ public class CancelarDialog {
 
 
 
-                    interfaz.ResultadoMotivoDialogo(motivo,"C1");
+                    interfaz.ResultadoMotivoCancelarDialogo(motivo,"C1");
                     dialogo.dismiss();
 
                 }else{

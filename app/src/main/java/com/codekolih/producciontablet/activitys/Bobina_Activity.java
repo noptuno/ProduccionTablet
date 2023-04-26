@@ -121,10 +121,7 @@ public class Bobina_Activity extends OcultarTeclado {
 
         Log.e("cargado ","" +tareaid + produccionid);
 
-//        getSupportActionBar().hide();
-
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_bobina);
-
         addKeyboardHideListener(constraintLayout);
 
         spi_NombreTipoMaterial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -178,14 +175,12 @@ public class Bobina_Activity extends OcultarTeclado {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if (adapterView.getItemAtPosition(i).toString().equals("Abierta")){
-
                     abiertaocerrada = "A";
                 }else if (adapterView.getItemAtPosition(i).toString().equals("Cerrada")){
-                    abiertaocerrada = "B";
+                    abiertaocerrada = "C";
                 }else{
-                    abiertaocerrada = unidad;
+                    abiertaocerrada = "Seleccionar";
                 }
-
             }
 
             @Override
@@ -305,6 +300,9 @@ public class Bobina_Activity extends OcultarTeclado {
         cargarProveedor(getApplicationContext());
         cargarMaterial(getApplicationContext());
 
+        configureEditText(edt_Ancho);
+        configureEditText(edt_DefectuosaKg);
+
         OcultarVariables();
 
 
@@ -336,8 +334,6 @@ public class Bobina_Activity extends OcultarTeclado {
             @Override
             public void onError(Exception e) {
                 dialogProgress.dismiss();
-
-
 
 
                 String onSuccess = "false";

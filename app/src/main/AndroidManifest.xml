@@ -38,8 +38,8 @@
         <activity
             android:name=".activitys.Verificacion_Activity"
             android:exported="false"
-            android:theme="@style/Theme.ProduccionTablet.NoActionBar"
-            android:windowSoftInputMode="adjustNothing" />
+            android:theme="@style/Theme.ProduccionTablet.NoActionBar"/>
+            <!--android:windowSoftInputMode="adjustNothing" -->
         <activity
             android:name=".activitys.Produccion_Activity"
             android:exported="false"

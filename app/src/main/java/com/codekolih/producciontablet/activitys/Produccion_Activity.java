@@ -1,22 +1,17 @@
 package com.codekolih.producciontablet.activitys;
 
-import static com.codekolih.producciontablet.R.id.constrain_produccion;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
-import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
-import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -43,10 +38,8 @@ import com.codekolih.producciontablet.clases.EstadosOp;
 import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
 import com.codekolih.producciontablet.clases.Tareas;
-import com.codekolih.producciontablet.dialogs.BobinaDialogo;
 import com.codekolih.producciontablet.dialogs.CantidadDialog;
 import com.codekolih.producciontablet.dialogs.CancelarDialog;
-import com.codekolih.producciontablet.dialogs.FinTrabajoDialog;
 import com.codekolih.producciontablet.dialogs.FinTurnoDialog;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
@@ -60,7 +53,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Produccion_Activity extends OcultarTeclado implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, CancelarDialog.finalizarMotivo, FinTurnoDialog.finalizarTurno, FinTrabajoDialog.finalizarTarea {
+public class Produccion_Activity extends OcultarTeclado implements CantidadDialog.finalizarCuadro, ScrapDialogo.finalizarScrapDialog, CancelarDialog.finalizarMotivo, FinTurnoDialog.finalizarTurno {
 
 
     Tareas tarea_Seleccionada;
@@ -77,7 +70,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
-    private Button btn_cantidad, btn_bobina, btn_scrap, btn_finalizar, btn_cancelar, btn_finturno, btnverpdf;
+    private Button btn_cantidad, btn_bobina, btn_scrap, btn_cancelar, btn_finturno, btnverpdf;
     private int BOBINA_ACTIVITY = 1;
     RecyclerView recyclerViewCantidad, recyclerViewBobinas;
     private int produccionId;
@@ -155,32 +148,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         });
 
 
-        btn_finalizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
-
-                    if (cargascrap) {
-                        if (cargocantidad) {
-                            if (cargobobina) {
-                                new FinTrabajoDialog(Produccion_Activity.this, Produccion_Activity.this);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Hay que cargar Bobina", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Hay que cargar Produccion", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-
-                        Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-            }
-        });
-
-
         btn_finturno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -212,9 +179,9 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             @Override
             public void onClick(View view) {
 
-                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
+
                     cancelar();
-                }
+
 
 
             }
@@ -278,7 +245,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         recyclerViewBobinas.setAdapter(adapterBobina);
 
 
-        cargarEstadoProduccion();
+        cargarTareaHttp();
         ocultarVariables();
         cargarfecha();
 
@@ -311,50 +278,16 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
     }
 
-    private void cargarEstadoProduccion() {
-
-        Map<String, Object> estado = new HashMap<>();
-        estado.put("TareaId", tareaId);
-        estado.put("EstadoId", "P1");
-        estado.put("TipoEstadoId", "I");
-
-        //sin finish
-
-        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                Log.e("Produccion_Activity", "Cargo Estado Produccion P1 en I " + tareaId);
-
-                cargarTareaHttp(); // tarea y produccion_actual y bobina actual
-
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-                dialogError("No cargo el estado inicial");
-
-
-            }
-        }, USUARIO);
-
-    }
 
     private void finalizar() {
 
-        if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
-
             new FinTurnoDialog(Produccion_Activity.this, Produccion_Activity.this);
-
-        }
-
 
     }
 
     private void cancelar() {
 
-        if (Validarinternet.validarConexionInternet(Produccion_Activity.this)) {
-
+        if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
             new CancelarDialog(Produccion_Activity.this, Produccion_Activity.this);
         }
 
@@ -425,7 +358,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         btn_cantidad = findViewById(R.id.produccion_btn_cantidad);
         btn_bobina = findViewById(R.id.produccion_btn_bobina);
         btn_scrap = findViewById(R.id.produccion_btn_scrap);
-        btn_finalizar = findViewById(R.id.produccion_btn_finalziar);
         btn_cancelar = findViewById(R.id.produccion_btn_cancelar);
         btn_finturno = findViewById(R.id.produccion_btn_finalziar2);
         cantidadtotal = findViewById(R.id.txt_produccion_cantidadtotal);
@@ -784,7 +716,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
 
     @Override
-    public void ResultadoMotivoDialogo(String motivo, String tipocierre) {
+    public void ResultadoMotivoCancelarDialogo(String motivo, String tipocierre) {
 
         Log.e("Resultado", "recibido" + motivo + " " + tipocierre);
         Map<String, Object> estado = new HashMap<>();
@@ -800,19 +732,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     public void ResultadoFinTurnoDialogo(String motivo, String tipocierre) {
 
         Log.e("Resultado", "recibido" + motivo + " " + tipocierre);
-        Map<String, Object> estado = new HashMap<>();
-        estado.put("TareaId", tareaId);
-        estado.put("EstadoId", tipocierre);
-        estado.put("TipoEstadoId", "I");
-
-        actualziarmotivoyestado(motivo, estado);
-
-    }
-
-    @Override
-    public void ResultadoFinTrabajoDialogo(String motivo, String tipocierre) {
-
-
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
         estado.put("EstadoId", tipocierre);
@@ -895,12 +814,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             public void onClick(View view) {
                 dialogg.dismiss();
 
-
-                if (mensaje.equals("No cargo el estado inicial")){
-
-                    cargarEstadoProduccion();
-
-                }else if(mensaje.equals("No Cargo Tarea")){
+                if(mensaje.equals("No Cargo Tarea")){
 
                     cargarTareaHttp();
                 }

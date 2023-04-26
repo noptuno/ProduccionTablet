@@ -14,7 +14,6 @@
     <string-array name="UNIDADES">
         <item>Seleccionar</item>
         <item>Kilos</item>
-        <item>Gramos</item>
         <item>Metros</item>
     </string-array>
     <string-array name="CIERRE">

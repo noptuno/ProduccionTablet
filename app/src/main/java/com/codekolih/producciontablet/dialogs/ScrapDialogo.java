@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.activitys.Tarea_Activity;
 import com.codekolih.producciontablet.activitys.Verificacion_Activity;
@@ -33,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ScrapDialogo {
+public class ScrapDialogo extends OcultarTeclado {
 
     private finalizarScrapDialog interfaz_scrap;
     String unidad = "KG";
@@ -64,6 +65,9 @@ public class ScrapDialogo {
         numero.setText("0");
 
         tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea();
+
+
+        configureEditText(numero);
 
         if (tarea_Seleccionada.getTipoMaquinaId()== 3){
             numero.setMaxEms(6);

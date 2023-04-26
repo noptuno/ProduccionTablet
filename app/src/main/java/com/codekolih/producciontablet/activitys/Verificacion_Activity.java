@@ -19,7 +19,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
@@ -135,6 +138,8 @@ public class Verificacion_Activity extends OcultarTeclado {
     private SharedPreferences pref;
     private boolean permisosaceptados = false;
 
+    private int tareaId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +154,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             String nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
             String tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
             txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
+            tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
 
         }catch (Exception e){
             Toast.makeText(getApplicationContext(), "Hubo un problema en los datos de Preference", Toast.LENGTH_SHORT).show();
@@ -201,6 +207,10 @@ public class Verificacion_Activity extends OcultarTeclado {
             @Override
             public void onClick(View view) {
 
+                hideKeyboard(constraintLayout.getRootView());
+
+
+
                 if (validarVariables()) {
 
                     AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
@@ -247,10 +257,24 @@ public class Verificacion_Activity extends OcultarTeclado {
 
         OcultarVariables();
         cargarfecha();
-        establecerlimitesnumericos();
+
         //CargarPedido();
 
+
+        // validar el 0
+        configureEditText(edt_verificacion_AnchoFinalRolloYGap);
+        configureEditText(edt_verificacion_CantidadPistasImpresas);
+        configureEditText(edt_verificacion_CantidadTintas);
+        configureEditText(edt_verificacion_ScrapAjusteInicial);
+        configureEditText(edt_verificacion_AnchoFinalRollo);
+        configureEditText(edt_verificacion_CantidadPistasCortadas);
+        configureEditText(edt_verificacion_PistasTroquelUsadas);
+
+        establecerlimitesnumericos();
+
+
     }
+
 
     @Override
     protected void onPause() {
@@ -267,6 +291,8 @@ public class Verificacion_Activity extends OcultarTeclado {
 
         Utils.startHandler(Utils.getRunnable(this, "Debe avanzar a Produccion"));
     }
+
+
 
 
 
@@ -321,7 +347,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                cambioEstadoA1F();
+              finish();
 
             }
 
@@ -398,10 +424,17 @@ public class Verificacion_Activity extends OcultarTeclado {
                                 String[] valirIdProduccion = RespuestaDato.split(":");
                                 String id = valirIdProduccion[1];
                                 TareaSingleton.SingletonInstance().setProduccionId(Integer.parseInt(id));
+
+                                cargarEstadoProduccion();
+
+
+
+
+                            }else{
+                              Toast.makeText(Verificacion_Activity.this, "Hubo un problema con el id de produccion", Toast.LENGTH_SHORT).show();
                             }
 
 
-                            cambioEstadoFinVerificacion();
 
                         }
 
@@ -417,12 +450,47 @@ public class Verificacion_Activity extends OcultarTeclado {
                 public void onError(Exception e) {
                     dialogProgress.dismiss();
 
-                    dialogError("No cargo Datos");
+                    dialogError("No cargo Datos Verificación");
 
                 }
             }, USUARIO);
         }
         }
+
+    private void cargarEstadoProduccion() {
+
+        Map<String, Object> estado = new HashMap<>();
+        estado.put("TareaId", tareaId);
+        estado.put("EstadoId", "P1");
+        estado.put("TipoEstadoId", "I");
+
+        //sin finish
+
+        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.e("Verificacion_Activity", "Cargo Estado Produccion P1 en I " + tareaId);
+
+
+                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                dialogError("No cargo el estado inicial a produccion reintentar");
+
+
+            }
+        }, USUARIO);
+
+    }
+
 
 
     private void cargarfecha() {
@@ -466,78 +534,6 @@ public class Verificacion_Activity extends OcultarTeclado {
 
     }
 
-    private void cambioEstadoA1F() {
-
-        Map<String, Object> estado = new HashMap<>();
-        estado.put("TareaId", tarea_Seleccionada.getTareaId());
-        estado.put("EstadoId", "A1");
-        estado.put("TipoEstadoId", "F");
-
-
-        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                Log.e("Verificacion_Activity", "Cargo Estado" + tarea_Seleccionada.getTareaId());
-                finish();
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-                dialogError("No cambio Estado, Presionar Ok");
-            }
-        }, USUARIO);
-
-    }
-
-    private void cambioEstadoFinVerificacion() {
-
-        Map<String, Object> estado = new HashMap<>();
-        estado.put("TareaId", tarea_Seleccionada.getTareaId());
-        estado.put("EstadoId", "A1");
-        estado.put("TipoEstadoId", "F");
-
-
-        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                Log.e("Verificacion_Activity", "Cargo Estado" + tarea_Seleccionada.getTareaId());
-                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-                dialogError("No cambio estado fin verificacion");
-            }
-        }, USUARIO);
-
-    }
-
-    private void dialogErrorPrintet(String mensaje) {
-
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Verificacion_Activity.this);
-        View mView = getLayoutInflater().inflate(R.layout.alerdialogerror, null);
-        final TextView mPassword = mView.findViewById(R.id.txtmensajeerror);
-        Button mLogin = mView.findViewById(R.id.btnReintentar);
-        mPassword.setText(mensaje);
-        mBuilder.setView(mView);
-        final AlertDialog dialogg = mBuilder.create();
-        dialogg.show();
-
-        mLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogg.dismiss();
-
-            }
-        });
-    }
 
     private void variablesFind() {
 
@@ -609,6 +605,9 @@ public class Verificacion_Activity extends OcultarTeclado {
         edt_verificacion_AnchoFinalRollo = findViewById(R.id.verificacion_edt_AnchoFinalRollo);
         edt_verificacion_CantidadPistasCortadas = findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
         edt_verificacion_PistasTroquelUsadas = findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
+
+
+
 
         txt_verificacion_txt_Observaciones = findViewById(R.id.verificacion_txt_Observaciones);
 
@@ -916,19 +915,6 @@ public class Verificacion_Activity extends OcultarTeclado {
             @Override
             public void onClick(View view) {
                 dialogg.dismiss();
-
-
-                if (mensaje.equals("No cambio Estado, Presionar Ok")){
-
-                    cambioEstadoA1F();
-
-                }else if(mensaje.equals("No cargo Datos")){
-
-                    cargarVerificacion();
-
-                }else if(mensaje.equals("No cambio estado fin verificacion")){
-                    cambioEstadoFinVerificacion();
-                }
 
             }
         });

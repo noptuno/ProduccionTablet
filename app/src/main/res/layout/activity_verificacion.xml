@@ -946,7 +946,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Ancho Final Rollo en milimetros"
+                android:text="Ancho Rollo en milimetros"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

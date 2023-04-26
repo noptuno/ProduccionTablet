@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.codekolih.producciontablet.HttpLayer;
 import com.codekolih.producciontablet.R;
+import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Tareas;
 
@@ -23,7 +24,7 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 
-public class CantidadDialog {
+public class CantidadDialog extends OcultarTeclado {
 
     private finalizarCuadro interfaz;
     Tareas tarea_Seleccionada;
@@ -58,6 +59,7 @@ public class CantidadDialog {
 
         tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea();
 
+
         if (tarea_Seleccionada.getTipoMaquinaId()== 4){
             edt_numero.setMaxEms(5);
             edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
@@ -74,6 +76,7 @@ public class CantidadDialog {
             edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
         }
 
+        configureEditText(edt_numero);
 
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
