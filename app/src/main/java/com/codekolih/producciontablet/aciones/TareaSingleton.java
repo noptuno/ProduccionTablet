@@ -414,7 +414,6 @@ public class TareaSingleton {
         if (tareaInstanciada==null){
             tareaInstanciada = null;
         }
-        Log.e("Class","GetTarea : " + tareaInstanciada.getTareaId());
         return this.tareaInstanciada;
     }
 

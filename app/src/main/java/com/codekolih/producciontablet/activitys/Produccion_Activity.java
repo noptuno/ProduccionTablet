@@ -64,7 +64,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     private TextView cantidadtotal;
     private float totaldadscrap;
     private TextView txt_imprenta, txt_usuario, txt_fecha, txt_hora;
-    private TextView txt_SerieYNro, txt_ArticuloId, txt_Cantidad, txt_Concepto;
+    private TextView txt_SerieYNro, txt_ArticuloId, txt_Cantidad, txt_Concepto,txt_ppistas;
     private AdapterProduccion adapterProduccion = new AdapterProduccion();
     private AdapterBobinas adapterBobina = new AdapterBobinas();
     private RequestQueue requestQueue;
@@ -105,7 +105,14 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
             txt_imprenta.setText(String.format("%s Tipo: %s", pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO"), pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0")));
             MAQUINAID = pref.getInt(PREF_PRODUCCION_MAQUINAID,0);
-            
+
+
+            if (pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0").equals("2") || pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0").equals("3")){
+                txt_ppistas.setText("Pistas");
+            }
+
+
+
             if (MAQUINAID==0){
                 Toast.makeText(getApplicationContext(), "No hay imprenta seleccionada", Toast.LENGTH_SHORT).show();
                 finish();
@@ -362,6 +369,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         btn_finturno = findViewById(R.id.produccion_btn_finalziar2);
         cantidadtotal = findViewById(R.id.txt_produccion_cantidadtotal);
 
+        txt_ppistas = findViewById(R.id.txt_ppistas);
 
         //datos tarea
         lyp_EtiquetasPorRollo = findViewById(R.id.lyp_EtiquetasPorRollo);

@@ -140,10 +140,19 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
             DefectuosaKg.setText((String.format("%s", bobina.getDefectuosaKg())));
             Lote.setText((String.format("%s", bobina.getLote())));
             Ancho.setText((String.format("%s", bobina.getAncho())));
+
             NombreTipoMaterial.setText((String.format("%s", bobina.getNombreTipoMaterial())));
             EsAbiertaoCerrada.setText((String.format("%s", bobina.getEsAbiertaoCerrada())));
 
+            if (bobina.getEsAbiertaoCerrada().equals("A")){
 
+                EsAbiertaoCerrada.setText("ABIERTA");
+
+            }else if(bobina.getEsAbiertaoCerrada().equals("C")){
+
+                EsAbiertaoCerrada.setText("CERRADA");
+
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

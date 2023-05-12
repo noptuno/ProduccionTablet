@@ -1,16 +1,11 @@
 package com.codekolih.producciontablet.activitys;
 
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_CONFIGURACION;
-import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINAID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_MAQUINATIPOID;
 import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_NOMBREMAQUINA;
-import static com.codekolih.producciontablet.aciones.Variables.PREF_PRODUCCION_USUARIO;
 import static java.lang.Integer.parseInt;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,11 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.InputFilter;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
@@ -43,30 +34,15 @@ import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Utils;
 import com.codekolih.producciontablet.aciones.Validarinternet;
-import com.codekolih.producciontablet.adapter.AdapterProduccion;
 import com.codekolih.producciontablet.clases.Pedido;
-import com.codekolih.producciontablet.clases.Produccion_Lista;
-import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -84,7 +60,7 @@ public class Verificacion_Activity extends OcultarTeclado {
     private HttpLayer httpLayer;
     private TextView txt_imprenta, txt_usuario, txt_fecha, txt_hora;
     //pedido
-    private TextView txt_SerieYNro, txt_ArticuloId, txt_Cantidad, txt_Concepto;
+    private TextView txt_SerieYNro, txt_ArticuloId, txt_Cantidad, txt_Concepto,txt_pistas;
     private EditText
             edt_verificacion_AnchoFinalRolloYGap,
             edt_verificacion_CantidadPistasImpresas,
@@ -153,6 +129,13 @@ public class Verificacion_Activity extends OcultarTeclado {
             pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
             String nombreMaquina = pref.getString(PREF_PRODUCCION_NOMBREMAQUINA, "NO");
             String tipomaquinaid = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "NO");
+
+            if (tipomaquinaid.equals("2") || tipomaquinaid.equals("3")){
+                txt_pistas.setText("Pistas");
+            }
+
+
+
             txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
             tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
 
@@ -160,6 +143,9 @@ public class Verificacion_Activity extends OcultarTeclado {
             Toast.makeText(getApplicationContext(), "Hubo un problema en los datos de Preference", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+
+
 
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
         txt_usuario.setText(USUARIO);
@@ -302,8 +288,7 @@ public class Verificacion_Activity extends OcultarTeclado {
 
             edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
             edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
-            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
-
+            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
 
         }else{
 
@@ -550,6 +535,8 @@ public class Verificacion_Activity extends OcultarTeclado {
         btn_verpdf = findViewById(R.id.verificacion_btn_verpdf);
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
         btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
+
+        txt_pistas = findViewById(R.id.txt_ppistas);
 
         ly_uno = findViewById(R.id.ly_uno);
         ly_dos = findViewById(R.id.ly_dos);

@@ -45,14 +45,6 @@ public abstract class OcultarTeclado extends AppCompatActivity {
         editText.setOnFocusChangeListener((view, hasFocus) -> {
             if (hasFocus) {
                 editText.selectAll();
-            } else {
-                if (!isUpdating[0]) {
-                    String text = editText.getText().toString().trim();
-                    if (!text.isEmpty()) {
-                        int num = Integer.parseInt(text);
-                        editText.setText(String.valueOf(num));
-                    }
-                }
             }
         });
         editText.addTextChangedListener(new TextWatcher() {
@@ -62,21 +54,7 @@ public abstract class OcultarTeclado extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!isUpdating[0]) {
-                    String text = s.toString().trim();
-                    if (!text.isEmpty()) {
-                        if (text.startsWith(".")) {
-                            allowZero[0] = true;
-                        } else {
-                            allowZero[0] = false;
-                        }
-                        int num = Integer.parseInt(text);
-                        isUpdating[0] = true;
-                        editText.setText(String.valueOf(num));
-                        editText.setSelection(editText.getText().length());
-                        isUpdating[0] = false;
-                    }
-                }
+
             }
 
             @Override

@@ -80,7 +80,7 @@ public class Bobina_Activity extends OcultarTeclado {
 
         spi_ProveedorNombre = findViewById(R.id.dialogbobina_spi_ProveedorNombre);
         spi_EsAbiertaoCerrada = findViewById(R.id.dialogbobina_spi_EsAbiertaoCerrada);
-        edt_Lote = findViewById(R.id.dialogbobina_edt_Lote);
+        edt_Lote = findViewById(R.id.edt_lote_);
         edt_Ancho = findViewById(R.id.dialogbobina_edt_Ancho);
         edt_DefectuosaKg = findViewById(R.id.dialogbobina_edt_DefectuosaKg);
 
@@ -115,13 +115,21 @@ public class Bobina_Activity extends OcultarTeclado {
         MAQUINATIPOID = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0");
 
 //todo validar
-        produccionid = TareaSingleton.SingletonInstance().getProduccionId();
-        tareaid = TareaSingleton.SingletonInstance().getTarea().getTareaId();
-        USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
 
-        Log.e("cargado ","" +tareaid + produccionid);
+         try {
+
+             produccionid = TareaSingleton.SingletonInstance().getProduccionId();
+             tareaid = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+             USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
+             Log.e("cargado ","" +tareaid + produccionid);
+
+         }catch (Exception e){
+             Log.e("cargado ","ERROR");
+         }
+
 
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_bobina);
+
         addKeyboardHideListener(constraintLayout);
 
         spi_NombreTipoMaterial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -297,13 +305,21 @@ public class Bobina_Activity extends OcultarTeclado {
             }
         });
 
-        cargarProveedor(getApplicationContext());
-        cargarMaterial(getApplicationContext());
+        try {
+            cargarProveedor(getApplicationContext());
+            cargarMaterial(getApplicationContext());
+            configureEditText(edt_Ancho);
+            configureEditText(edt_DefectuosaKg);
+            OcultarVariables();
+        }catch (Exception e){
 
-        configureEditText(edt_Ancho);
-        configureEditText(edt_DefectuosaKg);
 
-        OcultarVariables();
+        }
+
+
+
+
+
 
 
     }
