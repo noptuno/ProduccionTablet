@@ -55,7 +55,7 @@ public class CancelarDialog {
             public void onClick(View view) {
 
                 String motivo = edit_motivo.getText().toString();
-                if(motivo.length() > 1){
+                if(motivo.length() > 0){
 
                     interfaz.ResultadoMotivoCancelarDialogo(motivo,"C2");
                     dialogo.dismiss();
@@ -74,7 +74,7 @@ public class CancelarDialog {
 
 
                 String motivo = edit_motivo.getText().toString();
-                if(motivo.length() > 1){
+                if(motivo.length() > 0){
 
 
 

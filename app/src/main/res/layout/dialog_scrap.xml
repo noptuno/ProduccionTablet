@@ -104,7 +104,6 @@
             android:maxLength="6"
             android:numeric="decimal"
             android:selectAllOnFocus="true"
-            android:text="0"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"

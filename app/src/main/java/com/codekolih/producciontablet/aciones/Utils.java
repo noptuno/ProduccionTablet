@@ -19,7 +19,7 @@ public class Utils {
 
     public static void startHandler(Runnable runnable) {
         mHandler = new Handler();
-        mHandler.postDelayed(runnable, 600000);
+        mHandler.postDelayed(runnable, 300000);
     }
 
     public static void stopHandler() {

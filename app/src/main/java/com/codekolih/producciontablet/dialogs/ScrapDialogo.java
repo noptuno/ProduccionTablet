@@ -143,7 +143,7 @@ public class ScrapDialogo extends OcultarTeclado {
 
                 try{
                     String a = numero.getText().toString();
-                    if(a.equals("") || unidad.equals("Seleccionar")){
+                    if(a.isEmpty() || unidad.equals("Seleccionar")){
                         Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
                     }else{
 

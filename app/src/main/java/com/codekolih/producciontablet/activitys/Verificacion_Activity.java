@@ -134,8 +134,6 @@ public class Verificacion_Activity extends OcultarTeclado {
                 txt_pistas.setText("Pistas");
             }
 
-
-
             txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
             tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
 
@@ -805,7 +803,7 @@ public class Verificacion_Activity extends OcultarTeclado {
                 if (entry.getValue().equals("0")) {
 
                     String a = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
-                    if (a.equals("0") || a.equals("")) {
+                    if (!a.isEmpty()) {
                         validado = false;
                         break;
                     }
@@ -814,7 +812,7 @@ public class Verificacion_Activity extends OcultarTeclado {
 
                 if (entry.getValue().equals("0")) {
                     String a = edt_verificacion_CantidadPistasImpresas.getText().toString();
-                    if (a.equals("0") || a.equals("")) {
+                    if (a.isEmpty()) {
                         validado = false;
                         break;
                     }
@@ -823,7 +821,7 @@ public class Verificacion_Activity extends OcultarTeclado {
 
                 if (entry.getValue().equals("0")) {
                     String a = edt_verificacion_CantidadTintas.getText().toString();
-                    if (a.equals("0") || a.equals("")) {
+                    if (a.isEmpty()) {
                         validado = false;
                         break;
                     }
@@ -832,7 +830,7 @@ public class Verificacion_Activity extends OcultarTeclado {
 
                 if (entry.getValue().equals("0")) {
                     String a = edt_verificacion_ScrapAjusteInicial.getText().toString();
-                    if (a.equals("0") || a.equals("")) {
+                    if (a.isEmpty()) {
                         validado = false;
                         break;
                     }
@@ -848,7 +846,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             } else if ("AnchoFinalRollo".equals(entry.getKey())) {
                 if (entry.getValue().equals("0")) {
                     String a = edt_verificacion_AnchoFinalRollo.getText().toString();
-                    if (a.equals("0") || a.equals("")) {
+                    if (a.isEmpty()) {
                         validado = false;
                         break;
                     }
@@ -856,7 +854,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             } else if ("CantidadPistasCortadas".equals(entry.getKey())) {
                 if (entry.getValue().equals("0")) {
                     String a = edt_verificacion_CantidadPistasCortadas.getText().toString();
-                    if (a.equals("0") || a.equals("")) {
+                    if (a.isEmpty()) {
                         validado = false;
                         break;
                     }
@@ -864,7 +862,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             } else if ("PistasTroquelUsadas".equals(entry.getKey())) {
                 if (entry.getValue().equals("0")) {
                     String a = edt_verificacion_PistasTroquelUsadas.getText().toString();
-                    if (a.equals("0") || a.equals("")) {
+                    if (a.isEmpty()) {
                         validado = false;
                         break;
                     }

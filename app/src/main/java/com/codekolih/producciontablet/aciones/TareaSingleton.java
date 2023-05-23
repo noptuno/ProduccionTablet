@@ -228,7 +228,7 @@ public class TareaSingleton {
             variablesGenrales.put("Descripcion", "8");
             variablesGenrales.put("Cilindro", "8");
             variablesGenrales.put("Z_AltoMasGap", "8");
-            variablesGenrales.put("MetrosPorRollo", "8");
+            variablesGenrales.put("MetrosPorRollo", "0");
             variablesGenrales.put("MetrosMatTroquelar", "8");
             variablesGenrales.put("TroquelId", "8");
 
@@ -345,7 +345,7 @@ public class TareaSingleton {
             variablesGenrales.put("Descripcion", "8");
             variablesGenrales.put("Cilindro", "8");
             variablesGenrales.put("Z_AltoMasGap", "8");
-            variablesGenrales.put("MetrosPorRollo", "8");
+            variablesGenrales.put("MetrosPorRollo", "0");
             variablesGenrales.put("MetrosMatTroquelar", "8");
             variablesGenrales.put("TroquelId", "8");
 

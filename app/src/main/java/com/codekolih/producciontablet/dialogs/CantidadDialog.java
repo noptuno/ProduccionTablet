@@ -85,7 +85,7 @@ public class CantidadDialog extends OcultarTeclado {
                 try{
 
                     String a = edt_numero.getText().toString();
-                    if(a.equals("0") || a.equals("")){
+                    if(a.isEmpty()){
 
                         Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
                     }else{

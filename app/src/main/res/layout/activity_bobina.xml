@@ -156,7 +156,6 @@
                     android:maxLength="5"
                     android:numeric="decimal"
                     android:selectAllOnFocus="true"
-                    android:text="0"
                     android:textAllCaps="true"
                     android:textSize="24sp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -187,7 +186,6 @@
                     android:ems="10"
                     android:inputType="number|numberDecimal"
                     android:selectAllOnFocus="true"
-                    android:text="0"
                     android:textAllCaps="true"
                     android:textSize="24sp"
                     tools:ignore="TouchTargetSizeCheck" />

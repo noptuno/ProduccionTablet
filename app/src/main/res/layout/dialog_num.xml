@@ -76,7 +76,6 @@
             android:maxLength="5"
             android:numeric="integer"
             android:selectAllOnFocus="true"
-            android:text="0"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"

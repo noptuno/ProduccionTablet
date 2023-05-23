@@ -416,7 +416,7 @@ public class Bobina_Activity extends OcultarTeclado {
 
                 if (entry.getValue().equals("0")){
                     String a = edt_Ancho.getText().toString();
-                    if(a.equals("0") || a.equals("") ){
+                    if(a.isEmpty()){
                         validado = false;
                         break;
                     }
@@ -438,7 +438,7 @@ public class Bobina_Activity extends OcultarTeclado {
             else if ("DefectuosaKg".equals(entry.getKey())){
                 if (entry.getValue().equals("0")){
                     String a = edt_DefectuosaKg.getText().toString();
-                    if(a.equals("")){
+                    if(a.isEmpty()){
                         validado = false;
                         break;
                     }
