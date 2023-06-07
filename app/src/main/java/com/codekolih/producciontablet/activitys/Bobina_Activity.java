@@ -210,10 +210,25 @@ public class Bobina_Activity extends OcultarTeclado {
                         int idproveedor = parseInt(idproveedorSeleccionado);
                         String ProveedorNombre = proveedorSeleccionado;
                         String Lote = edt_Lote.getText().toString();
-                        float Ancho = parseFloat(edt_Ancho.getText().toString());
+                        float Ancho = 0;
+                        float DefectuosaKg = 0;
+                        int tipoMaterialId = 0;
+
+                        try {
+                             Ancho = parseFloat(edt_Ancho.getText().toString());
+                        }catch (Exception e){
+                        }
+                        try {
+                            DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
+                        }catch (Exception e){
+                        }
+                        try {
+                            tipoMaterialId = parseInt(TipoMaterialId);
+
+                        }catch (Exception e){
+                        }
+
                         String EsAbiertaoCerrada = abiertaocerrada;
-                        float DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
-                        int tipoMaterialId = parseInt(TipoMaterialId);
                         String ProveedorMaterial = NombreTipoMaterial;
 
                         try{

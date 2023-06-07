@@ -803,7 +803,7 @@ public class Verificacion_Activity extends OcultarTeclado {
                 if (entry.getValue().equals("0")) {
 
                     String a = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
-                    if (!a.isEmpty()) {
+                    if (a.isEmpty()) {
                         validado = false;
                         break;
                     }
