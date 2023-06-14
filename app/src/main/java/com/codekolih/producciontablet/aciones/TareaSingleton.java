@@ -114,6 +114,7 @@ public class TareaSingleton {
             variablesGenrales.put("MetrosPorRollo", "8");
             variablesGenrales.put("MetrosMatTroquelar", "8");
             variablesGenrales.put("TroquelId", "0");
+            variablesGenrales.put("AnchoBobinaUsadoCm", "0");
 
             //produccion
             variablesGenrales.put("SumMetrosImpresos", "0");//IE,IR
@@ -172,6 +173,7 @@ public class TareaSingleton {
             variablesGenrales.put("MetrosPorRollo", "0");
             variablesGenrales.put("MetrosMatTroquelar", "8");
             variablesGenrales.put("TroquelId", "8");
+            variablesGenrales.put("AnchoBobinaUsadoCm", "0");
 
             //produccion
             variablesGenrales.put("SumMetrosImpresos", "0");//IE,IR
@@ -231,6 +233,7 @@ public class TareaSingleton {
             variablesGenrales.put("MetrosPorRollo", "0");
             variablesGenrales.put("MetrosMatTroquelar", "8");
             variablesGenrales.put("TroquelId", "8");
+            variablesGenrales.put("AnchoBobinaUsadoCm", "8");
 
             //produccion
             variablesGenrales.put("SumMetrosImpresos", "8");//IE,IR
@@ -289,7 +292,7 @@ public class TareaSingleton {
             variablesGenrales.put("MetrosPorRollo", "0");
             variablesGenrales.put("MetrosMatTroquelar", "0");
             variablesGenrales.put("TroquelId", "0");
-
+            variablesGenrales.put("AnchoBobinaUsadoCm", "0");
             //produccion
             variablesGenrales.put("SumMetrosImpresos", "8");//IE,IR
             variablesGenrales.put("AnchoFinalRolloYGap", "0");
@@ -348,6 +351,7 @@ public class TareaSingleton {
             variablesGenrales.put("MetrosPorRollo", "0");
             variablesGenrales.put("MetrosMatTroquelar", "8");
             variablesGenrales.put("TroquelId", "8");
+            variablesGenrales.put("AnchoBobinaUsadoCm", "8");
 
             //produccion
             variablesGenrales.put("SumMetrosImpresos", "8");//IE,IR

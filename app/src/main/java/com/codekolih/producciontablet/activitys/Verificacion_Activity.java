@@ -68,7 +68,9 @@ public class Verificacion_Activity extends OcultarTeclado {
             edt_verificacion_ScrapAjusteInicial,
             edt_verificacion_AnchoFinalRollo,
             edt_verificacion_CantidadPistasCortadas,
-            edt_verificacion_PistasTroquelUsadas;
+            edt_verificacion_PistasTroquelUsadas,
+
+            edt_verificacion_AnchoBobinaUsadoCm;
 
     private Spinner spi_verificacion_UnidadIdScrapInicial;
     private LinearLayout
@@ -91,7 +93,8 @@ public class Verificacion_Activity extends OcultarTeclado {
             ly_AnchoFinalRollo,
             ly_CantidadPistasCortadas,
             ly_PistasTroquelUsadas,
-            ly_UnidadIdScrapInicial;
+            ly_UnidadIdScrapInicial,
+            ly_AnchoBobinaUsadoCm;
     private LinearLayout ly_uno, ly_dos, ly_tres, ly_cuatro, ly_cinco, ly_seis, ly_siete, ly_ocho, ly_nueve, ly_dies;
 
     private Switch uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, dies;
@@ -253,7 +256,7 @@ public class Verificacion_Activity extends OcultarTeclado {
         configureEditText(edt_verificacion_AnchoFinalRollo);
         configureEditText(edt_verificacion_CantidadPistasCortadas);
         configureEditText(edt_verificacion_PistasTroquelUsadas);
-
+        configureEditText(edt_verificacion_AnchoBobinaUsadoCm);
         establecerlimitesnumericos();
 
 
@@ -353,7 +356,6 @@ public class Verificacion_Activity extends OcultarTeclado {
 
     private void cargarVerificacion() {
 
-
         if (Validarinternet.validarConexionInternet(Verificacion_Activity.this)){
 
             String AnchoFinalRolloYGap = edt_verificacion_AnchoFinalRolloYGap.getText().toString();
@@ -363,6 +365,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             String AnchoFinalRollo = edt_verificacion_AnchoFinalRollo.getText().toString();
             String CantidadPistasCortadas = edt_verificacion_CantidadPistasCortadas.getText().toString();
             String PistasTroquelUsadas = edt_verificacion_PistasTroquelUsadas.getText().toString();
+            String AnchoBobinaUsadoCm = edt_verificacion_AnchoBobinaUsadoCm.getText().toString();
 
             Map<String, Object> newproduccion = new HashMap<>();
             newproduccion.put("ProduccionId", 0);
@@ -372,7 +375,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             newproduccion.put("AnchoFinalRolloYGap", AnchoFinalRolloYGap);
             newproduccion.put("CantidadPistasImpresas", CantidadPistasImpresas);
             newproduccion.put("CantidadTintas", CantidadTintas);
-            newproduccion.put("AnchoBobinaUsadoCm", 0);
+            newproduccion.put("AnchoBobinaUsadoCm", AnchoBobinaUsadoCm);
             newproduccion.put("ScrapAjusteInicial", ScrapAjusteInicial);
             newproduccion.put("ScrapAjusteInicial_Unidades", UnidadIdScrapInicial);
             newproduccion.put("ScrapAjusteProduccion", 0);
@@ -384,8 +387,8 @@ public class Verificacion_Activity extends OcultarTeclado {
             newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
             newproduccion.put("RollosEmpaquetados", 0);
             newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
-
             dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
+
 
             Log.e("json",GsonUtils.toJSON(newproduccion).toString());
 
@@ -411,13 +414,9 @@ public class Verificacion_Activity extends OcultarTeclado {
                                 cargarEstadoProduccion();
 
 
-
-
                             }else{
                               Toast.makeText(Verificacion_Activity.this, "Hubo un problema con el id de produccion", Toast.LENGTH_SHORT).show();
                             }
-
-
 
                         }
 
@@ -580,6 +579,8 @@ public class Verificacion_Activity extends OcultarTeclado {
         ly_CantidadPistasCortadas = findViewById(R.id.ly_CantidadPistasCortadas);
         ly_PistasTroquelUsadas = findViewById(R.id.ly_PistasTroquelUsadas);
         ly_UnidadIdScrapInicial = findViewById(R.id.ly_UnidadIdScrapInicial);
+        ly_AnchoBobinaUsadoCm= findViewById(R.id.ly_AnchoBobinaUsadoCm);
+
 
 
         edt_verificacion_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
@@ -590,8 +591,7 @@ public class Verificacion_Activity extends OcultarTeclado {
         edt_verificacion_AnchoFinalRollo = findViewById(R.id.verificacion_edt_AnchoFinalRollo);
         edt_verificacion_CantidadPistasCortadas = findViewById(R.id.verificacion_edt_CantidadPistasCortadas);
         edt_verificacion_PistasTroquelUsadas = findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
-
-
+        edt_verificacion_AnchoBobinaUsadoCm= findViewById(R.id.verificacion_edt_AnchoBobinaUsadoCm);
 
 
         txt_verificacion_txt_Observaciones = findViewById(R.id.verificacion_txt_Observaciones);
@@ -698,6 +698,8 @@ public class Verificacion_Activity extends OcultarTeclado {
                 ly_CantidadPistasCortadas.setVisibility(parseInt(entry.getValue()));
             } else if ("PistasTroquelUsadas".equals(entry.getKey())) {
                 ly_PistasTroquelUsadas.setVisibility(parseInt(entry.getValue()));
+            }else if("AnchoBobinaUsadoCm".equals(entry.getKey())){
+                ly_AnchoBobinaUsadoCm.setVisibility(parseInt(entry.getValue()));
             }
         }
     }
@@ -867,7 +869,16 @@ public class Verificacion_Activity extends OcultarTeclado {
                         break;
                     }
                 }
-            }else if(!pdfAbierto) {
+            }else if ("AnchoBobinaUsadoCm".equals(entry.getKey())) {
+                if (entry.getValue().equals("0")) {
+                    String a = edt_verificacion_AnchoBobinaUsadoCm.getText().toString();
+                    if (a.isEmpty()) {
+                        validado = false;
+                        break;
+                    }
+                }
+            }
+            else if(!pdfAbierto) {
                 validado = false;
                 toastPersonalziado("Debe abrir las especificaciones");
                 break;

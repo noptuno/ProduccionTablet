@@ -190,15 +190,12 @@ public class Bobina_Activity extends OcultarTeclado {
                     abiertaocerrada = "Seleccionar";
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
 
             }
         });
-
-
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
