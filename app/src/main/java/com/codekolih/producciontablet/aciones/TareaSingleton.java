@@ -25,6 +25,16 @@ public class TareaSingleton {
     private String usuarioIniciado;
     private String nombrepdf;
 
+    private String RespuestaDato;
+
+    public String getRespuestaDato() {
+        return RespuestaDato;
+    }
+
+    public void setRespuestaDato(String respuestaDato) {
+        RespuestaDato = respuestaDato;
+    }
+
     public String getNombrepdf() {
         return nombrepdf;
     }

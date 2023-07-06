@@ -40,6 +40,7 @@ import com.codekolih.producciontablet.clases.Material;
 import com.codekolih.producciontablet.clases.Proveedor;
 import com.codekolih.producciontablet.clases.Tareas;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -231,15 +232,13 @@ public class Tarea_Activity extends AppCompatActivity {
                 TareaSingleton.SingletonInstance().setTarea(note);
                 TareaSingleton.SingletonInstance().setNombrepdf(note.getArchivoEspecificacion());
 
-                Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
-                intent.putExtra("tarea", note);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 Map<String, Object> estado = new HashMap<>();
                 estado.put("TareaId", note.getTareaId());
                 estado.put("EstadoId", "A1");
-                estado.put("TipoEstadoId", "I");
+                estado.put("ProduccionId", "0");
+                estado.put("SessionId", "0");
+
                 cambioEstado(estado);
 
             }
@@ -271,9 +270,34 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject response) {
 
-                Log.e("Tarea_Activity", "Cargo Estado");
+                try {
 
-                finish();
+                    String comando = response.getString("Comando");
+                    String RespuestaMensaje = response.getString("RespuestaMensaje");
+                    String CodigoError = response.getString("CodigoError");
+                    String RespuestaDato = response.getString("RespuestaDato");
+
+
+                    if (RespuestaMensaje.equals("200")){
+                        TareaSingleton.SingletonInstance().setRespuestaDato(RespuestaDato);
+
+                        Intent intent = new Intent(Tarea_Activity.this, Verificacion_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                        finish();
+                    }else{
+
+                    }
+
+
+                } catch (JSONException e) {
+
+                    Log.e("Tarea_Activity", "error recibir datos estado");
+                    throw new RuntimeException(e);
+
+                }
+
             }
 
             @Override

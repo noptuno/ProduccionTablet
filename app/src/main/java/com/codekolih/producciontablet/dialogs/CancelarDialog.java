@@ -42,7 +42,7 @@ public class CancelarDialog {
         dialogo.setCanceledOnTouchOutside(false);
         dialogo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0C808E")));
         dialogo.setContentView(R.layout.dialog_cancelar_motivo);
-        cierre_btn_cancelarycerrar = dialogo.findViewById(R.id.cierre_btn_cancelarycerrar);
+        cierre_btn_cancelarycerrar = dialogo.findViewById(R.id.cierre_btn_cancelarysaltar);
         cierre_btn_cancelarycontinuar= dialogo.findViewById(R.id.cierre_btn_cancelarycontinuar);
 
         cierre_btn_cancelar= dialogo.findViewById(R.id.cierre_btn_cancelar);
@@ -57,7 +57,7 @@ public class CancelarDialog {
                 String motivo = edit_motivo.getText().toString();
                 if(motivo.length() > 0){
 
-                    interfaz.ResultadoMotivoCancelarDialogo(motivo,"C2");
+                    interfaz.ResultadoMotivoCancelarDialogo(motivo,"C1");
                     dialogo.dismiss();
 
                 }else{
@@ -78,7 +78,7 @@ public class CancelarDialog {
 
 
 
-                    interfaz.ResultadoMotivoCancelarDialogo(motivo,"C1");
+                    interfaz.ResultadoMotivoCancelarDialogo(motivo,"C2");
                     dialogo.dismiss();
 
                 }else{

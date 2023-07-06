@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/cierre_btn_cancelarycerrar"
+            android:id="@+id/cierre_btn_cancelarycontinuar"
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
         <Button
-            android:id="@+id/cierre_btn_cancelarycontinuar"
+            android:id="@+id/cierre_btn_cancelarysaltar"
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -85,7 +85,7 @@
             app:icon="@android:drawable/ic_menu_info_details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cierre_btn_cancelarycerrar"
+            app:layout_constraintStart_toEndOf="@+id/cierre_btn_cancelarycontinuar"
             app:layout_constraintTop_toBottomOf="@+id/edit_motivo" />
 
         <Button

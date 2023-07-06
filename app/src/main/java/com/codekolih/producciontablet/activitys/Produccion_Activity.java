@@ -44,6 +44,7 @@ import com.codekolih.producciontablet.dialogs.FinTurnoDialog;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
 import com.codekolih.producciontablet.dialogs.ScrapDialogo;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -76,6 +77,9 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     private int produccionId;
     private int pedidoId;
     private int tareaId;
+
+    private int SessionId;
+
     private String USUARIO;
     private SharedPreferences pref;
     private int MAQUINAID = 0;
@@ -129,6 +133,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
         pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
         tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+        SessionId = Integer.parseInt(TareaSingleton.SingletonInstance().getRespuestaDato());
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
         txt_usuario.setText(USUARIO);
 
@@ -415,9 +420,28 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             @Override
             public void onSuccess(JSONObject response) {
 
-                Log.e("onSuccess CE", response.toString());
-                dialogProgress.dismiss();
-                finish();
+
+                try {
+
+                    String comando = response.getString("Comando");
+                    String RespuestaMensaje = response.getString("RespuestaMensaje");
+                    String CodigoError = response.getString("CodigoError");
+                    String RespuestaDato = response.getString("RespuestaDato");
+
+                    if (RespuestaMensaje.equals("200")){
+
+                        Log.e("onSuccess CE", response.toString());
+                        dialogProgress.dismiss();
+                        finish();
+                    }
+
+                } catch (JSONException e) {
+                    Log.e("Produccion_Activity", "Dio error");
+                    throw new RuntimeException(e);
+                }
+
+
+
             }
 
             @Override
@@ -608,8 +632,8 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                 cargocantidad = true;
                 Log.e("onSuccess AP", response.toString());
                 cargarTareaHttp();
-
                 btn_cantidad.setText("MODIFICAR CANTIDAD");
+
             }
 
             @Override
@@ -727,12 +751,17 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     public void ResultadoMotivoCancelarDialogo(String motivo, String tipocierre) {
 
         Log.e("Resultado", "recibido" + motivo + " " + tipocierre);
+
+
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
         estado.put("EstadoId", tipocierre);
-        estado.put("TipoEstadoId", "I");
+        estado.put("ProduccionId", produccionId);
+        estado.put("SessionId", SessionId);
 
-        actualziarmotivoyestado(motivo, estado);
+
+
+         actualziarmotivoyestado(motivo, estado);
 
     }
 
@@ -743,7 +772,8 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
         estado.put("EstadoId", tipocierre);
-        estado.put("TipoEstadoId", "I");
+        estado.put("ProduccionId", produccionId);
+        estado.put("SessionId", SessionId);
 
         actualziarmotivoyestado(motivo, estado);
 
@@ -791,7 +821,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                 cargarTareaHttp();
                 btn_scrap.setText("MODIFICAR SCRAP");
 
-                 cargascrap = true;
+                cargascrap = true;
 
             }
 

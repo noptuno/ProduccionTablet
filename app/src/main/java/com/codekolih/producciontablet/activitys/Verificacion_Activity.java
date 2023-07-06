@@ -38,6 +38,7 @@ import com.codekolih.producciontablet.clases.Pedido;
 import com.codekolih.producciontablet.clases.Tareas;
 import com.codekolih.producciontablet.dialogs.PdfActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -118,6 +119,7 @@ public class Verificacion_Activity extends OcultarTeclado {
     private boolean permisosaceptados = false;
 
     private int tareaId;
+    private int SessionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +141,7 @@ public class Verificacion_Activity extends OcultarTeclado {
 
             txt_imprenta.setText(String.format("%s Tipo: %s", nombreMaquina, tipomaquinaid));
             tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
+            SessionId = Integer.parseInt(TareaSingleton.SingletonInstance().getRespuestaDato());
 
         }catch (Exception e){
             Toast.makeText(getApplicationContext(), "Hubo un problema en los datos de Preference", Toast.LENGTH_SHORT).show();
@@ -411,8 +414,7 @@ public class Verificacion_Activity extends OcultarTeclado {
                                 String id = valirIdProduccion[1];
                                 TareaSingleton.SingletonInstance().setProduccionId(Integer.parseInt(id));
 
-                                cargarEstadoProduccion();
-
+                                cargarEstadoProduccion(id);
 
                             }else{
                               Toast.makeText(Verificacion_Activity.this, "Hubo un problema con el id de produccion", Toast.LENGTH_SHORT).show();
@@ -439,25 +441,43 @@ public class Verificacion_Activity extends OcultarTeclado {
         }
         }
 
-    private void cargarEstadoProduccion() {
+    private void cargarEstadoProduccion(String idProduccion) {
+
 
         Map<String, Object> estado = new HashMap<>();
         estado.put("TareaId", tareaId);
         estado.put("EstadoId", "P1");
-        estado.put("TipoEstadoId", "I");
+        estado.put("ProduccionId", idProduccion);
+        estado.put("SessionId", SessionId);
 
         //sin finish
 
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override
             public void onSuccess(JSONObject response) {
-                Log.e("Verificacion_Activity", "Cargo Estado Produccion P1 en I " + tareaId);
+                Log.e("Verificacion_Activity", "Cargo Estado Produccion P1 " + tareaId);
+
+                try {
+
+                    String comando = response.getString("Comando");
+                    String RespuestaMensaje = response.getString("RespuestaMensaje");
+                    String CodigoError = response.getString("CodigoError");
+                    String RespuestaDato = response.getString("RespuestaDato");
+
+                    if (RespuestaMensaje.equals("200")){
+
+                        Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+                    }
+
+                } catch (JSONException e) {
+                    Log.e("Verificacion_Activity", "Dio error");
+                    throw new RuntimeException(e);
+                }
 
 
-                Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
 
 
             }
