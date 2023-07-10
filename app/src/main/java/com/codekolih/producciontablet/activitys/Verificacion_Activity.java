@@ -128,6 +128,9 @@ public class Verificacion_Activity extends OcultarTeclado {
         Log.e("VrerivicacionActivity", "INICIO");
         variablesFind();
 
+        //verificacion_edt_AnchoFinalRolloYGap no registra
+        //verificacion_edt_AnchoBobinaUsadoCm error
+
         httpLayer = new HttpLayer(this);
 
         try {
@@ -336,7 +339,17 @@ public class Verificacion_Activity extends OcultarTeclado {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-              finish();
+
+                Map<String, Object> estado = new HashMap<>();
+                estado.put("TareaId", tareaId);
+                estado.put("EstadoId", "C2");
+                estado.put("ProduccionId", 0);
+                estado.put("SessionId", SessionId);
+
+                finish();
+
+               // cargarEstadoCancelarProduccion(estado);
+
 
             }
 
@@ -414,7 +427,16 @@ public class Verificacion_Activity extends OcultarTeclado {
                                 String id = valirIdProduccion[1];
                                 TareaSingleton.SingletonInstance().setProduccionId(Integer.parseInt(id));
 
-                                cargarEstadoProduccion(id);
+
+                                Map<String, Object> estado = new HashMap<>();
+                                estado.put("TareaId", tareaId);
+                                estado.put("EstadoId", "P1");
+                                estado.put("ProduccionId", TareaSingleton.SingletonInstance().getProduccionId());
+                                estado.put("SessionId", SessionId);
+
+                                cargarEstadoProduccion(estado);
+
+
 
                             }else{
                               Toast.makeText(Verificacion_Activity.this, "Hubo un problema con el id de produccion", Toast.LENGTH_SHORT).show();
@@ -441,16 +463,52 @@ public class Verificacion_Activity extends OcultarTeclado {
         }
         }
 
-    private void cargarEstadoProduccion(String idProduccion) {
+    private void  cargarEstadoCancelarProduccion(Map<String, Object> estado) {
+        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.e("Verificacion_Activity", "Cargo Estado Produccion C2 " + tareaId);
+
+                try {
+
+                    String comando = response.getString("Comando");
+                    String RespuestaMensaje = response.getString("RespuestaMensaje");
+                    String CodigoError = response.getString("CodigoError");
+                    String RespuestaDato = response.getString("RespuestaDato");
+
+                    if (RespuestaMensaje.equals("200")){
+
+                        Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+                    }else{
+                        Log.e("Verificacion_Activity", "No cambi oestado " + tareaId + " " + RespuestaMensaje);
+                        finish();
+                    }
+
+                } catch (JSONException e) {
+                    Log.e("Verificacion_Activity", "Dio error");
+                    throw new RuntimeException(e);
+                }
 
 
-        Map<String, Object> estado = new HashMap<>();
-        estado.put("TareaId", tareaId);
-        estado.put("EstadoId", "P1");
-        estado.put("ProduccionId", idProduccion);
-        estado.put("SessionId", SessionId);
 
-        //sin finish
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+                dialogError("No cargo el estado inicial a produccion reintentar");
+
+
+            }
+        }, USUARIO);
+
+    }
+
+    private void cargarEstadoProduccion(Map<String, Object> estado) {
 
         httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
             @Override

@@ -1045,14 +1045,13 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:digits="0123456789,"
                 android:ems="10"
                 android:inputType="number"
                 android:maxLength="5"
                 android:minHeight="48dp"
-                android:numeric="integer"
                 android:selectAllOnFocus="true"
                 android:textAllCaps="true"
+                android:numeric="integer"
                 android:textSize="24sp" />
         </LinearLayout>
 

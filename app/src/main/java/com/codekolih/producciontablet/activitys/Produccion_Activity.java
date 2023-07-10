@@ -608,7 +608,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         produccion.put("PedidoId", pedidoId);
         produccion.put("TareaId", tareaId);
         produccion.put("MetrosImpresos", produccion_actual.getMetrosImpresos());
-        produccion.put("AnchoFinalRolloYGap", produccion_actual.getAnchoFinalRollo());
+        produccion.put("AnchoFinalRolloYGap", produccion_actual.getAnchoFinalRolloYGap());
         produccion.put("CantidadPistasImpresas", produccion_actual.getCantidadPistasImpresas());
         produccion.put("CantidadTintas", produccion_actual.getCantidadTintas());
         produccion.put("AnchoBobinaUsadoCm", produccion_actual.getAnchoBobinaUsadoCm());
