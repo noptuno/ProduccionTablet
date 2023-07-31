@@ -232,7 +232,6 @@ public class Tarea_Activity extends AppCompatActivity {
                 TareaSingleton.SingletonInstance().setTarea(note);
                 TareaSingleton.SingletonInstance().setNombrepdf(note.getArchivoEspecificacion());
 
-
                 Map<String, Object> estado = new HashMap<>();
                 estado.put("TareaId", note.getTareaId());
                 estado.put("EstadoId", "A1");
@@ -426,8 +425,6 @@ public class Tarea_Activity extends AppCompatActivity {
                 }else if(mensaje.equals("No cargo Materiales")){
                     cargarMateriales();
                 }
-
-
 
             }
         });

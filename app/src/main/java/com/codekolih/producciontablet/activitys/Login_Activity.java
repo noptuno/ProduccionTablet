@@ -19,6 +19,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +32,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +55,9 @@ import com.codekolih.producciontablet.clases.Usuario;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -61,8 +66,6 @@ public class Login_Activity extends OcultarTeclado {
     public static final String PREFS_NAME = "PingBusPrefs";
     public static final String PREFS_SEARCH_HISTORY = "SearchHistory";
     private Set<String> history;
-
-
     private Button btn_inicioSesion;
     private ImageButton btn_cargarImprenta;
     private ProgressDialog progressDialog;
@@ -74,22 +77,24 @@ public class Login_Activity extends OcultarTeclado {
     private int maquinaId;
     private String tipomaquinaid;
     private SharedPreferences pref;
+
     private boolean permisosEscritura;
+
     private ProgressHUD dialogProgress;
+
     private HttpLayer httpLayer;
+
     private AutoCompleteTextView edt_usaurio;
 
-    private static final String[] COUNTRIES = new String[]{
-            "rubach", "david", "peter", "enrique", "jose"
-    };
+    private static String[] COUNTRIES = new String[]{};
 
+    private ArrayList<String> registeredUsernames = new ArrayList<>();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menuimprentaschange, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -143,14 +148,21 @@ public class Login_Activity extends OcultarTeclado {
 
 
         edt_usaurio = findViewById(R.id.login_edt_login);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-        edt_usaurio.setAdapter(adapter);
 
-        edt_usaurio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        edt_usaurio.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                edt_pass.requestFocus();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = editable.toString().trim().toLowerCase();
+                // Aquí puedes realizar acciones adicionales según lo que el usuario escriba en el AutoCompleteTextView
+                // Por ejemplo, validar el nombre de usuario, habilitar/deshabilitar botones, etc.
             }
         });
 
@@ -191,14 +203,17 @@ public class Login_Activity extends OcultarTeclado {
 
                                     if (estado.equals("200")) {
 
-
-                                        edt_pass.setText("");
                                         //CargarUsuario
-                                        TareaSingleton.SingletonInstance().setUsuarioIniciado(edt_usaurio.getText().toString());
+                                        String usuario = edt_usaurio.getText().toString().trim();
+                                        TareaSingleton.SingletonInstance().setUsuarioIniciado(usuario);
+                                        registerUsername(usuario);
+
 
                                         Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                                        edt_pass.setText("");
 
                                     }else{
                                         Toast.makeText(getApplicationContext(), "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
@@ -241,21 +256,38 @@ public class Login_Activity extends OcultarTeclado {
     }
 
 
+    private void cargargarUserSharePreference(){
+
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        Set<String> usernameSet = preferences.getStringSet("usernames", new HashSet<>());
+        registeredUsernames = new ArrayList<>(usernameSet);
+
+        // Crear un ArrayAdapter con la lista de nombres de usuario
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, registeredUsernames);
+
+        // Establecer el ArrayAdapter como el adaptador para el AutoCompleteTextView
+        edt_usaurio.setAdapter(adapter);
+
+
+    }
+    private void registerUsername(String username) {
+        registeredUsernames.add(username);
+        COUNTRIES = registeredUsernames.toArray(new String[0]);
+
+        // Guardar la lista actualizada de nombres de usuario en SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putStringSet("usernames", new HashSet<>(registeredUsernames));
+        editor.apply();
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
 
         Validarinternet.validarConexionInternet(this);
-
-        if (TareaSingleton.SingletonInstance().getUsuarioIniciado() != null && !TareaSingleton.SingletonInstance().getUsuarioIniciado().isEmpty()) {
-            edt_usaurio.setText(TareaSingleton.SingletonInstance().getUsuarioIniciado());
-            edt_pass.requestFocus();
-
-        } else {
-            edt_usaurio.requestFocus();
-        }
-
-      // Utils.startHandler(Utils.getRunnable(this, "Debe avanzar a Produccion"));
+        cargargarUserSharePreference();
 
     }
 
