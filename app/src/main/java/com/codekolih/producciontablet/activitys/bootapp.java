@@ -12,6 +12,7 @@ public class bootapp extends BroadcastReceiver {
             Intent i = new Intent(context, Login_Activity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
+            //test
         }
     }
 }
