@@ -295,9 +295,14 @@ public class Verificacion_Activity extends OcultarTeclado {
 
             edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
             edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
-            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
+            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 
         }else{
+
+
+            edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
+            edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 
             edt_verificacion_AnchoFinalRolloYGap.setMaxEms(4);
             edt_verificacion_AnchoFinalRolloYGap.setInputType(InputType.TYPE_CLASS_PHONE);
@@ -311,14 +316,9 @@ public class Verificacion_Activity extends OcultarTeclado {
             edt_verificacion_CantidadTintas.setInputType(InputType.TYPE_CLASS_PHONE);
             edt_verificacion_CantidadTintas.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
 
-            edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
-            edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
-            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
-
-
             edt_verificacion_AnchoFinalRollo.setMaxEms(5);
             edt_verificacion_AnchoFinalRollo.setInputType(InputType.TYPE_CLASS_PHONE);
-            edt_verificacion_AnchoFinalRollo.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
+            edt_verificacion_AnchoFinalRollo.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 
             edt_verificacion_CantidadPistasCortadas.setMaxEms(2);
             edt_verificacion_CantidadPistasCortadas.setInputType(InputType.TYPE_CLASS_PHONE);
@@ -327,6 +327,18 @@ public class Verificacion_Activity extends OcultarTeclado {
             edt_verificacion_PistasTroquelUsadas.setMaxEms(2);
             edt_verificacion_PistasTroquelUsadas.setInputType(InputType.TYPE_CLASS_PHONE);
             edt_verificacion_PistasTroquelUsadas.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+
+        }
+
+        if (tarea_Seleccionada.getTipoMaquinaId()== 3){
+
+            edt_verificacion_ScrapAjusteInicial.setMaxEms(6);
+            edt_verificacion_ScrapAjusteInicial.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_ScrapAjusteInicial.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
+
+            edt_verificacion_AnchoBobinaUsadoCm.setMaxEms(6);
+            edt_verificacion_AnchoBobinaUsadoCm.setInputType(InputType.TYPE_CLASS_PHONE);
+            edt_verificacion_AnchoBobinaUsadoCm.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 
         }
 
@@ -660,7 +672,6 @@ public class Verificacion_Activity extends OcultarTeclado {
         ly_AnchoBobinaUsadoCm= findViewById(R.id.ly_AnchoBobinaUsadoCm);
 
 
-
         edt_verificacion_AnchoFinalRolloYGap = findViewById(R.id.verificacion_edt_AnchoFinalRolloYGap);
         edt_verificacion_CantidadPistasImpresas = findViewById(R.id.verificacion_edt_CantidadPistasImpresas);
         edt_verificacion_CantidadTintas = findViewById(R.id.verificacion_edt_CantidadTintas);
@@ -671,9 +682,7 @@ public class Verificacion_Activity extends OcultarTeclado {
         edt_verificacion_PistasTroquelUsadas = findViewById(R.id.verificacion_edt_PistasTroquelUsadas);
         edt_verificacion_AnchoBobinaUsadoCm= findViewById(R.id.verificacion_edt_AnchoBobinaUsadoCm);
 
-
         txt_verificacion_txt_Observaciones = findViewById(R.id.verificacion_txt_Observaciones);
-
         txt_verificacion_txt_NroDeSobre = findViewById(R.id.verificacion_txt_NroDeSobre);
         txt_verificacion_txt_Descripcion = findViewById(R.id.verificacion_txt_Descripcion);
         txt_verificacion_txt_MetrosAImprimir = findViewById(R.id.verificacion_txt_MetrosAImprimir);

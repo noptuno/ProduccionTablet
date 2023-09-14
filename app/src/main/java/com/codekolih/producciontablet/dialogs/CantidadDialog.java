@@ -73,7 +73,7 @@ public class CantidadDialog extends OcultarTeclado {
         }else{
             edt_numero.setMaxEms(5);
             edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
-            edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789,"));
+            edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
         }
 
         configureEditText(edt_numero);

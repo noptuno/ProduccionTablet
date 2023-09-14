@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -71,14 +72,15 @@ public class ScrapDialogo extends OcultarTeclado {
 
         if (tarea_Seleccionada.getTipoMaquinaId()== 3){
             numero.setMaxEms(6);
-          numero.setInputType(InputType.TYPE_CLASS_NUMBER);
+            numero.setInputType(InputType.TYPE_CLASS_NUMBER);
+            numero.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
+
         } else if (tarea_Seleccionada.getTipoMaquinaId()== 1){
             numero.setMaxEms(6);
         }else if (tarea_Seleccionada.getTipoMaquinaId()== 5){
             numero.setMaxEms(5);
         }else if (tarea_Seleccionada.getTipoMaquinaId()== 2){
             numero.setMaxEms(5);
-
         }
 /*
         final String DECIMAL_PATTERN = "^\\d+\\.\\d{1}$";
@@ -169,6 +171,9 @@ public class ScrapDialogo extends OcultarTeclado {
                             alertDialog4.show();
 
                         }else{
+                            Log.e("numero enviado",numero.getText().toString());
+
+
                             interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
                             dialogo.dismiss();
                         }
