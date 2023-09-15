@@ -648,7 +648,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
     }
 
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -668,8 +667,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
         }
     }
-
-
 
     private void dialogErrorPrintet(String mensaje) {
 
@@ -691,12 +688,10 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         });
     }
 
-
     @Override
     public void onBackPressed() {
         cancelar();
     }
-
 
     private void actualziarmotivoyestado(String motivo, Map<String, Object> estado) {
 
@@ -745,7 +740,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             }
         }, USUARIO);
     }
-
 
     @Override
     public void ResultadoMotivoCancelarDialogo(String motivo, String tipocierre) {

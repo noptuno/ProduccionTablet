@@ -86,11 +86,9 @@ public class CantidadDialog extends OcultarTeclado {
 
                     String a = edt_numero.getText().toString();
                     if(a.isEmpty()){
-
                         Toast.makeText(contexcto,"Faltan Datos",Toast.LENGTH_SHORT).show();
                     }else{
-                        float numfloat = Float.parseFloat(a);
-                        interfaz.ResultadoCantidadDialogo(numfloat);
+                        interfaz.ResultadoCantidadDialogo(Float.parseFloat(edt_numero.getText().toString()));
                         dialogo.dismiss();
                     }
 

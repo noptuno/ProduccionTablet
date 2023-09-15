@@ -27,6 +27,16 @@ public class TareaSingleton {
 
     private String RespuestaDato;
 
+    private int tipomaquinaid;
+
+    public int getTipomaquinaid() {
+        return tipomaquinaid;
+    }
+
+    public void setTipomaquinaid(int tipomaquinaid) {
+        this.tipomaquinaid = tipomaquinaid;
+    }
+
     public String getRespuestaDato() {
         return RespuestaDato;
     }

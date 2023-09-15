@@ -111,7 +111,9 @@ public class Verificacion_Activity extends OcultarTeclado {
             txt_verificacion_txt_Cilindro,
             txt_verificacion_txt_Pistas,
             txt_verificacion_txt_EtiquetasEnBanda,
-            txt_verificacion_txt_EtiquetasPorRollo;
+            txt_verificacion_txt_EtiquetasPorRollo,
+             txt_verificacion_txt_MetrosMatTroquelar;
+
 
     Button btn_guardar, btn_verpdf, btn_cancelar;
     String UnidadIdScrapInicial = "Seleccionar";
@@ -600,7 +602,7 @@ public class Verificacion_Activity extends OcultarTeclado {
             txt_verificacion_txt_Pistas.setText(String.format("%s", tarea_Seleccionada.getPistas()));
             txt_verificacion_txt_EtiquetasEnBanda.setText(String.format("%s", tarea_Seleccionada.getEtiquetasEnBanda()));
             txt_verificacion_txt_EtiquetasPorRollo.setText(String.format("%s", tarea_Seleccionada.getEtiquetasPorRollo()));
-
+            txt_verificacion_txt_MetrosMatTroquelar.setText(String.format("%s", tarea_Seleccionada.getMetrosMatTroquelar()));
             nombrepdf = tarea_Seleccionada.getArchivoEspecificacion();
         }
 
@@ -693,7 +695,7 @@ public class Verificacion_Activity extends OcultarTeclado {
         txt_verificacion_txt_Pistas = findViewById(R.id.verificacion_txt_Pistas);
         txt_verificacion_txt_EtiquetasEnBanda = findViewById(R.id.verificacion_txt_EtiquetasEnBanda);
         txt_verificacion_txt_EtiquetasPorRollo = findViewById(R.id.verificacion_txt_EtiquetasPorRollo);
-
+        txt_verificacion_txt_MetrosMatTroquelar = findViewById(R.id.verificacion_txt_MetrosMatTroquelar);
     }
 
     private void OcultarVariables() {

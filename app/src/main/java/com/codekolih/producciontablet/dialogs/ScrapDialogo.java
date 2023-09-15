@@ -173,7 +173,6 @@ public class ScrapDialogo extends OcultarTeclado {
                         }else{
                             Log.e("numero enviado",numero.getText().toString());
 
-
                             interfaz_scrap.ResultadoScrapDialogo(Float.parseFloat(numero.getText().toString()), unidad);
                             dialogo.dismiss();
                         }

@@ -326,6 +326,7 @@ public class Login_Activity extends OcultarTeclado {
             if (!tipomaquinaid.equals("0")) {
 
                 TareaSingleton.SingletonInstance().setTipoMaquina((tipomaquinaid));
+                TareaSingleton.SingletonInstance().setTipomaquinaid((Integer.parseInt(tipomaquinaid)));
 
             } else {
 

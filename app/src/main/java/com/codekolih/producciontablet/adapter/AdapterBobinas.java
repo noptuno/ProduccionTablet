@@ -16,6 +16,7 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
+import com.codekolih.producciontablet.clases.Tareas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +95,7 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
-        private TextView ProveedorNombre, DefectuosaKg, Lote,Ancho,TipoMaterialId,EsAbiertaoCerrada,NombreTipoMaterial;
+        private TextView ProveedorNombre, txtDefectuosaKg,DefectuosaKg, Lote,Ancho,TipoMaterialId,EsAbiertaoCerrada,NombreTipoMaterial;
         private LinearLayout ly_ProveedorNombre,ly_NombreTipoMaterial, ly_DefectuosaKg, ly_Lote,ly_Ancho,ly_TipoMaterialId,ly_EsAbiertaoCerrada;
 
 
@@ -110,12 +111,16 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
             ly_EsAbiertaoCerrada= (LinearLayout) item.findViewById(R.id.ly_EsAbiertaoCerrada);
 
             ProveedorNombre = (TextView) item.findViewById(R.id.item_bobina_txt_ProveedorNombre);
+
+
+            txtDefectuosaKg = item.findViewById(R.id.txt_bobina_txt_DefectuosaKg);
+
+
             DefectuosaKg = (TextView) item.findViewById(R.id.item_bobina_txt_DefectuosaKg);
             Lote = (TextView) item.findViewById(R.id.item_bobina_txt_Lote);
             Ancho = (TextView) item.findViewById(R.id.item_bobina_txt_Ancho);
             NombreTipoMaterial = (TextView) item.findViewById(R.id.item_bobina_txt_NombreTipoMaterial);
             EsAbiertaoCerrada= (TextView) item.findViewById(R.id.item_bobina_txt_EsAbiertaoCerrada);
-
 
 
             for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
@@ -128,6 +133,16 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
                     ly_DefectuosaKg.setVisibility(parseInt(entry.getValue()));
                 }
             }
+
+           Tareas tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea();
+
+            Log.e("Tipotarea de Tareas",tarea_Seleccionada.getTipoMaquinaId()+"");
+
+            if (TareaSingleton.SingletonInstance().getTipomaquinaid()== 4){
+                txtDefectuosaKg.setText("Metros o kilos de bobina");
+            }
+
+            Log.e("Tipotarea de Singleton",TareaSingleton.SingletonInstance().getTipomaquinaid()+"");
 
 
         }

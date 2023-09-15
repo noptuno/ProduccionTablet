@@ -16,12 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Produccion_Lista;
-import com.codekolih.producciontablet.clases.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.NoteViewHolder> {
 
@@ -124,7 +122,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
             RollosFabricdos = (TextView) item.findViewById(R.id.item_produccion_txt_RollosFabricdos);
             RollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txt_RollosEmpaquetados);
 
-            textviewRollosEmpaquetados= (TextView) item.findViewById(R.id.item_produccion_txtview_RollosEmpaquetados);
+            textviewRollosEmpaquetados= (TextView) item.findViewById(R.id.txt_bobina_txt_DefectuosaKg);
 
             UsuarioId = item.findViewById(R.id.item_produccion_txt_Usuario);
 
