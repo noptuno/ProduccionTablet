@@ -417,10 +417,9 @@ public class Verificacion_Activity extends OcultarTeclado {
             newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
             newproduccion.put("RollosEmpaquetados", 0);
             newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
+
             dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
 
-
-            Log.e("json",GsonUtils.toJSON(newproduccion).toString());
 
             httpLayer.altaproduccion(GsonUtils.toJSON(newproduccion), new HttpLayer.HttpLayerResponses<JSONObject>() {
                 @Override
@@ -441,7 +440,6 @@ public class Verificacion_Activity extends OcultarTeclado {
                                 String id = valirIdProduccion[1];
                                 TareaSingleton.SingletonInstance().setProduccionId(Integer.parseInt(id));
 
-
                                 Map<String, Object> estado = new HashMap<>();
                                 estado.put("TareaId", tareaId);
                                 estado.put("EstadoId", "P1");
@@ -449,7 +447,6 @@ public class Verificacion_Activity extends OcultarTeclado {
                                 estado.put("SessionId", SessionId);
 
                                 cargarEstadoProduccion(estado);
-
 
 
                             }else{
@@ -477,50 +474,6 @@ public class Verificacion_Activity extends OcultarTeclado {
         }
         }
 
-    private void  cargarEstadoCancelarProduccion(Map<String, Object> estado) {
-        httpLayer.cargarEstado(GsonUtils.toJSON(estado), new HttpLayer.HttpLayerResponses<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject response) {
-                Log.e("Verificacion_Activity", "Cargo Estado Produccion C2 " + tareaId);
-
-                try {
-
-                    String comando = response.getString("Comando");
-                    String RespuestaMensaje = response.getString("RespuestaMensaje");
-                    String CodigoError = response.getString("CodigoError");
-                    String RespuestaDato = response.getString("RespuestaDato");
-
-                    if (RespuestaMensaje.equals("200")){
-
-                        Intent intent = new Intent(Verificacion_Activity.this, Produccion_Activity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        finish();
-                    }else{
-                        Log.e("Verificacion_Activity", "No cambi oestado " + tareaId + " " + RespuestaMensaje);
-                        finish();
-                    }
-
-                } catch (JSONException e) {
-                    Log.e("Verificacion_Activity", "Dio error");
-                    throw new RuntimeException(e);
-                }
-
-
-
-
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-                dialogError("No cargo el estado inicial a produccion reintentar");
-
-
-            }
-        }, USUARIO);
-
-    }
 
     private void cargarEstadoProduccion(Map<String, Object> estado) {
 

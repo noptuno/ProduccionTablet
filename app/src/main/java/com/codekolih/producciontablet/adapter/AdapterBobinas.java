@@ -144,7 +144,6 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
 
             Log.e("Tipotarea de Singleton",TareaSingleton.SingletonInstance().getTipomaquinaid()+"");
 
-
         }
 
         public void bind(final Bobinas bobina) {

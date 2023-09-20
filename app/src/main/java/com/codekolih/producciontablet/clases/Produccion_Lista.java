@@ -33,22 +33,32 @@ public class Produccion_Lista implements Serializable  {
 
     }
 
-public String toString(){
-
-        String a = " ProduccionId: " + getProduccionId() +
-                " PedidoId: " +getPedidoId() +
-                " TareaId: " +getTareaId() +
-                " AnchoFinalRolloYGap: " +getAnchoFinalRolloYGap() +
-                " CantidadPistasImpresas: " +getCantidadPistasImpresas() +
-                " CantidadTintas: " +getCantidadTintas() +
-                " ScrapAjusteInicial: " +getScrapAjusteInicial() +
-                " ScrapAjusteInicial_Unidades: " +getScrapAjusteInicial() +
-                " AnchoFinalRollo: " +getAnchoFinalRollo() +
-                " CantidadPistasCortadas: " +getCantidadPistasCortadas() +
-                " PistasTroquelUsadas: " +getPistasTroquelUsadas();
-
-        return a;
-}
+    @Override
+    public String toString() {
+        return "Produccion_Lista{" +
+                "Fecha='" + Fecha + '\'' +
+                ", UserNameId='" + UserNameId + '\'' +
+                ", ProduccionId=" + ProduccionId +
+                ", PedidoId=" + PedidoId +
+                ", TareaId=" + TareaId +
+                ", MetrosImpresos=" + MetrosImpresos +
+                ", AnchoFinalRolloYGap=" + AnchoFinalRolloYGap +
+                ", CantidadPistasImpresas=" + CantidadPistasImpresas +
+                ", CantidadTintas=" + CantidadTintas +
+                ", AnchoBobinaUsadoCm=" + AnchoBobinaUsadoCm +
+                ", ScrapAjusteInicial=" + ScrapAjusteInicial +
+                ", ScrapAjusteInicial_Unidades='" + ScrapAjusteInicial_Unidades + '\'' +
+                ", ScrapAjusteProduccion=" + ScrapAjusteProduccion +
+                ", ScrapAjusteProduccion_Unidades='" + ScrapAjusteProduccion_Unidades + '\'' +
+                ", ObservacionesCierre='" + ObservacionesCierre + '\'' +
+                ", RollosFabricdos=" + RollosFabricdos +
+                ", AnchoFinalRollo=" + AnchoFinalRollo +
+                ", CantidadPistasCortadas=" + CantidadPistasCortadas +
+                ", PistasTroquelUsadas=" + PistasTroquelUsadas +
+                ", RollosEmpaquetados=" + RollosEmpaquetados +
+                ", UsuarioId=" + UsuarioId +
+                '}';
+    }
 
 // Getter Methods
 
@@ -221,4 +231,7 @@ public String toString(){
     public void setUsuarioId(int UsuarioId) {
         this.UsuarioId = UsuarioId;
     }
+
+
+
 }

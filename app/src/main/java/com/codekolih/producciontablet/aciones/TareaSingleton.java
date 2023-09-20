@@ -339,14 +339,15 @@ public class TareaSingleton {
             //valdiar
             variablesGenrales.put("1", "8"); //control del boceto o muestra contra la impresión de largada
             variablesGenrales.put("2", "8"); //control de tipo de papel correcto
-            variablesGenrales.put("3", "8"); //control que el trabajo cumpla con la especificación
+            variablesGenrales.put("3", "0"); //control que el trabajo cumpla con la especificación
             variablesGenrales.put("4", "8"); //control del troquelado y del estado del line
-            variablesGenrales.put("5", "8"); // control del sentido de bobinado.
+            variablesGenrales.put("5", "0"); // control del sentido de bobinado.
             variablesGenrales.put("6", "8"); // control para numerados (datos de pie, dirección y numeración)
             variablesGenrales.put("7", "8"); //control para numerados (armado y control de numeración)
             variablesGenrales.put("8", "8"); //control para largo fijo (largo de ticket)
-            variablesGenrales.put("9", "8"); //control tipo de papel y buje
-            variablesGenrales.put("10", "8");// Control del armado de la medida
+            variablesGenrales.put("9", "0"); //control tipo de papel y buje
+            variablesGenrales.put("10", "0");// Control del armado de la medida
+
 
             //Bobina
             variablesGenrales.put("11", "8");// control de calidad de la impresión
@@ -378,8 +379,8 @@ public class TareaSingleton {
             variablesGenrales.put("AnchoFinalRolloYGap", "8");
             variablesGenrales.put("CantidadPistasImpresas", "8");
             variablesGenrales.put("CantidadTintas", "8");
-            variablesGenrales.put("ScrapAjusteInicial", "8");
-            variablesGenrales.put("UnidadIdScrapInicial", "8");
+            variablesGenrales.put("ScrapAjusteInicial", "0");
+            variablesGenrales.put("UnidadIdScrapInicial", "0");
             variablesGenrales.put("SumRollosFabricados", "8");//FE,FR
             variablesGenrales.put("AnchoFinalRollo", "0");
             variablesGenrales.put("CantidadPistasCortadas", "8");
@@ -442,8 +443,19 @@ public class TareaSingleton {
     }
 
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "TareaSingleton{" +
+                "tareaInstanciada=" + tareaInstanciada +
+                ", pedidoInstanciada=" + pedidoInstanciada +
+                ", usuarioIniciado='" + usuarioIniciado + '\'' +
+                ", nombrepdf='" + nombrepdf + '\'' +
+                ", RespuestaDato='" + RespuestaDato + '\'' +
+                ", tipomaquinaid=" + tipomaquinaid +
+                ", produccionId=" + produccionId +
+                ", tipoMaquina=" + tipoMaquina +
+                ", proveedores=" + proveedores +
+                ", materiales=" + materiales +
+                '}';
+    }
 }

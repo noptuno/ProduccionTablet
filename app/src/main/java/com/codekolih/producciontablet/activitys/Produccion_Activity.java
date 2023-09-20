@@ -257,7 +257,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         recyclerViewBobinas.setAdapter(adapterBobina);
 
 
-        cargarTareaHttp();
+        volveracargarTarea();
         ocultarVariables();
         cargarfecha();
 
@@ -454,7 +454,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     }
 
 
-    void cargarTareaHttp() {
+    void volveracargarTarea() {
 
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
@@ -468,13 +468,13 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
                     if (tareatemp.getPedidoId() == pedidoId && tareatemp.getTareaId() == tareaId) {
                         TareaSingleton.SingletonInstance().setTarea(tareatemp);
-                        cargartodoslosestados(tareatemp);
+                        Log.e("Tarea cargada es=",TareaSingleton.SingletonInstance().toString());
                         break;
                     }
                 }
 
                 dialogProgress.dismiss();
-                cargarTareaSeleccionada();
+                cargarProduccionListdesdeTareaSeleccionada();
             }
 
             @Override
@@ -487,12 +487,12 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         });
     }
 
-    void cargarTareaSeleccionada() {
+    void cargarProduccionListdesdeTareaSeleccionada() {
 
+        //arriba ya actualice el singleton de tarea entonces vuelvo a seleccionar esa tarea
         if ((tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea()) == null) {
 
             Toast.makeText(getApplicationContext(), "Hubo un problema critico con la carga de Tarea Seleecionada", Toast.LENGTH_SHORT).show();
-
             finish();
         }
 
@@ -502,34 +502,38 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
         nombrepdf = tarea_Seleccionada.getArchivoEspecificacion();
 
-
+//aca debo mostrar todas las producciones de la tarea para ver sus valores
         if (tarea_Seleccionada.getProduccion_Lista().size() > 0) {
-            for (Produccion_Lista lg : tarea_Seleccionada.getProduccion_Lista()) {
-                Log.e("BDproduccion", lg.toString());
 
+            for (Produccion_Lista produccionListaTemp : tarea_Seleccionada.getProduccion_Lista()) {
+
+
+                //esto es para saber donde debo sumar los valores y en que variable mostrarlos porque depende de los tipos de maquinas
                 for (Map.Entry<String, String> entry : TareaSingleton.SingletonInstance().getTipoMaquina().entrySet()) {
                     if ("SumMetrosImpresos".equals(entry.getKey())) {
                         if (entry.getValue().equals("0")) {
-                            contcantidad += lg.getMetrosImpresos();
-
+                            contcantidad += produccionListaTemp.getMetrosImpresos();
                         }
                     } else if ("SumRollosFabricados".equals(entry.getKey())) {
                         if (entry.getValue().equals("0")) {
-                            contcantidad += lg.getRollosFabricdos();
-
+                            contcantidad += produccionListaTemp.getRollosFabricdos();
                         }
+
                     } else if ("SumRollosEmpaquedatos".equals(entry.getKey())) {
                         if (entry.getValue().equals("0")) {
-                            contcantidad += lg.getRollosEmpaquetados();
+                            contcantidad += produccionListaTemp.getRollosEmpaquetados();
                         }
                     }
                 }
+            //aca aprovecho de validar cual es la ultima produccion que cargue en la pantalla anterior y
+                // la asigno a la variable producicon_actual esto para saber donde cargar los valores de produccion
 
-                if (lg.getProduccionId() == produccionId) {
-                    produccion_actual = lg;
+                if (produccionListaTemp.getProduccionId() == produccionId) {
+                    produccion_actual = produccionListaTemp;
+
                 }
 
-                contscrap += lg.getScrapAjusteProduccion();
+                contscrap += produccionListaTemp.getScrapAjusteProduccion();
             }
 
             totaldadscrap = contscrap;
@@ -540,22 +544,23 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
         } else {
             Log.e("MSG", "no hay produccion para mostrar");
-
         }
 
+        Log.e("produccion actual = ", produccion_actual.toString());
+
+        //ACA HAGO LO MISMO CON BOBINAS
         if (tarea_Seleccionada.getBobinas().size() > 0) {
             for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
                 Log.e("Producción_Bobin", lg.toString());
                 bobinas_actual = lg;
             }
-
             adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
             adapterBobina.notifyDataSetChanged();
         }
 
+        //ACA Muetro los datos de la tarea para mostrarlos no los editext
         if (tarea_Seleccionada != null) {
             //datos tarea
-
 
             txt_SerieYNro.setText(tarea_Seleccionada.getSerieYNro());
             txt_ArticuloId.setText(tarea_Seleccionada.getArticuloId());
@@ -631,7 +636,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                 dialogProgress.dismiss();
                 cargocantidad = true;
                 Log.e("onSuccess AP", response.toString());
-                cargarTareaHttp();
+                volveracargarTarea();
                 btn_cantidad.setText("MODIFICAR CANTIDAD");
 
             }
@@ -658,7 +663,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
             if (onSuccessRecibido.equals("ok")){
                 cargobobina = true;
-                cargarTareaHttp();
+                volveracargarTarea();
             }else{
 
                 dialogErrorPrintet("No Cargo Bobina");
@@ -696,7 +701,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     private void actualziarmotivoyestado(String motivo, Map<String, Object> estado) {
 
 
-
         Map<String, Object> produccion = new HashMap<>();
         produccion.put("ProduccionId", produccionId);
         produccion.put("PedidoId", pedidoId);
@@ -710,7 +714,10 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         produccion.put("ScrapAjusteInicial_Unidades", produccion_actual.getScrapAjusteInicial_Unidades());
         produccion.put("ScrapAjusteProduccion", produccion_actual.getScrapAjusteProduccion());
         produccion.put("ScrapAjusteProduccion_Unidades", produccion_actual.getScrapAjusteProduccion_Unidades());
+
+        //aca solo necesito que se actualice esto
         produccion.put("ObservacionesCierre", motivo);
+
         produccion.put("RollosFabricdos", produccion_actual.getRollosFabricdos());
         produccion.put("AnchoFinalRollo", produccion_actual.getAnchoFinalRollo());
         produccion.put("CantidadPistasCortadas", produccion_actual.getCantidadPistasCortadas());
@@ -812,7 +819,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             public void onSuccess(JSONObject response) {
 
                 dialogProgress.dismiss();
-                cargarTareaHttp();
+                volveracargarTarea();
                 btn_scrap.setText("MODIFICAR SCRAP");
 
                 cargascrap = true;
@@ -848,7 +855,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
                 if(mensaje.equals("No Cargo Tarea")){
 
-                    cargarTareaHttp();
+                    volveracargarTarea();
                 }
 
             }
