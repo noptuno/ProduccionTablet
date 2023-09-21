@@ -261,8 +261,6 @@ public class Bobina_Activity extends OcultarTeclado {
                                 if (!Lote.equals("")){
 
 
-
-
                                 //todo    interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
 
                                     Bobinas bobinacargar = new Bobinas();
@@ -279,7 +277,6 @@ public class Bobina_Activity extends OcultarTeclado {
                                     bobinacargar.setNombreTipoMaterial(ProveedorMaterial);
 
                                     cargarBobina(bobinacargar);
-
 
 
                                 }else{
@@ -338,6 +335,9 @@ public class Bobina_Activity extends OcultarTeclado {
 
     private void cargarBobina(Bobinas bobinacargar) {
 
+
+        Log.e("Lote: ", bobinacargar.toString());
+
         dialogProgress = ProgressHUD.show(Bobina_Activity.this);
 
         httpLayer.cargarBobinas(bobinacargar, new HttpLayer.HttpLayerResponses<JSONObject>() {
@@ -348,14 +348,10 @@ public class Bobina_Activity extends OcultarTeclado {
 
                 dialogProgress.dismiss();
 
-                String onSuccess = "ok";
                 Intent intent = new Intent(Bobina_Activity.this, Produccion_Activity.class);
-                intent.putExtra("onSuccess", onSuccess);
+                intent.putExtra("onSuccess", "ok");
                 setResult(Activity.RESULT_OK, intent);
                 finish();
-
-
-                //  cargarTareaHttp();
 
             }
 
@@ -363,13 +359,10 @@ public class Bobina_Activity extends OcultarTeclado {
             public void onError(Exception e) {
                 dialogProgress.dismiss();
 
-
-                String onSuccess = "false";
                 Intent intent = new Intent(Bobina_Activity.this, Produccion_Activity.class);
-                intent.putExtra("onSuccess", onSuccess);
+                intent.putExtra("onSuccess", "false");
                 setResult(Activity.RESULT_OK, intent);
                 finish();
-
 
 
                 //dialogErrorPrintet("No Cargo Bobina");

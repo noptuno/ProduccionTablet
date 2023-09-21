@@ -16,15 +16,25 @@ public class Bobinas implements Serializable {
         private float DefectuosaKg;
         private String NombreTipoMaterial;
 
-
-    public String toString(){
-
-        String a = "Bobina: " + getBobinaId() + "\n";
-
-        return a;
+    @Override
+    public String toString() {
+        return "Bobinas{" +
+                "BobinaId=" + BobinaId +
+                ", TareaId=" + TareaId +
+                ", ProduccionId=" + ProduccionId +
+                ", ProveedorId=" + ProveedorId +
+                ", ProveedorNombre='" + ProveedorNombre + '\'' +
+                ", Lote='" + Lote + '\'' +
+                ", Ancho=" + Ancho +
+                ", TipoMaterialId=" + TipoMaterialId +
+                ", EsAbiertaoCerrada='" + EsAbiertaoCerrada + '\'' +
+                ", DefectuosaKg=" + DefectuosaKg +
+                ", NombreTipoMaterial='" + NombreTipoMaterial + '\'' +
+                '}';
     }
 
-        // Getter Methods
+
+// Getter Methods
 
         public int getBobinaId() {
             return BobinaId;

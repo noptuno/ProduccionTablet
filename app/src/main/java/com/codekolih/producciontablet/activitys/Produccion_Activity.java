@@ -257,13 +257,12 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         recyclerViewBobinas.setAdapter(adapterBobina);
 
 
-        volveracargarTarea();
+        volveraCargaryActualziarTarea();
         ocultarVariables();
         cargarfecha();
 
 
     }
-
 
     @Override
     protected void onResume() {
@@ -272,24 +271,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
      Validarinternet.validarConexionInternet(Produccion_Activity.this);
 
     }
-
-    private void cargartodoslosestados(Tareas a) {
-
-        List<EstadosOp> response = a.getEstadosOp();
-
-        for (EstadosOp tareatemp : response) {
-
-            Log.e("Estados","Tarea: "+ tareatemp.getTareaId() + "\n"+
-                    "id estado: "+tareatemp.getEstadoId() + "\n"+
-                    "nombreEstado: " +tareatemp.getNombreEstado() + "\n"+
-                    "fecha: " +tareatemp.getFechaInicio() + "\n"
-
-            );
-
-        }
-
-    }
-
 
     private void finalizar() {
 
@@ -302,7 +283,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
             new CancelarDialog(Produccion_Activity.this, Produccion_Activity.this);
         }
-
     }
 
     private void cargarfecha() {
@@ -454,7 +434,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     }
 
 
-    void volveracargarTarea() {
+    void volveraCargaryActualziarTarea() {
 
         dialogProgress = ProgressHUD.show(Produccion_Activity.this);
 
@@ -636,7 +616,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                 dialogProgress.dismiss();
                 cargocantidad = true;
                 Log.e("onSuccess AP", response.toString());
-                volveracargarTarea();
+                volveraCargaryActualziarTarea();
                 btn_cantidad.setText("MODIFICAR CANTIDAD");
 
             }
@@ -663,7 +643,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
             if (onSuccessRecibido.equals("ok")){
                 cargobobina = true;
-                volveracargarTarea();
+                volveraCargaryActualziarTarea();
             }else{
 
                 dialogErrorPrintet("No Cargo Bobina");
@@ -819,7 +799,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             public void onSuccess(JSONObject response) {
 
                 dialogProgress.dismiss();
-                volveracargarTarea();
+                volveraCargaryActualziarTarea();
                 btn_scrap.setText("MODIFICAR SCRAP");
 
                 cargascrap = true;
@@ -855,7 +835,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
                 if(mensaje.equals("No Cargo Tarea")){
 
-                    volveracargarTarea();
+                    volveraCargaryActualziarTarea();
                 }
 
             }

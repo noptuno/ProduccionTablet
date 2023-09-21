@@ -417,7 +417,6 @@ public class Verificacion_Activity extends OcultarTeclado {
             newproduccion.put("PistasTroquelUsadas", PistasTroquelUsadas);
             newproduccion.put("RollosEmpaquetados", 0);
             newproduccion.put("UsuarioId", tarea_Seleccionada.getUsuarioId());
-
             dialogProgress = ProgressHUD.show(Verificacion_Activity.this);
 
 
