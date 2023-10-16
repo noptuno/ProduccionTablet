@@ -38,9 +38,7 @@ public class CantidadDialog extends OcultarTeclado {
 
     }
 
-
     public CantidadDialog(Context contexcto , finalizarCuadro actividad){
-
 
         httpLayer = new HttpLayer(contexcto);
         interfaz = actividad;
@@ -59,21 +57,18 @@ public class CantidadDialog extends OcultarTeclado {
 
         tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea();
 
+        if (tarea_Seleccionada.getTipoMaquinaId()== 4 || tarea_Seleccionada.getTipoMaquinaId()== 1){
 
-        if (tarea_Seleccionada.getTipoMaquinaId()== 4){
             edt_numero.setMaxEms(5);
             edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
             edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
 
-
-        }else if (tarea_Seleccionada.getTipoMaquinaId()== 1){
-            edt_numero.setMaxEms(5);
-            edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
-            edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
         }else{
+
             edt_numero.setMaxEms(5);
             edt_numero.setInputType(InputType.TYPE_CLASS_PHONE);
             edt_numero.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
+
         }
 
         configureEditText(edt_numero);
@@ -98,7 +93,6 @@ public class CantidadDialog extends OcultarTeclado {
                     dialogo.dismiss();
 
                 }
-
 
             }
         });

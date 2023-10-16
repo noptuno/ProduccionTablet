@@ -157,12 +157,7 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
 
                 if ("SumMetrosImpresos".equals(entry.getKey())){
                     ly_MetrosImpresos.setVisibility(parseInt(entry.getValue()));
-                }  else if ("ScrapAjusteInicial".equals(entry.getKey())){
-                    ly_ScrapAjusteProduccion.setVisibility(parseInt(entry.getValue()));
-                } else if ("UnidadIdScrapInicial".equals(entry.getKey())){
-                    ly_ScrapAjusteProduccion_Unidades.setVisibility(parseInt(entry.getValue()));
-                }
-                else if ("SumRollosFabricados".equals(entry.getKey())){
+                } else if ("SumRollosFabricados".equals(entry.getKey())){
                     ly_RollosFabricdos.setVisibility(parseInt(entry.getValue()));
                 }
                 else if ("SumRollosEmpaquedatos".equals(entry.getKey())){
@@ -170,7 +165,13 @@ public class AdapterProduccion extends RecyclerView.Adapter<AdapterProduccion.No
                     textviewRollosEmpaquetados.setText("Rollos Producidos");
                 }
 
-
+/*
+                else if ("ScrapAjusteInicial".equals(entry.getKey())){
+                    ly_ScrapAjusteProduccion.setVisibility(parseInt(entry.getValue()));
+                } else if ("UnidadIdScrapInicial".equals(entry.getKey())){
+                    ly_ScrapAjusteProduccion_Unidades.setVisibility(parseInt(entry.getValue()));
+                }
+*/
 
                 //produccion unicavez
 

@@ -115,8 +115,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                 txt_ppistas.setText("Pistas");
             }
 
-
-
             if (MAQUINAID==0){
                 Toast.makeText(getApplicationContext(), "No hay imprenta seleccionada", Toast.LENGTH_SHORT).show();
                 finish();
