@@ -130,8 +130,6 @@ public class Verificacion_Activity extends OcultarTeclado {
         Log.e("VrerivicacionActivity", "INICIO");
         variablesFind();
 
-        //verificacion_edt_AnchoFinalRolloYGap no registra
-        //verificacion_edt_AnchoBobinaUsadoCm error
 
         httpLayer = new HttpLayer(this);
 
@@ -193,7 +191,13 @@ public class Verificacion_Activity extends OcultarTeclado {
             @Override
             public void onClick(View view) {
 
-                cancelar();
+
+                if (Validarinternet.validarConexionInternet(Verificacion_Activity.this)){
+
+                    cancelar();
+                }
+
+
 
             }
         });
@@ -205,32 +209,36 @@ public class Verificacion_Activity extends OcultarTeclado {
                 hideKeyboard(constraintLayout.getRootView());
 
 
+                if (Validarinternet.validarConexionInternet(Verificacion_Activity.this)){
 
-                if (validarVariables()) {
+                    if (validarVariables()) {
 
-                    AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
-                    build4.setMessage("¿Desea avanzar a produccion? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        AlertDialog.Builder build4 = new AlertDialog.Builder(Verificacion_Activity.this);
+                        build4.setMessage("¿Desea avanzar a produccion? ").setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                            cargarVerificacion();
+                                cargarVerificacion();
 
-                        }
+                            }
 
-                    }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-
-                        }
-                    });
-                    AlertDialog alertDialog4 = build4.create();
-                    alertDialog4.show();
+                        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
 
-            } else {
-                Toast.makeText(getApplicationContext(), "Faltan Datos", Toast.LENGTH_SHORT).show();
-            }
+                            }
+                        });
+                        AlertDialog alertDialog4 = build4.create();
+                        alertDialog4.show();
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Faltan Datos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
 
         }
         });
@@ -239,12 +247,16 @@ public class Verificacion_Activity extends OcultarTeclado {
             @Override
             public void onClick(View view) {
 
-                pdfAbierto = true;
 
-                Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
-                intent.putExtra("nombrepdf", nombrepdf);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                startActivityForResult(intent, CODIGOABRIRPDF);
+                if (Validarinternet.validarConexionInternet(Verificacion_Activity.this)){
+                    pdfAbierto = true;
+                    Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
+                    intent.putExtra("nombrepdf", nombrepdf);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivityForResult(intent, CODIGOABRIRPDF);
+
+                }
+
 
 
             }

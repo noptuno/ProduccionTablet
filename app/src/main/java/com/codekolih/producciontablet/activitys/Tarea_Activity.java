@@ -94,12 +94,11 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                if (Validarinternet.validarConexionInternet(getApplicationContext())){
+                if (Validarinternet.validarConexionInternet(Tarea_Activity.this)){
                     cargarTarea();
+                }else{
+
                 }
-
-
 
             }
         });
@@ -112,7 +111,12 @@ public class Tarea_Activity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        finish();
+
+                        if (Validarinternet.validarConexionInternet(Tarea_Activity.this)){
+
+                            finish();
+                        }
+
 
                     }
 
@@ -163,15 +167,21 @@ public class Tarea_Activity extends AppCompatActivity {
             @Override
             public void onClick(Tareas note, int a) {
 
-                if (PermiteCambioPrioridad.equals("false")) {
-                    if (a == 0) {
-                        elegirTarea(note);
+                if (Validarinternet.validarConexionInternet(Tarea_Activity.this)){
+                    if (PermiteCambioPrioridad.equals("false")) {
+                        if (a == 0) {
+                            elegirTarea(note);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No puede elegir esa Tarea", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getApplicationContext(), "No puede elegir esa Tarea", Toast.LENGTH_SHORT).show();
+                        elegirTarea(note);
                     }
-                } else {
-                    elegirTarea(note);
+                }else{
+
                 }
+
+
             }
         });
 
@@ -198,7 +208,7 @@ public class Tarea_Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (Validarinternet.validarConexionInternet(this)) {
+        if (Validarinternet.validarConexionInternet(Tarea_Activity.this)) {
             cargarTarea();
             mHandler.postDelayed(mRunnable, 300000);
         }

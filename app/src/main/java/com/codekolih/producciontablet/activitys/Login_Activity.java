@@ -178,7 +178,6 @@ public class Login_Activity extends OcultarTeclado {
             @Override
             public void onClick(View view) {
 
-
                 String imprenta = txt_nombreImprenta.getText().toString();
                 String usuario = edt_usaurio.getText().toString();
                 String pass = edt_pass.getText().toString();
@@ -207,7 +206,6 @@ public class Login_Activity extends OcultarTeclado {
                                         String usuario = edt_usaurio.getText().toString().trim();
                                         TareaSingleton.SingletonInstance().setUsuarioIniciado(usuario);
                                         registerUsername(usuario);
-
 
                                         Intent intent = new Intent(Login_Activity.this, Tarea_Activity.class);
                                         startActivity(intent);

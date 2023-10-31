@@ -117,7 +117,6 @@ public class Bobina_Activity extends OcultarTeclado {
 //todo validar
 
          try {
-
              produccionid = TareaSingleton.SingletonInstance().getProduccionId();
              tareaid = TareaSingleton.SingletonInstance().getTarea().getTareaId();
              USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
@@ -127,9 +126,7 @@ public class Bobina_Activity extends OcultarTeclado {
              Log.e("cargado ","ERROR");
          }
 
-
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_bobina);
-
         addKeyboardHideListener(constraintLayout);
 
         spi_NombreTipoMaterial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -150,8 +147,6 @@ public class Bobina_Activity extends OcultarTeclado {
 
             }
         });
-
-
 
         spi_ProveedorNombre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
