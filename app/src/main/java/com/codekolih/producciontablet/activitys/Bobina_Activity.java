@@ -31,6 +31,7 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
+import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.Material;
 import com.codekolih.producciontablet.clases.Proveedor;
@@ -106,10 +107,8 @@ public class Bobina_Activity extends OcultarTeclado {
         quince= findViewById(R.id.quince);
         dieciseis= findViewById(R.id.dieciseis);
 
-
         requestQueue = Volley.newRequestQueue(this);
         httpLayer = new HttpLayer(this);
-
 
         pref = getSharedPreferences(PREF_PRODUCCION_CONFIGURACION, Context.MODE_PRIVATE);
         MAQUINATIPOID = pref.getString(PREF_PRODUCCION_MAQUINATIPOID, "0");
@@ -163,12 +162,10 @@ public class Bobina_Activity extends OcultarTeclado {
                     proveedorSeleccionado = unidad;
                 }
 
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
 
             }
         });
@@ -188,114 +185,114 @@ public class Bobina_Activity extends OcultarTeclado {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-
             }
         });
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (!proveedorSeleccionado.equals(unidad)&&idproveedorSeleccionado.length()>0 && proveedorSeleccionado.length()>0 && edt_Lote.getText().length()>0 && NombreTipoMaterial.length()>0){
+                if (Validarinternet.validarConexionInternet(Bobina_Activity.this)){
+                    if (!proveedorSeleccionado.equals(unidad)&&idproveedorSeleccionado.length()>0 && proveedorSeleccionado.length()>0 && edt_Lote.getText().length()>0 && NombreTipoMaterial.length()>0){
 
-                    if (validarVariables()){
+                        if (validarVariables()){
 
-                        int idproveedor = parseInt(idproveedorSeleccionado);
-                        String ProveedorNombre = proveedorSeleccionado;
-                        String Lote = edt_Lote.getText().toString();
-                        float Ancho = 0;
-                        float DefectuosaKg = 0;
-                        int tipoMaterialId = 0;
-
-                        try {
-                             Ancho = parseFloat(edt_Ancho.getText().toString());
-                        }catch (Exception e){
-                        }
-                        try {
-                            DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
-                        }catch (Exception e){
-                        }
-                        try {
-                            tipoMaterialId = parseInt(TipoMaterialId);
-
-                        }catch (Exception e){
-                        }
-
-                        String EsAbiertaoCerrada = abiertaocerrada;
-                        String ProveedorMaterial = NombreTipoMaterial;
-
-                        try{
-                            if (MAQUINATIPOID.equals("5")){
-
-                                if (!Lote.equals("")){
-
-                                  //todo  interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
-                                   // dialogo.dismiss();
-
-                                    Bobinas bobinacargar = new Bobinas();
-                                    bobinacargar.setBobinaId(0);
-                                    bobinacargar.setTareaId(tareaid);
-                                    bobinacargar.setProduccionId(produccionid);
-                                    bobinacargar.setProveedorId(idproveedor);
-                                    bobinacargar.setProveedorNombre(ProveedorNombre);
-                                    bobinacargar.setLote(Lote);
-                                    bobinacargar.setAncho(Ancho);
-                                    bobinacargar.setTipoMaterialId(tipoMaterialId);
-                                    bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
-                                    bobinacargar.setDefectuosaKg(DefectuosaKg);
-                                    bobinacargar.setNombreTipoMaterial(ProveedorMaterial);
-
-
-                            cargarBobina(bobinacargar);
-
-
-                                }else{
-                                    Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
-                                }
-                            }else{
-
-                                if (!Lote.equals("")){
-
-
-                                //todo    interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
-
-                                    Bobinas bobinacargar = new Bobinas();
-                                    bobinacargar.setBobinaId(0);
-                                    bobinacargar.setTareaId(tareaid);
-                                    bobinacargar.setProduccionId(produccionid);
-                                    bobinacargar.setProveedorId(idproveedor);
-                                    bobinacargar.setProveedorNombre(ProveedorNombre);
-                                    bobinacargar.setLote(Lote);
-                                    bobinacargar.setAncho(Ancho);
-                                    bobinacargar.setTipoMaterialId(tipoMaterialId);
-                                    bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
-                                    bobinacargar.setDefectuosaKg(DefectuosaKg);
-                                    bobinacargar.setNombreTipoMaterial(ProveedorMaterial);
-
-                                    cargarBobina(bobinacargar);
-
-
-                                }else{
-
-                                    Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
-                                }
-
+                            int idproveedor = parseInt(idproveedorSeleccionado);
+                            String ProveedorNombre = proveedorSeleccionado;
+                            String Lote = edt_Lote.getText().toString();
+                            float Ancho = 0;
+                            float DefectuosaKg = 0;
+                            int tipoMaterialId = 0;
+                            try {
+                                Ancho = parseFloat(edt_Ancho.getText().toString());
+                            }catch (Exception e){
+                            }
+                            try {
+                                DefectuosaKg = parseFloat(edt_DefectuosaKg.getText().toString());
+                            }catch (Exception e){
+                            }
+                            try {
+                                tipoMaterialId = parseInt(TipoMaterialId);
+                            }catch (Exception e){
                             }
 
+                            String EsAbiertaoCerrada = abiertaocerrada;
+                            String ProveedorMaterial = NombreTipoMaterial;
 
-                        }catch (Exception e){
-                            Log.e("ErrorBobina",e.toString());
+                            try{
+                                if (MAQUINATIPOID.equals("5")){
+
+                                    if (!Lote.equals("")){
+
+                                        //todo  interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
+                                        // dialogo.dismiss();
+
+                                        Bobinas bobinacargar = new Bobinas();
+                                        bobinacargar.setBobinaId(0);
+                                        bobinacargar.setTareaId(tareaid);
+                                        bobinacargar.setProduccionId(produccionid);
+                                        bobinacargar.setProveedorId(idproveedor);
+                                        bobinacargar.setProveedorNombre(ProveedorNombre);
+                                        bobinacargar.setLote(Lote);
+                                        bobinacargar.setAncho(Ancho);
+                                        bobinacargar.setTipoMaterialId(tipoMaterialId);
+                                        bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
+                                        bobinacargar.setDefectuosaKg(DefectuosaKg);
+                                        bobinacargar.setNombreTipoMaterial(ProveedorMaterial);
+
+
+                                        cargarBobina(bobinacargar);
+
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
+                                    }
+                                }else{
+
+                                    if (!Lote.equals("")){
+
+
+                                        //todo    interfaz_scrap.ResultadoBobinaDialogo(idproveedor,ProveedorNombre,Lote,Ancho,EsAbiertaoCerrada,DefectuosaKg,tipoMaterialId,ProveedorMaterial);
+
+                                        Bobinas bobinacargar = new Bobinas();
+                                        bobinacargar.setBobinaId(0);
+                                        bobinacargar.setTareaId(tareaid);
+                                        bobinacargar.setProduccionId(produccionid);
+                                        bobinacargar.setProveedorId(idproveedor);
+                                        bobinacargar.setProveedorNombre(ProveedorNombre);
+                                        bobinacargar.setLote(Lote);
+                                        bobinacargar.setAncho(Ancho);
+                                        bobinacargar.setTipoMaterialId(tipoMaterialId);
+                                        bobinacargar.setEsAbiertaoCerrada(EsAbiertaoCerrada);
+                                        bobinacargar.setDefectuosaKg(DefectuosaKg);
+                                        bobinacargar.setNombreTipoMaterial(ProveedorMaterial);
+
+                                        cargarBobina(bobinacargar);
+
+
+                                    }else{
+
+                                        Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+
+
+                            }catch (Exception e){
+                                Log.e("ErrorBobina",e.toString());
+                            }
+
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
+
                         }
 
                     }else{
+
                         Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
 
                     }
-
-                }else{
-
-                    Toast.makeText(getApplicationContext(),"Faltan Datos",Toast.LENGTH_SHORT).show();
-
                 }
+
+
 
             }
         });
@@ -319,13 +316,6 @@ public class Bobina_Activity extends OcultarTeclado {
 
 
         }
-
-
-
-
-
-
-
     }
 
     private void cargarBobina(Bobinas bobinacargar) {
@@ -380,8 +370,7 @@ public class Bobina_Activity extends OcultarTeclado {
             listProveedores.add( proveeedores.getProveedorlId()+"-" +proveeedores.getNombre()  );
         }
 
-        adapterProveedor = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, listProveedores);
-        adapterProveedor.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        adapterProveedor = new ArrayAdapter<String>(this, R.layout.spinner_item_layout, listProveedores);
         spi_ProveedorNombre.setAdapter(adapterProveedor);
         spi_ProveedorNombre.setSelection(0);
 

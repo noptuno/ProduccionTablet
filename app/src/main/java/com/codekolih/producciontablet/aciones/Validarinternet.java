@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.codekolih.producciontablet.R;
+
 public class Validarinternet {
 
     public static boolean validarConexionInternet(Context context) {
@@ -19,7 +21,7 @@ public class Validarinternet {
 }
 
     private static void mostrarDialogoError(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialogSquareStyle);
         builder.setMessage("No hay conexión a Internet. Por favor, inténtalo de nuevo más tarde.")
                 .setCancelable(false)
                 .setPositiveButton("Reintentar", new DialogInterface.OnClickListener() {

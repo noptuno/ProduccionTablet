@@ -149,10 +149,16 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Produccion_Activity.this, PdfActivity.class);
-                intent.putExtra("nombrepdf", nombrepdf);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                startActivity(intent);
+
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
+
+                    Intent intent = new Intent(Produccion_Activity.this, PdfActivity.class);
+                    intent.putExtra("nombrepdf", nombrepdf);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivity(intent);
+
+                }
+
 
             }
         });
@@ -189,8 +195,10 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             @Override
             public void onClick(View view) {
 
-
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
                     cancelar();
+
+                }
 
 
 

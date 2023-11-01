@@ -37,4 +37,16 @@
         <item name="android:padding">8dp</item>
     </style>
 
+    <style name="CustomAlertDialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">#528DA8</item>
+        <item name="android:textColor">#FBF8F8</item>
+        <!-- Otros atributos de estilo personalizado que desees agregar -->
+    </style>
+
+    <style name="CustomAlertDialogSquareStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">#528DA8</item>
+        <item name="android:textColor">#FBF8F8</item>
+    </style>
+
+
 </resources>

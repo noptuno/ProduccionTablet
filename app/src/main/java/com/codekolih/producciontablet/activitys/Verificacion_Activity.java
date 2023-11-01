@@ -257,8 +257,6 @@ public class Verificacion_Activity extends OcultarTeclado {
 
                 }
 
-
-
             }
         });
 

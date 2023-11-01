@@ -24,10 +24,7 @@
 
         <activity
             android:name=".activitys.Bobina_Activity"
-            android:theme="@style/Theme.ProduccionTablet.NoActionBar"
             android:exported="true">
-
-
 
         </activity>
 
