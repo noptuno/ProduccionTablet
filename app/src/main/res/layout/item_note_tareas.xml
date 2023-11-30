@@ -172,7 +172,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="2"
-                    android:text="METROS A PRODUCIR"
+                    android:text="PRODUCIR"
                     android:textStyle="bold" />
 
                 <TextView
@@ -202,7 +202,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="2"
-                    android:text="METROS EN CURSO"
+                    android:text="EN CURSO"
                     android:textStyle="bold" />
 
                 <TextView

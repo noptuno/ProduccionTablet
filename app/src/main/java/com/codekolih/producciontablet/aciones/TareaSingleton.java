@@ -117,8 +117,6 @@ public class TareaSingleton {
             variablesGenrales.put("15", "8");// control del sentido de bobinado
             variablesGenrales.put("16", "8");// control de la calidad del final del rollo
 
-
-
             //tarea unicavez
             variablesGenrales.put("SumCantidad", "8"); //FR,FE,E
             variablesGenrales.put("EtiquetasPorRollo", "8");
@@ -158,7 +156,6 @@ public class TareaSingleton {
 //IR
             Log.e("VariablesOcultar",idtipomaquina);
 
-
             //valdiar
             variablesGenrales.put("1", "0"); //control del boceto o muestra contra la impresión de largada
             variablesGenrales.put("2", "0"); //control de tipo de papel correcto
@@ -178,7 +175,6 @@ public class TareaSingleton {
             variablesGenrales.put("14", "0"); //control de numeración
             variablesGenrales.put("15", "8");// control del sentido de bobinado
             variablesGenrales.put("16", "8");// control de la calidad del final del rollo
-
 
             variablesGenrales.put("SumCantidad", "0");
             variablesGenrales.put("EtiquetasPorRollo", "8");
@@ -217,7 +213,6 @@ public class TareaSingleton {
         }else if (idtipomaquina.equals("3")){
 //FR
             Log.e("VariablesOcultar",idtipomaquina);
-
 
             //valdiar
             variablesGenrales.put("1", "8"); //control del boceto o muestra contra la impresión de largada
@@ -401,7 +396,9 @@ public class TareaSingleton {
     }
 
     public void setProveedores(ArrayList<Proveedor> proveedores) {
+
         this.proveedores = proveedores;
+
     }
 
     private TareaSingleton() {

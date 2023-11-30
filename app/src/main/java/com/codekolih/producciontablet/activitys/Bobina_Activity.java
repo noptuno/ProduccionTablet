@@ -367,7 +367,10 @@ public class Bobina_Activity extends OcultarTeclado {
 
         listProveedores.add(unidad);
         for (Proveedor proveeedores : TareaSingleton.SingletonInstance().getProveedores()){
-            listProveedores.add( proveeedores.getProveedorlId()+"-" +proveeedores.getNombre()  );
+            if (proveeedores.getHabilitado()){
+                listProveedores.add( proveeedores.getProveedorlId()+"-" +proveeedores.getNombre()  );
+            }
+
         }
 
         adapterProveedor = new ArrayAdapter<String>(this, R.layout.spinner_item_layout, listProveedores);

@@ -183,6 +183,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                     } else {
 
                         Toast.makeText(getApplicationContext(), "Hay que cargar Scrap", Toast.LENGTH_SHORT).show();
+
                     }
 
                 }
@@ -190,18 +191,15 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             }
         });
 
-
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
+
                     cancelar();
 
                 }
-
-
-
             }
         });
 

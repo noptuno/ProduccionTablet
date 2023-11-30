@@ -145,13 +145,14 @@ public class AdapterTareas extends RecyclerView.Adapter<AdapterTareas.NoteViewHo
             serieynumero.setText(String.format("%s", tarea.getSerieYNro()));
             concepto.setText(tarea.getConcepto());
 
-
+/*
             if (tarea.getTipoMaquinaId()!=1 || tarea.getTipoMaquinaId()!=2){
                 txtproducir.setText("ROLLOS A PRODUCIR");
                 txtrestante.setText("ROLLOS EN CURSO");
 
             }
-
+*/
+            
             float cont = 0;
             if (tarea.getProduccion_Lista().size()>0){
 
