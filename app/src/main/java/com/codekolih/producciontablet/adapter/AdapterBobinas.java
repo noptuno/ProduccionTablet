@@ -50,7 +50,8 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
 
     @Override
     public void onBindViewHolder(NoteViewHolder view, int pos) {
-        view.bind(notes.get(pos));
+
+        view.bind(notes.get(pos),pos);
     }
 
     @Override
@@ -82,7 +83,7 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
 
 
     public interface OnNoteSelectedListener {
-        void onClick(Bobinas note);
+        void onClick(Bobinas note,int p);
     }
 
     public interface OnNoteDetailListener {
@@ -97,11 +98,10 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView ProveedorNombre, txtDefectuosaKg,DefectuosaKg, Lote,Ancho,TipoMaterialId,EsAbiertaoCerrada,NombreTipoMaterial;
         private LinearLayout ly_ProveedorNombre,ly_NombreTipoMaterial, ly_DefectuosaKg, ly_Lote,ly_Ancho,ly_TipoMaterialId,ly_EsAbiertaoCerrada;
-
+        private int pos;
 
         public NoteViewHolder(View item) {
             super(item);
-
 
             ly_ProveedorNombre = (LinearLayout) item.findViewById(R.id.ly_ProveedorNombre);
             ly_NombreTipoMaterial = (LinearLayout) item.findViewById(R.id.ly_NombreTipoMaterial);
@@ -146,7 +146,10 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
 
         }
 
-        public void bind(final Bobinas bobina) {
+        public void bind(final Bobinas bobina, int poss) {
+
+
+            this.pos = poss;
 
             Log.e("Boniba",bobina.getProveedorNombre());
 
@@ -172,7 +175,7 @@ public class AdapterBobinas extends RecyclerView.Adapter<AdapterBobinas.NoteView
                 @Override
                 public void onClick(View view) {
                     if (onNoteSelectedListener != null) {
-                        onNoteSelectedListener.onClick(bobina);
+                        onNoteSelectedListener.onClick(bobina,getAdapterPosition());
                     }
                 }
             });

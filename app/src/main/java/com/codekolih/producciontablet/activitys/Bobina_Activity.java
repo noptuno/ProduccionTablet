@@ -153,7 +153,6 @@ public class Bobina_Activity extends OcultarTeclado {
 
                 String nombreProveedor = adapterView.getItemAtPosition(i).toString();
 
-
                 if (!nombreProveedor.equals(unidad)){
                     String[] parts = nombreProveedor.split("-");
                     idproveedorSeleccionado = parts[0];
@@ -161,6 +160,7 @@ public class Bobina_Activity extends OcultarTeclado {
                 }else{
                     proveedorSeleccionado = unidad;
                 }
+
 
             }
 
@@ -366,16 +366,20 @@ public class Bobina_Activity extends OcultarTeclado {
         listProveedores = new ArrayList<>();
 
         listProveedores.add(unidad);
+
         for (Proveedor proveeedores : TareaSingleton.SingletonInstance().getProveedores()){
             if (proveeedores.getHabilitado()){
                 listProveedores.add( proveeedores.getProveedorlId()+"-" +proveeedores.getNombre()  );
             }
-
         }
 
-        adapterProveedor = new ArrayAdapter<String>(this, R.layout.spinner_item_layout, listProveedores);
+
+       adapterProveedor = new ArrayAdapter<String>(this, R.layout.spinner_item_layout2, listProveedores);
+
         spi_ProveedorNombre.setAdapter(adapterProveedor);
         spi_ProveedorNombre.setSelection(0);
+
+
 
     }
 
@@ -384,11 +388,12 @@ public class Bobina_Activity extends OcultarTeclado {
         listMaterial = new ArrayList<>();
         listMaterial.add(unidad);
         for (Material materiales : TareaSingleton.SingletonInstance().getMateriales()){
-            listMaterial.add( materiales.getTipoMaterialId()+"-" +materiales.getNombre()  );
+            listMaterial.add(materiales.getTipoMaterialId()+"-" +materiales.getNombre());
         }
 
         adapterMateriales = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, listMaterial);
-        adapterMateriales.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        adapterMateriales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         spi_NombreTipoMaterial.setAdapter(adapterMateriales);
         spi_NombreTipoMaterial.setSelection(0);

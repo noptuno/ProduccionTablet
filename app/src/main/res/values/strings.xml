@@ -16,6 +16,13 @@
         <item>Kilos</item>
         <item>Metros</item>
     </string-array>
+
+    <string-array name="PROVEEDORES">
+        <item>ASD ASDasd asd asdasd</item>
+        <item>Kiasdasdasd asda dsasdaslos</item>
+        <item>Metrasdasd asd asdas dasdasdasdas asdadasd asdasdasdos</item>
+    </string-array>
+
     <string-array name="CIERRE">
         <item>Cancelar y cerrar la tarea</item>
         <item>Cancelar  y continuar la tarea</item>

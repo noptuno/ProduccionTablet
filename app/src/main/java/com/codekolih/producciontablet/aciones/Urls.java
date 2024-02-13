@@ -23,6 +23,8 @@ public class Urls {
 
     public static final String UpdateProduccion="https://apidmr.azurewebsites.net/api/v1/produccion/updateproduc/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/";
     public static final String agregarbobinas = "https://apidmr.azurewebsites.net/api/v1/produccion/altabobina/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/";
+    public static final String eliminarBobina = "https://apidmr.azurewebsites.net/api/v1/produccion/deletebobina/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/";
+
     public static final String proveedor = "https://apidmr.azurewebsites.net/api/v1/proveedor/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/lista";
     public static final String estadoOperativo = "https://apidmr.azurewebsites.net/api/v1/tarea/altaestadoop/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/";
     public static final String altaproduccion = " httpS://apidmr.azurewebsites.net/api/v1/produccion/altaproduc/F03601A1-FD60-47E1-B30F-6B2C3BACDE3B/";

@@ -11,7 +11,7 @@ public class Tareas implements Serializable {
     private String SerieYNro;
     private String ArticuloId;
     private String Concepto;
-    private int Cantidad;
+    private Float Cantidad;
     private int TroquelId;
     private String Descripcion;
     private float Z_AltoMasGap;
@@ -103,7 +103,7 @@ public class Tareas implements Serializable {
     public String getConcepto() {
         return Concepto;
     }
-    public int getCantidad() {
+    public Float getCantidad() {
         return Cantidad;
     }
 
@@ -242,7 +242,7 @@ public class Tareas implements Serializable {
 
 
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Float cantidad) {
         Cantidad = cantidad;
     }
 

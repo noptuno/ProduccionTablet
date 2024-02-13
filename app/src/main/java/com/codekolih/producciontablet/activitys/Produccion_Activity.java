@@ -10,8 +10,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterBobinas;
 import com.codekolih.producciontablet.adapter.AdapterProduccion;
+import com.codekolih.producciontablet.adapter.AdapterTareas;
 import com.codekolih.producciontablet.clases.Bobinas;
 import com.codekolih.producciontablet.clases.EstadosOp;
 import com.codekolih.producciontablet.clases.Pedido;
@@ -48,6 +51,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +94,8 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
     private static final int CODIGO_PARA_LA_ACTIVIDAD_2 = 1;
     private String nombrepdf;
+
+    private boolean secargobobina = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,6 +270,68 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         volveraCargaryActualziarTarea();
         ocultarVariables();
         cargarfecha();
+
+        adapterBobina.setOnNoteSelectedListener(new AdapterBobinas.OnNoteSelectedListener() {
+
+            @Override
+            public void onClick(Bobinas note, int posicion) {
+
+                if (Validarinternet.validarConexionInternet(Produccion_Activity.this)){
+
+
+                        AlertDialog.Builder build4 = new AlertDialog.Builder(Produccion_Activity.this);
+                        build4.setMessage("¿Desea Eliminar la Bobina : " + note.getProveedorNombre()).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                              //  note.setProveedorNombre(USUARIO + " - " + txt_fecha.getText().toString() + note.getProveedorNombre());
+
+                               // cargarBobina(bobinacargar);
+                              //  ActualziarBobina(note);
+                                eliminarBobina(note);
+
+                            }
+
+                        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog alertDialog4 = build4.create();
+                        alertDialog4.show();
+
+
+
+                }
+            }
+
+        });
+
+
+    }
+
+    private void eliminarBobina(Bobinas note) {
+
+        dialogProgress = ProgressHUD.show(Produccion_Activity.this);
+        httpLayer.eliminarBobinaok(note, new HttpLayer.HttpLayerResponses<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.e("onSuccess CB", response.toString());
+
+                dialogProgress.dismiss();
+                volveraCargaryActualziarTarea();
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("error", e.toString());
+                dialogProgress.dismiss();
+            }
+        }, USUARIO);
 
 
     }
@@ -527,18 +595,23 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
             adapterProduccion.notifyDataSetChanged();
 
         } else {
-            Log.e("MSG", "no hay produccion para mostrar");
+            Log.e("MSG", "no hay producción para mostrar");
         }
 
         Log.e("produccion actual = ", produccion_actual.toString());
 
         //ACA HAGO LO MISMO CON BOBINAS
+
         if (tarea_Seleccionada.getBobinas().size() > 0) {
             for (Bobinas lg : tarea_Seleccionada.getBobinas()) {
                 Log.e("Producción_Bobin", lg.toString());
                 bobinas_actual = lg;
             }
             adapterBobina.setNotes(tarea_Seleccionada.getBobinas());
+            adapterBobina.notifyDataSetChanged();
+        } else {
+            // Si no hay bobinas, debes limpiar la interfaz o manejarlo de alguna manera
+            adapterBobina.setNotes(new ArrayList<Bobinas>());
             adapterBobina.notifyDataSetChanged();
         }
 
@@ -631,6 +704,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                 dialogProgress.dismiss();
                 dialogErrorPrintet("No Cargo Cantidad");
                 Toast.makeText(getApplicationContext(), "No Cargo Cantidad Reintentar", Toast.LENGTH_SHORT).show();
+                volveraCargaryActualziarTarea();
 
             }
         }, USUARIO);
@@ -647,11 +721,12 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
             if (onSuccessRecibido.equals("ok")){
                 cargobobina = true;
+                secargobobina = true;
                 volveraCargaryActualziarTarea();
             }else{
 
                 dialogErrorPrintet("No Cargo Bobina");
-
+                volveraCargaryActualziarTarea();
             }
 
         }
@@ -840,6 +915,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                 if(mensaje.equals("No Cargo Tarea")){
 
                     volveraCargaryActualziarTarea();
+
                 }
 
             }

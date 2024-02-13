@@ -324,8 +324,6 @@ public class Tarea_Activity extends AppCompatActivity {
             public void onSuccess(ArrayList<Proveedor> response) {
 
 
-
-
                 TareaSingleton.SingletonInstance().setProveedores(response);
                 Log.e("TareaActivity", "cargoProveedores");
 

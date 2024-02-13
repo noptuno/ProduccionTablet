@@ -12,7 +12,7 @@
         android:id="@+id/scrollView3"
         android:layout_width="400dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fadeScrollbars="false"
         android:scrollbarSize="15dp"
@@ -21,7 +21,8 @@
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/verificacion_btn_cancelar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16">
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
@@ -154,7 +155,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="2"
                 android:orientation="horizontal">
@@ -174,12 +175,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="ArticuloId"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
@@ -199,12 +202,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="SerieYNro"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="2"
                 android:orientation="horizontal">
@@ -224,12 +229,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Cantidad"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
@@ -246,10 +253,12 @@
                 <TextView
                     android:id="@+id/ver_txt_Concepto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Concepto"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -267,7 +276,7 @@
             <LinearLayout
                 android:id="@+id/ly_Observaciones"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
@@ -285,20 +294,22 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="ASD ASDASDA DASD ASDDDD ASSA AAAADDJJJJJJ ASD AS"
-                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ly_Z_AltoMasGap"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1.8"
                     android:text="Alto Mas Gap en milimetros"
                     android:textSize="16sp"
@@ -307,11 +318,13 @@
                 <TextView
                     android:id="@+id/verificacion_txt_Z_AltoMasGap"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="textPersonName"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -324,27 +337,29 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1.8"
-                    android:text="Etiquetas en Banda"
+                    android:text="Etiquetas en Banda "
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/verificacion_txt_EtiquetasEnBanda"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="textPersonName"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ly_Cilindro"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
@@ -359,11 +374,13 @@
                 <TextView
                     android:id="@+id/verificacion_txt_Cilindro"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="number"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -389,7 +406,9 @@
                     android:layout_weight="1"
                     android:inputType="number"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -415,7 +434,9 @@
                     android:layout_weight="1"
                     android:inputType="textPersonName"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -440,7 +461,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="0"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -466,14 +489,16 @@
                     android:layout_weight="1"
                     android:inputType="textPersonName"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ly_EtiquetasPorRollo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
@@ -492,7 +517,9 @@
                     android:layout_weight="1"
                     android:inputType="textPersonName"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
@@ -518,20 +545,22 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="0"
-                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ly_Descripcion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1.8"
                     android:text="Descripcion del Troquel"
                     android:textSize="16sp"
@@ -543,7 +572,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="datos"
-                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
