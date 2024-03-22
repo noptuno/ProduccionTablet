@@ -1157,7 +1157,6 @@
         android:id="@+id/verificacion_btn_guardar"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:backgroundTint="#4CAF50"
@@ -1166,7 +1165,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/verificacion_btn_cancelar" />
 
     <Button
         android:id="@+id/verificacion_btn_cancelar"
@@ -1180,6 +1180,21 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayotCargarDatos" />
+        app:layout_constraintEnd_toStartOf="@+id/verificacion_btn_guardar"
+        app:layout_constraintStart_toEndOf="@+id/verificacion_btn_imprimir" />
+
+    <Button
+        android:id="@+id/verificacion_btn_imprimir"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fondo"
+        android:backgroundTint="#2196F3"
+        android:text="Imprimir Etiqueta"
+        android:textColor="#FAF7F7"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/verificacion_btn_cancelar"
+        app:layout_constraintStart_toEndOf="@+id/scrollView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,6 @@ import com.codekolih.producciontablet.aciones.OcultarTeclado;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.clases.Tareas;
 
-import java.text.DecimalFormat;
 import java.util.Map;
 
 
@@ -51,8 +50,8 @@ public class CantidadDialog extends OcultarTeclado {
         dialogo.setContentView(R.layout.dialog_num);
 
         nombrevariable = dialogo.findViewById(R.id.item_tarea_txt_nombrecurso);
-        btn_aceptar = dialogo.findViewById(R.id.cantidad_btn_confirmar);
-        btn_cancelar= dialogo.findViewById(R.id.cantidad_btn_cancelar);
+        btn_aceptar = dialogo.findViewById(R.id.eti_btn_confirmar);
+        btn_cancelar= dialogo.findViewById(R.id.eti_btn_cancelar);
         edt_numero = dialogo.findViewById(R.id.et_numero);
 
         tarea_Seleccionada = TareaSingleton.SingletonInstance().getTarea();

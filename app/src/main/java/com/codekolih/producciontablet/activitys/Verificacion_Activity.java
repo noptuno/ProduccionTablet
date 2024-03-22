@@ -112,10 +112,9 @@ public class Verificacion_Activity extends OcultarTeclado {
             txt_verificacion_txt_Pistas,
             txt_verificacion_txt_EtiquetasEnBanda,
             txt_verificacion_txt_EtiquetasPorRollo,
-             txt_verificacion_txt_MetrosMatTroquelar;
+            txt_verificacion_txt_MetrosMatTroquelar;
 
-
-    Button btn_guardar, btn_verpdf, btn_cancelar;
+    Button btn_guardar, btn_verpdf, btn_cancelar,btn_etiqueta;
     String UnidadIdScrapInicial = "Seleccionar";
     private SharedPreferences pref;
     private boolean permisosaceptados = false;
@@ -152,15 +151,11 @@ public class Verificacion_Activity extends OcultarTeclado {
         }
 
 
-
-
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
+
         txt_usuario.setText(USUARIO);
-
         cargarTareaSeleccionada(); // tarea y produccion_actual // usuario
-
         ConstraintLayout constraintLayout = findViewById(R.id.constrain_verificacion);
-
         addKeyboardHideListener(constraintLayout);
 
         spi_verificacion_UnidadIdScrapInicial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -198,9 +193,21 @@ public class Verificacion_Activity extends OcultarTeclado {
                 }
 
 
+            }
+        });
+
+        btn_etiqueta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Verificacion_Activity.this, ImprimirEtiquetas.class);
+                intent.putExtra("origen", "Tarea_Activity");
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
             }
         });
+
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,7 +255,9 @@ public class Verificacion_Activity extends OcultarTeclado {
             public void onClick(View view) {
 
 
-                if (Validarinternet.validarConexionInternet(Verificacion_Activity.this)){
+                if (Validarinternet.validarConexionInternet(Verificacion_Activity.this))
+                {
+
                     pdfAbierto = true;
                     Intent intent = new Intent(Verificacion_Activity.this, PdfActivity.class);
                     intent.putExtra("nombrepdf", nombrepdf);
@@ -298,9 +307,6 @@ public class Verificacion_Activity extends OcultarTeclado {
     }
 
 
-
-
-
     private void establecerlimitesnumericos() {
 
 
@@ -341,7 +347,6 @@ public class Verificacion_Activity extends OcultarTeclado {
         edt_verificacion_AnchoBobinaUsadoCm.setInputType(InputType.TYPE_CLASS_PHONE);
         edt_verificacion_AnchoBobinaUsadoCm.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 
-
     }
 
     private void cancelar() {
@@ -362,7 +367,6 @@ public class Verificacion_Activity extends OcultarTeclado {
 
                // cargarEstadoCancelarProduccion(estado);
 
-
             }
 
         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -380,7 +384,6 @@ public class Verificacion_Activity extends OcultarTeclado {
     public void onBackPressed() {
         cancelar();
     }
-
 
     private void cargarVerificacion() {
 
@@ -469,8 +472,8 @@ public class Verificacion_Activity extends OcultarTeclado {
                 }
             }, USUARIO);
         }
-        }
 
+    }
 
     private void cargarEstadoProduccion(Map<String, Object> estado) {
 
@@ -499,9 +502,6 @@ public class Verificacion_Activity extends OcultarTeclado {
                     throw new RuntimeException(e);
                 }
 
-
-
-
             }
 
             @Override
@@ -514,7 +514,6 @@ public class Verificacion_Activity extends OcultarTeclado {
         }, USUARIO);
 
     }
-
 
 
     private void cargarfecha() {
@@ -574,6 +573,7 @@ public class Verificacion_Activity extends OcultarTeclado {
         btn_verpdf = findViewById(R.id.verificacion_btn_verpdf);
         btn_guardar = findViewById(R.id.verificacion_btn_guardar);
         btn_cancelar = findViewById(R.id.verificacion_btn_cancelar);
+        btn_etiqueta = findViewById(R.id.verificacion_btn_imprimir);
 
         txt_pistas = findViewById(R.id.txt_ppistas);
 
@@ -701,7 +701,6 @@ public class Verificacion_Activity extends OcultarTeclado {
             } else if ("TroquelId".equals(entry.getKey())) {
                 ly_TroquelId.setVisibility(parseInt(entry.getValue()));
             }
-
 
             if ("AnchoFinalRolloYGap".equals(entry.getKey())) {
                 ly_AnchoFinalRolloYGap.setVisibility(parseInt(entry.getValue()));

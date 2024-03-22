@@ -33,7 +33,6 @@ import com.codekolih.producciontablet.R;
 import com.codekolih.producciontablet.aciones.GsonUtils;
 import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
-import com.codekolih.producciontablet.aciones.Utils;
 import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.adapter.AdapterTareas;
 import com.codekolih.producciontablet.clases.Material;
@@ -47,12 +46,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class Tarea_Activity extends AppCompatActivity {
+public class Tarea_Activity extends AppCompatActivity  {
 
     private TextView txt_imprenta, txt_usuario, txt_fecha, txt_hora;
     private int MAQUINATIPOID = 0;
@@ -65,7 +63,7 @@ public class Tarea_Activity extends AppCompatActivity {
     private HttpLayer httpLayer;
     private SharedPreferences pref;
     private RecyclerView recyclerViewTareas;
-    private Button btn_cerrar_sesion;
+    private Button btn_cerrar_sesion,btn_etiqueta;
     private String PermiteCambioPrioridad = "false";
 
     private ImageButton btnactualizar;
@@ -89,6 +87,21 @@ public class Tarea_Activity extends AppCompatActivity {
         txt_hora = findViewById(R.id.txt_tarea_hora);
         btn_cerrar_sesion = findViewById(R.id.tarea_btn_cerraSesion);
         btnactualizar = findViewById(R.id.btnactualziartarea);
+        btn_etiqueta = findViewById(R.id.tarea_btn_etiqueta);
+
+        btn_etiqueta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Tarea_Activity.this, ImprimirEtiquetas.class);
+                intent.putExtra("origen", "Tarea_Activity");
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+            }
+        });
+
+
 
         btnactualizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +109,6 @@ public class Tarea_Activity extends AppCompatActivity {
 
                 if (Validarinternet.validarConexionInternet(Tarea_Activity.this)){
                     cargarTarea();
-                }else{
-
                 }
 
             }
@@ -157,8 +168,6 @@ public class Tarea_Activity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Hubo un problema en los datos de Preference", Toast.LENGTH_SHORT).show();
             finish();
         }
-
-
 
 
         //TODO Validar maquinatipoid y aquinaid
@@ -409,7 +418,6 @@ public class Tarea_Activity extends AppCompatActivity {
                 dialogErrorPrintet("No cargo Materiales");
             }
         });
-
 
     }
 

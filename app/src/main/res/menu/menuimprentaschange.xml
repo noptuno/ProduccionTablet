@@ -7,6 +7,11 @@
         android:drawableLeft="@drawable/ic_find"
         android:title="Seleccionar Maquina"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/configurar_ip"
+        android:drawableLeft="@drawable/ic_find"
+        android:title="Configurar Ip"
+        app:showAsAction="never" />
 
 
 </menu>

@@ -22,7 +22,7 @@ public class TareaSingleton {
     private static TareaSingleton tareaSingle;
     private Tareas tareaInstanciada;
     private Pedido pedidoInstanciada;
-    private String usuarioIniciado;
+    private String usuarioIniciado= "";
     private String nombrepdf;
 
     private String RespuestaDato;

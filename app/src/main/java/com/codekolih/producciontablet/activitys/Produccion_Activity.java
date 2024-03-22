@@ -75,7 +75,7 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
     private RequestQueue requestQueue;
     private ProgressHUD dialogProgress;
     private HttpLayer httpLayer;
-    private Button btn_cantidad, btn_bobina, btn_scrap, btn_cancelar, btn_finturno, btnverpdf;
+    private Button btn_cantidad, btn_bobina, btn_scrap, btn_cancelar, btn_finturno, btnverpdf,btn_imprimir;
     private int BOBINA_ACTIVITY = 1;
     RecyclerView recyclerViewCantidad, recyclerViewBobinas;
     private int produccionId;
@@ -132,13 +132,14 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
         }
 
 
-
         //VALIDAR
         produccionId = TareaSingleton.SingletonInstance().getProduccionId();
         pedidoId = TareaSingleton.SingletonInstance().getTarea().getPedidoId();
         tareaId = TareaSingleton.SingletonInstance().getTarea().getTareaId();
         SessionId = Integer.parseInt(TareaSingleton.SingletonInstance().getRespuestaDato());
         USUARIO = TareaSingleton.SingletonInstance().getUsuarioIniciado();
+
+
         txt_usuario.setText(USUARIO);
 
         Log.e("IdProduccionSelec", "" + produccionId);
@@ -149,7 +150,22 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
 
 
         btnverpdf=findViewById(R.id.produccion_btn_verpdf);
+        btn_imprimir=findViewById(R.id.produccion_btn_imprimir);
 
+
+        btn_imprimir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent intent = new Intent(Produccion_Activity.this, ImprimirEtiquetas.class);
+                intent.putExtra("origen", "Tarea_Activity");
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+
+            }
+        });
 
         btnverpdf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,9 +250,6 @@ public class Produccion_Activity extends OcultarTeclado implements CantidadDialo
                     // intent.putExtra("produccionId", produccionid);
                     startActivityForResult(intent, CODIGO_PARA_LA_ACTIVIDAD_2);
                 }
-
-
-
 
 
                 /*

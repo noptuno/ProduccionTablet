@@ -8,10 +8,23 @@
     tools:context=".activitys.Produccion_Activity">
 
     <Button
+        android:id="@+id/produccion_btn_imprimir"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fondo"
+        android:backgroundTint="#2196F3"
+        android:text="Imprimir Etiqueta"
+        android:textColor="#FAF7F7"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/produccion_btn_cancelar"
+        app:layout_constraintStart_toEndOf="@+id/produccion_btn_verpdf" />
+
+    <Button
         android:id="@+id/produccion_btn_finalziar2"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:backgroundTint="#399F3D"
@@ -19,13 +32,15 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/produccion_btn_cancelar" />
 
     <Button
         android:id="@+id/produccion_btn_verpdf"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="269dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fondo"
         android:text="VER ESPECIFICACIONES"
@@ -33,6 +48,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/produccion_btn_imprimir"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
@@ -762,7 +778,8 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/produccion_bobina_recycler" />
+        app:layout_constraintEnd_toStartOf="@+id/produccion_btn_finalziar2"
+        app:layout_constraintStart_toEndOf="@+id/produccion_btn_imprimir" />
 
     <TextView
         android:id="@+id/textView25"

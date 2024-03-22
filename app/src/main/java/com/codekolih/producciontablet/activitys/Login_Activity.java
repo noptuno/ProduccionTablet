@@ -11,10 +11,8 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -26,13 +24,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,13 +44,13 @@ import com.codekolih.producciontablet.aciones.ProgressHUD;
 import com.codekolih.producciontablet.aciones.TareaSingleton;
 import com.codekolih.producciontablet.aciones.Urls;
 import com.codekolih.producciontablet.aciones.OcultarTeclado;
-import com.codekolih.producciontablet.aciones.Utils;
 import com.codekolih.producciontablet.aciones.Validarinternet;
 import com.codekolih.producciontablet.clases.Usuario;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,15 +94,27 @@ public class Login_Activity extends OcultarTeclado {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent intent;
+
         switch (item.getItemId()) {
 
             case R.id.seleccionar_imprenta:
 
-                Intent intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
+                intent = new Intent(Login_Activity.this, Imprentas_Activity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 break;
+
+            case R.id.configurar_ip:
+
+                intent = new Intent(Login_Activity.this, Configuracion.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                break;
+
 
         }
 
@@ -250,8 +258,8 @@ public class Login_Activity extends OcultarTeclado {
         pedir_permiso_escritura();
 
 
-
     }
+
 
 
     private void cargargarUserSharePreference(){
@@ -417,10 +425,5 @@ public class Login_Activity extends OcultarTeclado {
             }
         }
     }
-
-
-
-
-
 
 }

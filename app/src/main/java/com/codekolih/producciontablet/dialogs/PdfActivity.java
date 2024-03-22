@@ -131,8 +131,6 @@ public class PdfActivity extends AppCompatActivity {
 
             Log.e("rutaRemota",rutaRemota);
 
-
-
                 String direccionServidor = "192.168.234.9";
                 int puerto = 21;
                 String usuario = "Produccion";

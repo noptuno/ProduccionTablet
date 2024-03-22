@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitys.ImprimirEtiquetas">
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Tipo de Etiqueta: "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerEtiquetas"
+        app:layout_constraintStart_toStartOf="@+id/eti_linear_filtro"
+        app:layout_constraintTop_toTopOf="@+id/spinnerEtiquetas" />
+
+    <Spinner
+        android:id="@+id/spinnerEtiquetas"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="2"
+        android:entries="@array/ETIQUETAS"
+        android:scaleX="1"
+        android:spinnerMode="dialog"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toEndOf="@+id/textView40"
+        app:layout_constraintTop_toBottomOf="@+id/eti_linear_filtro" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tarea: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/eti_descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/eti_linear_filtro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Código:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/eti_filtro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:digits="0123456789."
+            android:ems="10"
+            android:inputType="phone"
+            android:selectAllOnFocus="true"
+            android:text=" "
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/eti_btn_filtro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Buscar" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutprinc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerEtiquetas">
+
+        <LinearLayout
+            android:id="@+id/layoutetqxrollos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:layout_weight="1"
+                android:text="Etiquetas por Rollo"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etixrollo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cursorVisible="true"
+                android:digits="0123456789"
+                android:inputType="phone"
+                android:selectAllOnFocus="true"
+                android:text="0"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutrollocaja"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:layout_weight="1"
+                android:text="Rollos por Caja"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/rolloxrcaja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cursorVisible="true"
+                android:digits="0123456789."
+                android:inputType="phone"
+                android:selectAllOnFocus="true"
+                android:text="0"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutetiqcaja"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearRollo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/eti_btn_limp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Numero Inicial:"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/num_inicial"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+
+                    android:digits="0123456789"
+                    android:inputType="phone"
+                    android:selectAllOnFocus="true"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Numero Final"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/num_final"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:digits="0123456789"
+                    android:inputType="phone"
+                    android:selectAllOnFocus="true"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Serie"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/serie"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:maxLength="2"
+                    android:selectAllOnFocus="true"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tinicial1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total de Numeros por Rollo"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/num_x_rollos"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:digits="0123456789"
+                    android:inputType="phone"
+                    android:selectAllOnFocus="true"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad de Rollos por Cajas"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/cant_rollos_x_caja"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:digits="0123456789"
+                    android:inputType="phone"
+                    android:selectAllOnFocus="true"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/eti_btn_confirmar"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="54dp"
+        android:backgroundTint="#4CAF50"
+        android:enabled="false"
+        android:text="Imprimir"
+        android:textSize="12sp"
+        app:icon="@drawable/ic_printing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eti_btn_limp"
+        app:layout_constraintTop_toTopOf="@+id/eti_btn_limp" />
+
+    <Button
+        android:id="@+id/eti_btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="18dp"
+        android:backgroundTint="#F44336"
+        android:text="Cerrar"
+        android:textSize="12sp"
+        app:icon="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintEnd_toStartOf="@+id/eti_btn_limp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/eti_btn_limp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="518dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/eti_btn_limp"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FFC107"
+        android:text="Limpiar"
+        android:textSize="12sp"
+        app:icon="@android:drawable/ic_menu_delete"
+        app:layout_constraintEnd_toStartOf="@+id/eti_btn_confirmar"
+        app:layout_constraintStart_toEndOf="@+id/eti_btn_cancel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,12 @@
         <item>Metros</item>
     </string-array>
 
+    <string-array name="ETIQUETAS">
+        <item>Etiquetas</item>
+        <item>Rollos</item>
+        <item>Etiquetas o Rollos Numerados</item>
+    </string-array>
+
     <string-array name="PROVEEDORES">
         <item>ASD ASDasd asd asdasd</item>
         <item>Kiasdasdasd asda dsasdaslos</item>
